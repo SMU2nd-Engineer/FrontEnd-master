@@ -32,6 +32,7 @@ frontend-master
 │   │   ├─ style                       # 공통 ui 스타일 모음
 │   │   ├─ utils                       # 공통으로 사용할 유틸리티 함수 및 객체
 │   │   ├─ store                       # 공통으로 상태 모음
+│   │   ├─ lib                         # 외부 라이브러리 설정 모음(axios 등)
 │   │   └─ services                    # 공통 API 모음
 │   │
 │   ├─ domain                          # 도메인(기능) 별 패키지 모음
