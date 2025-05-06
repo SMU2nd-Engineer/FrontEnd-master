@@ -4,6 +4,7 @@ import { login } from "@domain/user/services/LoginApi";
 import { setAccessToken } from "@common/utils/TokenManager";
 import Button from "../components/Button";
 import KaKaoLogin from "../components/KakaoLogin";
+import NaverLogin from "../components/NaverLogin";
 
 export default function LogingPage() {
   const [userId, setUserId] = useState("");
@@ -57,6 +58,7 @@ export default function LogingPage() {
       </form>
       <hr />
       <KaKaoLogin />
+      <NaverLogin />
     </div>
   );
 }

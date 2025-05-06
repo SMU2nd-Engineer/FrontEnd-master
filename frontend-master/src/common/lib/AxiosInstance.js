@@ -5,7 +5,6 @@ import {
 } from "@common/utils/TokenManager";
 import { logout } from "@common/services/LogoutService";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 /**
  * axiosInstance
@@ -81,11 +80,14 @@ axiosInstance.interceptors.response.use(
           await logout();
         } catch (error) {
           console.log("세션 만료에 따른 페이지 이동 중 오류 발생 : ", error);
-          const navigate = useNavigate();
-          navigate("/user/login");
+          window.location.href = "/user/login";
         }
       }
       return Promise.reject(error);
+    }
+    if (error.response.status === 402) {
+      alert("소셜 아이디가 없습니다. 로그인 페이지로 갑니다.");
+      window.location.href = "/user/login";
     }
   }
 );
