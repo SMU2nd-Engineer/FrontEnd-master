@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      "@": path.resolve(__dirname, "./src"),
       "@common": path.resolve(__dirname, "./src/common"),
       "@domain": path.resolve(__dirname, "./src/domain"),
       "@user": path.resolve(__dirname, "./src/domain/user"),

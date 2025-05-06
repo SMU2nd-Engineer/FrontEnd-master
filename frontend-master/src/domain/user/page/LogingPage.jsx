@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import baseUrl from "./commonAxois";
-import KaKaoLogin from "./kakao_login/KaKaoLogin";
+import { login } from "@domain/user/services/LoginApi";
+import { setAccessToken } from "@common/utils/TokenManager";
+import Button from "../components/Button";
+import KaKaoLogin from "../components/KakaoLogin";
 
-export default function LoingPage() {
+export default function LogingPage() {
   const [userId, setUserId] = useState("");
   const [password, setpassword] = useState("");
 
@@ -12,20 +14,19 @@ export default function LoingPage() {
     // 새로 고침을 방지하기 위한 코드
     e.preventDefault();
     try {
-      const res = await baseUrl.post(
-        "/api/login",
-        {
-          userId,
-          password,
-        },
-        { withCredentials: true }
-      );
-      if (res.data.accessToken) {
-        localStorage.setItem("accessToken", res.data.accessToken);
+      const res = await login(userId, password);
+      console.log("로그인 시도를 진행함");
+      console.log("응답 : " + res);
+      const accessToken = res.data.accessToken;
+      console.log("accessToken : " + accessToken);
+      if (accessToken) {
+        setAccessToken(accessToken);
         alert("로그인 성공");
-        navigate("/midlebridge");
+        navigate("/user/home");
       } else {
-        console.log("토큰 정보가 없어서 저장 실패");
+        console.log(
+          `accessToken = ${accessToken} : no token plase retry login`
+        );
       }
     } catch (error) {
       console.log(error);
@@ -52,7 +53,7 @@ export default function LoingPage() {
           onChange={(e) => setpassword(e.target.value)}
         />
         <br />
-        <button type="submit">로그인</button>
+        <Button text={"로그인"} onClick={handleLogin} />
       </form>
       <hr />
       <KaKaoLogin />

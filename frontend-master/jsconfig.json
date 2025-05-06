@@ -9,9 +9,10 @@
     "strictFunctionTypes": true,
     "baseUrl": ".", // paths 옵션을 사용하기 위해서 필수로 지정
     "paths": {
-      "@common": ["./src/common"],
-      "@domain": ["./src/domain"],
-      "@user": ["./src/domain/user"]
+      "@/*": ["./src/*"],
+      "@common/*": ["./src/common/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@user/*": ["./src/domain/user/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]
