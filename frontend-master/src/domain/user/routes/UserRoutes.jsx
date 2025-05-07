@@ -4,6 +4,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import LogingPage from "../page/LogingPage";
 import TempHomePage from "../page/TempHomePage";
 import NaverRedirect from "../page/NaverRedirect";
+import GoogleRedirect from "../page/GoogleRedirect";
+import UserRegistationPage from "../page/UserRegistationPage";
 
 export default function UserRoutes() {
   return (
@@ -14,6 +16,8 @@ export default function UserRoutes() {
         <Route path="home" element={<TempHomePage />} />
         <Route path="kakaoauth" element={<KaKaoRedirect />} />
         <Route path="naverauth" element={<NaverRedirect />} />
+        <Route path="googleauth" element={<GoogleRedirect />} />
+        <Route path="registation" element={<UserRegistationPage />} />
       </Routes>
     </div>
   );

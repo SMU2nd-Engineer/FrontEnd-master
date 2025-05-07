@@ -5,6 +5,7 @@ import { setAccessToken } from "@common/utils/TokenManager";
 import Button from "../components/Button";
 import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
+import GoogleLogin from "../components/GoogleLogin";
 
 export default function LogingPage() {
   const [userId, setUserId] = useState("");
@@ -59,6 +60,7 @@ export default function LogingPage() {
       <hr />
       <KaKaoLogin />
       <NaverLogin />
+      <GoogleLogin />
     </div>
   );
 }
