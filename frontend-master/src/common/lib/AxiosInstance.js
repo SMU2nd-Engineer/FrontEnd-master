@@ -78,6 +78,7 @@ axiosInstance.interceptors.response.use(
         try {
           // 로그 아웃을 위한 경로 지정
           await logout();
+          window.location.href = "/user/login";
         } catch (error) {
           console.log("세션 만료에 따른 페이지 이동 중 오류 발생 : ", error);
           window.location.href = "/user/login";

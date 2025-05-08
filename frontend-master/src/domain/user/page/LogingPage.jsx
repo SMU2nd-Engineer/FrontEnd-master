@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "@domain/user/services/LoginApi";
 import { setAccessToken } from "@common/utils/TokenManager";
 import Button from "../components/Button";
@@ -62,9 +62,9 @@ export default function LogingPage() {
       <NaverLogin />
       <GoogleLogin />
       <hr />
-      <a href="/user/registation">
-        처음이신가요? 회원 가입하고 더 많은 정보를 확인하세요!
-      </a>
+      <div>
+        <Link to="/user/registration"> 회원 가입 </Link>
+      </div>
     </div>
   );
 }

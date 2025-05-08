@@ -1,8 +1,11 @@
-import React from 'react'
+import React from "react";
+import { logout } from "../services/LogoutService";
+import Button from "@/domain/user/components/Button";
 
 export default function LogoutButton() {
   return (
     <div>
-        <button onClick={}>로그 아웃</button></div>
-  )
+      <Button text={"로그아웃"} onClick={logout} />
+    </div>
+  );
 }
