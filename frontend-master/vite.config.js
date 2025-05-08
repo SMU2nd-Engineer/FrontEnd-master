@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -14,6 +15,7 @@ export default defineConfig({
       "@common": path.resolve(__dirname, "./src/common"),
       "@domain": path.resolve(__dirname, "./src/domain"),
       "@user": path.resolve(__dirname, "./src/domain/user"),
+      "@product": path.resolve(__dirname, "src/domain/product"),
     },
   },
 });
