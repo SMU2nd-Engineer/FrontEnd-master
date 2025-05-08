@@ -36,6 +36,8 @@ export default function Address({ state, dispatch }) {
     <div>
       <label>
         <input type="text" name="address" value={state.address} readOnly />
+      </label>
+      <label>
         <input
           ref={inputFocus}
           type="text"

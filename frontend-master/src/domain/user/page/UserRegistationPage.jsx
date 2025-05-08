@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 import Button from "../components/Button";
 import Address from "../components/Address";
+import IsCheck from "../components/IsCheck";
 
 /**
  * id
@@ -12,23 +13,6 @@ import Address from "../components/Address";
  */
 
 export default function UserRegistationPage() {
-  //   const [id, setId] = useState("");
-  //   const [name, setName] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [passwordCheck, setPasswordCheck] = useState("");
-  //   const [nickName, setNickName] = useState("");
-  //   const [address, setAddress] = useState("");
-  //   const [detailAddress, setDetailAddress] = useState("");
-
-  // 찾아보다가 reducer 방식이 있어서 고쳐봄
-  //   const [form, setForm] = useState({
-  //     id: "",
-  //     name: "",
-  //     password: "",
-  //     passwordCehck: "",
-  //     nickName: "",
-  //   });
-
   const initialState = {
     id: "",
     name: "",
@@ -39,6 +23,8 @@ export default function UserRegistationPage() {
     detailAddress: "",
     emailLocal: "",
     emailDomain: "",
+    isIdCheck: false,
+    isNickNameCheck: false,
   };
 
   const reducer = (state, action) => {
@@ -75,11 +61,10 @@ export default function UserRegistationPage() {
               type="text"
               name="id"
               value={state.id}
-              onChange={() => {
-                handleChange;
-              }}
+              onChange={handleChange}
             />
           </label>
+          <IsCheck name={state.id} />
         </div>
         <div>
           <label htmlFor="">
@@ -99,9 +84,7 @@ export default function UserRegistationPage() {
               type="password"
               name="password"
               value={state.password}
-              onChange={() => {
-                handleChange;
-              }}
+              onChange={handleChange}
             />
           </label>
         </div>
@@ -112,9 +95,7 @@ export default function UserRegistationPage() {
               type="password"
               name="passwordCheck"
               value={state.passwordCheck}
-              onChange={() => {
-                handleChange;
-              }}
+              onChange={handleChange}
             />
           </label>
         </div>
@@ -125,11 +106,10 @@ export default function UserRegistationPage() {
               type="text"
               name="nickName"
               value={state.nickName}
-              onChange={() => {
-                handleChange;
-              }}
+              onChange={handleChange}
             />
           </label>
+          <IsCheck name={state.nickName} />
         </div>
         <Address state={state} dispatch={dispatch} />
         {/* 이메일 넣을 곳 */}

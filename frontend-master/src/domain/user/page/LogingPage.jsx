@@ -55,12 +55,16 @@ export default function LogingPage() {
           onChange={(e) => setpassword(e.target.value)}
         />
         <br />
-        <Button text={"로그인"} onClick={handleLogin} />
+        <Button text={"로그인"} onClick={handleLogin} type={"submit"} />
       </form>
       <hr />
       <KaKaoLogin />
       <NaverLogin />
       <GoogleLogin />
+      <hr />
+      <a href="/user/registation">
+        처음이신가요? 회원 가입하고 더 많은 정보를 확인하세요!
+      </a>
     </div>
   );
 }
