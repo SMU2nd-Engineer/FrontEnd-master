@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import Button from "../components/Button";
 import Address from "../components/Address";
 import { duplicateCheckService } from "../services/DuplicateCheckService";
+import RegistrationEmail from "../components/RegistrationEmail";
 
 /**
  * id
@@ -39,10 +40,14 @@ export default function UserRegistrationPage() {
   const reducer = (state, action) => {
     switch (action.type) {
       case "CHANGE_FIELD":
-        return {
-          ...state,
-          ...action.payload,
-        };
+        if (action.payload) {
+          return {
+            ...state,
+            ...action.payload,
+          };
+        } else {
+          return { ...state, [action.name]: action.value };
+        }
       default:
         return state;
     }
@@ -100,9 +105,6 @@ export default function UserRegistrationPage() {
               value={state.name}
               onChange={handleChange}
             />
-            {!state.isIdCheck ? (
-              <p>아이디 중복입니다. 새로운 아이디를 입력해주세요</p>
-            ) : null}
           </label>
         </div>
         <div>
@@ -137,15 +139,21 @@ export default function UserRegistrationPage() {
               onChange={handleChange}
             />
           </label>
+          {state.id.length > 0 && !state.isNickNameCheck && (
+            <p>중복 체크 해주세요.</p>
+          )}
+          {state.id.length > 0 && state.isNickNameCheck && (
+            <p>사용 가능 합니다.</p>
+          )}
           <Button
             text={"중복 체크"}
             onClick={() => {
-              duplicateCheckService(state.id, dispatch, "nickName");
+              duplicateCheckService(state.nickName, dispatch, "nickName");
             }}
           />
         </div>
         <Address state={state} dispatch={dispatch} />
-        {/* 이메일 넣을 곳 */}
+        <RegistrationEmail state={state} dispatch={dispatch} />
       </form>
       <Button text={"취소"} />
       {state.isIdCheckComplete && state.isNickNameCheckComplete ? (

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Button from "./Button";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
@@ -46,8 +46,7 @@ export default function Address({ state, dispatch }) {
           onChange={(e) =>
             dispatch({
               type: "CHANGE_FIELD",
-              name: e.target.name,
-              value: e.target.value,
+              payload: { [e.target.name]: e.target.value },
             })
           }
         />
