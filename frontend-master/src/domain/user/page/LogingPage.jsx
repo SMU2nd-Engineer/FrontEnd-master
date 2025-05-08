@@ -8,7 +8,7 @@ import NaverLogin from "../components/NaverLogin";
 import GoogleLogin from "../components/GoogleLogin";
 
 export default function LogingPage() {
-  const [userId, setUserId] = useState("");
+  const [id, setUserId] = useState("");
   const [password, setpassword] = useState("");
 
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function LogingPage() {
     // 새로 고침을 방지하기 위한 코드
     e.preventDefault();
     try {
-      const res = await login(userId, password);
+      const res = await login(id, password);
       console.log("로그인 시도를 진행함");
       console.log("응답 : " + res);
       const accessToken = res.data.accessToken;
@@ -44,7 +44,7 @@ export default function LogingPage() {
         <label>id : </label>
         <input
           type="text"
-          value={userId}
+          value={id}
           onChange={(e) => setUserId(e.target.value)}
         />
         <br />
