@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function RegistrationEmail({ state, dispatch }) {
-  const [isManualDomain, setIsManualDomain] = useState(false);
+  const [isManualDomain, setIsManualDomain] = useState(true);
 
   const handleEmailChange = (e) => {
     dispatch({
@@ -22,7 +22,7 @@ export default function RegistrationEmail({ state, dispatch }) {
     } else {
       setIsManualDomain(false);
       dispatch({
-        // 선택한 값으로 도메인 주소 변경경
+        // 선택한 값으로 도메인 주소 변경
         type: "CHANGE_FIELD",
         payload: { emailDomain: value },
       });
@@ -31,7 +31,7 @@ export default function RegistrationEmail({ state, dispatch }) {
 
   return (
     <div>
-      <label htmlFor="">
+      <label htmlFor="emailLocal">
         <input
           type="text"
           name="emailLocal"
@@ -41,7 +41,7 @@ export default function RegistrationEmail({ state, dispatch }) {
       </label>
       <div>@</div>
       <div>
-        <label htmlFor="">
+        <label htmlFor="emailDomain">
           <input
             key={isManualDomain ? "editable" : "readonly"}
             type="text"

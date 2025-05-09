@@ -87,8 +87,12 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
     if (error.response.status === 402) {
-      alert("소셜 아이디가 없습니다. 로그인 페이지로 갑니다.");
-      window.location.href = "/user/login";
+      const { socialId, provider } = error.response.data;
+      sessionStorage.setItem("socialId", socialId);
+      sessionStorage.setItem("provider", provider);
+      confirm("가입된 정보가 없습니다. 회원 가입 페이지로 이동 하시겠습니까?")
+        ? (window.location.href = "/user/registration")
+        : (window.location.href = "/user/login");
     }
   }
 );

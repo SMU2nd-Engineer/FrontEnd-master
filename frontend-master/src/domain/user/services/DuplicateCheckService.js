@@ -19,11 +19,9 @@ export const duplicateCheckService = async (name, dispatch, category) => {
       let payload = {};
       if (category === "id") {
         payload.isIdCheck = true;
-        payload.isIdCheckComplete = true;
       }
       if (category === "nickName") {
         payload.isNickNameCheck = true;
-        payload.isNickNameCheckComplete = true;
       }
       dispatch({
         type: "CHANGE_FIELD",

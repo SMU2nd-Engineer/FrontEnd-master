@@ -1,22 +1,23 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import Button from "../components/Button";
 import Address from "../components/Address";
 import { duplicateCheckService } from "../services/DuplicateCheckService";
 import RegistrationEmail from "../components/RegistrationEmail";
+import regitrationService from "../services/RegistrationService";
 
 /**
- * id
- * name
- * password
- * passwordCheck
+ * id : 아이디
+ * name : 이름
+ * password : 비밀번호
+ * passwordCheck : 비밀 번호 확인
  * address : 주소 입력
  * detailAddress : 상세 주소
  * emailLocal : 이메일 앞 부분
  * emailDomain : 이메일 뒷 부분
  * isIdCheck : 아이디 중복 체크 여부
  * isNickNameCheck : 닉네임 중복 체크 여부
- * isIdCheckComplete : 아이디 중복 체크 완료
- * isNickNameCheckComplete : 닉네임 중복 체크 완료
+ * isSamePassword : 비밀 번호 & 비밀 번호 확인 모두 일치하는지 체크 여부
+ * isSocialLogin : 소셜 로그인 여부
  * @return : 회원 가입 폼
  */
 
@@ -33,8 +34,9 @@ export default function UserRegistrationPage() {
     emailDomain: "",
     isIdCheck: false,
     isNickNameCheck: false,
-    isIdCheckComplete: false,
-    isNickNameCheckComplete: false,
+    isSamePassword: false,
+    isSocialLogin: false,
+    socialProvider: "",
   };
 
   const reducer = (state, action) => {
@@ -61,7 +63,13 @@ export default function UserRegistrationPage() {
     if (e.target.name === "id") {
       dispatch({
         type: "CHANGE_FIELD",
-        payload: { [e.target.name]: e.target.value },
+        payload: { [e.target.name]: e.target.value, isIdCheck: false },
+      });
+    }
+    if (e.target.name === "nickName") {
+      dispatch({
+        type: "CHANGE_FIELD",
+        payload: { [e.target.name]: e.target.value, isNickNameCheck: false },
       });
     }
     dispatch({
@@ -70,7 +78,36 @@ export default function UserRegistrationPage() {
     });
   };
 
+  useEffect(() => {
+    dispatch({
+      type: "CHANGE_FIELD",
+      payload: {
+        isSamePassword:
+          state.password === state.passwordCheck &&
+          state.password.length &&
+          state.passwordCheck.length > 0,
+      },
+    });
+  }, [state.password, state.passwordCheck]);
+
+  useEffect(() => {
+    const socialId = sessionStorage.getItem("socialId");
+    const socialProvider = sessionStorage.getItem("provider");
+    dispatch({
+      type: "CHANGE_FIELD",
+      payload: {
+        id: socialId,
+        isIdCheck: true,
+        isSocialLogin: true,
+        socialProvider: socialProvider,
+        isSamePassword: true,
+      },
+    });
+  }, []);
+
   console.log({ ...state });
+
+  // 회원 가입 등록 버튼 작동 비밀 번호 동일할 경우만 진행 아닐 경우 안내 창 이동
 
   return (
     <div>
@@ -83,19 +120,25 @@ export default function UserRegistrationPage() {
               name="id"
               value={state.id}
               onChange={handleChange}
+              readOnly={state.isSocialLogin}
             />
           </label>
-          {state.id.length > 0 && !state.isIdCheck && (
-            <p>중복 체크 해주세요.</p>
-          )}
-          {state.id.length > 0 && state.isIdCheck && <p>사용 가능 합니다.</p>}
-          <Button
-            text={"중복 체크"}
-            onClick={() => {
-              duplicateCheckService(state.id, dispatch, "id");
-            }}
-          />
         </div>
+        {!state.isSocialLogin && (
+          <>
+            {state.id.length > 0 && !state.isIdCheck && (
+              <p>중복 체크 해주세요.</p>
+            )}
+            {state.id.length > 0 && state.isIdCheck && <p>사용 가능 합니다.</p>}
+            <Button
+              text={"중복 체크"}
+              onClick={() => {
+                duplicateCheckService(state.id, dispatch, "id");
+              }}
+            />
+          </>
+        )}
+
         <div>
           <label htmlFor="name">
             이름
@@ -107,28 +150,34 @@ export default function UserRegistrationPage() {
             />
           </label>
         </div>
-        <div>
-          <label htmlFor="password">
-            패스워드
-            <input
-              type="password"
-              name="password"
-              value={state.password}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="passwordCheck">
-            패스워드확인
-            <input
-              type="password"
-              name="passwordCheck"
-              value={state.passwordCheck}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+        {!state.isSocialLogin && (
+          <div>
+            <label htmlFor="password">
+              패스워드
+              <input
+                type="password"
+                name="password"
+                value={state.password}
+                onChange={handleChange}
+              />
+            </label>
+            <label htmlFor="passwordCheck">
+              패스워드확인
+              <input
+                type="password"
+                name="passwordCheck"
+                value={state.passwordCheck}
+                onChange={handleChange}
+              />
+            </label>
+            {state.passwordCheck.length > 0 && !state.isSamePassword && (
+              <p>입력한 비밀 번호가 다릅니다.</p>
+            )}
+            {state.passwordCheck.length > 0 && state.isSamePassword && (
+              <p>비밀번호가 일치 합니다.</p>
+            )}
+          </div>
+        )}
         <div>
           <label htmlFor="nickName">
             닉네임
@@ -139,10 +188,10 @@ export default function UserRegistrationPage() {
               onChange={handleChange}
             />
           </label>
-          {state.id.length > 0 && !state.isNickNameCheck && (
+          {state.nickName.length > 0 && !state.isNickNameCheck && (
             <p>중복 체크 해주세요.</p>
           )}
-          {state.id.length > 0 && state.isNickNameCheck && (
+          {state.nickName.length > 0 && state.isNickNameCheck && (
             <p>사용 가능 합니다.</p>
           )}
           <Button
@@ -155,12 +204,22 @@ export default function UserRegistrationPage() {
         <Address state={state} dispatch={dispatch} />
         <RegistrationEmail state={state} dispatch={dispatch} />
       </form>
-      <Button text={"취소"} />
-      {state.isIdCheckComplete && state.isNickNameCheckComplete ? (
-        <Button text={"가입"} onClick={""} />
-      ) : (
-        <Button text={"가입"} />
-      )}
+      <Button
+        text={"취소"}
+        onClick={() => {
+          window.location.href = "/user/login";
+        }}
+      />
+
+      <Button
+        text={"가입"}
+        onClick={() => {
+          regitrationService(state);
+        }}
+        disabled={
+          !(state.isIdCheck && state.isNickNameCheck && state.isSamePassword)
+        }
+      />
     </div>
   );
 }
