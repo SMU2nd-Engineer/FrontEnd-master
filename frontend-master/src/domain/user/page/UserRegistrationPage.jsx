@@ -100,7 +100,8 @@ export default function UserRegistrationPage() {
 
   return (
     <div>
-      <form action="">
+      {/* 의도치 않은 새로 고침 방지 */}
+      <form onSubmit={(e) => e.preventDefault()}>
         <div>
           <label htmlFor="id">
             아이디
@@ -127,7 +128,6 @@ export default function UserRegistrationPage() {
             />
           </>
         )}
-
         <div>
           <label htmlFor="name">
             이름
