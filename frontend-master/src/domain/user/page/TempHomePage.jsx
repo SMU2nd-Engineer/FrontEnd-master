@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../components/Button";
-import { logout } from "@/common/services/LogoutService";
+import Button from "../../../components/Button";
+import { logout } from "@/services/LogoutService";
 
 export default function TempHomePage() {
   return (

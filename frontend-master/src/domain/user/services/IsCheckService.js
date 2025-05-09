@@ -1,4 +1,4 @@
-import axiosInstance from "@/common/lib/AxiosInstance";
+import axiosInstance from "@/lib/axiosInstance";
 
 /**
  * isIdCheck
@@ -6,7 +6,7 @@ import axiosInstance from "@/common/lib/AxiosInstance";
  * @param {String} item : 중복 체크 할 아이템(id 또는 nickName)
  * @return {boolean} : 중복 체크 했을 때 넘겨줄 내용.
  */
-export const isCheck = async ({ item }) => {
+export const isCheckService = async ({ item }) => {
   try {
     const res = await axiosInstance.post(
       "/duplicatecheck",

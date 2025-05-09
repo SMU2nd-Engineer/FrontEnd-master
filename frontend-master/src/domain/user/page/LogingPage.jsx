@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "@domain/user/services/LoginApi";
-import { setAccessToken } from "@common/utils/TokenManager";
-import Button from "../components/Button";
+import { login } from "@/domain/user/services/login";
+import { setAccessToken } from "@/utils/TokenManager";
+import Button from "../../../components/Button";
 import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
 import GoogleLogin from "../components/GoogleLogin";

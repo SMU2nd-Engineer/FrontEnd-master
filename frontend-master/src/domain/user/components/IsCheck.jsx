@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 /**
  * IsCheck
  * 아이디, 닉네임 중복 체크를 위한 컴포넌트

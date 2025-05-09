@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
-import { kakaoLogin } from "../services/KakaoAuth";
-import { setAccessToken } from "@common/utils/TokenManager";
+import { kakaoLogin } from "../services/kakaoLogin";
+import { setAccessToken } from "@/utils/TokenManager";
 
 export default function KaKaoRedirect() {
   const navigate = useNavigate();
