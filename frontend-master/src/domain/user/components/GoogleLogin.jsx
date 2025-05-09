@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 import googleLoginButton from "@/assets/goole_login_circle.svg";
 
 export default function GoogleLogin() {

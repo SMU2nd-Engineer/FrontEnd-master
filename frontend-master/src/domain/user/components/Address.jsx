@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
 export default function Address({ state, dispatch }) {

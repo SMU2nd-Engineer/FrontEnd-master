@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from "react";
-import Button from "../components/Button";
+import Button from "../../../components/Button";
 import Address from "../components/Address";
 import IsCheck from "../components/IsCheck";
 

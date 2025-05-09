@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 import naverLoginButton from "@/assets/naver_login_circle_.png";
 
 export default function NaverLogin() {
