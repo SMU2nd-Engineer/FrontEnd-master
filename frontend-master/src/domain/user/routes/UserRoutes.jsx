@@ -6,6 +6,7 @@ import TempHomePage from "../page/TempHomePage";
 import NaverRedirect from "../page/NaverRedirect";
 import GoogleRedirect from "../page/GoogleRedirect";
 import UserRegistrationPage from "../page/UserRegistrationPage";
+import IdPasswordFindPage from "../page/IdPasswordFindPage";
 
 export default function UserRoutes() {
   return (
@@ -18,6 +19,7 @@ export default function UserRoutes() {
         <Route path="naverauth" element={<NaverRedirect />} />
         <Route path="googleauth" element={<GoogleRedirect />} />
         <Route path="registration" element={<UserRegistrationPage />} />
+        <Route path="find/:type" element={<IdPasswordFindPage />} />
       </Routes>
     </div>
   );

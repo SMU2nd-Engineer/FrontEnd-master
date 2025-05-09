@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../../../components/Button";
 import kakaoLoginButton from "@/assets/kakao_login_small.png";
 
 export default function KaKaoLogin() {

@@ -1,4 +1,4 @@
-import axiosInstance from "@/common/lib/AxiosInstance";
+import axiosInstance from "@/lib/axiosInstance";
 
 const regitrationService = async (state) => {
   try {

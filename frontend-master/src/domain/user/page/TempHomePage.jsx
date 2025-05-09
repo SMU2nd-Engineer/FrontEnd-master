@@ -1,4 +1,4 @@
-import LogoutButton from "@/common/components/LogoutButton";
+import LogoutButton from "@/domain/user/components/LogoutButton";
 import React from "react";
 
 export default function TempHomePage() {

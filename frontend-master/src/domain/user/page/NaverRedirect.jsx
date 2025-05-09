@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
-import { setAccessToken } from "@common/utils/TokenManager";
-import { naverLogin } from "../services/NaverAuth";
+import { setAccessToken } from "@/utils/TokenManager";
+import { naverLogin } from "../services/naverLogin";
 
 export default function NaverRedirect() {
   const navigate = useNavigate();

@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer } from "react";
-import Button from "../components/Button";
+import Button from "../../../components/Button";
 import Address from "../components/Address";
-import { duplicateCheckService } from "../services/DuplicateCheckService";
 import RegistrationEmail from "../components/RegistrationEmail";
-import regitrationService from "../services/RegistrationService";
+import userReducer from "../utils/userReducer";
+import { duplicateCheckService } from "../services/duplicateCheckService";
+import regitrationService from "../services/registrationService";
 
 /**
  * id : 아이디
@@ -39,21 +40,7 @@ export default function UserRegistrationPage() {
     socialProvider: "",
   };
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "CHANGE_FIELD":
-        if (action.payload) {
-          return {
-            ...state,
-            ...action.payload,
-          };
-        } else {
-          return { ...state, [action.name]: action.value };
-        }
-      default:
-        return state;
-    }
-  };
+  const reducer = userReducer;
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -93,16 +80,18 @@ export default function UserRegistrationPage() {
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
     const socialProvider = sessionStorage.getItem("provider");
-    dispatch({
-      type: "CHANGE_FIELD",
-      payload: {
-        id: socialId,
-        isIdCheck: true,
-        isSocialLogin: true,
-        socialProvider: socialProvider,
-        isSamePassword: true,
-      },
-    });
+    if (state.socialId !== "") {
+      dispatch({
+        type: "CHANGE_FIELD",
+        payload: {
+          id: socialId,
+          isIdCheck: true,
+          isSocialLogin: true,
+          socialProvider: socialProvider,
+          isSamePassword: true,
+        },
+      });
+    }
   }, []);
 
   console.log({ ...state });

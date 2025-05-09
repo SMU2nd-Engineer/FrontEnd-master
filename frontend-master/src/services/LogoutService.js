@@ -1,5 +1,5 @@
-import { removeAccessToken } from "@common/utils/TokenManager";
-import axiosInstance from "@common/lib/AxiosInstance";
+import { removeAccessToken } from "@/utils/TokenManager";
+import axiosInstance from "@/lib/axiosInstance";
 
 /**
  * logout

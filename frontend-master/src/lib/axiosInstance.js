@@ -2,8 +2,8 @@ import {
   getAccessToken,
   removeAccessToken,
   setAccessToken,
-} from "@common/utils/TokenManager";
-import { logout } from "@common/services/LogoutService";
+} from "@/utils/TokenManager";
+import { logout } from "@/services/LogoutService";
 import axios from "axios";
 
 /**
