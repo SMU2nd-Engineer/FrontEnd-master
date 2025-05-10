@@ -10,7 +10,7 @@ import axiosInstance from "@/lib/axiosInstance";
 export const duplicateCheckService = async (name, dispatch, category) => {
   try {
     const res = await axiosInstance.get(
-      "/duplicatecheck",
+      "/user/duplicatecheck",
       { params: { checklist: name, category: category } }, // chekcklist 를 불러옴
       { withCredentials: true }
     );

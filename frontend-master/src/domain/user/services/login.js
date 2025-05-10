@@ -10,7 +10,7 @@ import axiosInstance from "@/lib/axiosInstance";
 
 export const login = async (id, password) => {
   return await axiosInstance.post(
-    "/login",
+    "/user/login",
     {
       id,
       password,

@@ -3,8 +3,8 @@ import Button from "../../../components/Button";
 import Address from "../components/Address";
 import RegistrationEmail from "../components/RegistrationEmail";
 import userReducer from "../utils/userReducer";
-import { duplicateCheckService } from "../services/duplicateCheckService";
 import regitrationService from "../services/registrationService";
+import { duplicateCheckService } from "../services/duplicateCheckService";
 
 /**
  * id : 아이디
@@ -80,7 +80,7 @@ export default function UserRegistrationPage() {
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
     const socialProvider = sessionStorage.getItem("provider");
-    if (state.socialId !== "") {
+    if (socialId) {
       dispatch({
         type: "CHANGE_FIELD",
         payload: {
@@ -92,7 +92,7 @@ export default function UserRegistrationPage() {
         },
       });
     }
-  }, []);
+  }, [state.socialId]);
 
   console.log({ ...state });
 
@@ -108,7 +108,7 @@ export default function UserRegistrationPage() {
             <input
               type="text"
               name="id"
-              value={state.id}
+              value={state.id ?? ""}
               onChange={handleChange}
               readOnly={state.isSocialLogin}
             />
@@ -134,7 +134,7 @@ export default function UserRegistrationPage() {
             <input
               type="text"
               name="name"
-              value={state.name}
+              value={state.name ?? ""}
               onChange={handleChange}
             />
           </label>
@@ -146,7 +146,7 @@ export default function UserRegistrationPage() {
               <input
                 type="password"
                 name="password"
-                value={state.password}
+                value={state.password ?? ""}
                 onChange={handleChange}
               />
             </label>
@@ -155,7 +155,7 @@ export default function UserRegistrationPage() {
               <input
                 type="password"
                 name="passwordCheck"
-                value={state.passwordCheck}
+                value={state.passwordCheck ?? ""}
                 onChange={handleChange}
               />
             </label>
@@ -173,7 +173,7 @@ export default function UserRegistrationPage() {
             <input
               type="text"
               name="nickName"
-              value={state.nickName}
+              value={state.nickName ?? ""}
               onChange={handleChange}
             />
           </label>
@@ -206,7 +206,11 @@ export default function UserRegistrationPage() {
           regitrationService(state);
         }}
         disabled={
-          !(state.isIdCheck && state.isNickNameCheck && state.isSamePassword)
+          !(
+            state.isIdCheck &&
+            state.isNickNameCheck &&
+            (state.isSocialLogin || state.isSamePassword)
+          )
         }
       />
     </div>
