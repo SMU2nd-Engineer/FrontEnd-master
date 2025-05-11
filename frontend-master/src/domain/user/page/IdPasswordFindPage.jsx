@@ -1,9 +1,13 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import Button from "../../../components/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import userReducer from "../utils/userReducer";
 import idPasswordFindService from "../services/idPasswordFindService";
 
+/**
+ * get 방식으로 전달 받은 파라미터의 값에 따라서 아이디 비밀번호 찾기 페이지 표시
+ * @returns 아이디 또는 비밀번호 페이지
+ */
 export default function IdPasswordFindPage() {
   const initialState = {
     id: "",
@@ -41,7 +45,7 @@ export default function IdPasswordFindPage() {
                 onChange={handleChange}
               />
             </label>
-            비밀 번호:
+            이메일 :
             <label htmlFor="email">
               <input
                 type="text"
@@ -53,7 +57,10 @@ export default function IdPasswordFindPage() {
             <Button
               text={"아이디 찾기"}
               onClick={() => {
-                idPasswordFindService(...state, navigate);
+                idPasswordFindService(
+                  { name: state.name, email: state.email },
+                  navigate
+                );
               }}
               type={"submit"}
             />
@@ -61,7 +68,7 @@ export default function IdPasswordFindPage() {
         </>
       ) : (
         <>
-          <h2>비밀번호 찾기 찾기</h2>
+          <h2>비밀번호 찾기</h2>
           <form onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="id">
               아이디 :
@@ -81,7 +88,7 @@ export default function IdPasswordFindPage() {
                 value={state.name}
               />
             </label>
-            비밀 번호 :
+            이메일 :
             <label htmlFor="email">
               <input
                 type="text"
@@ -93,7 +100,14 @@ export default function IdPasswordFindPage() {
             <Button
               text={"비밀번호 찾기"}
               onClick={() => {
-                idPasswordFindService(...state, navigate);
+                idPasswordFindService(
+                  {
+                    id: state.id,
+                    name: state.name,
+                    email: state.email,
+                  },
+                  navigate
+                );
               }}
               type={"submit"}
             />

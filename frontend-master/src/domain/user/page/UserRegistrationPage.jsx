@@ -3,7 +3,7 @@ import Button from "../../../components/Button";
 import Address from "../components/Address";
 import RegistrationEmail from "../components/RegistrationEmail";
 import userReducer from "../utils/userReducer";
-import regitrationService from "../services/registrationService";
+import registrationService from "../services/registrationService";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 
 /**
@@ -47,22 +47,18 @@ export default function UserRegistrationPage() {
   // input 창에서 onChange로 같은 단어를 매번 다르게 쓸려니 어려워 찾아본 결과 함수로 모아서 쓰면 된다.
   // 이벤트 발생할 때 이름과 값만 가져오면 되므로 어렵지 않다.
   const handleChange = (e) => {
-    if (e.target.name === "id") {
-      dispatch({
-        type: "CHANGE_FIELD",
-        payload: { [e.target.name]: e.target.value, isIdCheck: false },
-      });
+    // 중복 구조 개선
+    const { name, value } = e.target;
+    const payload = { [name]: value };
+
+    if (name === "id") {
+      payload.isIdCheck = false;
     }
-    if (e.target.name === "nickName") {
-      dispatch({
-        type: "CHANGE_FIELD",
-        payload: { [e.target.name]: e.target.value, isNickNameCheck: false },
-      });
+    if (name === "nickName") {
+      payload.isNickNameCheck = false;
     }
-    dispatch({
-      type: "CHANGE_FIELD",
-      payload: { [e.target.name]: e.target.value },
-    });
+
+    dispatch({ type: "CHANGE_FIELD", payload });
   };
 
   useEffect(() => {
@@ -92,7 +88,7 @@ export default function UserRegistrationPage() {
         },
       });
     }
-  }, [state.socialId]);
+  }, []);
 
   console.log({ ...state });
 
@@ -203,7 +199,7 @@ export default function UserRegistrationPage() {
       <Button
         text={"가입"}
         onClick={() => {
-          regitrationService(state);
+          registrationService(state);
         }}
         disabled={
           !(

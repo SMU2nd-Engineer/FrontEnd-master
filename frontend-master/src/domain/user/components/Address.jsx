@@ -23,8 +23,7 @@ export default function Address({ state, dispatch }) {
     console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     dispatch({
       type: "CHANGE_FIELD",
-      name: "address",
-      value: fullAddress,
+      payload: { address: fullAddress },
     });
     inputFocus.current.focus();
   };

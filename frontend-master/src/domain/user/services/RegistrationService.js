@@ -3,7 +3,7 @@ import axiosInstance from "@/lib/axiosInstance";
 const regitrationService = async (state) => {
   try {
     const res = await axiosInstance.post(
-      "/registration",
+      "/user/registration",
       {
         id: state.id,
         name: state.name,

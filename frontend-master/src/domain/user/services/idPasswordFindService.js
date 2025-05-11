@@ -1,5 +1,4 @@
 import axiosInstance from "@/lib/axiosInstance";
-import { useNavigate } from "react-router-dom";
 
 /**
  * idPasswordFindService
@@ -8,25 +7,27 @@ import { useNavigate } from "react-router-dom";
  */
 
 const idPasswordFindService = async ({ id, name, email }, navigate) => {
-  if (id === "") {
-    try {
-      const res = await axiosInstance.post(
-        "/idFind",
-        { name, email },
-        { withCredentials: true }
-      );
-      const findId = res.data;
-      navigate("/showfindid", { state: { findId } });
-    } catch (error) {}
+  console.log(id, name, email);
+  if (id === "" || id === null || id === undefined) {
+    const res = await axiosInstance.post(
+      "/user/idFind",
+      { name, email },
+      { withCredentials: true }
+    );
+    const findId = res.data;
+    if (res.status === 200 || res.status === 201) {
+      navigate("/user/showfindid", { state: { findId } });
+    }
   } else {
-    try {
-      const res = await axiosInstance.post(
-        "/passwordFind",
-        { name, email },
-        { withCredentials: true }
-      );
-      navigate("/showfindid", { state: { findId } });
-    } catch (error) {}
+    const res = await axiosInstance.post(
+      "/user/passwordFind",
+      { name, email },
+      { withCredentials: true }
+    );
+    if (res.status === 200 || res.status === 201) {
+      // 정보가 일치하면 비밀번호 변경 페이지로 이동합니다.
+      navigate("/user/changePassword", { state: { id: id } });
+    }
   }
 };
 

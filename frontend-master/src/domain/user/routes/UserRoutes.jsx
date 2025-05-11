@@ -7,6 +7,8 @@ import NaverRedirect from "../page/NaverRedirect";
 import GoogleRedirect from "../page/GoogleRedirect";
 import UserRegistrationPage from "../page/UserRegistrationPage";
 import IdPasswordFindPage from "../page/IdPasswordFindPage";
+import ShowFindIdPage from "../page/ShowFindIdPage";
+import ChangePasswordPage from "../page/ChangePasswordPage";
 
 export default function UserRoutes() {
   return (
@@ -20,6 +22,8 @@ export default function UserRoutes() {
         <Route path="googleauth" element={<GoogleRedirect />} />
         <Route path="registration" element={<UserRegistrationPage />} />
         <Route path="find/:type" element={<IdPasswordFindPage />} />
+        <Route path="showfindid" element={<ShowFindIdPage />} />
+        <Route path="changePassword" element={<ChangePasswordPage />} />
       </Routes>
     </div>
   );
