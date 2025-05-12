@@ -60,7 +60,7 @@ export default function RegistrationEmail({ state, dispatch }) {
           <option value="type">직접 입력</option>
           <option value="naver.com">naver.com</option>
           <option value="google.com">google.com</option>
-          <option value="daumn.net">daumn.net</option>
+          <option value="daum.net">daumn.net</option>
           <option value="outlook.com">outlook.com</option>
           <option value="yahoo.com">yahoo.com</option>
           <option value="icloud.com">icloud.com</option>
