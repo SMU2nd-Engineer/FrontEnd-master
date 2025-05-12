@@ -8,7 +8,7 @@ import axiosInstance from "@/lib/axiosInstance";
 
 export const kakaoLogin = async (kakaoCode) => {
   return await axiosInstance.post(
-    "kakaoAuth",
+    "/user/kakaoAuth",
     { code: kakaoCode },
     { withCredentials: true }
   );
