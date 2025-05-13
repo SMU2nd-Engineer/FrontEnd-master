@@ -1,4 +1,4 @@
-import { removeAccessToken } from "/utils/TokenManager";
+import { removeAccessToken } from "@/utils/TokenManager";
 import axiosInstance from "@/lib/axiosInstance";
 
 /**

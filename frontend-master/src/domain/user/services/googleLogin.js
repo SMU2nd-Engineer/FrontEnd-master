@@ -9,7 +9,7 @@ import axiosInstance from "@/lib/axiosInstance";
 
 export const googleLogin = async (googleCode) => {
   return await axiosInstance.post(
-    "googleAuth",
+    "/user/googleAuth",
     { code: googleCode },
     { withCredentials: true }
   );

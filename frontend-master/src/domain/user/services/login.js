@@ -8,11 +8,11 @@ import axiosInstance from "@/lib/axiosInstance";
  * @returns api 호출
  */
 
-export const login = async (userId, password) => {
+export const login = async (id, password) => {
   return await axiosInstance.post(
-    "/login",
+    "/user/login",
     {
-      userId,
+      id,
       password,
     },
     { withCredentials: true }

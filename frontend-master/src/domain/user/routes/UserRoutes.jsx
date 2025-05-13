@@ -5,7 +5,10 @@ import LogingPage from "../page/LogingPage";
 import TempHomePage from "../page/TempHomePage";
 import NaverRedirect from "../page/NaverRedirect";
 import GoogleRedirect from "../page/GoogleRedirect";
-import UserRegistationPage from "../page/UserRegistationPage";
+import UserRegistrationPage from "../page/UserRegistrationPage";
+import IdPasswordFindPage from "../page/IdPasswordFindPage";
+import ShowFindIdPage from "../page/ShowFindIdPage";
+import ChangePasswordPage from "../page/ChangePasswordPage";
 
 export default function UserRoutes() {
   return (
@@ -17,7 +20,10 @@ export default function UserRoutes() {
         <Route path="kakaoauth" element={<KaKaoRedirect />} />
         <Route path="naverauth" element={<NaverRedirect />} />
         <Route path="googleauth" element={<GoogleRedirect />} />
-        <Route path="registation" element={<UserRegistationPage />} />
+        <Route path="registration" element={<UserRegistrationPage />} />
+        <Route path="find/:type" element={<IdPasswordFindPage />} />
+        <Route path="showfindid" element={<ShowFindIdPage />} />
+        <Route path="changePassword" element={<ChangePasswordPage />} />
       </Routes>
     </div>
   );
