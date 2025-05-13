@@ -17,6 +17,7 @@ export default defineConfig({
       "@user": path.resolve(__dirname, "./src/domain/user"),
       "@product": path.resolve(__dirname, "src/domain/product"),
       "@mypage": path.resolve(__dirname, "src/domain/mypage"),
+      "@chat": path.resolve(__dirname, "src/domain/chat"),
     },
   },
 });
