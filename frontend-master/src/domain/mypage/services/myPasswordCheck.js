@@ -13,9 +13,9 @@ export const myPasswordCheck = async (password, setIsMyInfoPasswordCheck) => {
     },
     { withCredentials: true }
   );
-  {
-    !res.data
-      ? alert("비밀번호를 확인해주세요.")
-      : setIsMyInfoPasswordCheck(res.data);
+  if (res.data === false) {
+    alert("비밀번호를 확인해주세요.");
+  } else {
+    setIsMyInfoPasswordCheck(res.data);
   }
 };

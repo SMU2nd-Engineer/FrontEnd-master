@@ -21,7 +21,9 @@ export default function MyInfoPasswordCheck({ setIsMyInfoPasswordCheck }) {
       </label>
       <Button
         text={"확인"}
-        onClick={myPasswordCheck(password, setIsMyInfoPasswordCheck)}
+        onClick={() => {
+          myPasswordCheck(password, setIsMyInfoPasswordCheck);
+        }}
       />
     </div>
   );
