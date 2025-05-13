@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import { setAccessToken } from "@/utils/TokenManager";
-import { googleLogin } from "../services/googleAuth";
+import { googleLogin } from "../services/googleLogin";
 
 export default function GoogleRedirect() {
   const navigate = useNavigate();
