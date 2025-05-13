@@ -12,7 +12,8 @@
       "@/*": ["./src/*"],
       "@common/*": ["./src/common/*"],
       "@domain/*": ["./src/domain/*"],
-      "@user/*": ["./src/domain/user/*"]
+      "@user/*": ["./src/domain/user/*"],
+      "@mypage/*": ["./src/domain/mypage/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]
