@@ -19,10 +19,6 @@ import { duplicateCheckService } from "../services/duplicateCheckService";
  * isNickNameCheck : 닉네임 중복 체크 여부
  * isSamePassword : 비밀 번호 & 비밀 번호 확인 모두 일치하는지 체크 여부
  * isSocialLogin : 소셜 로그인 여부
- * isValidId : 아이디 검증 여부
- * isValidPassword : 패스워드 검증 여부
- * isValidNickName : 닉네임 검증 여부
- * isValidEmail : 이메일 검증 여부
  * @return : 회원 가입 폼
  */
 
@@ -42,10 +38,6 @@ export default function UserRegistrationPage() {
     isSamePassword: false,
     isSocialLogin: false,
     socialProvider: "",
-    isValidId: true,
-    isValidPassword: true,
-    isValidNickName: true,
-    isValidEmail: true,
   };
 
   const reducer = userReducer;
