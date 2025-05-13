@@ -1,4 +1,4 @@
-import axiosInstance from "@/common/lib/AxiosInstance";
+import axiosInstance from "@/lib/axiosInstance";
 
 /**
  * 채팅방 목록 조회
