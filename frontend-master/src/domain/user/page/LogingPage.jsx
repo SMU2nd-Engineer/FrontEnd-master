@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "@/domain/user/services/login";
 import { setAccessToken } from "@/utils/TokenManager";
 import Button from "../../../components/Button";
@@ -8,7 +8,7 @@ import NaverLogin from "../components/NaverLogin";
 import GoogleLogin from "../components/GoogleLogin";
 
 export default function LogingPage() {
-  const [userId, setUserId] = useState("");
+  const [id, setUserId] = useState("");
   const [password, setpassword] = useState("");
 
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function LogingPage() {
     // 새로 고침을 방지하기 위한 코드
     e.preventDefault();
     try {
-      const res = await login(userId, password);
+      const res = await login(id, password);
       console.log("로그인 시도를 진행함");
       console.log("응답 : " + res);
       const accessToken = res.data.accessToken;
@@ -44,7 +44,7 @@ export default function LogingPage() {
         <label>id : </label>
         <input
           type="text"
-          value={userId}
+          value={id}
           onChange={(e) => setUserId(e.target.value)}
         />
         <br />
@@ -62,9 +62,11 @@ export default function LogingPage() {
       <NaverLogin />
       <GoogleLogin />
       <hr />
-      <a href="/user/registation">
-        처음이신가요? 회원 가입하고 더 많은 정보를 확인하세요!
-      </a>
+      <div>
+        <Link to="/user/registration"> 회원 가입 </Link> /
+        <Link to="/user/find/id"> 아이디 찾기 </Link> /
+        <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
+      </div>
     </div>
   );
 }

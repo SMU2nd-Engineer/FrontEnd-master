@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Button from "../../../components/Button";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
@@ -23,8 +23,7 @@ export default function Address({ state, dispatch }) {
     console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     dispatch({
       type: "CHANGE_FIELD",
-      name: "address",
-      value: fullAddress,
+      payload: { address: fullAddress },
     });
     inputFocus.current.focus();
   };
@@ -46,8 +45,7 @@ export default function Address({ state, dispatch }) {
           onChange={(e) =>
             dispatch({
               type: "CHANGE_FIELD",
-              name: e.target.name,
-              value: e.target.value,
+              payload: { [e.target.name]: e.target.value },
             })
           }
         />

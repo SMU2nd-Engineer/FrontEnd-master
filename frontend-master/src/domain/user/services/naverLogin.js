@@ -10,7 +10,7 @@ import axiosInstance from "@/lib/axiosInstance";
 
 export const naverLogin = async (naverCode) => {
   return await axiosInstance.post(
-    "naverAuth",
+    "/user/naverAuth",
     { code: naverCode },
     { withCredentials: true }
   );
