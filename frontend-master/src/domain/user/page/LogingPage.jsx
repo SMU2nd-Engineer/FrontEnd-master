@@ -6,7 +6,7 @@ import Button from "../../../components/Button";
 import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
 import GoogleLogin from "../components/GoogleLogin";
-
+import "@user/style/User.css";
 export default function LogingPage() {
   const [id, setUserId] = useState("");
   const [password, setpassword] = useState("");
@@ -39,7 +39,7 @@ export default function LogingPage() {
   };
 
   return (
-    <div>
+    <div id="LoginContainer">
       <form onSubmit={handleLogin}>
         <label>id : </label>
         <input
