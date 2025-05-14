@@ -6,6 +6,7 @@ import SellAndPurchaseList from "../page/SellAndPurchaseListPage";
 import WishlistPage from "../page/WishlistPage";
 import MyReviewPage from "../page/MyReviewPage";
 import MyBoardPage from "../page/MyBoardPage";
+import MyTransactionReviewPage from "../page/MyTransactionReviewPage";
 
 export default function MyPageRoutes() {
   return (
@@ -18,6 +19,10 @@ export default function MyPageRoutes() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="myRevicw" element={<MyReviewPage />} />
         <Route path="myBoard" element={<MyBoardPage />} />
+        <Route
+          path="myTransactionReviewPage"
+          element={<MyTransactionReviewPage />}
+        />
       </Routes>
     </div>
   );
