@@ -2,7 +2,11 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  /* text-align: center; */
+  
+}
+
+.content {
+  margin-top: 165px;
 }
 
 .logo {
@@ -12,7 +16,7 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #8f8f8faa);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);

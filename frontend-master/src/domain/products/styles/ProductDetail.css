@@ -1,0 +1,37 @@
+.detailinfo {
+  display: flex;
+  gap: 200px;
+  width: 1800px;             
+  margin: 0 auto;           
+  padding: 20px;
+}
+
+.image {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dotted rgb(168, 168, 168);
+  
+}
+
+.column {
+  width: 600px;
+  border: 1px dotted rgb(168, 168, 168);
+  margin-right: 50px;
+  text-align: left;
+}
+
+.title, .price, .detaillcontent, .buttonbox {
+  margin-left: 20px;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+.price {
+  font-size: 1.5em
+}
