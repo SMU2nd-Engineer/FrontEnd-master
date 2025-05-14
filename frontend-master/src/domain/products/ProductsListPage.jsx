@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import '../../../common/ui/header/Header.css';
-import './ProductsListPage.css';
+import './styles/ProductsListPage.css';
 import ProductList from "./components/ProductList";
 
 
