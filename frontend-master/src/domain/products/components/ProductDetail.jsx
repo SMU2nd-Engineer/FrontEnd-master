@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductDetail } from "../services/productService";
 import Button from "@/components/Button";
+import "../styles/ProductDetail.css";
 
 export default function ProductDetail() {
   const { idx } = useParams();
