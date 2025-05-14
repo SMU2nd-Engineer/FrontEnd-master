@@ -1,24 +1,19 @@
 import axiosInstance from "@/lib/axiosInstance";
 
-const regitrationService = async (state) => {
+export const updateUserInfo = async (state) => {
   try {
     const res = await axiosInstance.post(
-      "/user/registration",
+      "/mypage/updateInfo",
       {
-        id: state.id,
         name: state.name,
         password: state.password,
         nickName: state.nickName,
         email: `${state.emailLocal}@${state.emailDomain}`,
         address: `${state.address} ${state.detailAddress}`,
-        socialLogin: state.socialProvider || "",
       },
       { withCredentials: true }
     );
   } catch (error) {
-    console.log(error);
-    alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+    console.log(`개인정보 전달 중 오류 발생 : ${error}`);
   }
 };
-
-export default regitrationService;

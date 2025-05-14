@@ -60,7 +60,7 @@ export default function UserRegistrationPage() {
 
     dispatch({ type: "CHANGE_FIELD", payload });
   };
-
+  // 비밀번호 동일한 것을 체크하기 위한 useEffect
   useEffect(() => {
     dispatch({
       type: "CHANGE_FIELD",
@@ -73,6 +73,7 @@ export default function UserRegistrationPage() {
     });
   }, [state.password, state.passwordCheck]);
 
+  // 소셜 로그인을 구분하기 위하여 정보를 가져오는 훅
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
     const socialProvider = sessionStorage.getItem("provider");
@@ -89,10 +90,6 @@ export default function UserRegistrationPage() {
       });
     }
   }, []);
-
-  console.log({ ...state });
-
-  // 회원 가입 등록 버튼 작동 비밀 번호 동일할 경우만 진행 아닐 경우 안내 창 이동
 
   return (
     <div>
@@ -195,11 +192,13 @@ export default function UserRegistrationPage() {
           window.location.href = "/user/login";
         }}
       />
-
+      {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
       <Button
         text={"가입"}
         onClick={() => {
           registrationService(state);
+          alert("회원가입이 완료되었습니다.");
+          window.location.href = "/user/login";
         }}
         disabled={
           !(
