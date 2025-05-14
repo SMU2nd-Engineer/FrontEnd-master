@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "jsx": "react",
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "baseUrl": ".", // paths 옵션을 사용하기 위해서 필수로 지정
+    "paths": {
+      "@/*": ["./src/*"],
+      "@common/*": ["./src/common/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@user/*": ["./src/domain/user/*"],
+      "@mypage/*": ["./src/domain/mypage/*"],
+      "@chat/*": ["./src/domain/chat/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

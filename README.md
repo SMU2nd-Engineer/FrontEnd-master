@@ -25,29 +25,30 @@ frontend-master
 ├─ src                                 # 주요 코드 폴더
 │   ├─ assets                          # 애플리케이션 내부에서 동적으로 불러올 공통 이미지
 │   │
-│   ├─ common                          # 전역에서 사용할 코드
-│   │   ├─ ui                          # 공통으로 컴포넌트들
-│   │   ├─ hooks                       # 공통으로 사용할 훅
-│   │   ├─ components                  # 공통으로 사용할 컴포넌트
-│   │   ├─ style                       # 공통 ui 스타일 모음
-│   │   ├─ utils                       # 공통으로 사용할 유틸리티 함수 및 객체
-│   │   ├─ store                       # 공통으로 상태 모음
-│   │   └─ services                    # 공통 API 모음
+│   ├─ page                            # 공통으로 사용할 페이지
+│   ├─ hooks                           # 공통으로 사용할 훅
+│   ├─ components                      # 공통으로 사용할 컴포넌트
+│   ├─ style                           # 공통 ui 스타일 모음
+│   ├─ utils                           # 공통으로 사용할 유틸리티 함수 및 객체
+│   ├─ store                           # 공통으로 상태 모음
+│   ├─ lib                             # 외부 라이브러리 설정 모음(axios 등)
+│   ├─ services                        # 공통 API 모음
 │   │
 │   ├─ domain                          # 도메인(기능) 별 패키지 모음
 │   │   ├─ product                     # 상품 관련 코드
-│   │   │   ├─ ui                      # 상품 관련 하위 컴포넌트들
+│   │   │   ├─ page                    # 상품 페이지 모음
 │   │   │   ├─ hooks                   # 상품 전용 훅
 │   │   │   ├─ services                # 상품 API 모음
 │   │   │   ├─ style                   # 상품 관련 스타일 모음
 │   │   │   ├─ utils                   # 상품 관련 유틸리티 함수 및 객체
+│   │   │   ├─ routes                  # 상품 관련 라우팅 정의
 │   │   │   ├─ components              # 상품 관련 컴포넌트 모음
 │   │   │   └─ store                   # 상품 관련 상태 모음
 │   │   │
 │   │   ├─...
 │   │   ...
 │   │
-│   ├─ App.jsx                         # 메인 컴포넌트
+│   ├─ App.jsx                         # 메인 컴포넌트, 최상위 라우팅 정의
 │   └─ Main.jsx                        # React 진입점
 │
 ├─ .gitignore                          # git 제외 파일

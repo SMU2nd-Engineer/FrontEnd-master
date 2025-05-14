@@ -1,8 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { HeaderMenu } from "./common/ui/header/Header";
 import { BrowserRouter } from "react-router-dom";
-import ProductListPage from "./domain/products/ProductsListPage";
 import './domain/products/style/index.css';
 import './domain/products/style/App.css'
 
