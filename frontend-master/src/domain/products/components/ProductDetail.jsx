@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import"../styles/ProductDetail.css";
 
 export default function ProductDetail() {
   const {idx} = useParams();
@@ -26,12 +27,18 @@ export default function ProductDetail() {
     }
 
   return (
-    <div>
-      <h1>detail</h1>
-      <p>{product.title}</p>
-      <p>{product.price}원</p>
-      <p>{product.content}</p>
-      <button>찜</button> <button>1:1 채팅</button> <button>구매</button>
+    <div className="detailinfo">
+      <div className="image">
+        <p className="image">사진</p>
+      </div>
+      <div className="column">
+        <p className="title">{product.title}</p>
+        <p className="price">{product.price}원</p>
+        <p className="detaillcontent">{product.content}</p>
+          <div className="buttonbox">
+            <button>찜</button> <button>1:1 채팅</button> <button>구매</button>
+          </div>
+      </div>
     </div>
   )
 }
