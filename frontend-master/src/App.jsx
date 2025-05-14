@@ -1,26 +1,24 @@
-
 import { Routes, Route, Navigate } from "react-router-dom";
-import { HeaderMenu } from "./common/ui/header/Header";
+import { HeaderMenu } from "./page/header/Header";
 import UserRoutes from "@user/routes/UserRoutes";
 import MyPageRoutes from "@mypage/routes/MyPageRoutes";
 import ChatPage from "./domain/chat/page/ChatPage";
-import ProductListPage from "./domain/products/ProductsListPage";
-import ProductDetail from "./domain/products/components/ProductDetail";
-import ProductUpload from "./domain/products/components/ProductUpload";
+import BodyComponent from "./components/BodyComponent";
+import ProductsRoutes from "./domain/products/routes/ProductsRoutes";
 
 function App() {
   return (
-    <div>
+    <div className="app-main">
       <HeaderMenu />
-      <Routes>
-        <Route path="/" element={<Navigate to="/user" />} />
-        <Route path="/user/*" element={<UserRoutes />} />
-        <Route path="/mypage/*" element={<MyPageRoutes />} />
-        <Route path="/chat/*" element={<ChatPage />} />
-        <Route path="/product/list" element={<ProductListPage />} />
-        <Route path="/product/detail/:idx" element={<ProductDetail />} />
-        <Route path="/product/upload" element={<ProductUpload />} />
-      </Routes>
+      <BodyComponent>
+        <Routes>
+          <Route path="/" element={<Navigate to="/user" />} />
+          <Route path="/user/*" element={<UserRoutes />} />
+          <Route path="/mypage/*" element={<MyPageRoutes />} />
+          <Route path="/chat/*" element={<ChatPage />} />
+          <Route path="/product/*" element={<ProductsRoutes />} />
+        </Routes>
+      </BodyComponent>
     </div>
   );
 }

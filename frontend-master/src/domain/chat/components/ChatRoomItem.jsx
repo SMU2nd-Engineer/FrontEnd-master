@@ -1,4 +1,4 @@
-import { stringToTime } from "@/common/utils/Time";
+import { stringToTime } from "@/utils/Time";
 import React, { useContext } from "react";
 import { ChatRoomDispatchContext } from "../store/chatContext";
 
