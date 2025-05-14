@@ -22,7 +22,7 @@ export default function MyInfoPasswordCheck({ setIsMyInfoPasswordCheck }) {
       <Button
         text={"확인"}
         onClick={() => {
-          myPasswordCheck(password, setIsMyInfoPasswordCheck);
+          setIsMyInfoPasswordCheck(myPasswordCheck(password));
         }}
       />
     </div>

@@ -9,25 +9,27 @@ export default function MyInfo() {
   useEffect(() => {
     const checkSocialLogin = async () => {
       const whereSocial = await myInfoCheckSocialLogin();
-      console.log(whereSocial);
       if (whereSocial !== "regularLogin" && whereSocial !== null) {
-        setIsMyInfoPasswordCheck(true);
+        setIsSocialLogin(true); // 소셜 로그인 true
+        setIsMyInfoPasswordCheck(true); // 비밀번호 체크 안 하도록
       }
     };
     checkSocialLogin();
   }, []);
   const [isMyInfoPasswordCheck, setIsMyInfoPasswordCheck] = useState(false);
+  const [isSocialLogin, setIsSocialLogin] = useState(false);
   // console.log(isMyInfoPasswordCheck);
   return (
     <div>
       <MyPageLink />
       <p>개인정보수정</p>
+      <br />
       {!isMyInfoPasswordCheck ? (
         <MyInfoPasswordCheck
           setIsMyInfoPasswordCheck={setIsMyInfoPasswordCheck}
         />
       ) : (
-        <MyInfoList /> // 소셜 로그인에 따라 보여주는 정보가 달라질것.
+        <MyInfoList isSocialLogin={isSocialLogin} /> // 소셜 로그인에 따라 보여주는 정보가 달라질것.
       )}
     </div>
   );
