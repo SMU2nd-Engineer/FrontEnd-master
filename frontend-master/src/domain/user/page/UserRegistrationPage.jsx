@@ -1,10 +1,12 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import Address from "../components/Address";
 import RegistrationEmail from "../components/RegistrationEmail";
-import userReducer from "../utils/userReducer";
 import registrationService from "../services/registrationService";
 import { duplicateCheckService } from "../services/duplicateCheckService";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import SCHEMA from "../utils/inputValidator";
 
 /**
  * id : 아이디
@@ -22,170 +24,149 @@ import { duplicateCheckService } from "../services/duplicateCheckService";
  * @return : 회원 가입 폼
  */
 
+//yup 스키마 사용하여 입력폼 유효성 정의의
+const YUPSCHEMA = SCHEMA;
+
 export default function UserRegistrationPage() {
-  const initialState = {
-    id: "",
-    name: "",
-    password: "",
-    passwordCheck: "",
-    nickName: "",
-    address: "",
-    detailAddress: "",
-    emailLocal: "",
-    emailDomain: "",
-    isIdCheck: false,
-    isNickNameCheck: false,
-    isSamePassword: false,
-    isSocialLogin: false,
-    socialProvider: "",
-  };
+  const {
+    register, // 입력 폼 등록
+    handleSubmit, // 폼 제출시 사용하여
+    setValue, // 외부 API 값이나 수동 입력 처리
+    watch, // 실시간 값 확인용
+    formState: { errors }, // 각 필드의 유효성 오류 처리
+  } = useForm({
+    resolver: yupResolver(YUPSCHEMA),
+    mode: "onBlur", // 사용자에게 안내 메시지 출력
+  });
 
-  const reducer = userReducer;
+  const [isIdCheck, setIsIdCheck] = useState(false);
+  const [isNickNameCheck, setIsNickNameCheck] = useState(false);
+  const [isSocialLogin, setIsSocialLogin] = useState(false);
+  const [socialProvider, setSocialProvider] = useState("");
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  // input 창에서 onChange로 같은 단어를 매번 다르게 쓸려니 어려워 찾아본 결과 함수로 모아서 쓰면 된다.
-  // 이벤트 발생할 때 이름과 값만 가져오면 되므로 어렵지 않다.
-  const handleChange = (e) => {
-    // 중복 구조 개선
-    const { name, value } = e.target;
-    const payload = { [name]: value };
-
-    if (name === "id") {
-      payload.isIdCheck = false;
-    }
-    if (name === "nickName") {
-      payload.isNickNameCheck = false;
-    }
-
-    dispatch({ type: "CHANGE_FIELD", payload });
-  };
-  // 비밀번호 동일한 것을 체크하기 위한 useEffect
-  useEffect(() => {
-    dispatch({
-      type: "CHANGE_FIELD",
-      payload: {
-        isSamePassword:
-          state.password === state.passwordCheck &&
-          state.password.length &&
-          state.passwordCheck.length > 0,
-      },
-    });
-  }, [state.password, state.passwordCheck]);
-
-  // 소셜 로그인을 구분하기 위하여 정보를 가져오는 훅
+  // 소셜 로그인을 구분하기 위하여 정보를 가져오는 useEffect
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
     const socialProvider = sessionStorage.getItem("provider");
     if (socialId) {
-      dispatch({
-        type: "CHANGE_FIELD",
-        payload: {
-          id: socialId,
-          isIdCheck: true,
-          isSocialLogin: true,
-          socialProvider: socialProvider,
-          isSamePassword: true,
-        },
-      });
+      setValue("id", socialId);
+      setIsIdCheck(true);
+      setIsSocialLogin(true);
+      setSocialProvider(socialProvider || "");
     }
-  }, []);
+  }, [setValue]);
+
+  // handleSubmit 사용을 위하여 콜백 함수를 만들어서 api 함수 사용
+  const submitForm = async (formData) => {
+    if (
+      !(
+        isIdCheck &&
+        isNickNameCheck &&
+        (isSocialLogin || watch("password") === watch("passwordCheck"))
+      )
+    ) {
+      alert("아이디/닉네임 중복 체크와 비밀번호 확인이 필요합니다.");
+      return; // 멈추기위한 return
+    }
+    try {
+      await registrationService(formData);
+      alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+      window.location.href = "/user/login";
+    } catch (error) {
+      console.log(error);
+      alert("회원 가입 중에 오류가 발생했습니다. 관리자게에 문의해주세요.");
+    }
+  };
 
   return (
-    <div>
-      {/* 의도치 않은 새로 고침 방지 */}
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div>
-          <label htmlFor="id">
-            아이디
-            <input
-              type="text"
-              name="id"
-              value={state.id ?? ""}
-              onChange={handleChange}
-              readOnly={state.isSocialLogin}
-            />
-          </label>
-        </div>
-        {!state.isSocialLogin && (
+    <form onSubmit={handleSubmit(submitForm)}>
+      <div>
+        <label htmlFor="id">
+          아이디
+          <input type="text" {...register("id")} readOnly={isSocialLogin} />
+        </label>
+        {errors.id && <p>{errors.id.message}</p>}
+        {!isSocialLogin && (
           <>
-            {state.id.length > 0 && !state.isIdCheck && (
-              <p>중복 체크 해주세요.</p>
-            )}
-            {state.id.length > 0 && state.isIdCheck && <p>사용 가능 합니다.</p>}
+            {watch("id") && !isIdCheck && <p>중복 체크 해주세요.</p>}
+            {watch("id") && isIdCheck && <p>사용 가능합니다.</p>}
             <Button
               text={"중복 체크"}
-              onClick={() => {
-                duplicateCheckService(state.id, dispatch, "id");
+              onClick={async () => {
+                try {
+                  const result = await duplicateCheckService(watch("id"), "id");
+                  if (result) {
+                    setIsIdCheck(true);
+                  }
+                } catch (e) {
+                  console.log(e.message);
+                  alert("문제가 발생했습니다. 다시 시도해주세요.");
+                }
               }}
             />
           </>
         )}
+      </div>
+
+      <div>
+        <label htmlFor="name">
+          이름
+          <input type="text" {...register("name")} />
+        </label>
+        {errors.name && <p>{errors.name.message}</p>}
+      </div>
+      {!isSocialLogin && (
         <div>
-          <label htmlFor="name">
-            이름
-            <input
-              type="text"
-              name="name"
-              value={state.name ?? ""}
-              onChange={handleChange}
-            />
+          <label htmlFor="password">
+            패스워드
+            <input type="password" {...register("password")} />
           </label>
-        </div>
-        {!state.isSocialLogin && (
-          <div>
-            <label htmlFor="password">
-              패스워드
-              <input
-                type="password"
-                name="password"
-                value={state.password ?? ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label htmlFor="passwordCheck">
-              패스워드확인
-              <input
-                type="password"
-                name="passwordCheck"
-                value={state.passwordCheck ?? ""}
-                onChange={handleChange}
-              />
-            </label>
-            {state.passwordCheck.length > 0 && !state.isSamePassword && (
-              <p>입력한 비밀 번호가 다릅니다.</p>
-            )}
-            {state.passwordCheck.length > 0 && state.isSamePassword && (
-              <p>비밀번호가 일치 합니다.</p>
-            )}
-          </div>
-        )}
-        <div>
-          <label htmlFor="nickName">
-            닉네임
-            <input
-              type="text"
-              name="nickName"
-              value={state.nickName ?? ""}
-              onChange={handleChange}
-            />
+          {errors.password && <p>{errors.password.message}</p>}
+          <label htmlFor="passwordCheck">
+            패스워드확인
+            <input type="password" {...register("passwordCheck")} />
           </label>
-          {state.nickName.length > 0 && !state.isNickNameCheck && (
-            <p>중복 체크 해주세요.</p>
-          )}
-          {state.nickName.length > 0 && state.isNickNameCheck && (
-            <p>사용 가능 합니다.</p>
-          )}
-          <Button
-            text={"중복 체크"}
-            onClick={() => {
-              duplicateCheckService(state.nickName, dispatch, "nickName");
-            }}
-          />
+          {errors.passwordCheck && <p>{errors.passwordCheck.message}</p>}
         </div>
-        <Address state={state} dispatch={dispatch} />
-        <RegistrationEmail state={state} dispatch={dispatch} />
-      </form>
+      )}
+      <div>
+        <label htmlFor="nickName">
+          닉네임
+          <input type="text" {...register("nickName")} />
+        </label>
+        {errors.nickName && <p>{errors.nickName.message}</p>}
+        {watch("nickName") && !isNickNameCheck && <p>중복 체크 해주세요.</p>}
+        {watch("nickName") && isNickNameCheck && <p>사용 가능 합니다.</p>}
+        <Button
+          text={"중복 체크"}
+          onClick={async () => {
+            try {
+              const result = await duplicateCheckService(
+                watch("nickName"),
+                "nickName"
+              );
+              if (result) {
+                setIsNickNameCheck(true);
+              }
+            } catch (e) {
+              console.log(e.message);
+              alert("문제가 발생했습니다. 다시 시도해주세요.");
+            }
+          }}
+        />
+      </div>
+      <Address
+        register={register}
+        setValue={setValue}
+        watch={watch}
+        errors={errors}
+      />
+      <RegistrationEmail
+        register={register}
+        setValue={setValue}
+        watch={watch}
+        errors={errors}
+      />
       <Button
         text={"취소"}
         onClick={() => {
@@ -195,19 +176,15 @@ export default function UserRegistrationPage() {
       {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
       <Button
         text={"가입"}
-        onClick={() => {
-          registrationService(state);
-          alert("회원가입이 완료되었습니다.");
-          window.location.href = "/user/login";
-        }}
+        type="submit"
         disabled={
           !(
-            state.isIdCheck &&
-            state.isNickNameCheck &&
-            (state.isSocialLogin || state.isSamePassword)
+            isIdCheck &&
+            isNickNameCheck &&
+            (isSocialLogin || watch("password") === watch("passwordCheck"))
           )
         }
       />
-    </div>
+    </form>
   );
 }

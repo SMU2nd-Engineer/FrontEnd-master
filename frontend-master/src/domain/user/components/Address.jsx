@@ -2,9 +2,10 @@ import React, { useRef } from "react";
 import Button from "../../../components/Button";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 
-export default function Address({ state, dispatch }) {
+export default function Address({ register, setValue, watch, errors }) {
   const inputFocus = useRef();
   const open = useDaumPostcodePopup();
+
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -19,38 +20,31 @@ export default function Address({ state, dispatch }) {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-
-    console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
-    dispatch({
-      type: "CHANGE_FIELD",
-      payload: { address: fullAddress },
-    });
+    setValue("address", fullAddress);
     inputFocus.current.focus();
   };
 
-  const handleClick = () => {
-    open({ onComplete: handleComplete });
-  };
   return (
-    <div>
-      <label>
-        <input type="text" name="address" value={state.address} readOnly />
-      </label>
+    <>
       <label>
         <input
-          ref={inputFocus}
           type="text"
-          name="detailAddress"
-          value={state.detailAddress}
-          onChange={(e) =>
-            dispatch({
-              type: "CHANGE_FIELD",
-              payload: { [e.target.name]: e.target.value },
-            })
-          }
+          {...register("address")}
+          readOnly
+          value={watch("address")}
         />
       </label>
-      <Button text={"주소 찾기"} onClick={handleClick} />
-    </div>
+      {errors.address && <p>{errors.address.message}</p>}
+      <label>
+        <input type="text" {...register("detailAddress")} ref={inputFocus} />
+      </label>
+      {errors.detailAddress && <p>{errors.detailAddress.message}</p>}
+      <Button
+        text={"주소 찾기"}
+        onClick={() => {
+          open({ onComplete: handleComplete });
+        }}
+      />
+    </>
   );
 }
