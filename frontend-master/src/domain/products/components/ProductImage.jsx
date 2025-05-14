@@ -1,9 +1,7 @@
-const ProductImage = ({product})=>{
-  if(!product.IMAGE_URL) return null;
+const ProductImage = ({ imageUrl, title }) => {
+  if (!imageUrl) return null;
 
-  return (
-    <img className="product_image" src={product.IMAGE_URL} alt={product.TITLE} />
-  )
-}
+  return <img className="product_image" src={imageUrl} alt={title} />;
+};
 
 export default ProductImage;

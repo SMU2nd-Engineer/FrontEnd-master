@@ -12,10 +12,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@common": path.resolve(__dirname, "./src/common"),
       "@domain": path.resolve(__dirname, "./src/domain"),
       "@user": path.resolve(__dirname, "./src/domain/user"),
-      "@product": path.resolve(__dirname, "src/domain/product"),
+      "@product": path.resolve(__dirname, "./src/domain/product"),
       "@mypage": path.resolve(__dirname, "src/domain/mypage"),
       "@chat": path.resolve(__dirname, "src/domain/chat"),
     },
