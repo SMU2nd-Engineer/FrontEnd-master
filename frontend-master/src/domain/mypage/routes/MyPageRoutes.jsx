@@ -1,10 +1,11 @@
 import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainPage from "../page/MainPage";
 import MyInfo from "../page/MyInfoPage";
 import SellAndPurchaseList from "../page/SellAndPurchaseListPage";
 import WishlistPage from "../page/WishlistPage";
 import MyReviewPage from "../page/MyReviewPage";
-import { Navigate, Route, Routes } from "react-router-dom";
+import MyBoardPage from "../page/MyBoardPage";
 
 export default function MyPageRoutes() {
   return (
@@ -12,10 +13,11 @@ export default function MyPageRoutes() {
       <Routes>
         <Route path="" element={<Navigate to="main" />} />
         <Route path="main" element={<MainPage />} />
-        <Route path="myinfo" element={<MyInfo />} />
-        <Route path="sellandpurchaselist" element={<SellAndPurchaseList />} />
+        <Route path="myInfo" element={<MyInfo />} />
+        <Route path="sellAndPurchaselist" element={<SellAndPurchaseList />} />
         <Route path="wishlist" element={<WishlistPage />} />
-        <Route path="myrevicw" element={<MyReviewPage />} />
+        <Route path="myRevicw" element={<MyReviewPage />} />
+        <Route path="myBoard" element={<MyBoardPage />} />
       </Routes>
     </div>
   );
