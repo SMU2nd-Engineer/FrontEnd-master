@@ -2,8 +2,7 @@ import { FaRegMessage } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom'; 
 
 const selectedStyle = {
-  backgroundColor : "white",
-  color:"gray"
+  backgroundColor : "none"
 }
 
 // 헤더 메뉴

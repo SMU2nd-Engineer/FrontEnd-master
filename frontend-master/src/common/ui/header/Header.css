@@ -15,6 +15,11 @@ nav {
   padding: 0 50px 10px;
   box-sizing: border-box;
 }
+a {
+  font-weight: 500;
+  color: #adadad;
+  text-decoration: inherit;
+}
 
 .nav-left {
   display: flex;
