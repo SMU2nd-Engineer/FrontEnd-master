@@ -1,0 +1,211 @@
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 164px;
+  z-index: 1000;
+  background: #F0EBEB;
+  background-size: 100% 164px;
+ 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 50px 10px;
+  box-sizing: border-box;
+}
+
+.nav-left {
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* Site name */
+.site_name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 70px;
+  line-height: 110%;
+
+  color: #000000;
+}
+
+/* MARKET | TICKET */
+
+.main-link {
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 150%;
+
+  color: #9A8A8A;
+}
+
+.nav-top {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  align-items: flex-end;
+  gap: 50px;
+}
+
+.nav-right {
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  right: 100px;
+  align-items: flex-end;
+  gap: 30px;
+
+  font-size: 24px;
+}
+
+
+
+/* Message circle */
+.message_circle {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 39.47px;
+  height: 38.68px;
+  left: 1299.08px;
+  top: 90.37px;
+
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transform: rotate(9.05deg);
+
+}
+
+
+/* Icon */
+.icon{
+  position: absolute;
+  left: 25.83%;
+  right: -0.83%;
+  top: 14.35%;
+  bottom: 10.65%;
+
+  border: 4px solid #B7A5A5;
+  transform: rotate(9.05deg);
+}
+
+
+
+/* 로그인 */
+.login{
+  position: absolute;
+  width: 102px;
+  height: 56px;
+  left: 1178px;
+  top: 84px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 150%;
+  /* 또는 45px */
+  display: flex;
+  align-items: center;
+
+  color: #ACA7A7;
+}
+
+
+
+
+/* 검색 */
+.search{
+  position: absolute;
+  width: 37px;
+  height: 30px;
+  left: 1027px;
+  top: 13px;
+
+
+
+/* Body text
+
+Text for body copy
+*/
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+/* 상자 높이와 동일 또는 30px */
+display: flex;
+align-items: center;
+
+color: #ACA7A7;
+
+}
+
+/* 상품등록 */
+.product_create {
+  position: absolute;
+  width: 74px;
+  height: 30px;
+  left: 1112px;
+  top: 13px;
+
+  /* Body text
+
+  Text for body copy
+  */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  /* 상자 높이와 동일 또는 30px */
+  display: flex;
+  align-items: center;
+
+  color: #ACA7A7;
+}
+
+
+
+
+/* 마이페이지 */
+.my_page{
+  position: absolute;
+  width: 92px;
+  height: 30px;
+  left: 1234px;
+  top: 13px;
+
+  /* Body text
+
+  Text for body copy
+  */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  /* 상자 높이와 동일 또는 30px */
+  display: flex;
+  align-items: center;
+
+  color: #ACA7A7;
+
+}
+
+
+
+
+
+
+
