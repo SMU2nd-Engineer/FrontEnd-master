@@ -7,7 +7,7 @@ const PaymentTestPage = () => {
 
   const handleKakaoPayReady = async () => {
     try {
-      const response = await axiosInstance.post("/payment/ready?payMethod=kakao", {
+      const response = await axiosInstance.post("/api/payment/ready?payMethod=kakao", {
         cid: "TC0ONETIME",
         partnerOrderId: "ORDER1234",
         partnerUserId: "USER5678",
