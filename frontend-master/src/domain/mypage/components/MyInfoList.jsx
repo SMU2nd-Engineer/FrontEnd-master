@@ -1,9 +1,9 @@
 import Button from "@/components/Button";
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getUserInfo } from "../services/getUserInfo";
 import { useNavigate } from "react-router-dom";
 import { updateUserInfo } from "../services/updateUserInfo";
-import SCHEMA from "@user/utils/inputValidator";
+import SCHEMA from "@mypage/utils/EditInfoValidator";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationName from "@/domain/user/components/RegistrationName";
@@ -12,10 +12,9 @@ import RegistrationNickName from "@/domain/user/components/RegistrationNickName"
 import RegistrationAddress from "@user/components/RegistrationAddress";
 import RegistrationEmail from "@user/components/RegistrationEmail";
 
-//yup 스키마 사용하여 입력폼 유효성 정의의
-const YUPSCHEMA = SCHEMA;
-
 export default function MyInfoList({ isSocialLogin }) {
+  //yup 스키마 사용하여 입력폼 유효성 정의의
+  const YUPSCHEMA = SCHEMA(isSocialLogin);
   // react-hook-form 사용 설정
   const {
     register, // 입력 폼 등록
@@ -27,11 +26,7 @@ export default function MyInfoList({ isSocialLogin }) {
     resolver: yupResolver(YUPSCHEMA),
     mode: "onBlur", // 사용자에게 안내 메시지 출력
   });
-  // 필요한 데이터 설정
-  const initialState = {
-    isNickNameCheck: false,
-    isSamePassword: false,
-  };
+
   // 네비게이트 설정
   const navigate = useNavigate();
   // 기존 닉네임 저장하여 닉네임 변화 확인하기
@@ -62,7 +57,7 @@ export default function MyInfoList({ isSocialLogin }) {
       setExistingNickname(editUserInfo.nickName); // 기존 닉네임 저장
     };
     getUserInfoByToken();
-  }, []);
+  }, [setValue]);
 
   /**
    * 이메일, 주소 분리 함수

@@ -11,7 +11,7 @@ import { getMyTotalRating } from "../services/getMyTotalRating";
  * @returns 마이페이지 메인 화면 반환
  */
 export default function MainPage() {
-  const [myTotalReviewRating, setMyTotalReviewRating] = useState();
+  const [myTotalReviewRating, setMyTotalReviewRating] = useState(0); // 초깃값 0으로 세팅
   const navigate = useNavigate();
   //   별점 가져오기
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function MainPage() {
       if (result.totalRatingCount) {
         //평균 계산
         const averageRating =
-          result.myPageTotalRating / result.totalRatingCount;
+          result.myPageTotalRating ?? 0 / result.totalRatingCount; // undefined 방지
         // 0.5 단위로 반올림
         const roundRating = Math.round(averageRating * 2) / 2;
         setMyTotalReviewRating(roundRating);

@@ -5,7 +5,7 @@ import axiosInstance from "@/lib/axiosInstance";
  * @returns sql에서 sum으로 가져온 총합 점수가 들어 있음
  */
 export const getMyTotalRating = async () => {
-  const res = axiosInstance.post(
+  const res = await axiosInstance.post(
     "/mypage/myTotalRating",
     {},
     { withCredentials: true }

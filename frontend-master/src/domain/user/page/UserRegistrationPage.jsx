@@ -3,7 +3,7 @@ import Button from "../../../components/Button";
 import Address from "../components/RegistrationAddress";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import SCHEMA from "../utils/inputValidator";
+import { SCHEMA } from "../utils/userFormValidator";
 import RegistrationPassword from "../components/RegistrationPassword";
 import RegistrationName from "../components/RegistrationName";
 import RegistrationNickName from "../components/RegistrationNickName";
@@ -70,7 +70,7 @@ export default function UserRegistrationPage() {
       setIsSocialLogin(true);
       setSocialProvider(socialProvider || "");
     }
-  }, []);
+  }, [setValue]);
 
   // handleSubmit 사용을 위하여 콜백 함수를 만들어서 api 함수 사용
   const submitForm = async (formData) => {

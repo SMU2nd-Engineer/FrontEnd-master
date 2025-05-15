@@ -52,6 +52,7 @@ export default function WishListPage() {
             price={item.price}
           />
         ))}
+        {/* 페이지네이션 자리 */}
       </div>
     </div>
   );
