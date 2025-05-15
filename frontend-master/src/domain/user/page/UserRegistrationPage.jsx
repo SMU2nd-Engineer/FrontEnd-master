@@ -47,20 +47,25 @@ export default function UserRegistrationPage() {
   const [isSocialLogin, setIsSocialLogin] = useState(false);
   const [socialProvider, setSocialProvider] = useState("");
 
+  // 비밀번호 유효성 오류가 계속 나와서 랜덤하게 적절한 값이 들어가도록 함수 생성
+  const generatePassword = () => {
+    const front = Math.random().toString(36).slice(2, 8); // 영문 + 숫자 일부(소수점 제외 36진수로 바꾼다음 6자리만 자르기)
+    const back = "#E4r";
+    return front + back;
+  };
+
   // 소셜 로그인을 구분하기 위하여 정보를 가져오는 useEffect
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
     const socialProvider = sessionStorage.getItem("provider");
+    console.log(socialProvider);
     if (socialId) {
-      setValue("id", socialId);
-
       // 안전한 난수 비밀번호 생성 (예: 32자리) - handleSubmit 실행을 위해 설정함.
-      const randomPassword =
-        Math.random().toString(36).slice(2) + Date.now().toString(36);
-      // 길이 조건에 걸려서 자르기
-      const finalPassword = `#1q${randomPassword}`.slice(0, 5);
+      const finalPassword = generatePassword();
+      setValue("id", socialId);
       setValue("password", finalPassword);
       setValue("passwordCheck", finalPassword);
+      setValue("socialProvider", socialProvider || "");
       setIsIdCheck(true);
       setIsSocialLogin(true);
       setSocialProvider(socialProvider || "");
@@ -146,6 +151,8 @@ export default function UserRegistrationPage() {
           window.location.href = "/user/login";
         }}
       />
+      {/* 값을 넘기기 위하여 보이지 않는 값을 설정하기 */}
+      <input type="hidden" {...register("socialProvider")} />
       {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
       <Button
         text={"가입"}

@@ -21,6 +21,7 @@ export default function Address({ register, setValue, watch, errors }) {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setValue("address", fullAddress);
+    setValue("detailAddress", watch("detailAddress") || ""); // 혹시라도 빈 값 방지
     inputFocus.current.focus();
   };
   return (
@@ -30,7 +31,14 @@ export default function Address({ register, setValue, watch, errors }) {
       </label>
       {errors.address && <p>{errors.address.message}</p>}
       <label>
-        <input type="text" {...register("detailAddress")} ref={inputFocus} />
+        <input
+          type="text"
+          {...register("detailAddress")}
+          //   ref={(el) => {
+          //     register("detailAddress").ref(el); // react-hook-form에 먼저 연결
+          //     inputFocus.current = el; // 그 다음에 포커스 용도로 저장
+          //   }}
+        />
       </label>
       {errors.detailAddress && <p>{errors.detailAddress.message}</p>}
       <Button
