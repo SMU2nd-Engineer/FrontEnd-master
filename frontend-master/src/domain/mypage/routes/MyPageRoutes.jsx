@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import MainPage from "../page/MainPage";
 import MyInfo from "../page/MyInfoPage";
 import SellAndPurchaseList from "../page/SellAndPurchaseListPage";
-import WishlistPage from "../page/WishlistPage";
+import WishlistPage from "../page/WishListPage";
 import MyReviewPage from "../page/MyReviewPage";
 import MyBoardPage from "../page/MyBoardPage";
 import MyTransactionReviewPage from "../page/MyTransactionReviewPage";

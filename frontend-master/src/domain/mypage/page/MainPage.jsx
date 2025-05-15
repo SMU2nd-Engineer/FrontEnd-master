@@ -13,6 +13,7 @@ export default function MainPage() {
       <MyPageLink />
       <MyName />
       <p>내 상품 들어올 곳</p>
+      <p>찜 목록 들어올 곳</p>
       <p>내 리뷰 점수 들어올 곳</p>
       <MyRatingStar />
       <p>거래 후기 </p>
