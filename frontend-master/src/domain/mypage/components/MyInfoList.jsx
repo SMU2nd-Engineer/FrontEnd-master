@@ -123,7 +123,11 @@ export default function MyInfoList({ isSocialLogin }) {
     <div>
       <h1>개인 정보 페이지</h1>
       <br />
-      <form onSubmit={handleSubmit(submitEditForm)}>
+      <form
+        onSubmit={handleSubmit(submitEditForm, (errors) => {
+          console.log("유효성 검증 실패", errors);
+        })}
+      >
         <RegistrationName
           register={register}
           setValue={setValue}

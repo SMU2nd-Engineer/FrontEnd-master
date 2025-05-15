@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
 export default function MyRatingStar({ isReadOnly = false, MyRating = 0 }) {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(MyRating);
 
   // Catch Rating value
   const handleRating = (rate) => {
@@ -14,17 +14,19 @@ export default function MyRatingStar({ isReadOnly = false, MyRating = 0 }) {
     setRating(0);
   };
 
+  useEffect(() => {
+    setRating(MyRating);
+  }, [MyRating]);
+
   return (
     <div className="starRating">
-      {/* set initial value */}
       <Rating
         onClick={handleRating}
-        initialValue={MyRating}
+        initialValue={rating}
         allowFraction={true}
         readonly={isReadOnly}
       />
-
-      <button onClick={handleReset}>reset</button>
+      {!isReadOnly && <button onClick={handleReset}>reset</button>}
     </div>
   );
 }

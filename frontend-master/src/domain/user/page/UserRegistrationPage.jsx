@@ -53,11 +53,19 @@ export default function UserRegistrationPage() {
     const socialProvider = sessionStorage.getItem("provider");
     if (socialId) {
       setValue("id", socialId);
+
+      // 안전한 난수 비밀번호 생성 (예: 32자리) - handleSubmit 실행을 위해 설정함.
+      const randomPassword =
+        Math.random().toString(36).slice(2) + Date.now().toString(36);
+      // 길이 조건에 걸려서 자르기
+      const finalPassword = `#1q${randomPassword}`.slice(0, 5);
+      setValue("password", finalPassword);
+      setValue("passwordCheck", finalPassword);
       setIsIdCheck(true);
       setIsSocialLogin(true);
       setSocialProvider(socialProvider || "");
     }
-  }, [setValue]);
+  }, []);
 
   // handleSubmit 사용을 위하여 콜백 함수를 만들어서 api 함수 사용
   const submitForm = async (formData) => {
@@ -82,7 +90,11 @@ export default function UserRegistrationPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
+    <form
+      onSubmit={handleSubmit(submitForm, (errors) => {
+        console.log("유효성 검증 실패", errors);
+      })}
+    >
       <RegistrationId
         register={register}
         setValue={setValue}
@@ -129,6 +141,8 @@ export default function UserRegistrationPage() {
       <Button
         text={"취소"}
         onClick={() => {
+          sessionStorage.removeItem("socialId");
+          sessionStorage.removeItem("provider");
           window.location.href = "/user/login";
         }}
       />

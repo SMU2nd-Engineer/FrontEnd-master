@@ -6,8 +6,8 @@ const SCHEMA = yup.object({
     .string()
     .required("아이디를 입력해 주세요.")
     .matches(
-      /^[a-zA-Z0-9]{4,12}$/,
-      "4~12자의 영문 대소문자와 숫자만 입력해 주세요."
+      /^[a-zA-Z0-9]{4,25}$/,
+      "4~25자의 영문 대소문자와 숫자만 입력해 주세요."
     ),
   name: yup
     .string()
