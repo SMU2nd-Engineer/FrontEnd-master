@@ -5,6 +5,7 @@ import MyPageRoutes from "@mypage/routes/MyPageRoutes";
 import ChatPage from "./domain/chat/page/ChatPage";
 import BodyComponent from "./components/BodyComponent";
 import ProductsRoutes from "./domain/products/routes/ProductsRoutes";
+import PaymentRoutes from "./domain/payment/routes/PaymentRoutes";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/mypage/*" element={<MyPageRoutes />} />
           <Route path="/chat/*" element={<ChatPage />} />
           <Route path="/product/*" element={<ProductsRoutes />} />
+          <Route path="/payment/*" element={<PaymentRoutes />} />
         </Routes>
       </BodyComponent>
     </div>
