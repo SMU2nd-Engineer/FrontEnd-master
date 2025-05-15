@@ -32,7 +32,7 @@ export default function RegistrationEmail({
           key={isManualDomain ? "editable" : "readonly"}
           type="text"
           {...register("emailDomain")}
-          value={watch("emailDomain")}
+          value={watch("emailDomain") || ""} // 초기화 undefined 오류를 해결하기 위하여 "" 로 설정
           onChange={(e) => setValue("emailDomain", e.target.value)}
           disabled={!isManualDomain}
         />

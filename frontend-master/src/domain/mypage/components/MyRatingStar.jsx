@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
-export default function MyRatingStar() {
+export default function MyRatingStar({ isReadOnly = false, MyRating }) {
   const [rating, setRating] = useState(0);
 
   // Catch Rating value
@@ -15,7 +15,7 @@ export default function MyRatingStar() {
   };
 
   return (
-    <div className="App">
+    <div className="starRating">
       {/* set initial value */}
       <Rating
         onClick={handleRating}

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../../components/Button";
-import Address from "../components/Address";
-import RegistrationEmail from "../components/RegistrationEmail";
-import registrationService from "../services/registrationService";
-import { duplicateCheckService } from "../services/duplicateCheckService";
+import Address from "../components/RegistrationAddress";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SCHEMA from "../utils/inputValidator";
+import RegistrationPassword from "../components/RegistrationPassword";
+import RegistrationName from "../components/RegistrationName";
+import RegistrationNickName from "../components/RegistrationNickName";
+import RegistrationId from "../components/RegistrationId";
+import RegistrationEmail from "../components/RegistrationEmail";
+import registrationService from "../services/registrationService";
 
 /**
  * id : 아이디
@@ -80,81 +83,37 @@ export default function UserRegistrationPage() {
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <div>
-        <label htmlFor="id">
-          아이디
-          <input type="text" {...register("id")} readOnly={isSocialLogin} />
-        </label>
-        {errors.id && <p>{errors.id.message}</p>}
-        {!isSocialLogin && (
-          <>
-            {watch("id") && !isIdCheck && <p>중복 체크 해주세요.</p>}
-            {watch("id") && isIdCheck && <p>사용 가능합니다.</p>}
-            <Button
-              text={"중복 체크"}
-              onClick={async () => {
-                try {
-                  const result = await duplicateCheckService(watch("id"), "id");
-                  if (result) {
-                    setIsIdCheck(true);
-                  }
-                } catch (e) {
-                  console.log(e.message);
-                  alert("문제가 발생했습니다. 다시 시도해주세요.");
-                }
-              }}
-            />
-          </>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="name">
-          이름
-          <input type="text" {...register("name")} />
-        </label>
-        {errors.name && <p>{errors.name.message}</p>}
-      </div>
+      <RegistrationId
+        register={register}
+        setValue={setValue}
+        watch={watch}
+        errors={errors}
+        isSocialLogin={isSocialLogin}
+        isIdCheck={isIdCheck}
+        setIsIdCheck={setIsIdCheck}
+      />
+      <RegistrationName
+        register={register}
+        setValue={setValue}
+        watch={watch}
+        errors={errors}
+      />
       {!isSocialLogin && (
-        <div>
-          <label htmlFor="password">
-            패스워드
-            <input type="password" {...register("password")} />
-          </label>
-          {errors.password && <p>{errors.password.message}</p>}
-          <label htmlFor="passwordCheck">
-            패스워드확인
-            <input type="password" {...register("passwordCheck")} />
-          </label>
-          {errors.passwordCheck && <p>{errors.passwordCheck.message}</p>}
-        </div>
-      )}
-      <div>
-        <label htmlFor="nickName">
-          닉네임
-          <input type="text" {...register("nickName")} />
-        </label>
-        {errors.nickName && <p>{errors.nickName.message}</p>}
-        {watch("nickName") && !isNickNameCheck && <p>중복 체크 해주세요.</p>}
-        {watch("nickName") && isNickNameCheck && <p>사용 가능 합니다.</p>}
-        <Button
-          text={"중복 체크"}
-          onClick={async () => {
-            try {
-              const result = await duplicateCheckService(
-                watch("nickName"),
-                "nickName"
-              );
-              if (result) {
-                setIsNickNameCheck(true);
-              }
-            } catch (e) {
-              console.log(e.message);
-              alert("문제가 발생했습니다. 다시 시도해주세요.");
-            }
-          }}
+        <RegistrationPassword
+          register={register}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
         />
-      </div>
+      )}
+      <RegistrationNickName
+        register={register}
+        setValue={setValue}
+        watch={watch}
+        errors={errors}
+        isNickNameCheck={isNickNameCheck}
+        setIsNickNameCheck={setIsNickNameCheck}
+      />
       <Address
         register={register}
         setValue={setValue}

@@ -6,12 +6,17 @@ import axiosInstance from "@/lib/axiosInstance";
  * @param {Method} setIsMyInfoPasswordCheck : 사용자 정보 화면 렌더링 선택지 변경 함수
  */
 export const myPasswordCheck = async (password, setIsMyInfoPasswordCheck) => {
-  const res = await axiosInstance.post(
-    "/mypage/passwordCheck",
-    {
-      password,
-    },
-    { withCredentials: true }
-  );
-  return res.data;
+  try {
+    const res = await axiosInstance.post(
+      "/mypage/passwordCheck",
+      {
+        password,
+      },
+      { withCredentials: true }
+    );
+    return res.data;
+  } catch (error) {
+    console.log("비밀번호 일치하지 않는 오류 발생");
+    return;
+  }
 };

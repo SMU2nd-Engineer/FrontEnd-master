@@ -17,7 +17,6 @@ const regitrationService = async (state) => {
     );
   } catch (error) {
     console.log(error);
-    alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
   }
 };
 

@@ -23,16 +23,10 @@ export default function Address({ register, setValue, watch, errors }) {
     setValue("address", fullAddress);
     inputFocus.current.focus();
   };
-
   return (
     <>
       <label>
-        <input
-          type="text"
-          {...register("address")}
-          readOnly
-          value={watch("address")}
-        />
+        <input type="text" {...register("address")} readOnly />
       </label>
       {errors.address && <p>{errors.address.message}</p>}
       <label>
