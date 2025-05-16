@@ -15,9 +15,9 @@ const PaymentTestPage = () => {
         quantity: 1,
         amount: 10000,
         taxFreeAmount: 0,
-        approvalUrl: "http://localhost:5173/payment/success",
-        cancelUrl: "http://localhost:5173/payment/cancel",
-        failUrl: "http://localhost:5173/payment/fail",
+        approvalUrl: "http://localhost:5173/api/payment/success",
+        cancelUrl: "http://localhost:5173/api/payment/cancel",
+        failUrl: "http://localhost:5173/api/payment/fail",
       });
 
       console.log("카카오페이 준비 성공:", response.data);
