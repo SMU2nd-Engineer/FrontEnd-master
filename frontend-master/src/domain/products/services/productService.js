@@ -7,6 +7,7 @@ export const getProductList = () => {
 export const postProduct = ({
   title,
   category_idx,
+  categorygenre_idx,
   content,
   imageUrl,
   price,
@@ -14,7 +15,7 @@ export const postProduct = ({
 }) => {
   return axiosInstance.post(
     "product/upload",
-    { title, category_idx, content, imageUrl, price, userId },
+    { title, category_idx, categorygenre_idx, content, imageUrl, price, userId },
     { withCredentials: true }
   );
 };
@@ -25,4 +26,8 @@ export const getProductDetail = (idx) => {
     { idx },
     { withCredentials: true }
   );
+};
+
+export const searchProducts = (keyword) => {
+  return axiosInstance.get("product/search", {params : {keyword}, withCredentials: true } );
 };
