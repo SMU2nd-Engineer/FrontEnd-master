@@ -49,7 +49,7 @@ axiosInstance.interceptors.response.use(
     if (
       error.response.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/refresh")
+      !originalRequest.url.includes("/refresh") // refresh 에 대해서는 재시도하지 않도록 수정함.
     ) {
       //._retry는 반복되는 요청을 진행하지 않도록 하기위해서 설정
       originalRequest._retry = true;
@@ -93,6 +93,9 @@ axiosInstance.interceptors.response.use(
       confirm("가입된 정보가 없습니다. 회원 가입 페이지로 이동 하시겠습니까?")
         ? (window.location.href = "/user/registration")
         : (window.location.href = "/user/login");
+    }
+    if (error.response.status === 400) {
+      alert("입력된 정보를 다시 확인해 주세요.");
     }
   }
 );

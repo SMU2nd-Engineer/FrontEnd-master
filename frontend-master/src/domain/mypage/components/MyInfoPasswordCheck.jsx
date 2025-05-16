@@ -21,7 +21,12 @@ export default function MyInfoPasswordCheck({ setIsMyInfoPasswordCheck }) {
       </label>
       <Button
         text={"확인"}
-        onClick={myPasswordCheck(password, setIsMyInfoPasswordCheck)}
+        onClick={async () => {
+          const result = await myPasswordCheck(password);
+          if (result) {
+            setIsMyInfoPasswordCheck(true);
+          }
+        }}
       />
     </div>
   );

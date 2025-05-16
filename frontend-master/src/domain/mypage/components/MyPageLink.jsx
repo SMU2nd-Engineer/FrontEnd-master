@@ -7,13 +7,14 @@ export default function MyPageLink() {
       <p>
         <Link to="/mypage/main">마이페이지</Link>
       </p>
-      <Link to="/mypage/myinfo">개인 정보</Link> <br />
-      <Link to="/mypage/sellandpurchaselist">판매/구매이력</Link>
+      <Link to="/mypage/myInfo">개인 정보</Link> <br />
+      <Link to="/mypage/sellAndPurchaselist">판매/구매이력</Link>
       <br />
-      <Link to="/mypage/wishlist">찜 목록</Link>
+      <Link to="/mypage/peakList">찜 목록</Link>
       <br />
-      <Link to="/mypage/myrevicw">리뷰</Link>
+      <Link to="/mypage/myRevicw">리뷰</Link>
       <br />
+      <Link to="/mypage/myBoard">게시글</Link>
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import Button from "@/components/Button";
-import React, { useEffect, useState } from "react";
 import { changePasswordService } from "../services/changePasswordService";
 import { useLocation } from "react-router-dom";
+import RegistrationPassword from "../components/RegistrationPassword";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CHANGE_PASSWORD_SCHEMA } from "../utils/userFormValidator";
 
 export default function ChangePasswordPage() {
-  const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
-  const [isSamePassword, setIsSamePassword] = useState(false);
+  const YUPSCHEMA = CHANGE_PASSWORD_SCHEMA;
 
   // useNavigate에서 값을 가지고 오기 위해서 useLocation 훅을 사용.
   const location = useLocation();
@@ -15,47 +16,46 @@ export default function ChangePasswordPage() {
   const id = location.state?.id;
   console.log(id);
 
-  useEffect(() => {
-    setIsSamePassword(
-      password === passwordCheck &&
-        password.length > 0 &&
-        passwordCheck.length > 0
-    );
-  }, [password, passwordCheck]);
+  const {
+    register, // 입력 폼 등록
+    handleSubmit, // 폼 제출시 사용하여
+    setValue, // 외부 API 값이나 수동 입력 처리
+    watch, // 실시간 값 확인용
+    formState: { errors }, // 각 필드의 유효성 오류 처리
+  } = useForm({
+    resolver: yupResolver(YUPSCHEMA),
+    mode: "onBlur", // 사용자에게 안내 메시지 출력
+  });
+
+  const submitForm = async (id, formData) => {
+    try {
+      await changePasswordService(id, formData);
+    } catch (error) {
+      console.log(error);
+      alert("오류가 발생했습니다. 관리자게에 문의해주세요.");
+    }
+  };
+
   return (
     <div>
       <h2>변경할 비밀번호를 입력해주세요.</h2>
       <hr />
-      <label htmlFor="password">
-        패스워드 :
-        <input
-          type="password"
-          name="password"
-          value={password ?? ""}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+      <form
+        onSubmit={handleSubmit(
+          (formData) => submitForm(id, formData),
+          (errors) => {
+            console.log("유효성 검증 실패", errors);
+          }
+        )}
+      >
+        <RegistrationPassword
+          register={register}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
         />
-      </label>
-      <label htmlFor="passwordCheck">
-        패스워드확인 :
-        <input
-          type="password"
-          name="passwordCheck"
-          value={passwordCheck ?? ""}
-          onChange={(e) => setPasswordCheck(e.target.value)}
-        />
-      </label>
-      {passwordCheck.length > 0 && !isSamePassword && (
-        <p>입력한 비밀 번호가 다릅니다.</p>
-      )}
-      {passwordCheck.length > 0 && isSamePassword && (
-        <p>비밀번호가 일치 합니다.</p>
-      )}
-      <Button
-        text={"비밀번호를 변경합니다."}
-        onClick={() => changePasswordService(id, password)}
-      />
+        <Button type="submit" text={"비밀번호를 변경합니다."} />
+      </form>
     </div>
   );
 }

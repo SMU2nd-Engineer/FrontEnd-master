@@ -21,7 +21,7 @@ const idPasswordFindService = async ({ id, name, email }, navigate) => {
   } else {
     const res = await axiosInstance.post(
       "/user/passwordFind",
-      { name, email },
+      { id, name, email },
       { withCredentials: true }
     );
     if (res.status === 200 || res.status === 201) {
