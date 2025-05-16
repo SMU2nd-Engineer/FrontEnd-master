@@ -17,8 +17,7 @@ export default function GoogleLogin() {
   };
 
   return (
-    <div>
-      <p>소셜 로그인 - 나중에 지울것</p>
+    <div id="googleLoginIcon">
       <Button
         text={"구글 로그인"}
         imgSrc={googleLoginButton}

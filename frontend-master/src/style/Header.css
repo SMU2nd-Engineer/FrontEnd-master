@@ -1,12 +1,12 @@
 /* Navigation */
 nav {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
   height: 164px;
   z-index: 1000;
-  background: #f0ebeb;
+  background: #f3f2f2;
   background-size: 100% 164px;
 
   display: flex;
@@ -57,7 +57,7 @@ a {
   display: flex;
   position: absolute;
   top: 10px;
-  right: 100px;
+  right: 50px;
   align-items: flex-end;
   gap: 50px;
 }
@@ -66,7 +66,7 @@ a {
   display: flex;
   position: absolute;
   bottom: 10px;
-  right: 100px;
+  right: 50px;
   align-items: flex-end;
   gap: 30px;
 

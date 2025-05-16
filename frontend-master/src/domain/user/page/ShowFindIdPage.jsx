@@ -8,7 +8,11 @@ export default function ShowFindIdPage() {
   return (
     <div>
       <h2>아이디 찾기</h2>
-      <p>당신의 아이디는 : {findId?.id}</p>
+      {findId.socialLogin !== "regularLogin" ? (
+        <p>소셜 로그인 계정입니다. 소셜 로그인 해주세요.</p>
+      ) : (
+        <p>당신의 아이디는 : {findId?.id}</p>
+      )}
       <Button
         text={"로그인 페이지로 돌아가기."}
         onClick={() => {

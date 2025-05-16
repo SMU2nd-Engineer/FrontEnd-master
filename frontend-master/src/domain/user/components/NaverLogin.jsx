@@ -16,8 +16,7 @@ export default function NaverLogin() {
   };
 
   return (
-    <div>
-      <p>소셜 로그인 - 나중에 지울것</p>
+    <div id="naverLoginId">
       <Button
         text={"네이버 로그인"}
         imgSrc={naverLoginButton}
