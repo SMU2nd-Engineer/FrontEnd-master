@@ -1,6 +1,8 @@
+import SelectBox from "@/components/SelectBox";
+import { getCategoryIdx } from "@/utils/CategoryHandler";
 import { useState } from "react";
 
-const BoardPageFooter = () => {
+const BoardPageFooter = ({handleOnclick}) => {
   const [divisions, setDivision] = useState(""); // 기본 카테고리
   const [searchKeywords, setSearchKeyword] = useState(""); // 검색어 입력
 
@@ -12,21 +14,19 @@ const BoardPageFooter = () => {
 
   };
 
+  const onClick = () => {
+    handleOnclick(divisions, searchKeywords)
+  }
+
   // 카테고리 선택하기
   return (
     <div className="board_page_footer">
       <label htmlFor="divisions">카테고리 선택</label>
-      <select 
-        type="text"
+      <SelectBox 
         id="divisions"
-        value={divisions}
-        onChange={(e) => setDivision(e.target.value)}
-      >
-        {/* 카테고리 선택 옵션 */}
-        {/* <option value="카테고리 선택">카테고리 선택</option> */}
-        <option value="팝니다">팝니다</option>
-        <option value="삽니다">삽니다</option>
-      </select>
+        name="divisions" 
+        category_idx={getCategoryIdx("BOARD")}
+        handleChange={(e) => setDivision(e.target.value)}/>
 
       {/* 검색어 입력창 */}
       <input 
@@ -35,8 +35,8 @@ const BoardPageFooter = () => {
         value={searchKeywords}
         onChange={(e) => setSearchKeyword(e.target.value)}       
       />
-      {/* 카테고리 선택하고 키워드로 검색어를 입력했을때 실행되는 버튼 */}
-      <button onClick={handleSearch}>게시글 검색</button>
+      {/* 카테고리 선택하고 키워드로 검색어를 입력한 후 누르면 실행되는 버튼 */}
+      <button onClick={onClick}>게시글 검색</button>
     </div>
 
   );

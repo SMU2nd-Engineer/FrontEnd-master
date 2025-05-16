@@ -22,7 +22,7 @@ const BoardList = ({ boards = [] }) => {
             {/* DB에서 입력한 데이터를 게시글 목록에 출력 */}
             {
               boards.map((item)=> 
-                <BoardItem item={item}/>
+                <BoardItem key={item.idx} item={item}/>
             )
             }
           </tbody>
