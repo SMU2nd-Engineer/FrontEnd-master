@@ -1,6 +1,13 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
+/**
+ * 페이지네이션 컴포넌트
+ * @param {int} pageCount :  계산된 총 페이지 개수
+ * @param {method} onPageChange : 페이지이동 함수
+ * @param {int} pageRangeDisplayed : 페이지네이션 표시될 계수
+ * @returns
+ */
 export default function MyPagination({
   pageCount,
   onPageChange,

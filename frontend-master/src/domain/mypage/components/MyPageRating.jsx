@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import MyRatingStar from "./MyRatingStar";
 import { getMyTotalRating } from "../services/getMyTotalRating";
 
+/**
+ * 마이페이지 홈 및 리뷰에서 총 별점을 표시하기 위한 컴포넌트
+ * @returns
+ */
 export default function MyPageRating() {
   const [myTotalReviewRating, setMyTotalReviewRating] = useState(0); // 초깃값 0으로 세팅
 

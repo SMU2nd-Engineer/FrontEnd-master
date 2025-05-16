@@ -4,6 +4,10 @@ import { getMySellList } from "../services/getMySellList";
 import mook from "../utils/mook";
 import MyPagination from "./MyPaginationUI";
 
+/**
+ * 상품 판매 리스트 컴포넌트
+ * @returns
+ */
 export default function MySellList() {
   const [category, setCategory] = useState("all");
   const [myProductLists, setMyProductLists] = useState(mook);

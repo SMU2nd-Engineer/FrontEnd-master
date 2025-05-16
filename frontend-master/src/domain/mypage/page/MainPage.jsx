@@ -18,9 +18,10 @@ export default function MainPage() {
       <h1>MainPage</h1>
       <MyPageLink />
       <MyName />
+      <p>내 상품 </p>
       <p>내 상품 들어올 곳</p>
       <MyMainPeak />
-      <p>내 리뷰 점수 들어올 곳</p>
+      {/* <p>내 리뷰 점수 들어올 곳</p> */}
       <MyMainRating />
       <p>거래 후기 </p>
       {/* 아래는 나중에 지울 것. */}
