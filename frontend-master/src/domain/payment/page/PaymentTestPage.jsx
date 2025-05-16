@@ -15,12 +15,16 @@ const PaymentTestPage = () => {
         quantity: 1,
         amount: 10000,
         taxFreeAmount: 0,
-        approvalUrl: "http://localhost:5173/api/payment/success",
-        cancelUrl: "http://localhost:5173/api/payment/cancel",
-        failUrl: "http://localhost:5173/api/payment/fail",
+        approvalUrl: "http://localhost:5173/payment/success",
+        cancelUrl: "http://localhost:5173/payment/cancel",
+        failUrl: "http://localhost:5173/payment/fail",
       });
 
       console.log("카카오페이 준비 성공:", response.data);
+
+      // TID 저장
+      sessionStorage.setItem("tid", response.data.tid);
+
       setPayUrl(response.data.nextRedirectPcUrl);
       setError("");
     } catch (err) {
@@ -36,7 +40,7 @@ const PaymentTestPage = () => {
       <button onClick={handleKakaoPayReady}>카카오페이 결제 준비</button>
       {payUrl && (
         <div style={{marginTop: "20px"}}>
-          <a href={payUrl} target="_blank" rel="noopener noreferrer">
+          <a href={payUrl}>
             결제 페이지 이동하기
           </a>
         </div>
