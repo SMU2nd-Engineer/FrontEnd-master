@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getUserInfo } from "../services/getUserInfo";
 import { useNavigate } from "react-router-dom";
 import { updateUserInfo } from "../services/updateUserInfo";
-import SCHEMA from "@mypage/utils/EditInfoValidator";
+import SCHEMA from "@/domain/mypage/utils/editInfoValidator";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationName from "@/domain/user/components/RegistrationName";

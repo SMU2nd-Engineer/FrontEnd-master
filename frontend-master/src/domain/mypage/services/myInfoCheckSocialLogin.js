@@ -5,10 +5,8 @@ import axiosInstance from "@/lib/axiosInstance";
  * @return 소셜 컬럼에서 추출한 값.
  */
 export const myInfoCheckSocialLogin = async () => {
-  const res = await axiosInstance.get(
-    "/mypage/checkSocial",
-    {},
-    { withCredentials: true }
-  );
+  const res = await axiosInstance.get("/mypage/checkSocial", {
+    withCredentials: true,
+  });
   return res.data.socialLogin;
 };

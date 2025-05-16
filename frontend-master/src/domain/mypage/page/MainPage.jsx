@@ -3,7 +3,8 @@ import MyPageLink from "../components/MyPageLink";
 import Button from "@/components/Button";
 import { useNavigate } from "react-router-dom";
 import MyName from "../components/MyName";
-import MyMainRating from "../components/MyMainRating";
+import MyMainRating from "../components/MyPageRating";
+import MyMainPeak from "../components/MyMainPeak";
 
 /**
  * 메인 화면
@@ -18,7 +19,7 @@ export default function MainPage() {
       <MyPageLink />
       <MyName />
       <p>내 상품 들어올 곳</p>
-      <p>찜 목록 들어올 곳</p>
+      <MyMainPeak />
       <p>내 리뷰 점수 들어올 곳</p>
       <MyMainRating />
       <p>거래 후기 </p>

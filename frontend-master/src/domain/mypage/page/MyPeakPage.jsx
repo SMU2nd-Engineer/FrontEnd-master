@@ -1,49 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MyPageLink from "../components/MyPageLink";
-import { getWishListInfo } from "../services/getWishListInfo";
 import MyPageCardForm from "../components/MyPageCardForm";
 import MyPagination from "../components/MyPaginationUI";
 import ProductList from "@products/components/ProductList";
-
-// 더미데이터
-const mook = [
-  {
-    img: "",
-    title: "상품1",
-    contents: "멋진상품입니다.",
-    price: "00원입니다.",
-  },
-  {
-    img: "",
-    title: "상품2",
-    contents: "좋은상품입니다.",
-    price: "00원입니다.",
-  },
-  {
-    img: "",
-    title: "상품3",
-    contents: "보통상품입니다.",
-    price: "00원입니다.",
-  },
-  {
-    img: "",
-    title: "상품4",
-    contents: "보통상품입니다.",
-    price: "00원입니다.",
-  },
-  {
-    img: "",
-    title: "상품5",
-    contents: "보통상품입니다.",
-    price: "00원입니다.",
-  },
-  {
-    img: "",
-    title: "상품6",
-    contents: "보통상품입니다.",
-    price: "00원입니다.",
-  },
-];
+import mook from "../utils/mook";
 
 export default function MyPeakPage() {
   // 처음 렌더링 할 때 데이터를 가져올 useEffect

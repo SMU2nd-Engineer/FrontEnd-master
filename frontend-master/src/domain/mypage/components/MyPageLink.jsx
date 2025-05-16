@@ -12,7 +12,7 @@ export default function MyPageLink() {
       <br />
       <Link to="/mypage/peakList">찜 목록</Link>
       <br />
-      <Link to="/mypage/myRevicw">리뷰</Link>
+      <Link to="/mypage/myReview">리뷰</Link>
       <br />
       <Link to="/mypage/myBoard">게시글</Link>
     </div>

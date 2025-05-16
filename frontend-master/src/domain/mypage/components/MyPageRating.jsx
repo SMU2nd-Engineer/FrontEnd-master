@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MyRatingStar from "./MyRatingStar";
 import { getMyTotalRating } from "../services/getMyTotalRating";
 
-export default function MyMainRating() {
+export default function MyPageRating() {
   const [myTotalReviewRating, setMyTotalReviewRating] = useState(0); // 초깃값 0으로 세팅
 
   //   별점 가져오기
