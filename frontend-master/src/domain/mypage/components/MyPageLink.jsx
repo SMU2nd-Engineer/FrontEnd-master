@@ -10,7 +10,7 @@ export default function MyPageLink() {
       <Link to="/mypage/myInfo">개인 정보</Link> <br />
       <Link to="/mypage/sellAndPurchaselist">판매/구매이력</Link>
       <br />
-      <Link to="/mypage/wishlist">찜 목록</Link>
+      <Link to="/mypage/peakList">찜 목록</Link>
       <br />
       <Link to="/mypage/myRevicw">리뷰</Link>
       <br />

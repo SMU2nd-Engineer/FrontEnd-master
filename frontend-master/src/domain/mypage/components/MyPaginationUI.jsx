@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 export default function MyPagination({
   pageCount,
   onPageChange,
-  pageRangeDisplayed = 5,
+  pageRangeDisplayed = 3,
 }) {
   return (
     <>
@@ -13,7 +13,7 @@ export default function MyPagination({
         nextLabel="next >" // 다음 페이지 모양
         previousLabel="< previous" // 이전 페이지 모양
         onPageChange={onPageChange} // 페이지 변화 함수
-        pageRangeDisplayed={pageRangeDisplayed} // 한 페이지에 보여줄 개수
+        pageRangeDisplayed={pageRangeDisplayed} // 페이지네이션 번호 몇개 까지 보여줄지 정하는 숫자
         pageCount={pageCount} // 총 페이지 개수
         containerClassName="pagination" // 페이지네이션 컨테이너의 클래스 이름
         activeClassName="active" // 활성 페이지의 클래스 이름
