@@ -3,6 +3,7 @@ import MyPageLink from "../components/MyPageLink";
 import { getWishListInfo } from "../services/getWishListInfo";
 import MyPageCardForm from "../components/MyPageCardForm";
 import MyPagination from "../components/MyPaginationUI";
+import ProductList from "@products/components/ProductList";
 
 // 더미데이터
 const mook = [
@@ -78,15 +79,7 @@ export default function MyPeakPage() {
         <br />
         {/* 카드 형태 렌더링 만들기 
         여기 또는 하위에서 카드를 눌렀을 때 상세페이지로 이동하게끔 구현해야함 */}
-        {currentItems.map((item, key) => (
-          <MyPageCardForm
-            key={key}
-            img={item.img}
-            name={item.title}
-            contents={item.contents}
-            price={item.price}
-          />
-        ))}
+        <ProductList products={currentItems} />
         {/* 페이지네이션 자리 */}
         <MyPagination
           pageCount={totalPageCount}
