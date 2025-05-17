@@ -1,7 +1,7 @@
 import axiosInstance from "@/lib/axiosInstance";
 
 /**
- * 아이디를 요청하기 post로 진행.
+ * 총 별점 점수 합
  * @returns sql에서 sum으로 가져온 총합 점수가 들어 있음
  */
 export const getMyTotalRating = async () => {

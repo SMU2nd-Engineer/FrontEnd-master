@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getMyBoardList } from "../services/getMyBoardList";
 import { boardMook } from "../utils/mook";
 import BoardListcomp from "./BoardListcomp";
 import MyPagination from "./MyPaginationUI";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyBoard() {
   const [boardInfo, setBoardInfo] = useState(boardMook);
@@ -21,16 +21,17 @@ export default function MyBoard() {
     setCurrentPage(selected);
   };
 
+  useEffect(() => {
+    const callBoardInfo = async () => {
+      const result = await getMyPageData("MY_BOARD_LIST");
+      setBoardInfo(result);
+    };
+    callBoardInfo();
+  }, []);
+
   if (!boardInfo.length) {
     return <p>게시판 정보가 없습니다.</p>;
   }
-  //   useEffect(() => {
-  //     const callBoardInfo = async () => {
-  //       const result = await getMyBoardList();
-  //       setBoardInfo(result);
-  //     };
-  //     callBoardInfo();
-  //   }, []);
 
   return (
     <div>

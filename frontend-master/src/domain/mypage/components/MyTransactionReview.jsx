@@ -1,33 +1,26 @@
 import React, { useState } from "react";
+import MyTextReview from "./MyReviewText";
+import MyPagination from "./MyPaginationUI";
 
 /**
- * 거래 후기 컴포넌트
- * @returns
+ * 거래 후기를 렌더링할 컴포넌트
+ * @param {List<Object>} reviewLists: 리뷰 정보가 담긴 배열
+ * @returns 거래 후기 컴포넌트
  */
-export default function MyTransactionReview() {
-  const [myTransactionReview, setMyTransactionReview] = useState([]);
+export default function MyTransactionReview({ reviewLists = [] }) {
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 5;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 설정
   const offset = currentPage * itemsPerPage; // 현재 페이지에서 데이터를 몇 번째 항목부터 잘라서 보여줄지를 결정
   // 전체 페이지 수
-  const totalPageCount = Math.ceil(myTransactionReview.length / itemsPerPage);
+  const totalPageCount = Math.ceil(reviewLists.length / itemsPerPage);
   // 현재 페이지 보여줄 개수로 자른 리스트
-  const currentItems = myTransactionReview.slice(offset, offset + itemsPerPage);
+  const currentItems = reviewLists.slice(offset, offset + itemsPerPage);
   // selected 라이브러리에서 전달하는 값
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  // 처음 렌더링 할 때 데이터를 가져올 useEffect
-  useEffect(() => {
-    const saveList = async () => {
-      const results = await getMyTextReview();
-      setMyTransactionReview(results);
-    };
-    saveList();
-  }, []);
 
   return (
     <div
@@ -36,7 +29,23 @@ export default function MyTransactionReview() {
     >
       <p>거래 후기</p>
       <br />
-      {myTransactionReview.map(item)}
+      <table>
+        <thead>
+          <tr>
+            <th>리뷰</th>
+            <th>날짜 </th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((item) => (
+            <MyTextReview
+              key={item.idx}
+              reviewText={item.review}
+              reviewDate={item.sDate}
+            />
+          ))}
+        </tbody>
+      </table>
       <MyPagination
         pageCount={totalPageCount}
         onPageChange={onPageChange}

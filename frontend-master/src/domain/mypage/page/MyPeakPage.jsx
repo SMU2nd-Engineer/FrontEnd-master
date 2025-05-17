@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MyPageLink from "../components/MyPageLink";
-import MyPageCardForm from "../components/MyPageCardForm";
 import MyPagination from "../components/MyPaginationUI";
 import ProductList from "@products/components/ProductList";
 import mook from "../utils/mook";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyPeakPage() {
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
@@ -22,17 +22,19 @@ export default function MyPeakPage() {
     setCurrentPage(selected);
   };
 
-  // 카드 정보에 넣을 찜 목록 가져오기 - 데이터 보여지기 전까지 주석 처리
-  //   useEffect(() => {
-  // const totalInfoList = async () = =>{
-  //     const result = await getWishListInfo();
-  //     setWishListInfo(result);
-  //   } totalInfoList()}, []);
+  //카드 정보에 넣을 찜 목록 가져오기 - 데이터 보여지기 전까지 주석 처리
+  useEffect(() => {
+    const totalInfoList = async () => {
+      const result = await getMyPageData("PEAK_LIST_INFO");
+      setWishListInfo(result);
+    };
+    totalInfoList();
+  }, []);
   return (
     <div>
       <MyPageLink />
       <div
-        id="wishlistBody"
+        id="peakListBody"
         style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
       >
         <p>찜 목록</p>

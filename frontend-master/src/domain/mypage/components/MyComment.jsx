@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { getMyCommentList } from "../services/getMyCommentList";
+import React, { useEffect, useState } from "react";
 import { commentMook } from "../utils/mook";
 import CommentListcomp from "./CommentListcomp";
 import MyPagination from "./MyPaginationUI";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyComment() {
   const [commentInfo, setCommentInfo] = useState(commentMook);
@@ -20,17 +20,19 @@ export default function MyComment() {
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
+
+  useEffect(() => {
+    const callCommentInfo = async () => {
+      console.log("코멘트 useEffect 작동함");
+      const result = await getMyPageData("MY_COMMENT_LIST");
+      setCommentInfo(result);
+    };
+    callCommentInfo();
+  }, []);
+
   if (!commentInfo.length) {
     return <p>댓글 정보가 없습니다.</p>;
   }
-  //   useEffect(() => {
-  //     const callCommentInfo = async () => {
-  //       const result = await getMyCommentList();
-  //       setCommentInfo(result);
-  //     };
-  //     callCommentInfo();
-  //   }, []);
-
   return (
     <div>
       <table>

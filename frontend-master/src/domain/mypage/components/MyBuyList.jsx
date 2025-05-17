@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
-import { getMyBuyList } from "../services/getMyBuyList";
 import mook from "../utils/mook";
 import MyPagination from "./MyPaginationUI";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyBuyList() {
   const [myProductList, setMyProductList] = useState(mook);
@@ -20,13 +20,13 @@ export default function MyBuyList() {
     setCurrentPage(selected);
   };
 
-  //   useEffect(() => {
-  //     const saveList = async () => {
-  //       const result = await getMyBuyList();
-  //       setMyProductList(result);
-  //     };
-  //     saveList();
-  //   }, []);
+  useEffect(() => {
+    const saveList = async () => {
+      const result = await getMyPageData("MY_BUY_LIST");
+      setMyProductList(result);
+    };
+    saveList();
+  }, []);
 
   return (
     <>

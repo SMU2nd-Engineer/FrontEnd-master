@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
 import MyPageLink from "../components/MyPageLink";
 import Button from "@/components/Button";
 import { useNavigate } from "react-router-dom";
 import MyName from "../components/MyName";
-import MyMainRating from "../components/MyPageRating";
+import MyMainRating from "../components/MyReviewRating";
 import MyMainPeak from "../components/MyMainPeak";
 
 /**
@@ -22,7 +21,8 @@ export default function MainPage() {
       <p>내 상품 들어올 곳</p>
       <MyMainPeak />
       {/* <p>내 리뷰 점수 들어올 곳</p> */}
-      <MyMainRating />
+      <MyMainRating movePage={"myReview"} />
+
       <p>거래 후기 </p>
       {/* 아래는 나중에 지울 것. */}
       <Button

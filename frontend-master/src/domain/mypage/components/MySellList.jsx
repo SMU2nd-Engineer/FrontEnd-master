@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
-import { getMySellList } from "../services/getMySellList";
 import mook from "../utils/mook";
 import MyPagination from "./MyPaginationUI";
+import { getMyPageData } from "../services/getMyPageDate";
 
 /**
  * 상품 판매 리스트 컴포넌트
@@ -47,13 +47,13 @@ export default function MySellList() {
   };
 
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
-  //   useEffect(() => {
-  //     const saveList = async () => {
-  //       const results = await getMySellList();
-  //       setMyProductLists(results);
-  //     };
-  //     saveList();
-  //   }, []);
+  useEffect(() => {
+    const saveList = async () => {
+      const results = await getMyPageData("MY_SELL_LIST");
+      setMyProductLists(results);
+    };
+    saveList();
+  }, []);
 
   return (
     <>

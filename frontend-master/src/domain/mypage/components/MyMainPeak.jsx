@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
-import { getLastestPeakInfo } from "../services/getLatestPeakInfo";
 import { Link } from "react-router-dom";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyMainPeak() {
   const [latestPeak, setLatestPeak] = useState([]);
@@ -9,7 +9,7 @@ export default function MyMainPeak() {
   // 최신 항목 2개만 가져오기
   useEffect(() => {
     const latestListInfo = async () => {
-      const result = await getLastestPeakInfo();
+      const result = await getMyPageData("LASTEST_PEAK");
       setLatestPeak(result);
     };
     latestListInfo();
