@@ -12,7 +12,7 @@ import axios from "axios";
  */
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACK_API_URL, // 환경 변수에 있는 backUrl
-  withCredentials: true, // cors 정책으로 쿠키가 전달 되지 않도록 하기 위해서 추가
+  withCredentials: true, // cors 정책으로 쿠키가 전달되도록 허용
 });
 
 /**

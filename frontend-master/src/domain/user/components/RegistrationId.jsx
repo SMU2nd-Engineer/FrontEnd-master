@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
 
@@ -11,6 +11,12 @@ export default function RegistrationId({
   isIdCheck,
   setIsIdCheck,
 }) {
+  const id = watch("id");
+  // 닉네임 변경 시 중복 체크 상태 초기화
+  useEffect(() => {
+    setIsIdCheck(false);
+  }, [id, setIsIdCheck]);
+
   return (
     <div>
       <label htmlFor="id">
@@ -29,6 +35,9 @@ export default function RegistrationId({
                 const result = await duplicateCheckService(watch("id"), "id");
                 if (result) {
                   setIsIdCheck(true);
+                } else {
+                  alert("중복입니다. 다른 아이디를를 사용해주세요.");
+                  setIsIdCheck(false);
                 }
               } catch (e) {
                 console.log(e.message);
