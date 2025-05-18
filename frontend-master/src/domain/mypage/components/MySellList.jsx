@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
-import mook from "../utils/mook";
 import MyPagination from "./MyPaginationUI";
-import { getMyPageData } from "../services/getMyPageDate";
+import { Link } from "react-router-dom";
 
 /**
  * 상품 판매 리스트 컴포넌트
  * @returns
  */
-export default function MySellList() {
+export default function MySellList({ isMain = false, products = [] }) {
   const [category, setCategory] = useState("all");
-  const [myProductLists, setMyProductLists] = useState(mook);
+  // const [myProductLists, setMyProductLists] = useState(products);
 
   let filterMyProductLists = [];
 
   switch (category) {
     case "onSale":
-      filterMyProductLists = myProductLists.filter(
+      filterMyProductLists = products.filter(
         (myProductList) => myProductList.flag === 0
       );
       break;
     case "soldOut":
-      filterMyProductLists = myProductLists.filter(
+      filterMyProductLists = products.filter(
         (myProductList) => myProductList.flag === 1
       );
       break;
     default:
-      filterMyProductLists = myProductLists;
+      filterMyProductLists = products;
   }
 
-  // 한페이지에 보여줄 숫자
-  const itemsPerPage = 4;
+  // 한페이지에 보여줄 숫자 - 메인이면 2개 , 구매내역에서는 4개
+  let itemsPerPage = 0;
+  {
+    isMain ? (itemsPerPage = 2) : (itemsPerPage = 4);
+  }
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 설정
   const offset = currentPage * itemsPerPage; // 현재 페이지에서 데이터를 몇 번째 항목부터 잘라서 보여줄지를 결정
@@ -45,15 +47,6 @@ export default function MySellList() {
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  // 처음 렌더링 할 때 데이터를 가져올 useEffect
-  useEffect(() => {
-    const saveList = async () => {
-      const results = await getMyPageData("MY_SELL_LIST");
-      setMyProductLists(results);
-    };
-    saveList();
-  }, []);
 
   return (
     <>
@@ -81,12 +74,15 @@ export default function MySellList() {
       >
         / 판매완료
       </a>
+      {isMain && <Link to="/mypage/sellAndPurchaselist/">더 보기</Link>}
       <ProductList products={currentItems} />
-      <MyPagination
-        pageCount={totalPageCount}
-        onPageChange={onPageChange}
-        pageRangeDisplayed={3}
-      />
+      {!isMain && (
+        <MyPagination
+          pageCount={totalPageCount}
+          onPageChange={onPageChange}
+          pageRangeDisplayed={3}
+        />
+      )}
     </>
   );
 }

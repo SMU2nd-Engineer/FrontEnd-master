@@ -4,24 +4,41 @@ import { useNavigate } from "react-router-dom";
 import MyName from "../components/MyName";
 import MyMainRating from "../components/MyReviewRating";
 import MyMainPeak from "../components/MyMainPeak";
+import { useEffect, useState } from "react";
+import { getMyPageData } from "../services/getMyPageDate";
+import MySellList from "../components/MySellList";
 
 /**
  * 메인 화면
  * @returns 마이페이지 메인 화면 반환
  */
 export default function MainPage() {
+  const [mainPageInfo, setMainPageInfo] = useState({});
   const navigate = useNavigate();
+
+  // 마이페이지에 필요한 정보를 호출하는 useEffect
+  useEffect(() => {
+    const saveMainPageInfo = async () => {
+      const result = await getMyPageData("MY_MAIN_INFO");
+      setMainPageInfo(result);
+    };
+    saveMainPageInfo();
+  }, []);
 
   return (
     <div>
       <h1>MainPage</h1>
       <MyPageLink />
       <MyName />
-      <p>내 상품 </p>
-      <p>내 상품 들어올 곳</p>
-      <MyMainPeak />
-      {/* <p>내 리뷰 점수 들어올 곳</p> */}
-      <MyMainRating movePage={"myReview"} />
+      <p> 내 상품 </p>
+      <MySellList isMain={true} products={mainPageInfo.myMainSellProductList} />
+      <p> 찜 목록 </p>
+      <MyMainPeak list={mainPageInfo.myMainReview} />
+      <p> 내 점수 </p>
+      <MyMainRating
+        myRating={mainPageInfo.myPageAverageRating}
+        movePage={"myReview"}
+      />
 
       <p>거래 후기 </p>
       {/* 아래는 나중에 지울 것. */}
