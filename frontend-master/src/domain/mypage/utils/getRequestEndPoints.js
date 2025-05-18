@@ -9,4 +9,6 @@ export const MYPAGE_ENDPOINTS = Object.freeze({
   PEAK_LIST_INFO: "peakListInfo", // 찜 전체 목록.
   USER_INFO: "getUserInfo", // 유저 정보(개인정보 탭).
   CHECK_SOCIAL: "checkSocial", // 소셜 로그인 확인.
+  FAVORITE_CATEGORIES: "getCategory", // 관심사 카테고리 가져오기
+  USER_FAVORITES: "userFavorites", // 사용자 관심사 가져오기
 });

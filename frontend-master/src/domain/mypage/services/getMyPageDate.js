@@ -6,9 +6,14 @@ import { MYPAGE_ENDPOINTS } from "../utils/getRequestEndPoints";
  * @returns 프라미스 객체
  */
 export const getMyPageData = async (key) => {
-  const endpoint = MYPAGE_ENDPOINTS[key];
-  const res = await axiosInstance.get(`/mypage/${endpoint}`, {
-    withCredentials: true,
-  });
-  return res.data;
+  try {
+    const endpoint = MYPAGE_ENDPOINTS[key];
+    const res = await axiosInstance.get(`/mypage/${endpoint}`, {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("API 요청 중 오류 발생:", error);
+    return null;
+  }
 };

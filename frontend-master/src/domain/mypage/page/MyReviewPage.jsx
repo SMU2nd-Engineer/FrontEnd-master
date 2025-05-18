@@ -12,7 +12,7 @@ export default function MyReviewPage() {
   // 별점 과 총합을 저장할 useEffect
   useEffect(() => {
     const saveMyRviewInfo = async () => {
-      const results = await getMyPageData("getMyReviewList");
+      const results = await getMyPageData("MY_REVIEW_LIST");
       setMyReviewInfoList(results);
     };
     saveMyRviewInfo();

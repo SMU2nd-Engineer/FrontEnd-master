@@ -15,6 +15,8 @@ export default function MyPageLink() {
       <Link to="/mypage/myReview">리뷰</Link>
       <br />
       <Link to="/mypage/myBoard">게시글</Link>
+      <br />
+      <Link to="/mypage/myEditFavorite">관심사</Link>
     </div>
   );
 }

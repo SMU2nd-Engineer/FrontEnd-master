@@ -2,7 +2,6 @@ import axiosInstance from "@/lib/axiosInstance";
 
 export const registrationUserFavorite = async (formdata) => {
   try {
-    console.log(formdata);
     const res = await axiosInstance.post(
       "/user/registrationFavorites",
       formdata,

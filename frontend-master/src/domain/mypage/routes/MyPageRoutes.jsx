@@ -7,6 +7,7 @@ import MyPeakPage from "../page/MyPeakPage";
 import MyReviewPage from "../page/MyReviewPage";
 import MyBoardPage from "../page/MyBoardPage";
 import MyTransactionReviewPage from "../page/MyTransactionReviewPage";
+import MyEditFavoritePage from "../page/MyEditFavoritePage";
 
 export default function MyPageRoutes() {
   return (
@@ -23,9 +24,10 @@ export default function MyPageRoutes() {
         <Route path="myReview" element={<MyReviewPage />} />
         <Route path="myBoard" element={<MyBoardPage />} />
         <Route
-          path="myTransactionReviewPage"
+          path="myTransactionReview"
           element={<MyTransactionReviewPage />}
         />
+        <Route path="myEditFavorite" element={<MyEditFavoritePage />} />
       </Routes>
     </div>
   );
