@@ -9,16 +9,17 @@ const BoardSubmitPage = () => {
 const [ boardSubs, setBoardSubs ] = useState([]);
 
 // 게시글 등록하는 데이터 가져오기
-useEffect(()=> {
-  BoardSubmit()
-    .then((res) => res.data)
-    .then((data) => setBoardSubs(data))
-    .catch((err) => console.error("게시글 등록 실패: ", err))
-}, []);
+// 오류가 발생해서 일단 주석 처리함
+// useEffect(()=> {
+//   BoardSubmit()
+//     .then((res) => res.data)
+//     .then((data) => setBoardSubs(data))
+//     .catch((err) => console.error("게시글 등록 실패: ", err))
+// }, []);
 
 // boardSubs를 이용하여 등록하는 함수 
-// 게시글 등록버튼 눌렀을때 게시글 홈페이지로 전환되어 게시글 목록에 등록하기
-const handleBOnclick = () => {
+// 게시글 등록버튼 눌렀을때 게시글 홈페이지로 전환되어 게시글 목록에 등록하는 함수
+const handleOnclick = () => {
   BoardSubmit()
     .then((res) => res.data)
     .then((data) => setBoardSubs(data))
@@ -26,11 +27,12 @@ const handleBOnclick = () => {
 }
 
 // 화면에 표시할 내용
+ return (
   <div className='new_board_submit'>
-
+  <p>게시판 업로드</p>
 
   </div>
-
+)
 
 
 };

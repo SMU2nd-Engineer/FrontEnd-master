@@ -52,13 +52,18 @@ const BoardUpload = () => {
 
       <form onSubmit={handleSubmit}>
 
-      {/* form-row: 요소들 한줄로 출력 
-      
-      */}
+      {/* form-row: 요소들 한줄로 출력 */}
 
       <div className="form-row">
         <label htmlFor="category_idx">카테고리</label>
-        <SelectBox id={category_idx} name={category_idx} />
+        <SelectBox 
+        id="category"
+        name="category" 
+        category_idx={getCategoryIdx("BOARD")}
+        handleChange={(e) => setNewBoard(e.target.value)}/>
+
+
+        
       </div>  
 
 

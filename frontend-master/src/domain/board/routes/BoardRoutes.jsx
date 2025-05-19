@@ -2,6 +2,7 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import BoardListPage from "../page/BoardListPage";
+import BoardSubmitPage from "../page/BoardSubmitPage";
 
 
 const BoardRoutes = () => {
@@ -14,6 +15,9 @@ const BoardRoutes = () => {
         
         {/* 게시글 목록 페이지 - 게시판 메인화면 */}
         <Route path="/list" element={<BoardListPage />} />
+
+        {/* 게시글 등록 페이지 - 게시판 등록화면 */}
+        <Route path="/submit" element={<BoardSubmitPage />} />
         
       </Routes>
     </div>
