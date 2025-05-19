@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/ProductsListPage.css";
 import ProductList from "../components/ProductList";
-import SearchBar from "../components/ProductSearch"
+import ProductSearch from "../components/ProductSearch"
 import { getProductList, searchProducts } from "../services/productService";
 
 
@@ -18,8 +18,8 @@ const ProductListPage = () => {
       .catch((err) => console.error("상품 불러오기 실패:", err));
   }, []);
 
-  const handleSearch = (keyword) => {
-    if(!keyword) {
+  const handleSearch = (searchValue) => {
+    if(!searchValue) {
       getProductList()
       .then((res) => res.data)
       .then((data) => {
@@ -27,7 +27,8 @@ const ProductListPage = () => {
         setProducts(sortedData);
       });
     } else {
-      searchProducts(keyword)
+      console.log(searchValue)
+      searchProducts(searchValue)
       .then((res) => res.data)
       .then((data) => setProducts(data))
       .catch((err) => console.error("검색 실패", err))
@@ -38,7 +39,7 @@ const ProductListPage = () => {
     <div className="new_product">
       <p className="pagetitle"> 상품 전체보기 </p>
       
-      <SearchBar onSearch = {handleSearch} />
+      <ProductSearch onSearch = {handleSearch} />
       <ProductList products={products} />
     </div>
   );

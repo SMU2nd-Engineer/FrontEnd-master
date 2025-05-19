@@ -28,6 +28,10 @@ export const getProductDetail = (idx) => {
   );
 };
 
-export const searchProducts = (keyword) => {
-  return axiosInstance.get("product/search", {params : {keyword}, withCredentials: true } );
+export const searchProducts = ({category_idx = 0, categorygenre_idx = 0, keyword}) => {
+  return axiosInstance.post(
+    "product/search", 
+    { keyword, category_idx, categorygenre_idx },
+    {withCredentials: true } 
+  );
 };

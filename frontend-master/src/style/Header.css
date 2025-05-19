@@ -1,3 +1,4 @@
+
 /* Navigation */
 nav {
   position: sticky;
@@ -14,7 +15,11 @@ nav {
   align-items: flex-end;
   padding: 0 50px 10px;
   box-sizing: border-box;
+  
 }
+
+
+
 a {
   font-weight: 500;
   color: #adadad;
@@ -32,13 +37,13 @@ a {
 
 /* Site name */
 .site_name {
-  font-family: "Inter";
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 70px;
   line-height: 110%;
 
-  color: #000000;
+  color: #f0b8b8;
 }
 
 /* MARKET | TICKET */
@@ -60,6 +65,7 @@ a {
   right: 50px;
   align-items: flex-end;
   gap: 50px;
+  color: #aca7a7;
 }
 
 .nav-right {
@@ -67,36 +73,21 @@ a {
   position: absolute;
   bottom: 10px;
   right: 50px;
-  align-items: flex-end;
+  align-items: center;
   gap: 30px;
 
   font-size: 24px;
+  color: #aca7a7;
 }
 
-/* Message circle */
-.message_circle {
-  box-sizing: border-box;
 
-  position: absolute;
-  width: 39.47px;
-  height: 38.68px;
-  left: 1299.08px;
-  top: 90.37px;
-
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  transform: rotate(9.05deg);
-}
 
 /* Icon */
-.icon {
+path {
   position: absolute;
-  left: 25.83%;
-  right: -0.83%;
-  top: 14.35%;
-  bottom: 10.65%;
+  
 
   border: 4px solid #b7a5a5;
-  transform: rotate(9.05deg);
 }
 
 /* 로그인 */
@@ -116,7 +107,6 @@ a {
   display: flex;
   align-items: center;
 
-  color: #aca7a7;
 }
 
 /* 검색 */
@@ -128,9 +118,8 @@ a {
   top: 13px;
 
   /* Body text
-
-Text for body copy
-*/
+  Text for body copy
+  */
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
