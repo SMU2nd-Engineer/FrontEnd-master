@@ -1,9 +1,8 @@
 import Button from "@/components/Button";
 import React, { useEffect, useRef, useState } from "react";
-import { getUserInfo } from "../services/getUserInfo";
 import { useNavigate } from "react-router-dom";
 import { updateUserInfo } from "../services/updateUserInfo";
-import SCHEMA from "@mypage/utils/EditInfoValidator";
+import SCHEMA from "@/domain/mypage/utils/editInfoValidator";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationName from "@/domain/user/components/RegistrationName";
@@ -11,6 +10,7 @@ import RegistrationPassword from "@/domain/user/components/RegistrationPassword"
 import RegistrationNickName from "@/domain/user/components/RegistrationNickName";
 import RegistrationAddress from "@user/components/RegistrationAddress";
 import RegistrationEmail from "@user/components/RegistrationEmail";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyInfoList({ isSocialLogin }) {
   //yup 스키마 사용하여 입력폼 유효성 정의의
@@ -42,12 +42,10 @@ export default function MyInfoList({ isSocialLogin }) {
     if (hasFetched.current) return;
     hasFetched.current = true;
     const getUserInfoByToken = async () => {
-      const userInfo = await getUserInfo();
-      console.log(userInfo);
+      const userInfo = await getMyPageData("USER_INFO");
       // 가져온 정보에서 주소와 이메일 입력 폼에 맞게 분리 함수 호출
       const editUserInfo = userInfoSplit(userInfo);
       // setValue로 초기값 설정
-      console.log(editUserInfo);
       setValue("name", editUserInfo.name);
       setValue("nickName", editUserInfo.nickName);
       setValue("address", editUserInfo.address);

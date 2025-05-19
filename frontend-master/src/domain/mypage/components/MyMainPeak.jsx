@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from "react";
-import getLatestPeakInfo from "../services/getLatestPeakInfo";
+import React from "react";
+import ProductList from "@/domain/products/components/ProductList";
+import { Link } from "react-router-dom";
 
-export default function MyMainPeak() {
-  const [latestPeak, setLatestPeak] = useState([]);
-
+export default function MyMainPeak({ list }) {
   // 최신 항목 2개만 가져오기
-  useEffect(() => {
-    const latestListInfo = async () => {
-      const result = await getLatestPeakInfo();
-      setLatestPeak(result);
-    };
-    latestListInfo();
-  }, []);
   return (
     <div
       id="wishlistBody"
@@ -21,15 +13,7 @@ export default function MyMainPeak() {
       <Link to="/myPage/peakList">더 보기</Link>
       <br />
 
-      {currentItems.map((item, key) => (
-        <MyPageCardForm
-          key={key}
-          img={item.img}
-          name={item.title}
-          contents={item.contents}
-          price={item.price}
-        />
-      ))}
+      <ProductList products={list} />
     </div>
   );
 }

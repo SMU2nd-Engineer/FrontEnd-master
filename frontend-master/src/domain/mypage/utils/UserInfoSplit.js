@@ -17,7 +17,7 @@ export const userInfoSplit = (userInfo) => {
   // 이메일 분리하기 - 배열 구조 분해 할당, 오류 방지 위하여 빈칸 넣기
   const [emailLocal = "", emailDomain = ""] = userInfo.split("@");
 
-  const EditUserInfo = {
+  const editUserInfo = {
     ...userInfo,
     address: address.trim(),
     detailAddress: detailAddress.trim(),
@@ -25,5 +25,5 @@ export const userInfoSplit = (userInfo) => {
     emailDomain: emailDomain.trim(),
   };
 
-  return EditUserInfo;
+  return editUserInfo;
 };

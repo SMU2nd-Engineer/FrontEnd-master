@@ -15,23 +15,6 @@ export const duplicateCheckService = async (name, category) => {
       { withCredentials: true }
     );
     return res.data;
-    // console.log(res.data);
-    // if (res.data === true) {
-    //   let payload = {};
-    //   if (category === "id") {
-    //     payload.isIdCheck = true;
-    //   }
-    //   if (category === "nickName") {
-    //     payload.isNickNameCheck = true;
-    //   }
-    // } else {
-    //   console.log(`${name} : 중복입니다.`);
-    //   alert(
-    //     `입력하신 ${name} 중복입니다. 다른 ${
-    //       category === "id" ? "아이디" : "닉네임"
-    //     }을(를) 사용해 주세요.`
-    //   );
-    // }
   } catch (error) {
     console.log("중복 체크 과정에서 문제가 생겼습니다. 내용 : " + error);
     throw new Error("중복 체크 중 문제가 발생했습니다.");

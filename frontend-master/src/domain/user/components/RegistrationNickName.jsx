@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
 
@@ -11,6 +11,12 @@ export default function RegistrationNickName({
   setIsNickNameCheck,
   existingNickname,
 }) {
+  const nickName = watch("nickName");
+  // 닉네임 변경 시 중복 체크 상태 초기화
+  useEffect(() => {
+    setIsNickNameCheck(false);
+  }, [nickName, setIsNickNameCheck]);
+
   return (
     <div>
       <label htmlFor="nickName">

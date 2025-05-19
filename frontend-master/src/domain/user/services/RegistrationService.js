@@ -15,6 +15,7 @@ const regitrationService = async (state) => {
       },
       { withCredentials: true }
     );
+    return res.data;
   } catch (error) {
     console.log(error);
   }

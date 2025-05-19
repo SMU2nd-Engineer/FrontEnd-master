@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "@/domain/user/services/login";
 import { setAccessToken } from "@/utils/TokenManager";
@@ -10,8 +10,9 @@ import "@user/style/User.css";
 export default function LogingPage() {
   const [id, setUserId] = useState("");
   const [password, setpassword] = useState("");
-
+  const isLogin = !!localStorage.getItem("accessToken");
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     // 새로 고침을 방지하기 위한 코드
     e.preventDefault();
@@ -37,7 +38,12 @@ export default function LogingPage() {
       setpassword("");
     }
   };
-
+  // 토큰있으면 로그인 되었으니 로그인 페이지 눌러도 정상 화면으로 돌아오기
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/user/home");
+    }
+  }, [isLogin, navigate]);
   return (
     <div id="LoginContainer">
       <form onSubmit={handleLogin}>

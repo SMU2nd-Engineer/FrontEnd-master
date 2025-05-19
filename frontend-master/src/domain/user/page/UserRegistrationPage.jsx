@@ -10,6 +10,8 @@ import RegistrationNickName from "../components/RegistrationNickName";
 import RegistrationId from "../components/RegistrationId";
 import RegistrationEmail from "../components/RegistrationEmail";
 import registrationService from "../services/registrationService";
+import { useNavigate } from "react-router-dom";
+import { setAccessToken } from "@/utils/TokenManager";
 
 /**
  * id : 아이디
@@ -46,7 +48,7 @@ export default function UserRegistrationPage() {
   const [isNickNameCheck, setIsNickNameCheck] = useState(false);
   const [isSocialLogin, setIsSocialLogin] = useState(false);
   const [socialProvider, setSocialProvider] = useState("");
-
+  const navigate = useNavigate();
   // 비밀번호 유효성 오류가 계속 나와서 랜덤하게 적절한 값이 들어가도록 함수 생성
   const generatePassword = () => {
     const front = Math.random().toString(36).slice(2, 8); // 영문 + 숫자 일부(소수점 제외 36진수로 바꾼다음 6자리만 자르기)
@@ -85,9 +87,20 @@ export default function UserRegistrationPage() {
       return; // 멈추기위한 return
     }
     try {
-      await registrationService(formData);
-      alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
-      window.location.href = "/user/login";
+      const result = await registrationService(formData);
+      console.log(result);
+      const accessToken = result.accessToken;
+      if (accessToken) {
+        setAccessToken(accessToken);
+        let movePosition = confirm(
+          "회원가입이 완료되었습니다. 선호도를 등록할 수 있습니다. 등록하시겠습니까?"
+        );
+        if (movePosition) {
+          navigate("/user/selectFavorites", { replace: true });
+        } else {
+          navigate("/user/home", { replace: true });
+        }
+      }
     } catch (error) {
       console.log(error);
       alert("회원 가입 중에 오류가 발생했습니다. 관리자게에 문의해주세요.");

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import MyPageLink from "../components/MyPageLink";
 import MyInfoPasswordCheck from "../components/MyInfoPasswordCheck";
-import { myInfoCheckSocialLogin } from "../services/myInfoCheckSocialLogin";
 import MyInfoList from "../components/MyInfoList";
+import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyInfo() {
   // 소셜 로그인의 경우 비밀번호가 없으니 pass
   useEffect(() => {
     const checkSocialLogin = async () => {
-      const whereSocial = await myInfoCheckSocialLogin();
-      if (whereSocial !== "regularLogin" && whereSocial !== null) {
+      const whereSocial = await getMyPageData("CHECK_SOCIAL");
+      if (whereSocial.socialLogin !== "regularLogin" && whereSocial !== null) {
         setIsSocialLogin(true); // 소셜 로그인 true
         setIsMyInfoPasswordCheck(true); // 비밀번호 체크 안 하도록
       }
