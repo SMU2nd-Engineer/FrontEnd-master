@@ -43,10 +43,14 @@ export default function FavoritesSelector({ mode = "register" }) {
       if (mode === "edit") {
         // 수정하기
         await updateUserFavorites(formData);
+        alert("정상적으로 수정되었습니다.");
         navigate("/mypage/main");
       } else {
         // 등록하기
         await registrationUserFavorite(formData);
+        alert(
+          "관심사가 등록되었습니다! 저희 사이트를 방문해 주셔서 감사합니다!"
+        );
         navigate("/user/home");
       }
     } catch (error) {

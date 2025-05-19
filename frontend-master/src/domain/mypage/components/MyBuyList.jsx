@@ -11,7 +11,8 @@ export default function MyBuyList({ products }) {
   // 전체 페이지 수
   const totalPageCount = Math.ceil(products.length / itemsPerPage);
   // 현재 페이지 보여줄 개수 설정
-  const currentItems = products.slice(offset, offset + itemsPerPage);
+  const currentItems =
+    products > 0 ? products.slice(offset, offset + itemsPerPage) : [];
   // selected 라이브러리에서 전달하는 값
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);

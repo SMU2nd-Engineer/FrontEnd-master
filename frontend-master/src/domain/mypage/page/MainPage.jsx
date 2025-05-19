@@ -7,6 +7,7 @@ import MyMainPeak from "../components/MyMainPeak";
 import { useEffect, useState } from "react";
 import { getMyPageData } from "../services/getMyPageDate";
 import MySellList from "../components/MySellList";
+import MyTransactionReview from "../components/MyTransactionReview";
 
 /**
  * 메인 화면
@@ -37,11 +38,15 @@ export default function MainPage() {
       <p> 내 점수 </p>
       <MyMainRating
         myRating={mainPageInfo.myPageAverageRating}
-        movePage={"myReview"}
+        // movePage={"myReview"}
       />
 
       <p>거래 후기 </p>
       {/* 아래는 나중에 지울 것. */}
+      <MyTransactionReview
+        reviewLists={mainPageInfo.myMainReview}
+        movePage={"myReview"}
+      />
       <Button
         text={"임시 홈 화면으로"}
         onClick={() => {

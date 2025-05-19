@@ -39,10 +39,11 @@ export default function MySellList({ isMain = false, products = [] }) {
   // 전체 페이지 수
   const totalPageCount = Math.ceil(filterMyProductLists.length / itemsPerPage);
   // 현재 페이지 보여줄 개수 설정
-  const currentItems = filterMyProductLists.slice(
-    offset,
-    offset + itemsPerPage
-  );
+  const currentItems =
+    filterMyProductLists > 0
+      ? filterMyProductLists.slice(offset, offset + itemsPerPage)
+      : [];
+
   // selected 라이브러리에서 전달하는 값
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);
@@ -75,7 +76,7 @@ export default function MySellList({ isMain = false, products = [] }) {
         / 판매완료
       </a>
       {isMain && <Link to="/mypage/sellAndPurchaselist/">더 보기</Link>}
-      <ProductList products={currentItems} />
+      <ProductList products={currentItems ?? ""} />
       {!isMain && (
         <MyPagination
           pageCount={totalPageCount}
