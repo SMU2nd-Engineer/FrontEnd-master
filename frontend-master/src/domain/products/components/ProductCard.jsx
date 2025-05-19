@@ -13,7 +13,10 @@ const ProductCard = ({ product }) => {
       className="product_card"
       onClick={() => navigate(`/product/detail/${product.idx}`)}
     >
-      <ProductImage image_url={product.imageUrl} title={product.title} />
+      <div className="Sampleimage">
+          <p >사진</p>
+        </div>
+      {/* <ProductImage image_url={product.imageUrl} title={product.title} /> */}
       <ProductCardInfo title={product.title} price={product.price} />
     </div>
   );

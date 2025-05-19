@@ -1,4 +1,9 @@
-
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 
 hr {
   border: 0;
@@ -7,16 +12,16 @@ hr {
   background-color: #ececec;
 }
 
-.pagetitle {
+/* .pagetitle {
   font-weight: 430;
   font-size: 30px;
   text-align: left;
   margin-left: 20px;
   color: #35628a;
-}
+} */
 
 form {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Pretendard-Regular';
   font-size: 20px;
   line-height: 400%;
   margin-left: 145px
@@ -51,11 +56,18 @@ select {
 textarea {
   width: 500px;
   height: 100px;
+  
 }
 
-.uploadbutton {
-  margin-top: 20px;
+#upload {
+  border-color: rgb(184, 184, 184);
+  flex-shrink: 0; 
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
+.pricelabel {
+  width: 100px;
+  flex-shrink: 0;
+}

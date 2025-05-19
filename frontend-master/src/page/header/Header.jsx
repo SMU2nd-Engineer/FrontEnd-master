@@ -42,6 +42,13 @@ export const HeaderMenu = () => {
           검색{" "}
         </NavLink>
         <NavLink
+          to="/board"
+          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+        >
+          {" "}
+          게시판{" "}
+        </NavLink>
+        <NavLink
           to="/product/upload"
           style={({ isActive }) => (isActive ? selectedStyle : undefined)}
         >

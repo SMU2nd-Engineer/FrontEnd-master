@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
+import SelectBox from "@/components/SelectBox";
+import { getCategoryIdx } from "@/utils/CategoryHandler";
 
 const ProductSearch = ({onSearch}) => {
-  const [keyword, setKeyword] = useState("");
+  const [searchValue, setSearchValue] = useState({
+    category_idx: 0,
+    categorygenre_idx:0,
+    keyword : ""
+  });
 
   const handleChange = (e) => {
-    setKeyword(e.target.value);
+    const { name, value } = e.target;
+    setSearchValue({...searchValue, [name] : value});
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(keyword);
-    setKeyword("");
+    onSearch(searchValue);
+    setSearchValue({
+    category_idx: 0,
+    categorygenre_idx:0,
+    keyword : ""});
   }
 
   return (
     <div className="SearchBar">
-      <form onSubmit={handleSubmit}>
+      <form className="SearchBar" onSubmit={handleSubmit}>
+        <SelectBox id={"categorygenre_idx"} name={"categorygenre_idx"} category_idx={getCategoryIdx("contentsGenre")} handleChange={handleChange}/>
+        <SelectBox id={"category_idx"} name={"category_idx"} category_idx={getCategoryIdx("contents")} handleChange={handleChange}/>  
       <input
         type="text"
-        value={keyword}
+        name='keyword'
+        value={searchValue.keyword}
         onChange={handleChange}
         placeholder="검색어를 입력하세요"
       />
-      <button type="submit">검색</button>
+      <button type="submit" id='searchButton'>검색</button>
     </form>
     </div>
   );
