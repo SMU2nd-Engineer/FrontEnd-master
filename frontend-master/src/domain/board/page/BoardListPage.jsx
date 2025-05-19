@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import BoardList from "../components/BoardList";
-import { getBoardList } from '../services/boardService';
+import { BoardSearch, getBoardList } from '../services/boardService';
 import BoardPageHeader from '../components/BoardPageHeader';
 import BoardPageFooter from '../components/BoardPageFooter';
  
@@ -19,7 +19,7 @@ const BoardListPage = () => {
 
   // boards를 검색하는 기능 함수 - 게시글 검색버튼 눌렀을때 데이터 목록이 갱신되게
   const handleOnclick = (category , keyword) => {
-    getBoardList(category , keyword)
+    BoardSearch(category , keyword)
       .then((res) => res.data)
       .then((data) => setBoards(data))
       .catch((err) => console.error("게시글 불러오기 실패:", err))
