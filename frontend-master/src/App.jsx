@@ -7,7 +7,8 @@ import BodyComponent from "./components/BodyComponent";
 import ProductsRoutes from "./domain/products/routes/ProductsRoutes";
 import PaymentRoutes from "./domain/payment/routes/PaymentRoutes";
 import BoardRoutes from "./domain/board/routes/BoardRoutes";
-import "./style/App.css"; 
+import "./style/App.css";
+import TicketPage from "./domain/ticket/page/ticketPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/product/*" element={<ProductsRoutes />} />
           <Route path="/payment/*" element={<PaymentRoutes />} />
           <Route path="/board/*" element={<BoardRoutes />} />
+          <Route path="/ticket/*" element={<TicketPage />} />
         </Routes>
       </BodyComponent>
     </div>
