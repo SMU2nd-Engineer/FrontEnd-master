@@ -12,12 +12,18 @@ const PaymentTestPage = () => {
         partnerOrderId: "ORDER1234",
         partnerUserId: "USER5678",
         itemName: "TEST",
+        itemId: 10010001, // productID(상품종류+ID값)
         quantity: 1,
         amount: 10000,
         taxFreeAmount: 0,
         approvalUrl: "http://localhost:5173/payment/success",
         cancelUrl: "http://localhost:5173/payment/cancel",
         failUrl: "http://localhost:5173/payment/fail",
+
+        tradeType: "배송", 
+        deliveryAddress: "서울특별시 강남구 테헤란로 123",
+        buyerId: 'loginUserId',
+        sellerId: 'productSellerId'
       });
 
       console.log("카카오페이 준비 성공:", response.data);
