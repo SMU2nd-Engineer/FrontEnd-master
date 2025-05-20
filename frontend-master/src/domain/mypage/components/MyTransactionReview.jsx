@@ -11,9 +11,13 @@ import { Link } from "react-router-dom";
 export default function MyTransactionReview({
   reviewLists = [],
   movePage = "",
+  isMain = false,
 }) {
   // 한페이지에 보여줄 숫자
-  const itemsPerPage = 5;
+  let itemsPerPage = 0;
+  {
+    isMain ? (itemsPerPage = 2) : (itemsPerPage = 5);
+  }
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 설정
   const offset = currentPage * itemsPerPage; // 현재 페이지에서 데이터를 몇 번째 항목부터 잘라서 보여줄지를 결정
@@ -58,11 +62,13 @@ export default function MyTransactionReview({
           ))}
         </tbody>
       </table>
-      <MyPagination
-        pageCount={totalPageCount}
-        onPageChange={onPageChange}
-        pageRangeDisplayed={3}
-      />
+      {isMain && (
+        <MyPagination
+          pageCount={totalPageCount}
+          onPageChange={onPageChange}
+          pageRangeDisplayed={3}
+        />
+      )}
       {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
     </div>
   );

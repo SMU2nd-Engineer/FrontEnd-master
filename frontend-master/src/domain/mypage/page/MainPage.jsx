@@ -25,7 +25,8 @@ export default function MainPage() {
     };
     saveMainPageInfo();
   }, []);
-
+  console.log("리뷰 점수", mainPageInfo.myPageAverageRating);
+  console.log("리뷰 점수 타입", typeof mainPageInfo.myPageAverageRating);
   return (
     <div>
       <h1>MainPage</h1>
@@ -40,7 +41,6 @@ export default function MainPage() {
         myRating={mainPageInfo.myPageAverageRating}
         // movePage={"myReview"}
       />
-      {/* 아래는 나중에 지울 것. */}
       <MyTransactionReview
         reviewLists={mainPageInfo.myMainReview}
         movePage={"myReview"}
