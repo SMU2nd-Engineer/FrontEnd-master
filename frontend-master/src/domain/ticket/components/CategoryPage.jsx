@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SelectCategory from "./SelectCategory";
-import CategoryList from "./CategoryList";
+import TicketList from "./TicketList";
 import SearchTitleAndCast from "./SearchTitleAndCast";
 
 // 전체 장르 ID 배열
@@ -22,7 +22,7 @@ const CategoryPage = () => {
     <div>
       <SelectCategory onChange={setSelectedIds} />
       <SearchTitleAndCast onSearch={handleSearch} />
-      <CategoryList selectedIds={categoriesToQuery} searchTerm={searchTerm} />
+      <TicketList selectedIds={categoriesToQuery} searchTerm={searchTerm} />
     </div>
   );
 };

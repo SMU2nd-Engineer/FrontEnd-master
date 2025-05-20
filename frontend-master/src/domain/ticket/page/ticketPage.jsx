@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SelectCategory from "../components/SelectCategory";
 import SearchTitleAndCast from "../components/SearchTitleAndCast";
-import CategoryList from "../components/CategoryList";
+import TicketList from "../components/TicketList";
 
 const TicketPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -28,7 +28,7 @@ const TicketPage = () => {
         <div className="calender">{/* 하단 좌측 달력 공간 */}</div>
         <div className="showList">
           {/* 하단 우측 리스트 표출 공간 */}
-          <CategoryList
+          <TicketList
             selectedIds={selectedCategories}
             searchTerm={searchQuery}
           />
