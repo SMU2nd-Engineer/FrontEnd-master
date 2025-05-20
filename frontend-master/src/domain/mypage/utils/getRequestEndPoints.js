@@ -4,7 +4,7 @@ export const MYPAGE_ENDPOINTS = Object.freeze({
   MY_COMMENT_LIST: "getMyCommentList", // 사용자 작성 댓글 정보.
   MY_BUY_LIST: "getMyBuyList", // 구매 내역 조회.
   MY_SELL_LIST: "getMySellList", // 판매 내역.
-  MY_REVIEW_LIST: "getMyReviewList", // 마이페이지 리뷰 탭 정보 얻기.
+  MY_REVIEW_LIST: "getMyReviewList", // 마이페이지 리뷰 탭 정보 얻기(평균 별점, 리뷰 정보, 거래 평가).
   TOTAL_RATING: "myTotalRating", // 총 별점 점수 합.
   PEAK_LIST_INFO: "peakListInfo", // 마이페이지 찜 탭 전체 목록.
   USER_INFO: "getUserInfo", // 유저 정보(개인정보 탭).

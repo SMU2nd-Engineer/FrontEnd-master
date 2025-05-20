@@ -33,15 +33,13 @@ export default function MainPage() {
       <MyName />
       <p> 내 상품 </p>
       <MySellList isMain={true} products={mainPageInfo.myMainSellProductList} />
-      <p> 찜 목록 </p>
+      {/* <p> 찜 목록 </p> */}
       <MyMainPeak list={mainPageInfo.myMainReview} />
       <p> 내 점수 </p>
       <MyMainRating
         myRating={mainPageInfo.myPageAverageRating}
         // movePage={"myReview"}
       />
-
-      <p>거래 후기 </p>
       {/* 아래는 나중에 지울 것. */}
       <MyTransactionReview
         reviewLists={mainPageInfo.myMainReview}
