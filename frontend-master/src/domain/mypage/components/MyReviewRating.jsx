@@ -10,10 +10,7 @@ export default function MyPageRating({ myRating = 0, movePage = "" }) {
   console.log(Math.round(myRating.myPageTotalRating));
   return (
     <>
-      <MyRatingStar
-        isReadOnly={true}
-        myReviewRating={Math.round(myRating.myPageTotalRating)}
-      />
+      <MyRatingStar isReadOnly={true} myReviewRating={myRating} />
       {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
     </>
   );

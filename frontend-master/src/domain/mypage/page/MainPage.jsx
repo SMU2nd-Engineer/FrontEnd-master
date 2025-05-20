@@ -21,12 +21,20 @@ export default function MainPage() {
   useEffect(() => {
     const saveMainPageInfo = async () => {
       const result = await getMyPageData("MY_MAIN_INFO");
-      setMainPageInfo(result);
+      // setMainPageInfo(result);
+      // 별점 평균 처리하기
+      const averageRating =
+        result.myPageAverageRating?.myPageTotalRating ?? null;
+      const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      setMainPageInfo({
+        myPageAverageRating: ceilRating,
+        myMainSellProductList: result.myMainSellProductList ?? [],
+        myMainPeakList: result.myMainPeakList ?? [],
+        myMainReview: result.myMainReview ?? [],
+      });
     };
     saveMainPageInfo();
   }, []);
-  console.log("리뷰 점수", mainPageInfo.myPageAverageRating);
-  console.log("리뷰 점수 타입", typeof mainPageInfo.myPageAverageRating);
   return (
     <div>
       <h1>MainPage</h1>
