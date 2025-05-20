@@ -1,32 +1,31 @@
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
+import { Select } from "@chakra-ui/react";
 import { useState } from "react";
+import SearchSelectBox from "@/components/SearchSelectBox";
 
 const BoardPageFooter = ({handleOnclick}) => {
-  const [divisions, setDivision] = useState(""); // 기본 카테고리
+  const [searchTypes, setSearchTypes] = useState(""); // 구분자(제목+내용/작성자)  
+  const [categprys, setCategprys] = useState(""); // 기본 카테고리
   const [searchKeywords, setSearchKeyword] = useState(""); // 검색어 입력
 
-  const handleSearch = () => {
-    console.log("카테고리: ", divisions);
-    console.log("검색어: ", searchKeywords);
-
-    // 게시글 API 호출 게시글 필터링 로직
-
-  };
-
   const onClick = () => {
-    handleOnclick(divisions, searchKeywords)
+    handleOnclick(searchTypes, categprys, searchKeywords)
   }
 
   // 카테고리 선택하기
   return (
     <div className="board_page_footer">
-      <label htmlFor="divisions">카테고리 선택</label>
+      {/* 구분자: 제목+내용 / 작성자 */} 
+      <SearchSelectBox 
+        handleChange={(e) => setSearchTypes(e.target.value)}/>
+
+      {/* 카테고리 선택 : 잡담 / 팝니다 / 삽니다 / 기타 */}  
       <SelectBox 
-        id="divisions"
-        name="divisions" 
+        id="categpry"
+        name="categpry" 
         category_idx={getCategoryIdx("BOARD")}
-        handleChange={(e) => setDivision(e.target.value)}/>
+        handleChange={(e) => setCategprys(e.target.value)}/>
 
       {/* 검색어 입력창 */}
       <input 

@@ -7,8 +7,8 @@ export const getBoardList = () => {
 };
 
 // 카테고리와 키워드를 조건으로 검색 하는 함수 - (파라미터 : 카테고리, 키워드 검색어) 
-export const BoardSearch = (category, keyword) => {
-  return axiosInstance.get("board/search", {params: {category: category, keyword: keyword}
+export const BoardSearch = (searchType, category, keyword) => {
+  return axiosInstance.get("board/search", {params: {searchType: searchType, category: category, keyword: keyword}
     , withCredentials: true});
 };
 
