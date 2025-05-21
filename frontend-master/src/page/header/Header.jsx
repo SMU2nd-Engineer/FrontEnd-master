@@ -10,99 +10,101 @@ const selectedStyle = {
 export const HeaderMenu = () => {
   return (
     <nav className="header-nav">
-      <div className="nav-left">
-        <NavLink to="/" className="site_name">
-          {" "}
-          SMU{" "}
-        </NavLink>
-        <div className="main-link">
-          <NavLink
-            to="/product/list"
-            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-          >
+      <div className="header_12345">
+        <div className="nav-left">
+          <NavLink to="/" className="site_name">
             {" "}
-            Market{" "}
+            SMU{" "}
           </NavLink>
-          <span> | </span>
+          <div className="main-link">
+            <NavLink
+              to="/product/list"
+              style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+            >
+              {" "}
+              Market{" "}
+            </NavLink>
+            <span> | </span>
+            <NavLink
+              to="/ticket"
+              style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+            >
+              {" "}
+              Ticket{" "}
+            </NavLink>
+          </div>
+        </div>
+        <div className="nav-top">
           <NavLink
-            to="/ticket"
+            to="/search"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
           >
             {" "}
-            Ticket{" "}
+            검색{" "}
+          </NavLink>
+          <NavLink
+            to="/board"
+            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+          >
+            {" "}
+            게시판{" "}
+          </NavLink>
+          <NavLink
+            to="/product/upload"
+            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+          >
+            {" "}
+            상품등록{" "}
+          </NavLink>
+          <NavLink
+            to="/mypage"
+            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+          >
+            {" "}
+            마이페이지{" "}
           </NavLink>
         </div>
-      </div>
-      <div className="nav-top">
-        <NavLink
-          to="/search"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
-          검색{" "}
-        </NavLink>
-        <NavLink
-          to="/board"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
-          게시판{" "}
-        </NavLink>
-        <NavLink
-          to="/product/upload"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
-          상품등록{" "}
-        </NavLink>
-        <NavLink
-          to="/mypage"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
-          마이페이지{" "}
-        </NavLink>
-      </div>
-      <div className="nav-right">
-        <NavLink
-          to="/login"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
-          로그인{" "}
-        </NavLink>
-        <NavLink
-          to="/chat"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
-          <FaRegMessage />{" "}
-        </NavLink>
+        <div className="nav-right">
+          <NavLink
+            to="/login"
+            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+          >
+            {" "}
+            로그인{" "}
+          </NavLink>
+          <NavLink
+            to="/chat"
+            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+          >
+            {" "}
+            <FaRegMessage />{" "}
+          </NavLink>
+        </div>
       </div>
     </nav>
   );
 };
 
-function HeaderVisibility() {
-  const [isVisible, setIsVisible] = useState(true);
+// function HeaderVisibility() {
+//   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(false); // 100px 이상 스크롤 시 헤더 숨기기
-      } else {
-        setIsVisible(true); // 100px 이하 시 헤더 보이기
-      }
-    };
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (window.scrollY > 100) {
+//         setIsVisible(false); // 100px 이상 스크롤 시 헤더 숨기기
+//       } else {
+//         setIsVisible(true); // 100px 이하 시 헤더 보이기
+//       }
+//     };
 
-    window.addEventListener("scroll", handleScroll);
+//     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
 
-  return (
-    <div>
-      <HeaderMenu style={{ display: isVisible ? "block" : "none" }} />
-    </div>
-  );
-}
+  // return (
+  //   <div>
+  //     <HeaderMenu style={{ display: isVisible ? "block" : "none" }} />
+  //   </div>
+  // );
+// }

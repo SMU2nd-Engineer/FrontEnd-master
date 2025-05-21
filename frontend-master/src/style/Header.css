@@ -1,24 +1,38 @@
 
 /* Navigation */
-nav {
+.header-nav {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
   height: 164px;
-  z-index: 1000;
-  background: #f3f2f2;
-  background-size: 100% 164px;
+  z-index: 10;
+  background: #ffffff;
+  /* background-size: 100% 164px; */
+  border-bottom: 1px solid #d1d1d1;
 
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   padding: 0 50px 10px;
-  box-sizing: border-box;
+  box-sizing: border-box; 
   
 }
 
-
+.header_12345 {
+  left: 0px;
+  position: sticky;
+  width: 1024px;
+  height: inherit;
+  background: #ffffff;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom:10px;
+  box-sizing: border-box;
+}
 
 a {
   font-weight: 500;
@@ -26,11 +40,12 @@ a {
   text-decoration: inherit;
 }
 
+/* site_name, market,ticket */
 .nav-left {
   display: flex;
   position: absolute;
   bottom: 10px;
-  left: 50px;
+  left: 10px;
   align-items: flex-end;
   gap: 10px;
 }
@@ -47,7 +62,6 @@ a {
 }
 
 /* MARKET | TICKET */
-
 .main-link {
   font-family: "Inter";
   font-style: normal;
@@ -58,21 +72,23 @@ a {
   color: #9a8a8a;
 }
 
+/* 검색 게시판 상품등록 마이페이지 */
 .nav-top {
   display: flex;
   position: absolute;
   top: 10px;
-  right: 50px;
+  right: 30px;
   align-items: flex-end;
   gap: 50px;
   color: #aca7a7;
 }
 
+/* 로그인 챗 */
 .nav-right {
   display: flex;
   position: absolute;
   bottom: 10px;
-  right: 50px;
+  right: 30px;
   align-items: center;
   gap: 30px;
 
@@ -82,11 +98,9 @@ a {
 
 
 
-/* Icon */
+/* Chat Icon */
 path {
   position: absolute;
-  
-
   border: 4px solid #b7a5a5;
 }
 
@@ -117,9 +131,6 @@ path {
   left: 1027px;
   top: 13px;
 
-  /* Body text
-  Text for body copy
-  */
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -140,10 +151,7 @@ path {
   left: 1112px;
   top: 13px;
 
-  /* Body text
-
-  Text for body copy
-  */
+  
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -164,10 +172,7 @@ path {
   left: 1234px;
   top: 13px;
 
-  /* Body text
-
-  Text for body copy
-  */
+  
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
