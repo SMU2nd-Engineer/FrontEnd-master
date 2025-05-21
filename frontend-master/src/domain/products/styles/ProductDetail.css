@@ -8,14 +8,15 @@ hr {
 .detail-top {
   display: flex;
   gap: 130px;
-  width: 1800px;             
-  margin: 0 auto;           
+  width: 780px;             
+  margin-left: 80px;           
   padding: 20px;
 }
 
 .chakra-divider {
   display: flex;
   align-items: center;
+  margin: 10px;
 }
 
 .image {
@@ -29,14 +30,14 @@ hr {
 }
 
 .column {
-  width: 600px;
+  width: 700px;
   border: 1px dotted rgb(168, 168, 168);
-  margin-right: 50px;
+  margin-right: 70px;
   text-align: left;
 }
 
 .title, .price {
-  margin-left: 80px;
+  margin-left: 30px;
 }
 
 .title {
@@ -47,7 +48,7 @@ hr {
 
 .price {
   font-size: 1.5em;
-  margin: 20px 0 100px 80px;
+  margin: 20px 0 100px 30px;
 }
 
 
