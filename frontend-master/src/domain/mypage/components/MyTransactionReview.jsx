@@ -62,7 +62,7 @@ export default function MyTransactionReview({
           ))}
         </tbody>
       </table>
-      {isMain && (
+      {!isMain && (
         <MyPagination
           pageCount={totalPageCount}
           onPageChange={onPageChange}

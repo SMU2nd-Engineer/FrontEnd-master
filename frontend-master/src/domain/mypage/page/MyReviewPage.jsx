@@ -15,7 +15,15 @@ export default function MyReviewPage() {
     const saveMyRviewInfo = async () => {
       const results = await getMyPageData("MY_REVIEW_LIST");
       console.log("실제로받은 데이터 : ", results);
-      setMyReviewInfoList(results);
+      const averageRating = results.myAverageRating?.myPageTotalRating ?? null;
+      //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      const ceilRating = averageRating === null ? 0 : averageRating;
+      //   setMyReviewInfoList(results);
+      setMyReviewInfoList({
+        myAverageRating: ceilRating,
+        reviewLists: results.reviewLists ?? [],
+        myEvaluationList: results.myEvaluationList ?? [],
+      });
     };
     saveMyRviewInfo();
   }, []);

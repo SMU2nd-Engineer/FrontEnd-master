@@ -54,6 +54,12 @@ export default function ChangePasswordPage() {
           watch={watch}
           errors={errors}
         />
+        <Button
+          text="취소"
+          onClick={() => {
+            window.location.href = "/user/login";
+          }}
+        />
         <Button type="submit" text={"비밀번호를 변경합니다."} />
       </form>
     </div>

@@ -7,7 +7,7 @@ import MyRatingStar from "./MyRatingStar";
  * @returns 별 표시 컴포넌트
  */
 export default function MyPageRating({ myRating = 0, movePage = "" }) {
-  console.log(Math.round(myRating.myPageTotalRating));
+  console.log("MyPageRating으로 넘어온 값 :", myRating);
   return (
     <>
       <MyRatingStar isReadOnly={true} myReviewRating={myRating} />

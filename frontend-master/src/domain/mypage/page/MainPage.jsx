@@ -25,7 +25,8 @@ export default function MainPage() {
       // 별점 평균 처리하기
       const averageRating =
         result.myPageAverageRating?.myPageTotalRating ?? null;
-      const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      const ceilRating = averageRating === null ? 0 : averageRating;
       setMainPageInfo({
         myPageAverageRating: ceilRating,
         myMainSellProductList: result.myMainSellProductList ?? [],
@@ -52,6 +53,7 @@ export default function MainPage() {
       <MyTransactionReview
         reviewLists={mainPageInfo.myMainReview}
         movePage={"myReview"}
+        isMain={true}
       />
       <Button
         text={"임시 홈 화면으로"}
