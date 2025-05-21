@@ -13,7 +13,7 @@ const BoardPageFooter = ({handleOnclick}) => {
     handleOnclick(searchTypes, categprys, searchKeywords)
   }
 
-  // 카테고리 선택하기
+  // 화면에 출력되는 내용
   return (
     <div className="board_page_footer">
       {/* 구분자: 제목+내용 / 작성자 */} 
