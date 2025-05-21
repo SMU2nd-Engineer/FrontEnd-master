@@ -33,10 +33,19 @@ export default function MyRatingStar({
   }, [myReviewRating]);
 
   return (
-    <div className="starRating">
+    <div
+      className="starRating"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        gap: "4px",
+        alignItems: "center",
+      }}
+    >
       <Rating
         onClick={handleRating}
         initialValue={rating}
+        value={rating}
         allowFraction={true}
         readonly={isReadOnly}
       />
