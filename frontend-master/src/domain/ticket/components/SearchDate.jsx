@@ -6,14 +6,16 @@ const SearchDate = ({ onDateChange }) => {
   const [endDate, setEndDate] = useState(null); // 종료날짜 지정
 
   const handleStartChange = (date) => {
-    setStartDate(date); // 선택한 날짜를 시작날짜로 셋팅
+    setStartDate(date); // 선택한 날짜를 시작날짜로
 
+    let newEndDate = endDate;
     // 시작일이 종료일보다 늦으면 종료일 초기화
     if (endDate && date > endDate) {
+      newEndDate = null;
       setEndDate(null);
     }
     // 부모 컴포넌트에게 날짜 알려쥐기
-    onDateChange(date, endDate);
+    onDateChange(date, newEndDate);
   };
 
   const handleEndChange = (date) => {

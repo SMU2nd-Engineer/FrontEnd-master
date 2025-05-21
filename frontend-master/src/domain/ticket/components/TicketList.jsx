@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "@/lib/axiosInstance";
 
-const TicketList = ({ selectedIds, searchTerm: searchTitle }) => {
+const TicketList = ({
+  selectedIds,
+  searchTerm: searchTitle,
+  startDate,
+  endDate,
+}) => {
   const [ticketInfos, setTicketInfos] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,6 +20,8 @@ const TicketList = ({ selectedIds, searchTerm: searchTitle }) => {
         params: {
           categories: categoriesParam,
           query: searchTitle,
+          startDate: startDate ? startDate.toISOString().split("T")[0] : null, // date 형식을 'yyyy-mm-dd' 형식으로 가져오게 하기 위함(시간 빼고)
+          endDate: endDate ? endDate.toISOString().split("T")[0] : null,
         }, // categories, query 파라미터 넘김
       })
       .then((res) => {
@@ -26,7 +33,7 @@ const TicketList = ({ selectedIds, searchTerm: searchTitle }) => {
         console.error("검색 실패:", err);
         setLoading(false);
       });
-  }, [selectedIds, searchTitle]);
+  }, [selectedIds, searchTitle, startDate, endDate]);
 
   // 검색어가 있으면 필터링, 없으면 전체 infos 보여주기
   const filteredInfos = ticketInfos.filter((info) =>
