@@ -21,6 +21,11 @@ export default function FavoritesSelector({ mode = "register" }) {
 
   const navigate = useNavigate();
 
+  // 컬럼에 맞추기 위하여 카테고리 sub_idx에 붙이기
+  const formatFavoritesForDB = (favoritesArray) => {
+    return favoritesArray.map((item) => `FAV_${item}`);
+  };
+
   // 마운트시 카테고리 정보 저장하기 및 mode === edit일 때 기존 정보 가져오기 넣기
   useEffect(() => {
     const saveCategoryAndInfo = async () => {
@@ -74,7 +79,10 @@ export default function FavoritesSelector({ mode = "register" }) {
         navigate("/mypage/main");
       } else {
         // 등록하기
-        await registrationUserFavorite(formData);
+        const fitToColumnFomData = formatFavoritesForDB(
+          formData["favorites"] || [] // formData가 json형태인듯
+        );
+        await registrationUserFavorite(fitToColumnFomData);
         alert(
           "관심사가 등록되었습니다! 저희 사이트를 방문해 주셔서 감사합니다!"
         );
