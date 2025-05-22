@@ -172,6 +172,13 @@ export default function MyInfoList({ isSocialLogin }) {
             )
           }
         />
+        <Button
+          text={"회원탈퇴"}
+          onClick={() => {
+            navigate("/user/withdrawal");
+          }}
+          navigate={navigate}
+        />
       </form>
     </div>
   );

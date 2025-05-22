@@ -32,7 +32,12 @@ const CategoryPage = () => {
       <SearchDate onDateChange={handleDateChange} />
       <SearchTitleAndCast onSearch={handleSearch} />
 
-      <TicketList selectedIds={categoriesToQuery} searchTerm={searchTerm} />
+      <TicketList
+        selectedIds={categoriesToQuery}
+        searchTerm={searchTerm}
+        startDate={startDate}
+        endDate={endDate}
+      />
     </div>
   );
 };

@@ -29,6 +29,7 @@ export default function FavoritesSelector({ mode = "register" }) {
       if (mode === "edit") {
         const userFavorites = await getMyPageData("USER_FAVORITES");
         // 기존 항목 저장.
+        console.log("userFavorites````````````", userFavorites);
         setOldFavorite(userFavorites.favorites.map(String));
         // 렌더링 과정에 순서때문인지 받아오지 못 해서 간격을 줌.
         setTimeout(() => {
@@ -84,12 +85,12 @@ export default function FavoritesSelector({ mode = "register" }) {
       console.log(error);
     }
   };
-
+  console.log("------categories------", categories);
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       {categories.map((category) => (
         <FavoriteCategory
-          key={category.id}
+          key={category.subIdx}
           category={category}
           register={register}
           setValue={setValue}

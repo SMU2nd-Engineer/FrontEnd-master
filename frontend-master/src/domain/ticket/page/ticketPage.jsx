@@ -18,7 +18,7 @@ const TicketPage = () => {
   return (
     <div className="ticketPage">
       <div className="topCategoryBar">
-        {/* 카테고리 선택 바 공간
+        {/* 카테고리 선택 바 공간 */}
         {/* 1. 카테고리 선택 */}
         {/* <SelectCategory onChange={setSelectedCategories} /> */}
         {/* 2. 기간 선택 */}
