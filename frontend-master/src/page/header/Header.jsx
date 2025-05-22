@@ -10,31 +10,8 @@ const selectedStyle = {
 export const HeaderMenu = () => {
   return (
     <nav className="header-nav">
-      <div className="header_12345">
-        <div className="nav-left">
-          <NavLink to="/" className="site_name">
-            {" "}
-            SMU{" "}
-          </NavLink>
-          <div className="main-link">
-            <NavLink
-              to="/product/list"
-              style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-            >
-              {" "}
-              Market{" "}
-            </NavLink>
-            <span> | </span>
-            <NavLink
-              to="/ticket"
-              style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-            >
-              {" "}
-              Ticket{" "}
-            </NavLink>
-          </div>
-        </div>
-        <div className="nav-top">
+     <div className="navigation">
+      <div className="nav-top">
           <NavLink
             to="/search"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
@@ -43,7 +20,7 @@ export const HeaderMenu = () => {
             검색{" "}
           </NavLink>
           <NavLink
-            to="/board"
+            to="/ticket"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
           >
             {" "}
@@ -64,23 +41,53 @@ export const HeaderMenu = () => {
             마이페이지{" "}
           </NavLink>
         </div>
-        <div className="nav-right">
-          <NavLink
-            to="/login"
-            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-          >
-            {" "}
-            로그인{" "}
-          </NavLink>
-          <NavLink
-            to="/chat"
-            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-          >
-            {" "}
-            <FaRegMessage />{" "}
-          </NavLink>
+        <div className="nav-bottom">
+          
+          <div className="nav-left">
+            <NavLink to="/" className="site_name">
+              {" "}
+              SMU{" "}
+            </NavLink>
+            <div className="main-link">
+              <NavLink
+                to="/product/list"
+                style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+              >
+                {" "}
+                Market{" "}
+              </NavLink>
+              <span> | </span>
+              <NavLink
+                to="/ticket"
+                style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+              >
+                {" "}
+                Ticket{" "}
+              </NavLink>
+            </div>
+          </div>
+          
+          <div className="nav-right">
+            <div className="login">
+            <NavLink
+              to="/login"
+              style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+            >
+              {" "}
+              로그인{" "}
+            </NavLink>
+            </div>
+            <NavLink
+              to="/chat"
+              style={({ isActive }) => (isActive ? selectedStyle : undefined)}
+            >
+              {" "}
+              <FaRegMessage />{" "}
+            </NavLink>
+          </div>
         </div>
       </div>
+      
     </nav>
   );
 };
