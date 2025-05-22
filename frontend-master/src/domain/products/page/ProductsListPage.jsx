@@ -3,6 +3,8 @@ import "../styles/ProductsListPage.css";
 import ProductList from "../components/ProductList";
 import ProductSearch from "../components/ProductSearch"
 import { getProductList, searchProducts } from "../services/productService";
+import Button from "@/components/Button";
+import { Navigate } from "react-router-dom";
 
 
 const ProductListPage = () => {
@@ -35,10 +37,16 @@ const ProductListPage = () => {
     }
   };
 
+  const handleClick = () => {
+    Navigate('/product/upload');
+  };
+
   return (
     <div className="new_product">
-      <p className="pagetitle"> 상품 전체보기 </p>
-      
+      <div className="productpage-top">
+        <p className="pagetitle"> 상품 전체보기 </p>
+        {/* <Button text={상품등록} onClick={handleClick} />  */}
+      </div>
       <ProductSearch onSearch = {handleSearch} />
       <ProductList products={products} />
     </div>

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import"../styles/ProductDetail.css";
 import { Divider } from '@chakra-ui/react'
 import Button from "@/components/Button";
+import { getProductDetail } from "../services/productService";
 
 export default function ProductDetail() {
   const {idx} = useParams();
@@ -11,8 +12,8 @@ export default function ProductDetail() {
   const navigate = useNavigate();
   
     useEffect(() => {    
-      fetch(`http://localhost:8100/product/detail/${idx}`) 
-        .then((res) => res.json())
+      getProductDetail(idx)
+        .then((res) => res.data)
         .then((data) => {
           console.log("#########", data)
           setProduct(data)

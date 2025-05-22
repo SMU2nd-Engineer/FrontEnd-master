@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import SelectCategory from "../components/SelectCategory";
 import SearchTitleAndCast from "../components/SearchTitleAndCast";
-import CategoryList from "../components/CategoryList";
+import TicketList from "../components/TicketList";
+import SearchDate from "../components/SearchDate";
+import CategoryPage from "../components/CategoryPage";
 
 const TicketPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -18,20 +20,22 @@ const TicketPage = () => {
       <div className="topCategoryBar">
         {/* 카테고리 선택 바 공간 */}
         {/* 1. 카테고리 선택 */}
-        <SelectCategory onChange={setSelectedCategories} />
+        {/* <SelectCategory onChange={setSelectedCategories} /> */}
         {/* 2. 기간 선택 */}
+        {/* <SearchDate /> */}
         {/* 3. 검색 */}
-        <SearchTitleAndCast onSearch={handleSearch} />
+        {/* <SearchTitleAndCast onSearch={handleSearch} /> */}
+        <CategoryPage />
       </div>
 
       <div className="bottomArea">
         <div className="calender">{/* 하단 좌측 달력 공간 */}</div>
         <div className="showList">
           {/* 하단 우측 리스트 표출 공간 */}
-          <CategoryList
+          {/* <TicketList
             selectedIds={selectedCategories}
             searchTerm={searchQuery}
-          />
+          /> */}
         </div>
       </div>
     </div>

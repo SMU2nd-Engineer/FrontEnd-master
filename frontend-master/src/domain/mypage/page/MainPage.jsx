@@ -21,11 +21,21 @@ export default function MainPage() {
   useEffect(() => {
     const saveMainPageInfo = async () => {
       const result = await getMyPageData("MY_MAIN_INFO");
-      setMainPageInfo(result);
+      // setMainPageInfo(result);
+      // 별점 평균 처리하기
+      const averageRating =
+        result.myPageAverageRating?.myPageTotalRating ?? null;
+      //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      const ceilRating = averageRating === null ? 0 : averageRating;
+      setMainPageInfo({
+        myPageAverageRating: ceilRating,
+        myMainSellProductList: result.myMainSellProductList ?? [],
+        myMainPeakList: result.myMainPeakList ?? [],
+        myMainReview: result.myMainReview ?? [],
+      });
     };
     saveMainPageInfo();
   }, []);
-
   return (
     <div>
       <h1>MainPage</h1>
@@ -33,19 +43,17 @@ export default function MainPage() {
       <MyName />
       <p> 내 상품 </p>
       <MySellList isMain={true} products={mainPageInfo.myMainSellProductList} />
-      <p> 찜 목록 </p>
+      {/* <p> 찜 목록 </p> */}
       <MyMainPeak list={mainPageInfo.myMainReview} />
       <p> 내 점수 </p>
       <MyMainRating
         myRating={mainPageInfo.myPageAverageRating}
         // movePage={"myReview"}
       />
-
-      <p>거래 후기 </p>
-      {/* 아래는 나중에 지울 것. */}
       <MyTransactionReview
         reviewLists={mainPageInfo.myMainReview}
         movePage={"myReview"}
+        isMain={true}
       />
       <Button
         text={"임시 홈 화면으로"}

@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateUserInfo } from "../services/updateUserInfo";
-import SCHEMA from "@/domain/mypage/utils/editInfoValidator";
+import SCHEMA from "@/domain/mypage/utils/EditInfoValidator";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegistrationName from "@/domain/user/components/RegistrationName";
@@ -171,6 +171,13 @@ export default function MyInfoList({ isSocialLogin }) {
               (isSocialLogin || watch("password") === watch("passwordCheck"))
             )
           }
+        />
+        <Button
+          text={"회원탈퇴"}
+          onClick={() => {
+            navigate("/user/withdrawal");
+          }}
+          navigate={navigate}
         />
       </form>
     </div>
