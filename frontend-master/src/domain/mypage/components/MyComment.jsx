@@ -45,7 +45,11 @@ export default function MyComment() {
         </thead>
         <tbody>
           {currentItems.map((item) => (
-            <CommentListcomp key={item.idx} text={item.text} date={item.date} />
+            <CommentListcomp
+              key={item.idx}
+              text={item.text}
+              date={item.sdate}
+            />
           ))}
         </tbody>
       </table>

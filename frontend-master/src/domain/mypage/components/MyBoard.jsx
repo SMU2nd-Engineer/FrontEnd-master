@@ -49,7 +49,7 @@ export default function MyBoard() {
             <BoardListcomp
               key={item.idx}
               title={item.title}
-              division={item.division}
+              division={item.categoryIdx}
             />
           ))}
         </tbody>
