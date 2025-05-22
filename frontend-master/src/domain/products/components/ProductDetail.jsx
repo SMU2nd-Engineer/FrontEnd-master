@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import"../styles/ProductDetail.css";
 import { Divider } from '@chakra-ui/react'
+import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
 
 export default function ProductDetail() {
   const {idx} = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   
     useEffect(() => {    
       getProductDetail(idx)
@@ -27,6 +29,11 @@ export default function ProductDetail() {
     if(!product) {
       return <p>상품을 찾을 수 없습니다.</p>
     }
+    const handleClick = () => {
+    navigate('/payment',{
+      state: {product}
+    });
+  }
 
   return (
     <div className="detailinfo">
@@ -46,7 +53,7 @@ export default function ProductDetail() {
             <div className="buttonbox">
               <button className="pickbutton">찜</button> 
               <button className="chatbutton">1:1 채팅</button> 
-              <button className="orderbutton">구매</button>
+              <Button className='orderbutton' text={"바로구매"} onClick={handleClick}/>
             </div> 
         </div>
       </div>  

@@ -4,10 +4,11 @@ const Button = ({
   imgSrc = null,
   type = "button",
   disabled = false,
+  className="Button"
 }) => {
   return (
     <button
-      className="Button"
+      className={className}
       onClick={onClick}
       type={type}
       disabled={disabled}
