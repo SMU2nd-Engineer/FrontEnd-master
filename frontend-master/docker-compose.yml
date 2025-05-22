@@ -1,0 +1,13 @@
+services:
+  react-app:
+    build:
+      context: .
+    container_name: react-app
+    ports:
+      - "5174:80"
+    networks:
+      - culturemoa-network
+
+networks:
+  culturemoa-network:
+    external: true # 공통 네트워크로 설정 (백엔드와 공유)
