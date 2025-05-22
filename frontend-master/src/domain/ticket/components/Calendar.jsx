@@ -6,6 +6,8 @@ import { useEffect } from "react";
 function Calendar() {
   const [date, setDate] = useState(new Date()); // 현재기준 날짜 저장
   const [list, setList] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+
   // 날짜 계산
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -34,6 +36,22 @@ function Calendar() {
 
   const calendarDays = [];
 
+  // 날짜 포맷 맞추기
+  const formatDate = (year, month, day) => {
+    return `${year}-${String(month + 1).padStart(2, "0")}-${String(
+      day
+    ).padStart(2, "0")}`;
+  };
+
+  const getCountsForDay = (day) => {
+    const targetDate = formatDate(year, month, day);
+    const entry = list.find((item) => item.date.startsWith(targetDate));
+    return {
+      performance: entry?.performance_count || 0,
+      sports: entry?.sports_count || 0,
+    };
+  };
+
   // 이전달 날짜 채우기
   for (let i = startDay - 1; i >= 0; i--) {
     calendarDays.push(
@@ -45,10 +63,34 @@ function Calendar() {
 
   // 이번달 날짜 채우기
   for (let day = 1; day <= daysInMonth; day++) {
+    const { performance, sports } = getCountsForDay(day);
+    const dateString = formatDate(year, month, day);
+    // 특정 날짜 선택시 선택된 날짜만 보이고 나머지는 hidden
+    // const isSelected = selectedDate === null || selectedDate === dateString;
+
     calendarDays.push(
-      <div key={"current-" + day} className="current-month-day day">
+      <div
+        key={"current-" + day}
+        className={`current-month-day day ${
+          selectedDate === dateString ? "selected" : ""
+        }`}
+        onClick={() =>
+          setSelectedDate((prev) => (prev === dateString ? null : dateString))
+        }
+      >
         <div>{day}</div>
-        {/* {count && <div className="event-badge">{count}건</div>} */}
+        {/* 특정 날짜 선택시 나머지 날짜들의 공연수를 숨기고 싶다면 */}
+        {/* {isSelected && performance > 0 && (
+          <div className="event-badge performance">{performance} 공연</div>
+        )}
+        {isSelected && sports > 0 && (
+          <div className="event-badge sports">{sports} 스포츠</div> */}
+        {performance > 0 && (
+          <div className="event-badge performance">공연: {performance}건</div>
+        )}
+        {sports > 0 && (
+          <div className="event-badge sports">스포츠: {sports}건</div>
+        )}
       </div>
     );
   }
