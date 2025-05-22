@@ -14,7 +14,6 @@ const TicketList = ({
     setLoading(true);
 
     const categoriesParam = selectedIds.join(",");
-
     axiosInstance
       // API 호출
       .get("/ticket/search", {
