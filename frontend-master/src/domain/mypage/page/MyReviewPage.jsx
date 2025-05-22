@@ -15,7 +15,15 @@ export default function MyReviewPage() {
     const saveMyRviewInfo = async () => {
       const results = await getMyPageData("MY_REVIEW_LIST");
       console.log("실제로받은 데이터 : ", results);
-      setMyReviewInfoList(results);
+      const averageRating = results.myAverageRating?.myPageTotalRating ?? null;
+      //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      const ceilRating = averageRating === null ? 0 : averageRating;
+      //   setMyReviewInfoList(results);
+      setMyReviewInfoList({
+        myAverageRating: ceilRating,
+        reviewLists: results.reviewLists ?? [],
+        myEvaluationList: results.myEvaluationList ?? [],
+      });
     };
     saveMyRviewInfo();
   }, []);
@@ -31,11 +39,8 @@ export default function MyReviewPage() {
       <p>리뷰 페이지</p>
       <MyPageLink />
       <MyName />
-      <p>별점 나오는 컴포넌트</p>
       <MyPageRating myRating={myReviewInfoList.myAverageRating} />
-      <p>거래 후기 나오는 컴포넌트</p>
       <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />
-      <p>거래 평가 나오는 컴포넌트 - 제작 중...</p>
       <MyTransactionEvaluation
         evaluationLists={myReviewInfoList.myEvaluationList}
       />

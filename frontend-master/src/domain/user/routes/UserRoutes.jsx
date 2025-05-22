@@ -10,6 +10,7 @@ import IdPasswordFindPage from "../page/IdPasswordFindPage";
 import ShowFindIdPage from "../page/ShowFindIdPage";
 import ChangePasswordPage from "../page/ChangePasswordPage";
 import ChooseFavoritePage from "../page/ChooseFavoritePage";
+import UserWithdrawalPage from "../page/UserWithdrawalPage";
 
 export default function UserRoutes() {
   return (
@@ -26,6 +27,7 @@ export default function UserRoutes() {
         <Route path="showfindid" element={<ShowFindIdPage />} />
         <Route path="changePassword" element={<ChangePasswordPage />} />
         <Route path="selectFavorites" element={<ChooseFavoritePage />} />
+        <Route path="withdrawal" element={<UserWithdrawalPage />} />
       </Routes>
     </div>
   );
