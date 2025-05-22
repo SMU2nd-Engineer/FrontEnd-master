@@ -4,7 +4,6 @@ import SearchTitleAndCast from "../components/SearchTitleAndCast";
 import TicketList from "../components/TicketList";
 import SearchDate from "../components/SearchDate";
 import CategoryPage from "../components/CategoryPage";
-import Calendar from "../components/Calendar";
 
 const TicketPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -37,7 +36,6 @@ const TicketPage = () => {
             selectedIds={selectedCategories}
             searchTerm={searchQuery}
           /> */}
-          <Calendar />
         </div>
       </div>
     </div>
