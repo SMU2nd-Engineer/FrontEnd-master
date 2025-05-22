@@ -7,7 +7,7 @@ hr {
 
 .detail-top {
   display: flex;
-  gap: 130px;
+  gap: 100px;
   width: 780px;             
   margin-left: 80px;           
   padding: 20px;
@@ -73,15 +73,15 @@ hr {
   height: auto;
   text-align: left;
   margin-top: 20px;
-  
+  padding: 10px;
   border: 1px dotted rgb(168, 168, 168);
 }
 
 .detailcontent-label {
   background-size: contain;
-  background-color:  rgb(117, 117, 117);
   font-size: 1.5em;
-  color: aliceblue;
+  font-weight: bold;
+  color: rgb(111, 111, 112);
 }
 
 .pickbutton {
@@ -101,4 +101,14 @@ hr {
 .detaillcontent {
   white-space: pre-wrap; 
   /* 줄 바꿈 적용되도록 */
+}
+
+.detail-bottom {
+  display: flex;
+  
+}
+
+.dcbox {
+  width: 500px;
+  margin-right: 10px;
 }

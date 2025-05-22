@@ -4,11 +4,13 @@ import ProductList from "../components/ProductList";
 import ProductSearch from "../components/ProductSearch"
 import { getProductList, searchProducts } from "../services/productService";
 import Button from "@/components/Button";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 
 const ProductListPage = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProductList()
@@ -38,14 +40,14 @@ const ProductListPage = () => {
   };
 
   const handleClick = () => {
-    Navigate('/product/upload');
+    navigate('/product/upload');
   };
 
   return (
     <div className="new_product">
       <div className="productpage-top">
         <p className="pagetitle"> 상품 전체보기 </p>
-        {/* <Button text={상품등록} onClick={handleClick} />  */}
+        <Button className="pluploadbutton" text={"상품등록"} onClick={handleClick} /> 
       </div>
       <ProductSearch onSearch = {handleSearch} />
       <ProductList products={products} />
