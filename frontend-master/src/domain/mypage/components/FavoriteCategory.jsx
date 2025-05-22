@@ -7,7 +7,7 @@ export default function FavoriteCategory({ category, register }) {
         type="checkbox"
         {...register("favorites[]")}
         value={String(category.subIdx)}
-        id={`${category.idx}`}
+        id={`${category.subIdx}`}
       />
       <label htmlFor={`${category.subIdx}`}> {category.name} </label>
     </>
