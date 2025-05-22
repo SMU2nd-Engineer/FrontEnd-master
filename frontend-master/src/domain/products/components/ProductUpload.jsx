@@ -14,10 +14,10 @@ const ProductUpload = () => {
     categorygenre_idx:"",
     content: "",
     imageUrl: "",
-    userId: "",
+    user_idx: "",
   });
 
-  const { title, price, category_idx, categorygenre_idx, content, imageUrl, userId } = newProduct;
+  const { title, price, category_idx, categorygenre_idx, content, imageUrl, user_idx } = newProduct;
 
   const navigate = useNavigate();
 
@@ -62,12 +62,12 @@ const ProductUpload = () => {
         <div className="chakra-divider"> <Divider orientation='horizontal'/>  </div>
         
         <div className="form-row">
-          <label htmlFor="userId">userID </label>
+          <label htmlFor="user_idx">userID </label>
           <Input
             type="text"
-            id="userId"
-            name="userId"
-            value={userId}
+            id="user_idx"
+            name="user_idx"
+            value={user_idx}
             onChange={handleChange}
             placeholder="userID는 추후 삭제 예정"
           />

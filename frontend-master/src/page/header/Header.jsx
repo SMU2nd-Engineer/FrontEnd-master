@@ -20,19 +20,19 @@ export const HeaderMenu = () => {
             검색{" "}
           </NavLink>
           <NavLink
-            to="/ticket"
+            to="/board"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
           >
             {" "}
             게시판{" "}
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/product/upload"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
           >
             {" "}
             상품등록{" "}
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/mypage"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}

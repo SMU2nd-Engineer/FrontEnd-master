@@ -58,8 +58,19 @@ export default function ProductDetail() {
         </div>
       </div>  
         <div className="detail-bottom">
-          <p className="detailcontent-label">상세 정보</p>
-          <p className="detaillcontent">{product.content}</p>
+          <div className="dcbox">
+            <p className="detailcontent-label">상세 정보</p>
+            <div className="chakra-divider">
+              <Divider orientation='horizontal'/>
+            </div>
+            <p className="detaillcontent">{product.content}</p>
+          </div>
+          <div className="chakra-divider">
+            <Divider orientation='vertical' height="400px"/>
+          </div>
+          <div className="salerinfo">
+            {/* 판매자 정보 뜨게 하고 싶엉 */}
+          </div>
         </div> 
       
     </div>
