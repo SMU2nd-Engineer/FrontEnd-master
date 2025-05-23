@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
  */
 export default function MySellList({ isMain = false, products = [] }) {
   const [category, setCategory] = useState("all");
-  // const [myProductLists, setMyProductLists] = useState(products);
 
   let filterMyProductLists = [];
 
@@ -40,7 +39,7 @@ export default function MySellList({ isMain = false, products = [] }) {
   const totalPageCount = Math.ceil(filterMyProductLists.length / itemsPerPage);
   // 현재 페이지 보여줄 개수 설정
   const currentItems =
-    filterMyProductLists > 0
+    filterMyProductLists.length > 0
       ? filterMyProductLists.slice(offset, offset + itemsPerPage)
       : [];
 

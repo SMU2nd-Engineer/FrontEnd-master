@@ -15,17 +15,14 @@ export default function SellAndPurchaseList() {
     };
     saveList();
   }, []);
-  console.log(myProductList);
-  console.log(myProductList);
-  console.log(myProductList);
   return (
     <div>
       <MyPageLink />
       <p>판매/구매이력</p>
       <p>판매 내역 컴포넌트</p>
-      <MySellList products={myProductList} />
+      <MySellList products={myProductList.sellInfoList} />
       <p>구매 내역 컴포넌트</p>
-      <MyBuyList products={myProductList} />
+      <MyBuyList products={myProductList.buyInfoList} />
     </div>
   );
 }

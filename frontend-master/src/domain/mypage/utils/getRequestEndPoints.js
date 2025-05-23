@@ -1,7 +1,6 @@
 export const MYPAGE_ENDPOINTS = Object.freeze({
   MY_MAIN_INFO: "getMyMainInfo", // 가장 최신 2개 찜 목록.
-  MY_BOARD_LIST: "getMyBoardList", // 사용자 작성 게시판 정보.
-  MY_COMMENT_LIST: "getMyCommentList", // 사용자 작성 댓글 정보.
+  MY_BOARD_COMMENT_LIST: "getMyBoardAndCommentList", // 사용자 게시글, 댓글 정보 가져오기
   MY_BUY_LIST: "getMyBuyList", // 구매 내역 조회.
   MY_SELL_LIST: "getMySellList", // 판매 내역.
   MY_REVIEW_LIST: "getMyReviewList", // 마이페이지 리뷰 탭 정보 얻기(평균 별점, 리뷰 정보, 거래 평가).

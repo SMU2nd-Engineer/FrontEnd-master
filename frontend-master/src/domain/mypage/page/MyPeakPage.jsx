@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import MyPageLink from "../components/MyPageLink";
 import MyPagination from "../components/MyPaginationUI";
 import ProductList from "@products/components/ProductList";
-import mook from "../utils/mook";
 import { getMyPageData } from "../services/getMyPageDate";
 
 export default function MyPeakPage() {
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
-  const [wishListInfo, setWishListInfo] = useState(mook);
+  const [wishListInfo, setWishListInfo] = useState([]);
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 4;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
@@ -26,7 +25,7 @@ export default function MyPeakPage() {
   useEffect(() => {
     const totalInfoList = async () => {
       const result = await getMyPageData("PEAK_LIST_INFO");
-      setWishListInfo(result);
+      setWishListInfo(result ?? []);
     };
     totalInfoList();
   }, []);

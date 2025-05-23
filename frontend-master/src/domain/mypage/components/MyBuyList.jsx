@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
 import MyPagination from "./MyPaginationUI";
 
-export default function MyBuyList({ products }) {
+export default function MyBuyList({ products = [] }) {
+  console.log("buylist  products: ", products);
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 4;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
@@ -12,12 +13,12 @@ export default function MyBuyList({ products }) {
   const totalPageCount = Math.ceil(products.length / itemsPerPage);
   // 현재 페이지 보여줄 개수 설정
   const currentItems =
-    products > 0 ? products.slice(offset, offset + itemsPerPage) : [];
+    products.length > 0 ? products.slice(offset, offset + itemsPerPage) : [];
   // selected 라이브러리에서 전달하는 값
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
+  console.log("buylist : ", currentItems);
   return (
     <>
       <ProductList products={currentItems} />
