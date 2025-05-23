@@ -27,6 +27,12 @@ input {
   font-size: 90%;
 }
 
+.pluploadbutton{
+  text-decoration: underline;
+  font-size: 90%;
+  color: #666666;
+}
+
 .product_list {
   
   display: grid;
