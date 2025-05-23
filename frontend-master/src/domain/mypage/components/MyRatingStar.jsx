@@ -49,7 +49,11 @@ export default function MyRatingStar({
         allowFraction={true}
         readonly={isReadOnly}
       />
-      {!isReadOnly && <button onClick={handleReset}>reset</button>}
+      {!isReadOnly && (
+        <button type="button" onClick={handleReset}>
+          reset
+        </button>
+      )}
     </div>
   );
 }

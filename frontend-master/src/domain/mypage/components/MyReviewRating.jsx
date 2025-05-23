@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import MyRatingStar from "./MyRatingStar";
 
 /**
@@ -6,11 +5,18 @@ import MyRatingStar from "./MyRatingStar";
  * @param {int} myRating
  * @returns 별 표시 컴포넌트
  */
-export default function MyPageRating({ myRating = 0 }) {
-  console.log("MyPageRating으로 넘어온 값 :", myRating);
+export default function MyPageRating({
+  myRating = 0,
+  isReadOnly = true,
+  setRating,
+}) {
   return (
     <>
-      <MyRatingStar isReadOnly={true} myReviewRating={myRating} />
+      <MyRatingStar
+        isReadOnly={isReadOnly}
+        myReviewRating={myRating}
+        setMyReviewRating={setRating}
+      />
     </>
   );
 }

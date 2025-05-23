@@ -11,6 +11,12 @@ export default function TempHomePage() {
       <hr />
       <LogoutButton />
       <Button
+        text={"리뷰 남기기 페이지 이동"}
+        onClick={() => {
+          navigate("/mypage/myTransactionReview");
+        }}
+      />
+      <Button
         text={"마이페이지 이동"}
         onClick={() => {
           navigate("/mypage/main");
