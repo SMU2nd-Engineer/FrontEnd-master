@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MyPageLink from "../components/MyPageLink";
 import MyPagination from "../components/MyPaginationUI";
-import ProductList from "@products/components/ProductList";
 import { getMyPageData } from "../services/getMyPageDate";
+import MyPeakList from "../components/MyPeakList";
+import { updateUserPeak } from "../services/updateUserPeak";
 
 export default function MyPeakPage() {
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
@@ -21,12 +22,20 @@ export default function MyPeakPage() {
     setCurrentPage(selected);
   };
 
+  // 찜 목록 삭제하기
+  const handlePeak = async (productIdx) => {
+    await updateUserPeak(productIdx);
+    totalInfoList();
+  };
+
+  // 찜 목록 불러오기 함수
+  const totalInfoList = async () => {
+    const result = await getMyPageData("PEAK_LIST_INFO");
+    setWishListInfo(result ?? []);
+  };
+
   //카드 정보에 넣을 찜 목록 가져오기 - 데이터 보여지기 전까지 주석 처리
   useEffect(() => {
-    const totalInfoList = async () => {
-      const result = await getMyPageData("PEAK_LIST_INFO");
-      setWishListInfo(result ?? []);
-    };
     totalInfoList();
   }, []);
   return (
@@ -40,7 +49,7 @@ export default function MyPeakPage() {
         <br />
         {/* 카드 형태 렌더링 만들기 
         여기 또는 하위에서 카드를 눌렀을 때 상세페이지로 이동하게끔 구현해야함 */}
-        <ProductList products={currentItems} />
+        <MyPeakList products={currentItems} handlePeak={handlePeak} />
         {/* 페이지네이션 자리 */}
         <MyPagination
           pageCount={totalPageCount}
