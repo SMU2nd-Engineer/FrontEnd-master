@@ -57,7 +57,7 @@ export default function MyTransactionReview({
             <MyTextReview
               key={item.idx}
               reviewText={item.review}
-              reviewDate={item.sDate}
+              reviewDate={item.sdate}
             />
           ))}
         </tbody>

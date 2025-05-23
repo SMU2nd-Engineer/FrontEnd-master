@@ -6,12 +6,11 @@ import MyRatingStar from "./MyRatingStar";
  * @param {int} myRating
  * @returns 별 표시 컴포넌트
  */
-export default function MyPageRating({ myRating = 0, movePage = "" }) {
+export default function MyPageRating({ myRating = 0 }) {
   console.log("MyPageRating으로 넘어온 값 :", myRating);
   return (
     <>
       <MyRatingStar isReadOnly={true} myReviewRating={myRating} />
-      {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
     </>
   );
 }

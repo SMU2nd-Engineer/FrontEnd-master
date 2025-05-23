@@ -26,7 +26,9 @@ export default function MainPage() {
       const averageRating =
         result.myPageAverageRating?.myPageTotalRating ?? null;
       //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
-      const ceilRating = averageRating === null ? 0 : averageRating;
+      console.log("averageRating : ", averageRating);
+      const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
+      console.log("ceilRating : ", ceilRating);
       setMainPageInfo({
         myPageAverageRating: ceilRating,
         myMainSellProductList: result.myMainSellProductList ?? [],
@@ -44,12 +46,9 @@ export default function MainPage() {
       <p> 내 상품 </p>
       <MySellList isMain={true} products={mainPageInfo.myMainSellProductList} />
       {/* <p> 찜 목록 </p> */}
-      <MyMainPeak list={mainPageInfo.myMainReview} />
+      <MyMainPeak list={mainPageInfo.myMainPeakList} />
       <p> 내 점수 </p>
-      <MyMainRating
-        myRating={mainPageInfo.myPageAverageRating}
-        // movePage={"myReview"}
-      />
+      <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
       <MyTransactionReview
         reviewLists={mainPageInfo.myMainReview}
         movePage={"myReview"}
