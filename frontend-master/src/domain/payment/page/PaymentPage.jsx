@@ -6,14 +6,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SCHEMA } from '@/domain/user/utils/userFormValidator';
 import { Input } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
+import KakaoPayReady from '../service/KakaoPayReady';
 
 const PaymentPage = () => {
   const YUPSCHEMA = SCHEMA;
   const location = useLocation();
-  const product = location.state?.product;
-  
-  if (!product) {
-    return <p>상품 정보가 없습니다. 다시 시도해주세요.</p>
+  const product = location.state?.product
+  const user = {
+    idx: 1,
+    address: '제주특별자치도 안양시 동안구 봉은사3로 (현정김마을)'
   }
 
   const handleChange = (e) => {
@@ -35,31 +36,44 @@ const PaymentPage = () => {
       mode: "onBlur", // 사용자에게 안내 메시지 출력
     });
 
+    const handlePaymentClick = async () => {
+      const result = await KakaoPayReady(product, user);
+      console.log("카카오 응답 ", result);
+      if (result) {
+        window.location.href = result.nextRedirectPcUrl;
+        console.log("카카오 응답 ", result);
+      } else {
+        alert("결제 요청에 실패했습니다.")
+      }
+    }
+
   return (
     <div>
-      <p>결제 화면입니다.</p>
-      <p>이미지</p>
-      <p>상품 정보</p>
+      <div>
+        <img src={product.img} alt="상품이미지" />
+        <p><strong>{product.title}</strong></p>
+        <h2>{product.price}원</h2>
+      </div>
       <div className="form-row">
         <label htmlFor="address">배송지 입력</label>
-        <Input
+        {/* <Input
           type="text"
           id="address"
           name="address"
-          // value={address}
+          value={user.address}
           onChange={handleChange}
-          placeholder="주소"
+        /> */}
+        <Address
+          register={register}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
         />
       </div>
-      <Address
-        register={register}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-      />
       <Button 
-        text={`${product.price.toLocaleString()}원 결제하기`}
+        text={`${product.price}원 결제하기`}
         type='submit'
+        onClick={handlePaymentClick}
       />
     </div>
   );

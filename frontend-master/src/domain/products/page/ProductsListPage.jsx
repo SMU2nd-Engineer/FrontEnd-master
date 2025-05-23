@@ -45,7 +45,7 @@ const ProductListPage = () => {
     <div className="new_product">
       <div className="productpage-top">
         <p className="pagetitle"> 상품 전체보기 </p>
-        {/* <Button text={상품등록} onClick={handleClick} />  */}
+        <Button text={"상품등록"} onClick={handleClick} /> 
       </div>
       <ProductSearch onSearch = {handleSearch} />
       <ProductList products={products} />
