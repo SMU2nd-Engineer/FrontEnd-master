@@ -36,14 +36,10 @@ export default function MyTransactionReviewPage() {
   });
 
   const submitForm = async (formData) => {
-    try {
-      console.log("제출 데이터 확인하기 : " + formData);
-      const result = await registReview(formData);
-      alert("리뷰를 남겨주셔서 감사합니다!");
-      navigate("/product/list");
-    } catch (error) {
-      throw error;
-    }
+    console.log("제출 데이터 확인하기 : " + formData);
+    const result = await registReview(formData);
+    alert("리뷰를 남겨주셔서 감사합니다!");
+    navigate("/product/list");
   };
 
   const rating = watch("rating"); // 변수 선언 및 실시간 체크
@@ -53,14 +49,11 @@ export default function MyTransactionReviewPage() {
   // 거래 평가 하기 위한 카테고리 가져오기
   useEffect(() => {
     const saveInfo = async () => {
-      try {
-        const result = await getMyPageData("SELLER_AND_CATEGORIES");
-        setSellerInfo(result.sellerInfo);
-        setEvalutaionCategories(result.evaluationCategories);
-        setValue("sellerIdx", result.sellerInfo.sellerIdx); // 폼 제출이 안되서 지정해주기
-      } catch (error) {
-        throw error;
-      }
+      const result = await getMyPageData("SELLER_AND_CATEGORIES");
+      setSellerInfo(result.sellerInfo);
+      setEvalutaionCategories(result.evaluationCategories);
+      setValue("sellerIdx", result.sellerInfo.sellerIdx); // 폼 제출이 안되서 지정해주기
+      setValue("transactionIdx", result.sellerInfo.transactionIdx); // 폼 제출이 안되서 지정해주기
     };
     saveInfo();
   }, []);
@@ -92,6 +85,7 @@ export default function MyTransactionReviewPage() {
         ))}
         <TransactionTextReview register={register} setValue={setValue} />
         <input type="hidden" {...register("sellerIdx")} />
+        <input type="hidden" {...register("transactionIdx")} />
         <Button
           text={"다음에"}
           onClick={() => {
