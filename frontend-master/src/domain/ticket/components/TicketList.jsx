@@ -48,9 +48,9 @@ const TicketList = ({
 
   return (
     <ul>
-      {filteredInfos.map((info) => (
+      {filteredInfos.map((info, i) => (
         // 결과가 있을 경우, filteredInfos를 순회하면서 <li>로 각 항목 표시 / title, name 둘다 없으면 JSON.stringify(info)로 객체 전체 문자열 출력(디버깅 목적)
-        <li key={info.id}>{info.title || info.name || JSON.stringify(info)}</li>
+        <li key={i}>{info.title || info.name || JSON.stringify(info)}</li>
       ))}
     </ul>
   );

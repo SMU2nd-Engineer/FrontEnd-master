@@ -7,21 +7,11 @@ function Calendar() {
   const [date, setDate] = useState(new Date()); // 현재기준 날짜 저장
   const [list, setList] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [infos, setInfos] = useState(new Array(35).fill(0));
 
   // 날짜 계산
   const year = date.getFullYear();
   const month = date.getMonth();
-
-  useEffect(() => {
-    // 날짜 전송필요
-    getTicketCalendar(date)
-      .then((res) => {
-        console.log(res);
-        return res.data;
-      })
-      .then((data) => setList(data))
-      .catch((err) => console.log(err));
-  }, [date]);
 
   // 이번달 정보
   const firstDay = new Date(year, month, 1); // 1일부터 시작
@@ -35,6 +25,50 @@ function Calendar() {
   const daysInPrevMonth = prevLastDay.getDate(); // 이전달 날짜
 
   const calendarDays = [];
+
+  // 한달 날짜 배열에 저장하는 for문(전달,당월,익월 모두 포함됨)
+  for (let i = 0; i < 35; i++) {
+    infos[i] = {
+      day:
+        i < startDay
+          ? daysInPrevMonth - startDay + i + 1
+          : i - startDay + 1 > daysInMonth
+          ? i - startDay + 1 - daysInMonth
+          : i - startDay + 1,
+      sports: "data",
+    };
+    console.log(infos[i].day); // i를 키로 두면 눌럿을때 day값 알수 이씀!
+  }
+
+  infos.map((info, i) => <div key={i} className={`day${info.day}`}></div>);
+
+  useEffect(() => {
+    // 날짜 전송필요
+    getTicketCalendar(date)
+      .then((res) => {
+        console.log(res);
+        return res.data;
+      })
+      .then((data) => setList(data))
+      .catch((err) => console.log(err));
+  }, [date]);
+
+  const handleChange = (e) => {
+    const { key, name, value } = e.target;
+    setInfos([...infos, { key: value }]);
+  };
+
+  useEffect(() => {
+    const calList = [];
+    // 새로운 배열 infos // 5월이다 -> 1일부터 31일까지 있는 배열
+    /*
+    for (cal in calList){
+      for (i, cal.sdate -> cal.edate) // 시작일부터 종료일까지
+        //카테고리 종류에 따라
+        infos[i].카테고리 += 1
+    }
+      */
+  }, [list]);
 
   // 날짜 포맷 맞추기
   const formatDate = (year, month, day) => {
