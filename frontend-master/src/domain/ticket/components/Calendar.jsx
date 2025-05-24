@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getTicketCalendar } from "../services/ticketService";
 import "../style/Calendar.css";
 
-function Calendar() {
+function Calendar({ selectedIds }) {
   const [date, setDate] = useState(new Date()); // 현재 기준 달
   const [list, setList] = useState([]); // API에서 가져온 날짜별 공연/스포츠 데이터
   const [infos, setInfos] = useState([]); // 달력에 출력할 날짜 정보 배열
@@ -25,13 +25,13 @@ function Calendar() {
   useEffect(() => {
     const formattedMonth = `${year}-${String(month + 1).padStart(2, "0")}`;
 
-    getTicketCalendar(formattedMonth)
+    getTicketCalendar(formattedMonth, selectedIds.join(","))
       .then((res) => {
         console.log("📦 API 응답:", res.data);
         setList(res.data);
       })
       .catch((err) => console.log(err));
-  }, [date]);
+  }, [date, selectedIds]);
 
   // list 변경될 때마다 infos 재계산
   useEffect(() => {
@@ -85,6 +85,8 @@ function Calendar() {
 
     setInfos(newInfos);
   }, [list, date]);
+
+  useEffect(() => {}, { selectedIds });
 
   // 이전달/다음달 보기 기능
   const prevMonth = () => setDate(new Date(year, month - 1, 1));

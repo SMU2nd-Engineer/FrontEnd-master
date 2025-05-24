@@ -32,7 +32,17 @@ const TicketPage = () => {
 
       <div className="bottomArea">
         <div className="calender">
-          <Calendar />
+          <Calendar
+            selectedIds={selectedIds}
+            setSelectedIds={setSelectedIds}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            setAllCategoryIds={setAllCategoryIds}
+          />
         </div>
         <div className="showList">
           <TicketList
