@@ -4,12 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getProductDetail } from '@/domain/products/services/productService';
 import { useEffect } from 'react';
 import TradeOptionBtn from '../components/TradeOptionBtn';
+import "../styles/TradeTypeBtn.css"
 
 const TradeType = () => {
   const {idx} = useParams(); 
   const [tradeType, setTradeType] = useState(null);
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     getProductDetail(idx)
@@ -19,7 +21,13 @@ const TradeType = () => {
         setProduct(data)
       })
       .catch((err) => console.error("상품 불러오기 실패: ", err));
+    
+    setTradeType(0);
   }, [idx]);
+
+  useEffect(() => {
+    console.log('tradeType: ', tradeType);
+  }, [tradeType]);
 
   if(!product) {
     return <p>상품을 찾을 수 없습니다.</p>

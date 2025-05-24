@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const TradeOptionBtn = ({
   type,
   selected,
@@ -10,7 +12,7 @@ const TradeOptionBtn = ({
   return (
     <button
       onClick={() => onClick(type)}
-      className={`${className} ${selected === type ? 'selected' : ''}`}
+      className={`${className} ${selected === type ? 'select' : ''}`}
       style={{
         display: 'flex',
         justifyContent: 'space-between',
