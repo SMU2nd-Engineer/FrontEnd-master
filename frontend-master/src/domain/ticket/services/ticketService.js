@@ -1,10 +1,16 @@
 import axiosInstance from "@/lib/axiosInstance";
 
-export const getTicketCalendar = (month) => {
-  return axiosInstance.get("/ticket/calendar", {
-    params: { month },
-    withCredentials: true,
-  });
+export const getTicketCalendar = (month, selectedIds) => {
+  return axiosInstance.get(
+    "/ticket/calendar",
+    {
+      params: {
+        categories: selectedIds,
+        month: month,
+      },
+    },
+    { withCredentials: true }
+  );
 };
 
 // export const getTicketCalendar = (date) => {
