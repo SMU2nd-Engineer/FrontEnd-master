@@ -5,7 +5,7 @@ export default function MyTextReview({ reviewText, reviewDate, reviewIdx }) {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    navigate(`TransactionReviewEdit/${reviewIdx}`);
+    navigate(`/mypage/TransactionReviewEdit/${reviewIdx}`);
   };
   return (
     <tr onClick={handleOnClick}>

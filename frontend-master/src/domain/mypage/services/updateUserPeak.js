@@ -11,6 +11,7 @@ export const updateUserPeak = async (productIdx) => {
       { withCredentials: true }
     );
   } catch (error) {
+    console.log(`찜 목록 상품 지우는 과정에서 문제 발생 : ${error}`);
     throw error;
   }
 };
