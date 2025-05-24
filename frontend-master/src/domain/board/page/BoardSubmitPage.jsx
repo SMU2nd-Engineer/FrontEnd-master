@@ -1,12 +1,13 @@
 // BoardSubmitPage.jsx
 import { useState } from "react";
-import { BoardSubmit } from "../services/boardService"
+import { getBoardSubmit, getBoardDetail } from "../services/boardService"
 import { div, title } from "framer-motion/client";
 import BoardEditorQuill from "../components/BoardEditorQuill";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
+import { useRef } from "react";
 
 // 게시글 등록 페이지
 const BoardSubmitPage = () => {
@@ -28,6 +29,9 @@ const BoardSubmitPage = () => {
   // 페이지 이동을 처리 하는 함수
   const navigate = useNavigate();
 
+  // quill 확인
+  const quillRef = useRef();
+
   // 입력 값 처리 함수
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,6 +50,7 @@ const BoardSubmitPage = () => {
   // }, [quillCustomData])
 
   // 게시글 내용 입력 후 클릭하는 버튼
+  // preventDefault: 페이지 새로고침 방지
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -58,21 +63,43 @@ const BoardSubmitPage = () => {
 
     // => 게시글 등록버튼 눌렀을때 성공하면 게시글 상세페이지로 이동
     // 서버에 게시글 등록 요청을 보내는 함수
-    BoardSubmit(postContent)
+    getBoardSubmit(postContent)
       .then((response) => response.data)
-      .then((result) => {
-        console.log("결과: ", result);
-        // 에러 확인용 
-        // const idx = response.idx;
-        // if (!idx) throw new Error("게시글 없음");
+      .then((data) => {
+        console.log("서버응답 확인: ", data)
 
-        // 게시글 등록 성공시 게시글 상세화면으로 페이지 이동
-        // navigate(`/board/detail/${idx}`, { replace: true });
+        // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
+        navigate(`/board/detail/${data}`);
       })
       .catch((error) => {
-          console.error("게시글 등록 실패: ", error);
-          alert("게시글 등록에 실패했습니다."); 
-      });                    
+        console.error("게시글 등록 실패: ", error);
+        alert("게시글 등록 실패했습니다...");
+      });
+  };
+
+  // 게시글 취소 버튼 누르면 게시글 리스트 페이지로 이동하는 함수
+  const handleCancel = (e) => {
+    // 새로고침 방지
+    e.preventDefault();
+
+    // 취소하고 홈페이지로 돌아갈건지 선택하는 팝업창
+    const submitCancel = window.confirm("게시글 등록을 취소하고 게시글 홈페이지로 돌아가시겠습니까?");
+
+    // 취소 누르면 게시글 등록페이지에 머무름
+    if(!submitCancel) return;
+
+    // 상태 초기화
+    setNewSubmit({
+      category_idx: "",
+      title: "",
+      content: "",
+    });
+      // 글 내용 - 텍스트 에디터 quill의 데이터 초기화
+      setContentData("");
+
+      // 게시글 리스트 페이지로 이동
+      navigate(`/board`);
+
   };
 
   // 화면에 표시될 내용
@@ -109,15 +136,13 @@ const BoardSubmitPage = () => {
         {/* 글 내용 입력하는 창 */}
         <p>글 내용</p>
         <BoardEditorQuill
-        contentData={contentData} setContentData={setContentData}/>
+        contentData={contentData} setContentData={setContentData} quillRef={quillRef}/>
      
       {/* 게시글 등록 페이지 - 게시글 등록 버튼 */}        
       <button onClick={handleSubmit}>등록</button>
 
       {/* 게시글 등록 페이지 - 게시글 취소 버튼 */}        
-      <button onClick={() => navigate("/board/submit")}>취소</button>
-
-      {/* <button className="board_cancel_button">취소</button>   */}
+      <button onClick={handleCancel}>취소</button>
 
     </div>
   )
