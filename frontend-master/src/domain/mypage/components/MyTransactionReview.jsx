@@ -56,6 +56,7 @@ export default function MyTransactionReview({
           {currentItems.map((item) => (
             <MyTextReview
               key={item.idx}
+              reviewIdx={item.idx}
               reviewText={item.review}
               reviewDate={item.sdate}
             />

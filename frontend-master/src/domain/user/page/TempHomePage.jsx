@@ -13,7 +13,7 @@ export default function TempHomePage() {
       <Button
         text={"리뷰 남기기 페이지 이동"}
         onClick={() => {
-          navigate("/mypage/myTransactionReview");
+          navigate("/mypage/transactionReviewRegist");
         }}
       />
       <Button

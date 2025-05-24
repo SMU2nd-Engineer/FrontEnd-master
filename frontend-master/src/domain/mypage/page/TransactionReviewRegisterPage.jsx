@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REVIEW_SCHEMA } from "@user/utils/userFormValidator";
 import Button from "@/components/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TransactionTextReview from "../components/TransactionTextReview";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -16,7 +16,9 @@ import { registReview } from "../services/registReview";
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
 
-export default function MyTransactionReviewPage() {
+export default function TransactionReviewRegisterPage() {
+  const { reviewIdx } = useParams();
+  const idEditMode = !!reviewIdx; // boolean 타입으로 변경
   const [sellerInfo, setSellerInfo] = useState("");
   const [evalutaionCategories, setEvalutaionCategories] = useState([]);
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ export default function MyTransactionReviewPage() {
       setValue("transactionIdx", result.sellerInfo.transactionIdx); // 폼 제출이 안되서 지정해주기
     };
     saveInfo();
-  }, []);
+  }, [setValue]);
   return (
     <div>
       <MyPageLink />
