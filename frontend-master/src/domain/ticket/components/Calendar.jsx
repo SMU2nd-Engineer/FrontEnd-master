@@ -1,151 +1,92 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getTicketCalendar } from "../services/ticketService";
-import "./Calendar.css";
-import { useEffect } from "react";
+import "../style/Calendar.css";
 
 function Calendar() {
-  const [date, setDate] = useState(new Date()); // 현재기준 날짜 저장
-  const [list, setList] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [infos, setInfos] = useState(new Array(35).fill(0));
+  const [date, setDate] = useState(new Date()); // 현재 기준 달
+  const [list, setList] = useState([]); // API에서 가져온 날짜별 공연/스포츠 데이터
+  const [infos, setInfos] = useState([]); // 달력에 출력할 날짜 정보 배열
+  const [selectedDate, setSelectedDate] = useState(null); // 사용자가 클릭한 날짜
 
-  // 날짜 계산
   const year = date.getFullYear();
   const month = date.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 이번달 날짜 개수
+  const startDay = new Date(year, month, 1).getDay(); // 매월 1일의 요일 출력
+  const daysInPrevMonth = new Date(year, month, 0).getDate(); // 이전달 날짜 개수
 
-  // 이번달 정보
-  const firstDay = new Date(year, month, 1); // 1일부터 시작
-  const lastDay = new Date(year, month + 1, 0); // 다음달 0일 = 이번달 마지막날
-  const daysInMonth = lastDay.getDate(); // 이번달 날짜
-  // 이번달 시작요일
-  const startDay = firstDay.getDay(); // 1일의 요일 출력, 0(일) ~ 6(토)
+  // 날짜 포맷 함수
+  const formatDate = (year, month, day) =>
+    `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(
+      2,
+      "0"
+    )}`;
 
-  // 이전달 마지막 날짜
-  const prevLastDay = new Date(year, month, 0); // 이번달 0일 = 이전달 마지막 날
-  const daysInPrevMonth = prevLastDay.getDate(); // 이전달 날짜
+  // API로부터 데이터 받아오기
+  useEffect(() => {
+    const formattedMonth = `${year}-${String(month + 1).padStart(2, "0")}`;
 
-  const calendarDays = [];
+    getTicketCalendar(formattedMonth)
+      .then((res) => {
+        console.log("📦 API 응답:", res.data);
+        setList(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [date]);
 
-  // 한달 날짜 배열에 저장하는 for문(전달,당월,익월 모두 포함됨)
-  for (let i = 0; i < 35; i++) {
-    infos[i] = {
-      day:
+  // list 변경될 때마다 infos 재계산
+  useEffect(() => {
+    const newInfos = [];
+
+    for (let i = 0; i < 35; i++) {
+      // 한달 날짜 표시할 숫자
+      const day =
         i < startDay
           ? daysInPrevMonth - startDay + i + 1
           : i - startDay + 1 > daysInMonth
           ? i - startDay + 1 - daysInMonth
-          : i - startDay + 1,
-      sports: "data",
-    };
-    console.log(infos[i].day); // i를 키로 두면 눌럿을때 day값 알수 이씀!
-  }
+          : i - startDay + 1;
 
-  infos.map((info, i) => <div key={i} className={`day${info.day}`}></div>);
+      let type = "current";
+      let targetYear = year;
+      let targetMonth = month;
 
-  useEffect(() => {
-    // 날짜 전송필요
-    getTicketCalendar(date)
-      .then((res) => {
-        console.log(res);
-        return res.data;
-      })
-      .then((data) => setList(data))
-      .catch((err) => console.log(err));
-  }, [date]);
+      // 이전달/현재달/다음달 구분(prev/current/next)
+      if (i < startDay) {
+        type = "prev";
+        targetYear = month === 0 ? year - 1 : year;
+        targetMonth = (month + 11) % 12;
+      } else if (i - startDay + 1 > daysInMonth) {
+        type = "next";
+        targetYear = month === 11 ? year + 1 : year;
+        targetMonth = (month + 1) % 12;
+      } else {
+        type = "current";
+        targetYear = year;
+        targetMonth = month;
+      }
 
-  const handleChange = (e) => {
-    const { key, name, value } = e.target;
-    setInfos([...infos, { key: value }]);
-  };
+      const dateStr = formatDate(targetYear, targetMonth, day); // 문자열
+      const matched = list.find((item) => item.date.startsWith(dateStr));
+      // const matched = list.find((item) => item.date.startsWith(dateStr)); // 날짜 일치하는 데이터 찾아서 넣기
+      // ✅ 확인 로그 추가
+      console.log("🔍 비교 중:", {
+        dateStr,
+        matched,
+      });
 
-  useEffect(() => {
-    const calList = [];
-    // 새로운 배열 infos // 5월이다 -> 1일부터 31일까지 있는 배열
-    /*
-    for (cal in calList){
-      for (i, cal.sdate -> cal.edate) // 시작일부터 종료일까지
-        //카테고리 종류에 따라
-        infos[i].카테고리 += 1
+      newInfos.push({
+        day,
+        dateStr,
+        type,
+        performance: matched?.performance_count || 0,
+        sports: matched?.sports_count || 0,
+      });
     }
-      */
-  }, [list]);
 
-  // 날짜 포맷 맞추기
-  const formatDate = (year, month, day) => {
-    return `${year}-${String(month + 1).padStart(2, "0")}-${String(
-      day
-    ).padStart(2, "0")}`;
-  };
+    setInfos(newInfos);
+  }, [list, date]);
 
-  const getCountsForDay = (day) => {
-    const targetDate = formatDate(year, month, day);
-    const entry = list.find((item) => item.date.startsWith(targetDate));
-    return {
-      performance: entry?.performance_count || 0,
-      sports: entry?.sports_count || 0,
-    };
-  };
-
-  // 이전달 날짜 채우기
-  for (let i = startDay - 1; i >= 0; i--) {
-    calendarDays.push(
-      <div key={"prev-" + i} className="prev-month-day day">
-        {daysInPrevMonth - i}
-      </div>
-    );
-  }
-
-  // 이번달 날짜 채우기
-  for (let day = 1; day <= daysInMonth; day++) {
-    const { performance, sports } = getCountsForDay(day);
-    const dateString = formatDate(year, month, day);
-    // 특정 날짜 선택시 선택된 날짜만 보이고 나머지는 hidden
-    // const isSelected = selectedDate === null || selectedDate === dateString;
-
-    calendarDays.push(
-      <div
-        key={"current-" + day}
-        className={`current-month-day day ${
-          selectedDate === dateString ? "selected" : ""
-        }`}
-        onClick={() =>
-          setSelectedDate((prev) => (prev === dateString ? null : dateString))
-        }
-      >
-        <div>{day}</div>
-        {/* 특정 날짜 선택시 나머지 날짜들의 공연수를 숨기고 싶다면 */}
-        {/* {isSelected && performance > 0 && (
-          <div className="event-badge performance">{performance} 공연</div>
-        )}
-        {isSelected && sports > 0 && (
-          <div className="event-badge sports">{sports} 스포츠</div> */}
-        {performance > 0 && (
-          <div className="event-badge performance">공연: {performance}건</div>
-        )}
-        {sports > 0 && (
-          <div className="event-badge sports">스포츠: {sports}건</div>
-        )}
-      </div>
-    );
-  }
-
-  // 이번달 마지막 날 위치 (인덱스, 0부터 시작)
-  const lastDayIndex = calendarDays.length - 1;
-
-  // 그 주의 마지막 칸 (7의 배수 - 1)
-  const lastWeekEndIndex = Math.ceil((lastDayIndex + 1) / 7) * 7 - 1;
-
-  // 다음달 날짜 채우기
-  const nextDaysCount = lastWeekEndIndex - lastDayIndex;
-  for (let i = 1; i <= nextDaysCount; i++) {
-    calendarDays.push(
-      <div key={"next-" + i} className="next-month-day day">
-        {i}
-      </div>
-    );
-  }
-
-  // 월 이동 버튼
+  // 이전달/다음달 보기 기능
   const prevMonth = () => setDate(new Date(year, month - 1, 1));
   const nextMonth = () => setDate(new Date(year, month + 1, 1));
 
@@ -158,6 +99,7 @@ function Calendar() {
         </div>
         <button onClick={nextMonth}>›</button>
       </div>
+
       <div className="weekdays">
         <div>일</div>
         <div>월</div>
@@ -167,7 +109,34 @@ function Calendar() {
         <div>금</div>
         <div>토</div>
       </div>
-      <div className="days-grid">{calendarDays}</div>
+
+      <div className="days-grid">
+        {infos.map((info, idx) => (
+          <div
+            key={idx}
+            className={`day ${info.type}-month-day ${
+              selectedDate === info.dateStr ? "selected" : ""
+            }`}
+            onClick={() =>
+              setSelectedDate((prev) =>
+                prev === info.dateStr ? null : info.dateStr
+              )
+            }
+          >
+            <div>{info.day}</div>
+            {/* 이번달 데이터만 출력 */}
+            {info.type === "current" && info.performance > 0 && (
+              <div className="event-badge performance">
+                공연: {info.performance}건
+              </div>
+            )}
+            {/* 이번달 데이터만 출력 */}
+            {info.type === "current" && info.sports > 0 && (
+              <div className="event-badge sports">스포츠: {info.sports}건</div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
