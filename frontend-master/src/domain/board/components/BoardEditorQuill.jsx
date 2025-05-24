@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import BoardCustomToolbar from "./BoardCustomToolbar"; // 툴바 컴포넌트 import
 
-const BoardEditorQuill = ({ quillCustomData, setQuillCustomData }) => {
+const BoardEditorQuill = ({ contentData, setContentData }) => {
   // 에디터의 사용할 기능(글꼴, 색상, 스타일 등)들을 모아놓은 항목들
   const formats = [
     "header", "size", "align",
@@ -30,8 +30,9 @@ const BoardEditorQuill = ({ quillCustomData, setQuillCustomData }) => {
       {/* React Quill 텍스트 에디터 연결함 */}
       <ReactQuill
         style={{ height: "350px", margin: "4px" }}
-        value={quillCustomData}
-        onChange={setQuillCustomData}
+        name="content"
+        value={contentData}
+        onChange={setContentData}
         modules={modules}
         formats={formats}
       />

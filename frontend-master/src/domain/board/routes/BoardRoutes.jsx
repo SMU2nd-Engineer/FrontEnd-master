@@ -18,6 +18,9 @@ const BoardRoutes = () => {
 
         {/* 게시글 등록 페이지 - 게시판 등록화면 */}
         <Route path="/submit" element={<BoardSubmitPage />} />
+
+        {/* 게시글 상세 페이지 - 게시판 등록 후 */}
+        {/* <Route path="/detail" element={<BoardDetailPage />} />   */}
         
       </Routes>
     </div>

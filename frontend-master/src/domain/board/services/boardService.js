@@ -13,6 +13,21 @@ export const BoardSearch = (searchType, category, keyword) => {
 };
 
 // 게시글 등록페이지에서 게시글 등록하는 함수
-export const BoardSubmit = () => {
-  return axiosInstance.post("board/submit", {}, {withCredentials: true});
+// export const BoardSubmit = ({category_idx, title, quillCustomData}) => {
+//   return axiosInstance.post(
+//     "board/submit", 
+//     {category_idx, title, quillCustomData}, {withCredentials: true});
+// };
+
+export const BoardSubmit = ({ category_idx, title, content }) => {
+  return axiosInstance.post(
+    "board/submit",
+    { category_idx, title, content },
+    { withCredentials: true }
+  );
+};
+
+// 게시글 상세페이지 
+export const BoardDetail = () => {
+  return axiosInstance.post("board/detail", { withCredentials: true });
 };
