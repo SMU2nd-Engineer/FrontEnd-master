@@ -1,6 +1,6 @@
 import axiosInstance from "@/lib/axiosInstance";
 
-const KakaoPayReady = async (product, user, tradeType) => {
+const KakaoPayReady = async ({product, user, tradeType, category_idx}) => {
   console.log(product);
   console.log("itemName:", product?.title);
 
@@ -9,7 +9,7 @@ const KakaoPayReady = async (product, user, tradeType) => {
   const partnerUserId = `user${user.idx}`;
   try {
     const res = await axiosInstance.post(
-      "/payment/ready?payMethod=6001",
+      `/payment/ready?payMethod=${category_idx}`,
       {
         partnerOrderId,
         partnerUserId,
@@ -20,7 +20,7 @@ const KakaoPayReady = async (product, user, tradeType) => {
         approvalUrl: "http://localhost:5173/payment/success",
         cancelUrl: "http://localhost:5173/payment/cancel",
         failUrl: "http://localhost:5173/payment/fail",
-        tradeType: 0,
+        tradeType,
         deliveryAddress: user.address,
         buyerIdx: user.idx,
         sellerIdx: 1
@@ -36,6 +36,8 @@ const KakaoPayReady = async (product, user, tradeType) => {
     return res.data;
   } catch (error) {
     console.error(error);
+    const tid = sessionStorage.getItem("tid");
+    kakaoPayFail({tid, error});
   }
 };
 
