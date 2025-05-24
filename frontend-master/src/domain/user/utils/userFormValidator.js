@@ -51,3 +51,5 @@ export const CHANGE_PASSWORD_SCHEMA = yup.object({
     .string()
     .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
 });
+
+export const REVIEW_SCHEMA = yup.object({});

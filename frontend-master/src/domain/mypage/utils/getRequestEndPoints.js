@@ -11,4 +11,6 @@ export const MYPAGE_ENDPOINTS = Object.freeze({
   FAVORITE_CATEGORIES: "getCategory", // 관심사 카테고리 가져오기
   USER_FAVORITES: "userFavorites", // 사용자 관심사 가져오기
   MY_TRANSACTION_LIST: "getMyTransactionList", // 사용자 거래 내역 정보 가져오기
+  SELLER_AND_CATEGORIES: "getSellerAndCategoryInfo", // 리뷰 남기기에서 사용할 거래 상대 정보와 카테고리 가졍오기
+  GET_REVIEW_INFO: "getReviewInfo", // 사용자가 작성한 리뷰 내용 가져오기
 });

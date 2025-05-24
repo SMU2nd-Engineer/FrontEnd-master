@@ -14,7 +14,6 @@ export default function MyReviewPage() {
   useEffect(() => {
     const saveMyRviewInfo = async () => {
       const results = await getMyPageData("MY_REVIEW_LIST");
-      console.log("실제로받은 데이터 : ", results);
       const averageRating = results.myAverageRating?.myPageTotalRating ?? null;
       //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
       const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
@@ -28,13 +27,6 @@ export default function MyReviewPage() {
     };
     saveMyRviewInfo();
   }, []);
-
-  console.log(`MyReviewInfoList : ${myReviewInfoList}`);
-
-  console.log("myAverageRating:", myReviewInfoList.myAverageRating); // null
-  console.log("myEvaluationList:", myReviewInfoList.myEvaluationList); // []
-  console.log("reviewLists:", myReviewInfoList.reviewLists); // []
-  console.log("evaluationList:", myReviewInfoList.evaluationList); // []
 
   return (
     <div>
