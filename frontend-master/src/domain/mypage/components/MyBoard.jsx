@@ -36,6 +36,7 @@ export default function MyBoard({ boards = [] }) {
           {currentItems.map((item) => (
             <BoardListcomp
               key={item.idx}
+              idx={item.idx}
               title={item.title}
               division={item.categoryIdx}
             />

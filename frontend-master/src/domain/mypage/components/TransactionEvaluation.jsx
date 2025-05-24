@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function TransactionEvaluation({ category, register }) {
+export default function TransactionEvaluation({
+  category,
+  register,
+  readOnly,
+}) {
   return (
     <>
       <input
@@ -8,6 +12,7 @@ export default function TransactionEvaluation({ category, register }) {
         {...register("evaluation[]")}
         value={`EVAL_${category.subIdx}`}
         id={`${category.subIdx}`}
+        disabled={readOnly}
       />
       <label htmlFor={`${category.subIdx}`}> {category.name} </label>
     </>

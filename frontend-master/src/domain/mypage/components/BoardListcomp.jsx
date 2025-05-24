@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import React from "react";
 
-export default function BoardListcomp({ title, categoryIdx }) {
+export default function BoardListcomp({ idx, title, categoryIdx }) {
   return (
     <tr>
       <td>{title}</td>
