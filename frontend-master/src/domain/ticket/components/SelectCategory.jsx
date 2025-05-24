@@ -1,21 +1,16 @@
-import React, { useState } from "react";
-// react 컴포넌트를 만들기 위해 'React'를 불러옴
-// useState는 *선택된 장르 목록을 기억* 하기 위해 사용하는 React Hook
-
-// 장르 리스트(배열), 나중에 map으로 돌려서 체크 박스 만들 예정
-const categories = {
-  3001: "콘서트",
-  3002: "뮤지컬",
-  3003: "연극",
-  3004: "전시",
-  3005: "클래식",
-  3006: "아동/가족",
-  3007: "레저",
-  3008: "스포츠",
-};
+import React, { useState, useEffect } from "react";
+import { getCategory } from "@/services/Category";
+import { getCategoryIdx } from "@/utils/CategoryHandler";
 
 const SelectCategory = ({ onChange }) => {
+  const [categories, setCategories] = useState([]);
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    getCategory(getCategoryIdx("ticket"))
+      .then((res) => setCategories(res.data))
+      .catch((error) => console.error("장르 리스트 불러오기 실패:", error));
+  }, []);
 
   // 체크박스 클릭 했을 때 호출되는 함수
   const toggleCategory = (category) => {
@@ -29,18 +24,20 @@ const SelectCategory = ({ onChange }) => {
     onChange?.(updated.map(Number)); // 선택 상태가 바뀌면 부모 컴포넌트로 전달
   };
 
+  // setCategories(response.data?.filter((item) => item !== null) || []);
+
   return (
     <div>
       <h3>원하는 장르를 선택하세요.</h3>
       <div>
-        {Object.entries(categories).map(([sub_idx, categoryName]) => (
-          <label key={sub_idx}>
+        {categories.map((category) => (
+          <label key={category.sub_idx}>
             <input
               type="checkbox"
-              checked={selected.includes(sub_idx)}
-              onChange={() => toggleCategory(sub_idx)}
+              checked={selected.includes(category.sub_idx)}
+              onChange={() => toggleCategory(category.sub_idx)}
             />
-            <span>{categoryName}</span>
+            <span>{category.categoryName}</span>
           </label>
         ))}
       </div>
