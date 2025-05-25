@@ -7,3 +7,6 @@
 .showList {
   width: 30%;
 }
+.listDot {
+  list-style-type: none;
+}

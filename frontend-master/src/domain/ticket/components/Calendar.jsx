@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getTicketCalendar } from "../services/ticketService";
 import "../style/Calendar.css";
 
-function Calendar({ selectedIds }) {
+function Calendar({ selectedIds, setStartDate, setEndDate }) {
   const [date, setDate] = useState(new Date()); // 현재 기준 달
   const [list, setList] = useState([]); // API에서 가져온 날짜별 공연/스포츠 데이터
   const [infos, setInfos] = useState([]); // 달력에 출력할 날짜 정보 배열
@@ -68,11 +68,11 @@ function Calendar({ selectedIds }) {
       const dateStr = formatDate(targetYear, targetMonth, day); // 문자열
       const matched = list.find((item) => item.date.startsWith(dateStr));
       // const matched = list.find((item) => item.date.startsWith(dateStr)); // 날짜 일치하는 데이터 찾아서 넣기
-      // ✅ 확인 로그 추가
-      console.log("🔍 비교 중:", {
-        dateStr,
-        matched,
-      });
+      // 확인 로그
+      // console.log("🔍 비교 중:", {
+      //   dateStr,
+      //   matched,
+      // });
 
       newInfos.push({
         day,
@@ -85,8 +85,6 @@ function Calendar({ selectedIds }) {
 
     setInfos(newInfos);
   }, [list, date]);
-
-  useEffect(() => {}, { selectedIds });
 
   // 이전달/다음달 보기 기능
   const prevMonth = () => setDate(new Date(year, month - 1, 1));
@@ -119,11 +117,22 @@ function Calendar({ selectedIds }) {
             className={`day ${info.type}-month-day ${
               selectedDate === info.dateStr ? "selected" : ""
             }`}
-            onClick={() =>
-              setSelectedDate((prev) =>
-                prev === info.dateStr ? null : info.dateStr
-              )
-            }
+            onClick={() => {
+              const isSame = selectedDate === info.dateStr;
+              const newSelected = isSame ? null : info.dateStr;
+              setSelectedDate(newSelected);
+
+              if (info.type === "current") {
+                if (newSelected === null) {
+                  setStartDate(null);
+                  setEndDate(null);
+                } else {
+                  const dateObj = new Date(newSelected);
+                  setStartDate(dateObj);
+                  setEndDate(dateObj);
+                }
+              }
+            }}
           >
             <div>{info.day}</div>
             {/* 이번달 데이터만 출력 */}

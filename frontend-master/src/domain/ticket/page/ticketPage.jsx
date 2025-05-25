@@ -11,8 +11,21 @@ const TicketPage = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
+  // 팝업 관련 상태 추가
+  const [popupInfo, setPopupInfo] = useState(null);
+
   const categoriesToQuery =
     selectedIds.length > 0 ? selectedIds : allCategoryIds;
+
+  // 팝업 열기 함수: 공연 정보를 받아서 상태 업데이트
+  const openPopup = (info) => {
+    setPopupInfo(info);
+  };
+
+  // 팝업 닫기 함수
+  const closePopup = () => {
+    setPopupInfo(null);
+  };
 
   return (
     <div className="ticketPage">
@@ -53,6 +66,9 @@ const TicketPage = () => {
           />
         </div>
       </div>
+
+      {/* 팝업 컴포넌트 */}
+      {popupInfo && <PopupPage info={popupInfo} onClose={closePopup} />}
     </div>
   );
 };

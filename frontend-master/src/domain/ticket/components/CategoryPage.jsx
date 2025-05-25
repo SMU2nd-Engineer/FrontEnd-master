@@ -4,20 +4,11 @@ import SearchTitleAndCast from "./SearchTitleAndCast";
 import SearchDate from "./SearchDate";
 
 const CategoryPage = ({
-  selectedIds,
   setSelectedIds,
-  searchTerm,
   setSearchTerm,
-  startDate,
   setStartDate,
-  endDate,
   setEndDate,
 }) => {
-  const [allCategoryIds, setAllCategoryIds] = useState([]);
-
-  const categoriesToQuery =
-    selectedIds.length > 0 ? selectedIds : allCategoryIds;
-
   const handleSearch = (query) => {
     setSearchTerm(query);
   };
