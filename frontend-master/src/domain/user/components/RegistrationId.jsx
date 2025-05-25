@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { duplicateCheckService } from "../services/DuplicateCheckService";
+import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
 
 export default function RegistrationId({

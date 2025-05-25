@@ -1,15 +1,24 @@
 import Button from "@/components/Button";
 import React from "react";
 
-export default function CommentListcomp({ text, date }) {
+export default function CommentListcomp({
+  navigate,
+  contentTitle,
+  text,
+  date,
+  contentIdx,
+  idx,
+}) {
+  const handleOnClick = () => {
+    // 경로 받아서 적어야함.
+    navigate(`/board/${contentIdx}`);
+    //navigate(`/board/${contentIdx}?commentId={idx}`); // 포커싱 기능을 넣을 경우 넘겨줄 경로
+  };
   return (
-    <tr>
+    <tr onClick={handleOnClick}>
+      <td>{contentTitle}</td>
       <td>{text}</td>
       <td>{date}</td>
-      <td>
-        {/* 게시판 댓글 삭제 경로 받아서 적을것 */}
-        <Button text={"삭제"} type="button" onClick={() => {}} />
-      </td>
     </tr>
   );
 }

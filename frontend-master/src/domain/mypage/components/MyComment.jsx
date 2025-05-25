@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CommentListcomp from "./CommentListcomp";
 import MyPagination from "./MyPaginationUI";
 
-export default function MyComment({ comments = [] }) {
+export default function MyComment({ navigate, comments = [] }) {
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 5;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
@@ -25,17 +25,21 @@ export default function MyComment({ comments = [] }) {
       <table>
         <thead>
           <tr>
-            <th>제목</th>
-            <th>날짜</th>
-            <th>삭제</th>
+            <th>게시글 제목</th>
+            <th>작성한 댓글</th>
+            <th>작성한 날짜</th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item) => (
             <CommentListcomp
               key={item.idx}
+              idx={item.idx}
               text={item.text}
               date={item.sdate}
+              contentTitle={item.contentTitle}
+              contentIdx={item.contentIdx}
+              navigate={navigate}
             />
           ))}
         </tbody>
