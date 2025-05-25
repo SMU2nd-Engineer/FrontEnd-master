@@ -15,6 +15,9 @@ export default function NaverRedirect() {
     "error_description"
   );
 
+  // 자동 로그인 체크
+  const autoLogin = sessionStorage.getItem("autoLogin") === "true";
+
   console.log("NaverCode : " + naverCode);
   console.log("stateKey : " + stateKey);
 
@@ -23,7 +26,7 @@ export default function NaverRedirect() {
     const requestNaverAuth = async () => {
       if (stateKey === import.meta.env.VITE_API_STATE && naverCode) {
         try {
-          const res = await naverLogin(naverCode);
+          const res = await naverLogin(naverCode, autoLogin);
           console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);

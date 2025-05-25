@@ -7,10 +7,10 @@ import axiosInstance from "@/lib/axiosInstance";
  * @returns API를 전달
  */
 
-export const googleLogin = async (googleCode) => {
+export const googleLogin = async (googleCode, autoLogin) => {
   return await axiosInstance.post(
     "/user/googleAuth",
-    { code: googleCode },
+    { code: googleCode, autoLogin },
     { withCredentials: true }
   );
 };

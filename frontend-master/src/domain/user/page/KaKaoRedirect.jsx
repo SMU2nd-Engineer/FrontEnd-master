@@ -14,12 +14,14 @@ export default function KaKaoRedirect() {
   console.log("kakaoCode : " + kakaoCode);
   console.log("stateKey : " + stateKey);
 
+  const autoLogin = sessionStorage.getItem("autoLogin") === "true";
+
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   useEffect(() => {
     const requestKaKaoAuth = async () => {
       if (stateKey === import.meta.env.VITE_API_STATE && kakaoCode) {
         try {
-          const res = await kakaoLogin(kakaoCode);
+          const res = await kakaoLogin(kakaoCode, autoLogin);
           console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
