@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BoardListcomp from "./BoardListcomp";
 import MyPagination from "./MyPaginationUI";
 
-export default function MyBoard({ boards = [] }) {
+export default function MyBoard({ navigate, boards = [] }) {
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 5;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
@@ -26,10 +26,9 @@ export default function MyBoard({ boards = [] }) {
       <table>
         <thead>
           <tr>
-            <th>제목</th>
-            <th>삽니다/팝니다</th>
-            <th>수정</th>
-            <th>삭제</th>
+            <th>작성한 게시글 제목</th>
+            <th>분류</th>
+            <th>작성한 날짜</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +37,9 @@ export default function MyBoard({ boards = [] }) {
               key={item.idx}
               idx={item.idx}
               title={item.title}
-              division={item.categoryIdx}
+              categoryName={item.categoryName}
+              navigate={navigate}
+              sDate={item.sDate}
             />
           ))}
         </tbody>

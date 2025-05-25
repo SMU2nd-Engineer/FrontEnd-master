@@ -23,10 +23,11 @@ const SCHEMA = REVIEW_SCHEMA;
  */
 export default function TransactionReviewRegisterPage() {
   const { reviewIdx } = useParams();
-  const [isEditMode, setIsEditMode] = useState(!reviewIdx); // 수정모드확인
-  const [sellerInfo, setSellerInfo] = useState(""); // 판매자 정보 등록
+  const isNewReview = !reviewIdx;
+  const [isEditMode, setIsEditMode] = useState(isNewReview); // 수정모드확인
+  const isReadOnly = !isNewReview && !isEditMode; // 수정모드 체크를 위한 변수
+  const [sellerInfo, setSellerInfo] = useState(null); // 판매자 정보 등록
   const [evalutaionCategories, setEvalutaionCategories] = useState([]); // 평가 항목
-  const isReadOnly = reviewIdx && !isEditMode; // 수정모드 체크를 위한 변수
   const [originalReview, setOriginalReview] = useState({}); // 기존 리뷰 정보 저장.
   const navigate = useNavigate();
 
@@ -38,9 +39,11 @@ export default function TransactionReviewRegisterPage() {
     formState: { errors }, // 각 필드의 유효성 오류 처리
   } = useForm({
     resolver: yupResolver(SCHEMA),
+    mode: "onBlur", // 사용자에게 안내 메시지 출력
     defaultValues: {
       rating: 0,
       reviewText: "",
+      sellerIdx: 0,
     },
   });
 
@@ -60,32 +63,35 @@ export default function TransactionReviewRegisterPage() {
       alert("변경된 값이 없습니다.");
       return;
     }
-
+    let addCount = [];
+    let removeCount = [];
+    let changeValueEvaluation = {};
     const currentEvaluations = formData["evaluation"] || [];
+    const originalEvaluations = originalReview.evaluation || [];
+    if (!isNewReview) {
+      addCount = currentEvaluations.filter(
+        (item) => !originalEvaluations.includes(item)
+      );
+      removeCount = originalEvaluations.filter(
+        (item) => !currentEvaluations.includes(item)
+      );
 
-    const addCount = currentEvaluations.filter(
-      (item) => !originalReview.evaluation.includes(item)
-    );
-    const removeCount = originalReview.evaluation.filter(
-      (item) => !currentEvaluations.includes(item)
-    );
+      // 거래 평가 값을 변경하기 위해서 프론트에서 +/- 처리
+      const changeValueEvaluation = {};
 
-    // 거래 평가 값을 변경하기 위해서 프론트에서 +/- 처리
-    const changeValueEvaluation = {};
-
-    addCount.forEach((evaluation) => {
-      changeValueEvaluation[evaluation] = 1;
-    });
-    removeCount.forEach((evaluation) => {
-      changeValueEvaluation[evaluation] = -1;
-    });
-
+      addCount.forEach((evaluation) => {
+        changeValueEvaluation[evaluation] = 1;
+      });
+      removeCount.forEach((evaluation) => {
+        changeValueEvaluation[evaluation] = -1;
+      });
+    }
     const editFormData = {
       ...formData,
       changeValueEvaluation,
     };
 
-    if (!isEditMode) {
+    if (isNewReview) {
       const result = await registReview(formData);
       alert("리뷰를 남겨주셔서 감사합니다!");
       navigate("/product/list");
@@ -122,7 +128,10 @@ export default function TransactionReviewRegisterPage() {
         setValue("rating", getReview.fetchReviewRegisterInfo.rating);
         setValue("reviewText", getReview.fetchReviewRegisterInfo.reviewText);
         setValue("reviewIdx", getReview.fetchReviewRegisterInfo.reviewIdx);
-        setValue("sellerIdx", getReview.fetchReviewRegisterInfo.sellerIdx); // 폼 제출이 안되서 지정해주기
+        setValue(
+          "sellerIdx",
+          getReview?.fetchReviewRegisterInfo?.sellerIdx ?? 0
+        ); // 폼 제출이 안되서 지정해주기
         setSellerInfo(getReview.fetchReviewRegisterInfo);
         const selectedKeys = Object.entries(getReview.reviewEvaluationRecord) // 객체의 값만 가져옴(map객체)
           .filter(([key, value]) => value === 1) // 선택된 값만 선택
@@ -140,16 +149,20 @@ export default function TransactionReviewRegisterPage() {
         const result = await getMyPageData("SELLER_AND_CATEGORIES");
         setSellerInfo(result.sellerInfo);
         setEvalutaionCategories(result.evaluationCategories);
-        setValue("sellerIdx", result.sellerInfo.sellerIdx); // 폼 제출이 안되서 지정해주기
-        setValue("transactionIdx", result.sellerInfo.transactionIdx); // 폼 제출이 안되서 지정해주기
+        setValue("sellerIdx", result?.sellerInfo?.sellerIdx ?? 0); // 폼 제출이 안되서 지정해주기
+        setValue("transactionIdx", result?.sellerInfo?.transactionIdx ?? 0); // 폼 제출이 안되서 지정해주기
       }
     };
     saveInfo();
   }, [setValue, reviewIdx]);
   return (
     <div>
-      <MyPageLink />
-      <h1>{sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요</h1>
+      <h1>
+        {sellerInfo && sellerInfo.sellerName
+          ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
+          : "거래 정보 로딩 중..."}
+      </h1>
+      {/* <h1>{sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요</h1> */}
       <form
         onSubmit={handleSubmit(submitForm, (error) => {
           console.log("유효성 검증 실패", error);
@@ -177,10 +190,11 @@ export default function TransactionReviewRegisterPage() {
           register={register}
           setValue={setValue}
           readOnly={isReadOnly}
+          errors={errors}
         />
 
         <input type="hidden" {...register("sellerIdx")} />
-        {!reviewIdx && <input type="hidden" {...register("transactionIdx")} />}
+        {isNewReview && <input type="hidden" {...register("transactionIdx")} />}
         {isEditMode && <input type="hidden" {...register("reviewIdx")} />}
 
         <Button
@@ -190,7 +204,7 @@ export default function TransactionReviewRegisterPage() {
           }}
         />
 
-        {!reviewIdx && <Button type="submit" text={"리뷰 작성하기"} />}
+        {isNewReview && <Button type="submit" text={"리뷰 작성하기"} />}
 
         {isReadOnly && (
           <Button
@@ -201,7 +215,9 @@ export default function TransactionReviewRegisterPage() {
           />
         )}
 
-        {isEditMode && <Button type="submit" text={"리뷰 수정하기"} />}
+        {isEditMode && !isNewReview && (
+          <Button type="submit" text={"리뷰 수정하기"} />
+        )}
       </form>
     </div>
   );
