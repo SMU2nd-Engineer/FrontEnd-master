@@ -6,7 +6,8 @@ import Button from "../../../components/Button";
 import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
 import GoogleLogin from "../components/GoogleLogin";
-// import "@user/style/User.css";
+import "@user/style/LoginPage.css";
+
 export default function LogingPage() {
   const [id, setUserId] = useState("");
   const [password, setpassword] = useState("");
@@ -60,21 +61,35 @@ export default function LogingPage() {
   );
   return (
     <div id="LoginContainer">
-      <form onSubmit={handleLogin}>
-        <label>id : </label>
+      <form onSubmit={handleLogin} className="login-form">
+        {/* <label htmlFor="id"> */}
         <input
+          id="id"
+          className="input-id"
           type="text"
           value={id}
           onChange={(e) => setUserId(e.target.value)}
+          placeholder="아이디"
         />
-        <br />
-        <label>password : </label>
+        {/* </label> */}
+        {/* <label htmlFor="pw"> */}
         <input
+          id="pw"
+          className="input-pw"
+          placeholder="패스워드"
           type="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-        <br />
+        {/* </label> */}
+        <Button
+          text={"로그인"}
+          onClick={handleLogin}
+          type={"submit"}
+          className="login-button"
+        />
+      </form>
+      <div className="login-option">
         <label>
           <input
             type="checkbox"
@@ -95,15 +110,8 @@ export default function LogingPage() {
           />
           자동 로그인
         </label>
-        <br />
-        <Button text={"로그인"} onClick={handleLogin} type={"submit"} />
-      </form>
-      <hr />
-      <KaKaoLogin />
-      <NaverLogin />
-      <GoogleLogin />
-      <hr />
-      <div>
+      </div>
+      <div className="login-help">
         <Link
           to="/user/registration"
           onClick={() => {
@@ -115,6 +123,11 @@ export default function LogingPage() {
         </Link>
         /<Link to="/user/find/id"> 아이디 찾기 </Link> /
         <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
+      </div>
+      <div className="social-login">
+        <KaKaoLogin />
+        <NaverLogin />
+        <GoogleLogin />
       </div>
     </div>
   );

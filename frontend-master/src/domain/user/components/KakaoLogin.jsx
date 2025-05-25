@@ -16,7 +16,7 @@ export default function KaKaoLogin() {
   };
 
   return (
-    <div id="kakoLoginIcon">
+    <div id="kakoLoginIcon" className="social-button">
       <Button
         text={"카카오 로그인"}
         imgSrc={kakaoLoginButton}
