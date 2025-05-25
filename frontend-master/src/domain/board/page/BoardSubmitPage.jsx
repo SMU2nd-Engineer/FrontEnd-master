@@ -43,12 +43,7 @@ const BoardSubmitPage = () => {
       [name]: value, 
     }));
   };
-
-  // 글 내용 입력창에서 값 입력하면 출력되는 콘솔확인하기
-  // useEffect (() => {
-  //   console.log("에디터 글 내용: ", quillCustomData);
-  // }, [quillCustomData])
-
+  
   // 게시글 내용 입력 후 클릭하는 버튼
   // preventDefault: 페이지 새로고침 방지
   const handleSubmit = (e) => {

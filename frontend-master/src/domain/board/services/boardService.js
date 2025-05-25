@@ -12,6 +12,7 @@ export const getBoardSearch = (searchType, category, keyword) => {
     , withCredentials: true});
 };
 
+// 게시글 등록
 export const getBoardSubmit = ({ category_idx, title, content }) => {
   return axiosInstance.post(
     "board/submit",
@@ -21,14 +22,24 @@ export const getBoardSubmit = ({ category_idx, title, content }) => {
 };
 
 // 게시글 상세페이지 
-// export const getBoardDetail = ({ category_idx, title, contents_idx, nickname}) => {
-//   return axiosInstance.get(
-//     "board/detail",
-//     {category_idx, title, contents_idx, nickname}, 
-//     { withCredentials: true }
-//   );
-// };
-
 export const getBoardDetail = (id) => {
   return axiosInstance.get(`board/detail/${id}`,{ withCredentials: true });
+};
+
+// 게시글 상세페이지 - 댓글 목록 불러오기
+export const getBoardComment = (id) => {
+  return axiosInstance.get(`/board/comment/${id}`, { withCredentials: true });
+};
+
+// 게시글 상세페이지 - 댓글 등록
+// commentTextData: 댓글 등록하는 text 가지고 있음
+export const getBoardAddComment = ({ id, text}) => {
+  return axiosInstance.post(
+    `board/comment`, 
+     {
+      contents_idx: id,
+      text : text
+     },
+    { withCredentials: true }
+  );
 };
