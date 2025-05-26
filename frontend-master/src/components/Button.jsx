@@ -6,6 +6,7 @@ const Button = ({
   disabled = false,
   className = "Button",
   style = null,
+  imgStyle = null,
 }) => {
   return (
     <button
@@ -16,7 +17,7 @@ const Button = ({
       style={style}
     >
       {/* 이미지가 있을 경우 버튼 이미지를 보여줌 - 소셜 로그인 관련 기능 */}
-      {imgSrc ? <img src={imgSrc} alt={text} /> : text}
+      {imgSrc ? <img src={imgSrc} alt={text} style={imgStyle} /> : text}
     </button>
   );
 };

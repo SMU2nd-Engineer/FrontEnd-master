@@ -22,6 +22,7 @@ export default function GoogleLogin() {
         text={"구글 로그인"}
         imgSrc={googleLoginButton}
         onClick={handleAutoGoogle}
+        imgStyle={{ width: 54, height: 54 }}
       />
     </div>
   );
