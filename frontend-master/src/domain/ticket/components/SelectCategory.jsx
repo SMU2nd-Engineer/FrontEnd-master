@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getCategory } from "@/services/Category";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
+import "../style/ticketPage.css";
 
 const SelectCategory = ({ onChange }) => {
   const [categories, setCategories] = useState([]);
@@ -23,15 +24,16 @@ const SelectCategory = ({ onChange }) => {
   };
 
   return (
-    <div>
-      <h3>원하는 장르를 선택하세요.</h3>
-      <div>
+    <div className="categoryCheckboxMain">
+      {/* <h3 className="checkboxTitle">원하는 장르를 선택하세요.</h3> */}
+      <div className="checkboxGrid">
         {categories.map((category) => (
-          <label key={category.sub_idx}>
+          <label key={category.sub_idx} className="categoryCheckbox">
             <input
               type="checkbox"
               checked={selected.includes(category.sub_idx)}
               onChange={() => toggleCategory(category.sub_idx)}
+              className="checkbox"
             />
             <span>{category.categoryName}</span>
           </label>

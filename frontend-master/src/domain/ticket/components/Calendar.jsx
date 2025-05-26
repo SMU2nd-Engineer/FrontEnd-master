@@ -86,11 +86,17 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
   return (
     <div className="calendar">
       <div className="header">
-        <button onClick={prevMonth}>‹</button>
-        <div>
-          {year}년 {month + 1}월
+        <button onClick={prevMonth} className="monthMoveButton">
+          ‹
+        </button>
+        <div className="calendarTitle">
+          <p>
+            {year}년 {month + 1}월
+          </p>
         </div>
-        <button onClick={nextMonth}>›</button>
+        <button onClick={nextMonth} className="monthMoveButton">
+          ›
+        </button>
       </div>
 
       <div className="weekdays">
@@ -127,17 +133,22 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
               }
             }}
           >
-            <div>{info.day}</div>
-            {/* 이번달 데이터만 출력 */}
-            {info.type === "current" && info.performance > 0 && (
-              <div className="event-badge performance">
-                공연: {info.performance}건
-              </div>
-            )}
-            {/* 이번달 데이터만 출력 */}
-            {info.type === "current" && info.sports > 0 && (
-              <div className="event-badge sports">스포츠: {info.sports}건</div>
-            )}
+            {info.day}
+
+            <div className="dataQuantity">
+              {/* 이번달 데이터만 출력 */}
+              {info.type === "current" && info.performance > 0 && (
+                <div className="event-badge performance">
+                  <p>공연: {info.performance}건</p>
+                </div>
+              )}
+              {/* 이번달 데이터만 출력 */}
+              {info.type === "current" && info.sports > 0 && (
+                <div className="event-badge sports">
+                  <p>스포츠: {info.sports}건</p>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

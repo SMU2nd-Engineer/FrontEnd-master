@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../style/ticketPage.css";
 
 const SearchTitleAndCast = ({ onSearch }) => {
   const [query, setQuery] = useState("");
