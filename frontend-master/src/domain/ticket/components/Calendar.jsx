@@ -27,7 +27,6 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
 
     getTicketCalendar(formattedMonth, selectedIds.join(","))
       .then((res) => {
-        console.log("📦 API 응답:", res.data);
         setList(res.data);
       })
       .catch((err) => console.log(err));
@@ -67,12 +66,6 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
 
       const dateStr = formatDate(targetYear, targetMonth, day); // 문자열
       const matched = list.find((item) => item.date.startsWith(dateStr));
-      // const matched = list.find((item) => item.date.startsWith(dateStr)); // 날짜 일치하는 데이터 찾아서 넣기
-      // 확인 로그
-      // console.log("🔍 비교 중:", {
-      //   dateStr,
-      //   matched,
-      // });
 
       newInfos.push({
         day,

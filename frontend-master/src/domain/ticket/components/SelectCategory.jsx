@@ -17,14 +17,10 @@ const SelectCategory = ({ onChange }) => {
     const updated = selected.includes(category)
       ? selected.filter((item) => item !== category)
       : [...selected, category];
-    // 만약 category가 이미 선택되어 있다면 filer로 제거하고 아니면 새로 배열에 추가한다는 삼항 연산자
-    // .includes() : 배열에 특정 요소 포함 여부를 확인해주는 함수
 
     setSelected(updated); // 상태 업데이트
     onChange?.(updated.map(Number)); // 선택 상태가 바뀌면 부모 컴포넌트로 전달
   };
-
-  // setCategories(response.data?.filter((item) => item !== null) || []);
 
   return (
     <div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TicketList from "../components/TicketList";
 import CategoryPage from "../components/CategoryPage";
 import Calendar from "../components/Calendar";
+import SearchDate from "../components/SearchDate";
 import "../style/ticketPage.css";
 
 const TicketPage = () => {
@@ -25,6 +26,11 @@ const TicketPage = () => {
   // 팝업 닫기 함수
   const closePopup = () => {
     setPopupInfo(null);
+  };
+
+  const handleDateChange = (start, end) => {
+    setStartDate(start);
+    setEndDate(end);
   };
 
   return (
@@ -58,6 +64,7 @@ const TicketPage = () => {
           />
         </div>
         <div className="showList">
+          <SearchDate onDateChange={handleDateChange} />
           <TicketList
             selectedIds={categoriesToQuery}
             searchTerm={searchTerm}
