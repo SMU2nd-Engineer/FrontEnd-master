@@ -7,23 +7,21 @@ const PaymentTestPage = () => {
 
   const handleKakaoPayReady = async () => {
     try {
-      const response = await axiosInstance.post("/api/payment/ready?payMethod=kakao", {
-        cid: "TC0ONETIME",
+      const response = await axiosInstance.post("/payment/ready?payMethod=6001", {
         partnerOrderId: "ORDER1234",
         partnerUserId: "USER5678",
         itemName: "TEST",
-        itemId: 10010001, // productID(상품종류+ID값)
         quantity: 1,
-        amount: 10000,
+        amount: 5000,
         taxFreeAmount: 0,
         approvalUrl: "http://localhost:5173/payment/success",
         cancelUrl: "http://localhost:5173/payment/cancel",
         failUrl: "http://localhost:5173/payment/fail",
 
-        tradeType: "배송", 
         deliveryAddress: "서울특별시 강남구 테헤란로 123",
-        buyerId: 'loginUserId',
-        sellerId: 'productSellerId'
+        productIdx: 2,
+        buyerIdx: 3,
+        sellerIdx: 4
       });
 
       console.log("카카오페이 준비 성공:", response.data);
@@ -49,8 +47,8 @@ const PaymentTestPage = () => {
           <a href={payUrl}>
             결제 페이지 이동하기
           </a>
-        </div>
-      )}
+    </div>
+  )}
 
       {error && <p style={{color: "red"}}>{error}</p>}
     </div>

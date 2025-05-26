@@ -12,6 +12,7 @@ export const getBoardSearch = (searchType, category, keyword) => {
     , withCredentials: true});
 };
 
+
 // 게시글 등록
 export const getBoardSubmit = ({ category_idx, title, content }) => {
   return axiosInstance.post(
@@ -42,4 +43,5 @@ export const getBoardAddComment = ({ id, text}) => {
      },
     { withCredentials: true }
   );
+
 };

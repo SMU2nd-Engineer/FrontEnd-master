@@ -3,10 +3,14 @@ import "../styles/ProductsListPage.css";
 import ProductList from "../components/ProductList";
 import ProductSearch from "../components/ProductSearch"
 import { getProductList, searchProducts } from "../services/productService";
+import Button from "@/components/Button";
+import { useNavigate } from "react-router-dom";
+
 
 
 const ProductListPage = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProductList()
@@ -35,10 +39,16 @@ const ProductListPage = () => {
     }
   };
 
+  const handleClick = () => {
+    navigate('/product/upload');
+  };
+
   return (
     <div className="new_product">
-      <p className="pagetitle"> 상품 전체보기 </p>
-      
+      <div className="productpage-top">
+        <p className="pagetitle"> 상품 전체보기 </p>
+        <Button className="pluploadbutton" text={"상품등록"} onClick={handleClick} /> 
+      </div>
       <ProductSearch onSearch = {handleSearch} />
       <ProductList products={products} />
     </div>

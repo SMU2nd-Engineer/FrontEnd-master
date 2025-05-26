@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "@/lib/axiosInstance";
+import { getTicketInfo, getSearchTicket } from "../services/ticketService";
+import PopupPage from "./popupPage";
+import "../style/ticketPage.css";
 
 const TicketList = ({
   selectedIds,
@@ -8,26 +10,36 @@ const TicketList = ({
   endDate,
 }) => {
   const [ticketInfos, setTicketInfos] = useState([]);
+  const [selectedInfo, setSelectedInfo] = useState(null); // 팝업용 상태
   const [loading, setLoading] = useState(false);
+  const [idx, setIdx] = useState();
+
+  useEffect(() => {
+    if (!idx) return; // idx가 null/undefined이면 실행하지 않음
+
+    console.log("idx 변경됨:", idx);
+
+    getTicketInfo(idx)
+      .then((res) => {
+        console.log("상세 데이터:", res.data);
+        setSelectedInfo(res.data); // 팝업 열기
+      })
+      .catch((err) => console.log(err));
+  }, [idx]);
 
   useEffect(() => {
     setLoading(true);
 
     const categoriesParam = selectedIds.join(",");
-    axiosInstance
-      // API 호출
-      .get("/ticket/search", {
-        params: {
-          categories: categoriesParam,
-          query: searchTitle,
-          startDate: startDate ? startDate.toISOString().split("T")[0] : null, // date 형식을 'yyyy-mm-dd' 형식으로 가져오게 하기 위함(시간 빼고)
-          endDate: endDate ? endDate.toISOString().split("T")[0] : null,
-        }, // categories, query 파라미터 넘김
-      })
+    getSearchTicket({
+      categories: categoriesParam,
+      query: searchTitle,
+      startDate: startDate ? startDate.toISOString().split("T")[0] : null, // date 형식을 'yyyy-mm-dd' 형식으로 가져오게 하기 위함(시간 빼고)
+      endDate: endDate ? endDate.toISOString().split("T")[0] : null,
+    })
       .then((res) => {
-        console.log("검색 결과:", res.data);
-        setTicketInfos(res.data); // 저장
-        setLoading(false); // 로딩 종료
+        setTicketInfos(res.data);
+        setLoading(false);
       })
       .catch((err) => {
         console.error("검색 실패:", err);
@@ -43,15 +55,42 @@ const TicketList = ({
   );
 
   if (loading) return <p>정보 로딩 중...</p>;
+  console.log("ticketInfos:", ticketInfos);
   if (filteredInfos.length === 0) return <p>검색 결과가 없습니다.</p>;
 
   return (
-    <ul>
-      {filteredInfos.map((info) => (
-        // 결과가 있을 경우, filteredInfos를 순회하면서 <li>로 각 항목 표시 / title, name 둘다 없으면 JSON.stringify(info)로 객체 전체 문자열 출력(디버깅 목적)
-        <li key={info.id}>{info.title || info.name || JSON.stringify(info)}</li>
-      ))}
-    </ul>
+    <>
+      <ul className="listDot">
+        {filteredInfos.map((info, i) => (
+          <li key={i}>
+            <div
+              onClick={() => {
+                console.log("선택된 idx:", info.idx);
+                setIdx(info.idx);
+              }}
+              style={{
+                cursor: "pointer",
+                textDecoration: "underline",
+                color: "blue",
+              }}
+            >
+              {info.title || info.name || JSON.stringify(info)} - {info.company}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      {/* 팝업 컴포넌트 표시 */}
+      {selectedInfo && (
+        <PopupPage
+          info={selectedInfo}
+          onClose={() => {
+            setSelectedInfo(null);
+            setIdx(null);
+          }}
+        />
+      )}
+    </>
   );
 };
 

@@ -6,10 +6,10 @@
 
 import axiosInstance from "@/lib/axiosInstance";
 
-export const kakaoLogin = async (kakaoCode) => {
+export const kakaoLogin = async (kakaoCode, autoLogin) => {
   return await axiosInstance.post(
     "/user/kakaoAuth",
-    { code: kakaoCode },
+    { code: kakaoCode, autoLogin },
     { withCredentials: true }
   );
 };

@@ -33,7 +33,7 @@ export default function MyTransactionReview({
   if (!reviewLists.length)
     return (
       <>
-        <p>상품이 없습니다. </p>
+        <p>작성하신 거래 후기가 없습니다. </p>
         {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
       </>
     );
@@ -56,8 +56,9 @@ export default function MyTransactionReview({
           {currentItems.map((item) => (
             <MyTextReview
               key={item.idx}
+              reviewIdx={item.idx}
               reviewText={item.review}
-              reviewDate={item.sDate}
+              reviewDate={item.sdate}
             />
           ))}
         </tbody>

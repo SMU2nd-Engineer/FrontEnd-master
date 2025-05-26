@@ -14,6 +14,7 @@ const BoardSubmitPage = () => {
 
   // 게시글을 등록하고 저장하는 함수 
   // boardSubs: 게시글 입력한 데이터 담아서 백엔드로 보냄 
+
   // 게시글 등록 (제목, 등록일자, 작성자(닉네임), 이미지, 글내용(React Quill Toollbar))
   const [ newsubmit, setNewSubmit ] = useState({
     category_idx: "",
@@ -97,6 +98,7 @@ const BoardSubmitPage = () => {
 
   };
 
+
   // 화면에 표시될 내용
   return (
     <div className='new_board_submit'>
@@ -138,7 +140,6 @@ const BoardSubmitPage = () => {
 
       {/* 게시글 등록 페이지 - 게시글 취소 버튼 */}        
       <button onClick={handleCancel}>취소</button>
-
     </div>
   )
 

@@ -15,26 +15,14 @@ export default function SellAndPurchaseList() {
     };
     saveList();
   }, []);
-  console.log(myProductList);
-  // 가져온 값 판매, 구매 내역에 따라 구분해서 값을 분배해줘야 함.
-  const sellProducts =
-    myProductList > 0
-      ? myProductList.filter((product) => product.division === 0)
-      : [];
-  const buyProducts =
-    myProductList > 0
-      ? myProductList.filter((product) => product.division === 1)
-      : [];
-  console.log(sellProducts);
-  console.log(buyProducts);
   return (
     <div>
       <MyPageLink />
       <p>판매/구매이력</p>
       <p>판매 내역 컴포넌트</p>
-      <MySellList products={sellProducts} />
+      <MySellList products={myProductList.sellInfoList} />
       <p>구매 내역 컴포넌트</p>
-      <MyBuyList products={buyProducts} />
+      <MyBuyList products={myProductList.buyInfoList} />
     </div>
   );
 }

@@ -9,9 +9,10 @@ import RegistrationName from "../components/RegistrationName";
 import RegistrationNickName from "../components/RegistrationNickName";
 import RegistrationId from "../components/RegistrationId";
 import RegistrationEmail from "../components/RegistrationEmail";
-import registrationService from "../services/RegistrationService";
+import registrationService from "../services/registrationService";
 import { useNavigate } from "react-router-dom";
 import { setAccessToken } from "@/utils/TokenManager";
+import { registrationUserFavorite } from "../services/registrationUserFavorite";
 
 /**
  * id : 아이디
@@ -98,6 +99,7 @@ export default function UserRegistrationPage() {
         if (movePosition) {
           navigate("/user/selectFavorites", { replace: true });
         } else {
+          await registrationUserFavorite([]);
           navigate("/user/home", { replace: true });
         }
       }

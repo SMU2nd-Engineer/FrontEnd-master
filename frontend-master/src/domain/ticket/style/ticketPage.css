@@ -1,0 +1,12 @@
+.bottomArea {
+  display: flex;
+}
+.calender {
+  width: 70%;
+}
+.showList {
+  width: 30%;
+}
+.listDot {
+  list-style-type: none;
+}

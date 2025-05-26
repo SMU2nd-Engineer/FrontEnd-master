@@ -1,43 +1,74 @@
 import React, { useState } from "react";
-import SelectCategory from "../components/SelectCategory";
-import SearchTitleAndCast from "../components/SearchTitleAndCast";
 import TicketList from "../components/TicketList";
-import SearchDate from "../components/SearchDate";
 import CategoryPage from "../components/CategoryPage";
+import Calendar from "../components/Calendar";
+import "../style/ticketPage.css";
 
 const TicketPage = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [allCategoryIds, setAllCategoryIds] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
-  // 이후 showList 필터링에 사용할 수 있음
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    console.log("검색어:", query);
+  // 팝업 관련 상태 추가
+  const [popupInfo, setPopupInfo] = useState(null);
+
+  const categoriesToQuery =
+    selectedIds.length > 0 ? selectedIds : allCategoryIds;
+
+  // 팝업 열기 함수: 공연 정보를 받아서 상태 업데이트
+  const openPopup = (info) => {
+    setPopupInfo(info);
+  };
+
+  // 팝업 닫기 함수
+  const closePopup = () => {
+    setPopupInfo(null);
   };
 
   return (
     <div className="ticketPage">
       <div className="topCategoryBar">
-        {/* 카테고리 선택 바 공간 */}
-        {/* 1. 카테고리 선택 */}
-        {/* <SelectCategory onChange={setSelectedCategories} /> */}
-        {/* 2. 기간 선택 */}
-        {/* <SearchDate /> */}
-        {/* 3. 검색 */}
-        {/* <SearchTitleAndCast onSearch={handleSearch} /> */}
-        <CategoryPage />
+        <CategoryPage
+          selectedIds={selectedIds}
+          setSelectedIds={setSelectedIds}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          setAllCategoryIds={setAllCategoryIds}
+        />
       </div>
 
       <div className="bottomArea">
-        <div className="calender">{/* 하단 좌측 달력 공간 */}</div>
+        <div className="calender">
+          <Calendar
+            selectedIds={selectedIds}
+            setSelectedIds={setSelectedIds}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            setAllCategoryIds={setAllCategoryIds}
+          />
+        </div>
         <div className="showList">
-          {/* 하단 우측 리스트 표출 공간 */}
-          {/* <TicketList
-            selectedIds={selectedCategories}
-            searchTerm={searchQuery}
-          /> */}
+          <TicketList
+            selectedIds={categoriesToQuery}
+            searchTerm={searchTerm}
+            startDate={startDate}
+            endDate={endDate}
+          />
         </div>
       </div>
+
+      {/* 팝업 컴포넌트 */}
+      {popupInfo && <PopupPage info={popupInfo} onClose={closePopup} />}
     </div>
   );
 };

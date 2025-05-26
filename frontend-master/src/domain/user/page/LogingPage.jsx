@@ -10,6 +10,8 @@ import GoogleLogin from "../components/GoogleLogin";
 export default function LogingPage() {
   const [id, setUserId] = useState("");
   const [password, setpassword] = useState("");
+  const [autoLogin, setAutoLogin] = useState(false);
+  const [rememberId, setRememberId] = useState(false);
   const isLogin = !!localStorage.getItem("accessToken");
   const navigate = useNavigate();
 
@@ -17,13 +19,16 @@ export default function LogingPage() {
     // 새로 고침을 방지하기 위한 코드
     e.preventDefault();
     try {
-      const res = await login(id, password);
-      console.log("로그인 시도를 진행함");
-      console.log("응답 : " + res);
+      const res = await login(id, password, autoLogin);
       const accessToken = res.data.accessToken;
-      console.log("accessToken : " + accessToken);
       if (accessToken) {
         setAccessToken(accessToken);
+        if (rememberId) {
+          // 아이디 기억하기 체크 여부에 따라 아이디 제거 또는 기억하기
+          localStorage.setItem("savedUserId", id);
+        } else {
+          localStorage.removeItem("savedUserId");
+        }
         alert("로그인 성공");
         navigate("/user/home");
       } else {
@@ -38,12 +43,21 @@ export default function LogingPage() {
       setpassword("");
     }
   };
-  // 토큰있으면 로그인 되었으니 로그인 페이지 눌러도 정상 화면으로 돌아오기
-  useEffect(() => {
-    if (isLogin) {
-      navigate("/user/home");
-    }
-  }, [isLogin, navigate]);
+
+  useEffect(
+    () => {
+      const savedId = localStorage.getItem("savedUserId");
+      if (savedId) {
+        setUserId(savedId);
+        setRememberId(true);
+      }
+      if (isLogin) {
+        navigate("/user/home");
+      }
+    },
+    // 토큰있으면 로그인 되었으니 로그인 페이지 눌러도 정상 화면으로 돌아오기
+    [isLogin, navigate]
+  );
   return (
     <div id="LoginContainer">
       <form onSubmit={handleLogin}>
@@ -61,6 +75,27 @@ export default function LogingPage() {
           onChange={(e) => setpassword(e.target.value)}
         />
         <br />
+        <label>
+          <input
+            type="checkbox"
+            checked={rememberId}
+            onChange={(e) => setRememberId(e.target.checked)}
+          />
+          아이디 기억하기
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={autoLogin}
+            onChange={(e) => {
+              const checked = e.target.checked;
+              setAutoLogin(checked);
+              sessionStorage.setItem("autoLogin", String(checked));
+            }}
+          />
+          자동 로그인
+        </label>
+        <br />
         <Button text={"로그인"} onClick={handleLogin} type={"submit"} />
       </form>
       <hr />
@@ -76,9 +111,8 @@ export default function LogingPage() {
             sessionStorage.removeItem("provider");
           }}
         >
-          {" "}
-          회원 가입{" "}
-        </Link>{" "}
+          회원 가입
+        </Link>
         /<Link to="/user/find/id"> 아이디 찾기 </Link> /
         <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
       </div>
