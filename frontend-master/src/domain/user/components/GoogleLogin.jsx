@@ -17,7 +17,7 @@ export default function GoogleLogin() {
   };
 
   return (
-    <div id="googleLoginIcon">
+    <div id="googleLoginIcon" className="social-button">
       <Button
         text={"구글 로그인"}
         imgSrc={googleLoginButton}

@@ -10,7 +10,7 @@ export default function BoardListcomp({
 }) {
   const handleOnClick = () => {
     // 경로 받아서 적어야함.
-    navigate(`/board/${idx}`);
+    navigate(`/board/detail/${idx}`);
   };
   return (
     <tr onClick={handleOnClick}>
