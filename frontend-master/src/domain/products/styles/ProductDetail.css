@@ -19,7 +19,7 @@ hr {
   margin: 10px;
 }
 
-.image {
+/* .image {
   width: 400px;
   height: 400px;
   display: flex;
@@ -27,7 +27,7 @@ hr {
   justify-content: center;
   border: 1px dotted rgb(168, 168, 168);
   
-}
+} */
 
 .column {
   width: 700px;

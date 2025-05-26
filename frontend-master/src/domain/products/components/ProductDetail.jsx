@@ -4,12 +4,15 @@ import"../styles/ProductDetail.css";
 import { Divider } from '@chakra-ui/react'
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
+import ProductImage from "./ProductImage";
+import { title } from "framer-motion/client";
 
 export default function ProductDetail() {
   const {idx} = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  
   
     useEffect(() => {    
       getProductDetail(idx)
@@ -39,7 +42,7 @@ export default function ProductDetail() {
     <div className="detailinfo">
       <div className="detail-top">
         <div className="image">
-          <p className="image">사진</p>
+           <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" />
         </div>
         <div className="chakra-divider">
           <Divider orientation='vertical' height="400px"/>
@@ -63,6 +66,8 @@ export default function ProductDetail() {
             <div className="chakra-divider">
               <Divider orientation='horizontal'/>
             </div>
+            <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+
             <p className="detaillcontent">{product.content}</p>
           </div>
           <div className="chakra-divider">
