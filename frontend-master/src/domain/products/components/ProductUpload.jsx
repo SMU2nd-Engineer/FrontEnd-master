@@ -5,6 +5,7 @@ import { Divider, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
 import "../styles/ProductUpload.css";
+import ImageUpload from "./ImageUpload";
 
 const ProductUpload = () => {
   const [newProduct, setNewProduct] = useState({
@@ -13,11 +14,13 @@ const ProductUpload = () => {
     category_idx: "",
     categorygenre_idx:"",
     content: "",
-    imageUrl: "",
+    image_Url: "",
     user_idx: "",
   });
+  
+  const [uploadImage, setUploadImage] = useState([]);
 
-  const { title, price, category_idx, categorygenre_idx, content, imageUrl, user_idx } = newProduct;
+  const { title, price, category_idx, categorygenre_idx, content, image_Url, user_idx } = newProduct;
 
   const navigate = useNavigate();
 
@@ -33,7 +36,7 @@ const ProductUpload = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    postProduct(newProduct)
+    postProduct(newProduct, uploadImage)
       .then((response) => response.data)
       .then((result) => {
         console.log("결과: ", result);
@@ -49,15 +52,8 @@ const ProductUpload = () => {
         <form onSubmit={handleSubmit}>
         
         <div className="form-row">
-          <label htmlFor="imageUrl">상품 이미지 </label>
-          <Input
-            type="text"
-            id="imageUrl"
-            name="imageUrl"
-            value={imageUrl}
-            onChange={handleChange}
-            placeholder="상품이미지는 추후 업로드 탭으로 변동 예정"
-          />
+          <label>상품 이미지</label>
+          <ImageUpload uploadImage={uploadImage} setUploadImage={setUploadImage}/>
         </div>
         <div className="chakra-divider"> <Divider orientation='horizontal'/>  </div>
         

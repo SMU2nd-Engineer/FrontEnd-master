@@ -5,18 +5,17 @@ import React from "react";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-
+  // console.log('ProductCard product:', product);
   if (!product) return null;
-
+  // console.log("imageList:", product.imageList);
   return (
     <div
       className="product_card"
       onClick={() => navigate(`/product/detail/${product.idx}`)}
     >
-      <div className="Sampleimage">
-          <p >사진</p>
+      <div className="image">
+           <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
         </div>
-      {/* <ProductImage image_url={product.imageUrl} title={product.title} /> */}
       <ProductCardInfo title={product.title} price={product.price} />
     </div>
   );

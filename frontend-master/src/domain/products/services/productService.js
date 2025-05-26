@@ -1,21 +1,22 @@
 import axiosInstance from "@/lib/axiosInstance";
+import { param } from "framer-motion/client";
 
 export const getProductList = () => {
   return axiosInstance.get("product/list", {}, { withCredentials: true });
 };
 
-export const postProduct = ({
-  title,
-  category_idx,
-  categorygenre_idx,
-  content,
-  imageUrl,
-  price,
-  userId,
-}) => {
+export const postProduct = (
+  newProduct,
+  uploadImage
+) => {
+  const formData = new FormData();
+  formData.append("product", new Blob([JSON.stringify(newProduct)], { type: 'application/json' }))
+  uploadImage.forEach((img) => formData.append("files", img))
+  
+  console.log()
   return axiosInstance.post(
     "product/upload",
-    { title, category_idx, categorygenre_idx, content, imageUrl, price, userId },
+    formData,
     { withCredentials: true }
   );
 };
