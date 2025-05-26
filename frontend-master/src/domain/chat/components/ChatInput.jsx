@@ -20,10 +20,12 @@ const ChatInput = ({ handleMessageSend }) => {
         type="text"
         name="message"
         id="messageBox"
+        className="input-message"
         value={message}
+        placeholder="메시지를 입력하세요."
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button type="button" onClick={onSumit}>
+      <button className="input-message-button" type="button" onClick={onSumit}>
         보내기
       </button>
     </div>

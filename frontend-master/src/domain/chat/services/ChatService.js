@@ -5,8 +5,8 @@ import axiosInstance from "@/lib/axiosInstance";
  * @param {number} userId 유저 id
  * @returns {Promise<ChatRoom>}
  */
-export const getChatRooms = async (userId) =>
-  await axiosInstance.get(`/chatroom/${userId}`, {}, { withCredentials: true });
+export const getChatRooms = async () =>
+  await axiosInstance.get(`/chat/rooms`, {}, { withCredentials: true });
 
 /**
  * 채팅방 삭제
@@ -15,7 +15,7 @@ export const getChatRooms = async (userId) =>
  */
 export const deleteChatRoom = async (chatRoomId) =>
   await axiosInstance.delete(
-    `/chatroom/${chatRoomId}`,
+    `/chat/rooms/${chatRoomId}`,
     {},
     { withCredentials: true }
   );
@@ -27,8 +27,8 @@ export const deleteChatRoom = async (chatRoomId) =>
  */
 export const getChatRoomMessage = async (chatRoomId) => {
   return await axiosInstance.get(
-    `/chat/room/${chatRoomId}`,
-    {},
+    `/chat/messages`,
+    { params: { chatRoomId: chatRoomId } },
     { withCredentials: true }
   );
 };
@@ -38,13 +38,12 @@ export const getChatRoomMessage = async (chatRoomId) => {
  * @param {{user_idx : number, content : string, chatRoom_id: number}} obj
  * @returns {Promise<Chat>}
  */
-export const postChatMessage = async ({ user_idx, content, chatRoom_id }) => {
+export const postChatMessage = async ({ content, chatRoomId }) => {
   return await axiosInstance.post(
     `chat`,
     {
-      user_idx,
       content,
-      chatRoom_id,
+      chatRoomId,
     },
     { withCredentials: true }
   );
