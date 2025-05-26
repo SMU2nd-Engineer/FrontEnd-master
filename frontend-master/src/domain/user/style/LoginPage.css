@@ -1,0 +1,87 @@
+#LoginContainer {
+  display: grid;
+  grid-template-areas:
+    "form"
+    "options"
+    "helps"
+    "socials";
+  grid-template-rows: auto auto auto auto;
+  gap: 2rem;
+  max-width: fit-content;
+  margin: 4rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+}
+
+.login-form {
+  grid-area: form;
+  display: grid;
+  grid-template-areas:
+    "input-id login-button"
+    "input-pw login-button";
+  gap: 1rem;
+  margin-left: 10px;
+}
+
+.input-id {
+  grid-area: input-id;
+  justify-self: end;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.input-pw {
+  grid-area: input-pw;
+  justify-self: end;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.login-button {
+  grid-area: login-button;
+  grid-row: 1 / 3;
+  height: 100%;
+  background-color: black;
+  color: aliceblue;
+  width: auto;
+}
+
+.login-option {
+  grid-area: options;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.login-help {
+  grid-area: helps;
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.social-login {
+  grid-area: socials;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.social-button button {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+}

@@ -8,10 +8,10 @@ import axiosInstance from "@/lib/axiosInstance";
  * @returns api 호출
  */
 
-export const naverLogin = async (naverCode) => {
+export const naverLogin = async (naverCode, autoLogin) => {
   return await axiosInstance.post(
     "/user/naverAuth",
-    { code: naverCode },
+    { code: naverCode, autoLogin },
     { withCredentials: true }
   );
 };

@@ -18,18 +18,24 @@ const PaymentPage = () => {
     idx: 1,
     address: '제주특별자치도 안양시 동안구 봉은사3로 (현정김마을)'
   }
+  const [searchValue, setSearchValue] = useState({
+    category_idx: 0,
+    keyword : ""
+  });
+
+  useState(()=>{
+    console.log(product, tradeType);
+  }, [tradeType])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setNewProduct({
-      ...newProduct,
-      [name]: value,
-    });
+    setSearchValue({...searchValue, [name] : value});
+    console.log("카테고리 변경됨:", name, value);
+    console.log(typeof searchValue.category_idx);
   }
+
   const {
       register, // 입력 폼 등록
-      handleSubmit, // 폼 제출시 사용하여
       setValue, // 외부 API 값이나 수동 입력 처리
       watch, // 실시간 값 확인용
       formState: { errors }, // 각 필드의 유효성 오류 처리
@@ -43,19 +49,32 @@ const PaymentPage = () => {
         alert("상품 정보가 없습니다. 다시 시도해주세요.")
         return;
       }
-
-      try {
-        const result = await KakaoPayReady(product, user, tradeType);
-        console.log("카카오 응답 ", result);
-        if (result) {
-          window.location.href = result.nextRedirectPcUrl;
-          console.log("카카오 응답 ", result);
-        } else {
-          alert("결제 요청에 실패했습니다.");
-        }
-      } catch (error) {
-        console.error("카카오페이 요청 중 오류 발생: ", error);
-        alert("결제 요청 중 오류가 발생했습니다. 다시 시도해주세요.")
+      const categoryIdx = Number(searchValue.category_idx);
+      switch (categoryIdx) {
+        case 6001:
+          try {
+            const result = await KakaoPayReady(product, user, tradeType, searchValue.category_idx);
+            console.log("카카오 응답 ", result);
+            if (result) {
+              window.location.href = result.nextRedirectPcUrl;
+              console.log("카카오 응답 ", result);
+            } else {
+              alert("결제 요청에 실패했습니다.");
+            }
+          } catch (error) {
+            console.error("카카오페이 요청 중 오류 발생: ", error);
+            alert("결제 요청 중 오류가 발생했습니다. 다시 시도해주세요.")
+          }
+          break;
+        case 6002:
+          alert('토스페이 준비중');
+          break;
+        case 6003:
+          alert('네이버페이 준비중');
+          break;
+        default:
+          alert('결제수단을 선택해주세요');
+          break;
       }
     }
 
@@ -83,7 +102,7 @@ const PaymentPage = () => {
       </div>
       <div>
         <label htmlFor='category_idx'>결제 방법</label>
-        {/* <SelectBox id={"pay_method"} name={"pay_method"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/> */}
+        <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
       </div>
       <div className='paybtn'>
         <Button 

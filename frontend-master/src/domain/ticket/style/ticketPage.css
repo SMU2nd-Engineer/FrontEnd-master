@@ -1,0 +1,39 @@
+.bottomArea {
+  display: flex;
+}
+.calender {
+  width: 55%;
+}
+.showList {
+  width: 45%;
+}
+.listDot {
+  list-style-type: none;
+}
+
+.accordion-container {
+  margin-top: 1rem;
+}
+
+.accordion-section {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.accordion-header {
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.seDate {
+  display: flex;
+}
+
+.startDate {
+  width: 50%;
+}
+
+.endDate {
+  width: 50%;
+}

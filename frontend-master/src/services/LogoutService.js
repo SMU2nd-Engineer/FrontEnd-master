@@ -8,6 +8,7 @@ import axiosInstance from "@/lib/axiosInstance";
 export const logout = async (islogout = true) => {
   await axiosInstance.post("/logout", {}, { withCredentials: true });
   removeAccessToken();
+  sessionStorage.removeItem("autoLogin"); // 자동 로그인 설정 해제
   {
     islogout && alert("로그 아웃 되었습니다.");
   }

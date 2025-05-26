@@ -3,6 +3,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import BoardListPage from "../page/BoardListPage";
 import BoardSubmitPage from "../page/BoardSubmitPage";
+import BoardDetailPage from "../page/BoardDetailPage";
 
 
 const BoardRoutes = () => {
@@ -18,6 +19,9 @@ const BoardRoutes = () => {
 
         {/* 게시글 등록 페이지 - 게시판 등록화면 */}
         <Route path="/submit" element={<BoardSubmitPage />} />
+
+        {/* 게시글 상세 페이지 - 게시판 등록 후 */}
+        <Route path="/detail/:id" element={<BoardDetailPage />} />  
         
       </Routes>
     </div>

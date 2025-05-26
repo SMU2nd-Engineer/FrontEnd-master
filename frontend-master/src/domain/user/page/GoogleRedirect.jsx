@@ -14,6 +14,8 @@ export default function GoogleRedirect() {
   const googleErrorMessage = new URL(window.location.href).searchParams.get(
     "error_description"
   );
+  // 자동 로그인 체크
+  const autoLogin = sessionStorage.getItem("autoLogin") === "true";
 
   console.log("GoogleCode : " + googleCode);
   console.log("stateKey : " + stateKey);
@@ -28,7 +30,7 @@ export default function GoogleRedirect() {
     const requestGoogleAuth = async () => {
       if (stateKey === import.meta.env.VITE_API_STATE && googleCode) {
         try {
-          const res = await googleLogin(googleCode);
+          const res = await googleLogin(googleCode, autoLogin);
           console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
