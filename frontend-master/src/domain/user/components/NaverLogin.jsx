@@ -21,6 +21,7 @@ export default function NaverLogin() {
         text={"네이버 로그인"}
         imgSrc={naverLoginButton}
         onClick={handleAutoNaver}
+        imgStyle={{ width: 54, height: 54 }}
       />
     </div>
   );
