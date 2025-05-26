@@ -27,6 +27,10 @@ const BoardDetailPage = () => {
   // 입력한 댓글 목록으로 불러오기
   const [commentList, setCommentList] = useState([]);
 
+  // 로그인한 사람의 user_idx를 가져와야함 - 숫자 가져옴
+  // ContentsService, ContentsCommentService에 어떻게 불러올지 생각
+  const [userIdx, setUserIdx ] = useState(0);
+
   // 게시글 상세데이터 상태
   const [loading, setLoading] = useState(); // 로딩 상태
 
@@ -176,8 +180,12 @@ const BoardDetailPage = () => {
                 </p>
                 <p>{comment.text}</p>
                 <strong>{comment.sdate}</strong>
-                {/* 댓글 삭제 button */}
-                <CloseButton onClick={()=> {handleDelete(comment.comment_idx)}}/>
+                {/* 댓글 삭제 button 
+                  처음 페이지 시작하면 다른 정보와 로그인한 사람의 user_idx를 가져와야함
+                  비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정
+                   ContentsService, ContentsCommentService에 어떻게 불러올지 생각해야함
+                */}
+                {userIdx === comment.userIdx && <CloseButton onClick={()=> {handleDelete(comment.comment_idx)}}/>}
               </li>
             );
         })}
