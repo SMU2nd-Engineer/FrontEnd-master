@@ -13,10 +13,12 @@ const ChatRoomList = () => {
 
   return (
     <div className="roomList">
-      <h2>채팅 목록</h2>
-      {chatRooms.map((chatRoom) => (
-        <ChatRoomItem key={chatRoom.id} {...chatRoom} />
-      ))}
+      <div className="chatTitle">채팅 목록</div>
+      <div className="rooms">
+        {chatRooms.map((chatRoom) => (
+          <ChatRoomItem key={chatRoom.id} {...chatRoom} />
+        ))}
+      </div>
     </div>
   );
 };

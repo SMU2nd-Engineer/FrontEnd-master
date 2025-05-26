@@ -7,7 +7,7 @@ import { ChatRoomDispatchContext } from "../store/chatContext";
  * @param {{id : number, title : string, time : DateTime}} param0
  * @returns
  */
-const ChatRoomItem = ({ id, title, time }) => {
+const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage }) => {
   const { handleRoomClick, handleRoomDeleteClick } = useContext(
     ChatRoomDispatchContext
   );
@@ -19,15 +19,18 @@ const ChatRoomItem = ({ id, title, time }) => {
 
   return (
     <div
-      className="chatRoom"
+      className="chatRoomItme"
       onClick={() => {
         handleRoomClick(id);
       }}
     >
       {/* <img src="" alt="" /> */}
       <div className="roomInfo">
-        <p>{title}</p>
-        <p>{stringToTime(time)}</p>
+        <div className="info-title">{title}</div>
+        <div>
+          <div className="info-last">{lastMessage}</div>
+          <div className="info-text">{stringToTime(lastMessageAt)}</div>
+        </div>
         {/* <span>{toUser}</span> */}
       </div>
       <button type="button" onClick={onClick}>

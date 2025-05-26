@@ -6,6 +6,7 @@ import {
   ChatRoomDispatchContext,
   ChatRoomStateContext,
 } from "../store/chatContext";
+import "../styles/chatPage.css";
 
 /**
  * 채팅 목록 컴포넌트
@@ -16,8 +17,7 @@ const ChatPage = () => {
   const [selectRoom, setSelectRoom] = useState(0);
 
   useEffect(() => {
-    // user id 전송 필요
-    getChatRooms(1).then((res) => setChatRooms(res.data));
+    getChatRooms().then((res) => setChatRooms(res.data));
   }, []);
 
   const handleRoomClick = (id) => {
@@ -29,16 +29,15 @@ const ChatPage = () => {
   };
 
   return (
-    <div>
+    <div className="chatpage">
       <ChatRoomStateContext.Provider value={chatRooms}>
-        <ChatRoomDispatchContext
+        <ChatRoomDispatchContext.Provider
           value={{ handleRoomClick, handleRoomDeleteClick }}
         >
           <ChatRoomList />
-        </ChatRoomDispatchContext>
+          <ChatRoomMain selectRoom={selectRoom} />
+        </ChatRoomDispatchContext.Provider>
       </ChatRoomStateContext.Provider>
-
-      <ChatRoomMain selectRoom={selectRoom} />
     </div>
   );
 };

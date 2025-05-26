@@ -1,15 +1,27 @@
 import React from "react";
 import ChatMessage from "./ChatMessage";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 /**
  * 채팅 내역 컴포넌트
  * @param {[ChatDTO]} param0
  * @returns
  */
-const ChatList = ({ chatList }) => {
+const ChatList = ({ chatList = [] }) => {
+  const messagesEndRef = useRef(null);
+  console.log(chatList);
+
+  // 메시지가 업데이트되면 스크롤 아래로 이동
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }, [chatList]);
+
+  if (typeof chatList == typeof "") return;
   return (
-    <div className="chatList">
-      <h2>채팅 내역</h2>
+    <div className="chatList" ref={messagesEndRef}>
       {chatList.map((chat) => {
         return chat.user_idx == 1 ? (
           <ChatMessage key={chat.id} type={"from"} {...chat} />
