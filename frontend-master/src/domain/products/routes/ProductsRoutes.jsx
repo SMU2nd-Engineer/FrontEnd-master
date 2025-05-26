@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import ProductListPage from "../page/ProductsListPage";
 import ProductDetail from "../components/ProductDetail";
 import ProductUpload from "../components/ProductUpload";
+import ProductEdit from "../components/ProductEdit";
 
 const ProductsRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const ProductsRoutes = () => {
         <Route path="/list" element={<ProductListPage />} />
         <Route path="/detail/:idx" element={<ProductDetail />} />
         <Route path="/upload" element={<ProductUpload />} />
+        <Route path="/edit/:idx" element={<ProductEdit />} />
       </Routes>
     </div>
   );

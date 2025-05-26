@@ -29,6 +29,22 @@ export const getProductDetail = (idx) => {
   );
 };
 
+export const putProductEdit = (
+  idx,
+  newProduct,
+  uploadImage) =>{
+    const formData = new FormData();
+    formData.append("product", new Blob([JSON.stringify(newProduct)], { type: 'application/json' }))
+    uploadImage.forEach((img) => formData.append("files", img))
+
+    console.log()
+  return axiosInstance.put(
+    `product/detail/${idx}`,
+    formData,
+    { withCredentials: true }
+  )
+}
+
 export const searchProducts = ({category_idx = 0, categorygenre_idx = 0, keyword}) => {
   return axiosInstance.post(
     "product/search", 
