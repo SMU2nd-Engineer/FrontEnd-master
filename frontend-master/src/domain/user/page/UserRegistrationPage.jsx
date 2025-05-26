@@ -13,6 +13,7 @@ import registrationService from "../services/registrationService";
 import { useNavigate } from "react-router-dom";
 import { setAccessToken } from "@/utils/TokenManager";
 import { registrationUserFavorite } from "../services/registrationUserFavorite";
+import "@user/style/UserRegistrationPage.css";
 
 /**
  * id : 아이디
@@ -110,76 +111,93 @@ export default function UserRegistrationPage() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(submitForm, (errors) => {
-        console.log("유효성 검증 실패", errors);
-      })}
-    >
-      <RegistrationId
-        register={register}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-        isSocialLogin={isSocialLogin}
-        isIdCheck={isIdCheck}
-        setIsIdCheck={setIsIdCheck}
-      />
-      <RegistrationName
-        register={register}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-      />
-      {!isSocialLogin && (
-        <RegistrationPassword
-          register={register}
-          setValue={setValue}
-          watch={watch}
-          errors={errors}
-        />
-      )}
-      <RegistrationNickName
-        register={register}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-        isNickNameCheck={isNickNameCheck}
-        setIsNickNameCheck={setIsNickNameCheck}
-      />
-      <Address
-        register={register}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-      />
-      <RegistrationEmail
-        register={register}
-        setValue={setValue}
-        watch={watch}
-        errors={errors}
-      />
-      <Button
-        text={"취소"}
-        onClick={() => {
-          sessionStorage.removeItem("socialId");
-          sessionStorage.removeItem("provider");
-          window.location.href = "/user/login";
-        }}
-      />
-      {/* 값을 넘기기 위하여 보이지 않는 값을 설정하기 */}
-      <input type="hidden" {...register("socialProvider")} />
-      {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
-      <Button
-        text={"가입"}
-        type="submit"
-        disabled={
-          !(
-            isIdCheck &&
-            isNickNameCheck &&
-            (isSocialLogin || watch("password") === watch("passwordCheck"))
-          )
-        }
-      />
-    </form>
+    <div className="RegistrationContainer">
+      <form
+        className="registration-form"
+        onSubmit={handleSubmit(submitForm, (errors) => {
+          console.log("유효성 검증 실패", errors);
+        })}
+      >
+        <div className="registration-id">
+          <RegistrationId
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            errors={errors}
+            isSocialLogin={isSocialLogin}
+            isIdCheck={isIdCheck}
+            setIsIdCheck={setIsIdCheck}
+          />
+        </div>
+        <div className="registration-name">
+          <RegistrationName
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            errors={errors}
+          />
+        </div>
+        {!isSocialLogin && (
+          <div className="registration-password">
+            <RegistrationPassword
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              errors={errors}
+            />
+          </div>
+        )}
+        <div className="registration-nickname">
+          <RegistrationNickName
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            errors={errors}
+            isNickNameCheck={isNickNameCheck}
+            setIsNickNameCheck={setIsNickNameCheck}
+          />
+        </div>
+        <div className="registration-address">
+          <Address
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            errors={errors}
+          />
+        </div>
+        <div className="registration-email">
+          <RegistrationEmail
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            errors={errors}
+          />
+        </div>
+        <div className="registration-buttons">
+          <Button
+            text={"취소"}
+            onClick={() => {
+              sessionStorage.removeItem("socialId");
+              sessionStorage.removeItem("provider");
+              window.location.href = "/user/login";
+            }}
+          />
+          {/* 값을 넘기기 위하여 보이지 않는 값을 설정하기 */}
+          <input type="hidden" {...register("socialProvider")} />
+          {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
+          <Button
+            text={"가입"}
+            type="submit"
+            disabled={
+              !(
+                isIdCheck &&
+                isNickNameCheck &&
+                (isSocialLogin || watch("password") === watch("passwordCheck"))
+              )
+            }
+          />
+        </div>
+      </form>
+    </div>
   );
 }

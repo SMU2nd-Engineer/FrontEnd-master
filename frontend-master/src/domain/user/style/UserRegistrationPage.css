@@ -1,0 +1,59 @@
+/* 외부 전체 컨테이너 */
+#RegistrationContainer {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* form 내부 그리드 레이아웃 */
+.registration-form {
+  display: grid;
+  grid-template-areas:
+    "id"
+    "name"
+    "password"
+    "nickname"
+    "address"
+    "email"
+    "buttons";
+  gap: 1.5rem;
+  margin-left: 10px;
+}
+
+/* 각각의 그리드 영역 */
+.registration-id {
+  grid-area: id;
+  display: flex;
+  justify-content: space-around;
+}
+
+.registration-name {
+  grid-area: name;
+}
+
+.registration-password {
+  grid-area: password;
+}
+
+.registration-nickname {
+  grid-area: nickname;
+}
+
+.registration-address {
+  grid-area: address;
+}
+
+.registration-email {
+  grid-area: email;
+}
+
+.registration-buttons {
+  grid-area: buttons;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
