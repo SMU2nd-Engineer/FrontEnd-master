@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postProduct } from "../services/productService";
+import { postProduct, putProductEdit } from "../services/productService";
 import { Divider, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
 import "../styles/ProductUpload.css";
 import ImageUpload from "./ImageUpload";
+import { useEffect } from "react";
 
-const ProductUpload = () => {
+const ProductUpload = ({ initialData, isEdit }) => {
   const [newProduct, setNewProduct] = useState({
     title: "",
     price: "",
@@ -16,11 +17,18 @@ const ProductUpload = () => {
     content: "",
     image_Url: "",
     user_idx: "",
+    idx:""
   });
   
+  useEffect(() => {
+    if (isEdit && initialData) {
+      setNewProduct(initialData);
+    }
+  }, [initialData, isEdit]);
+
   const [uploadImage, setUploadImage] = useState([]);
 
-  const { title, price, category_idx, categorygenre_idx, content, image_Url, user_idx } = newProduct;
+  const { title, price, category_idx, categorygenre_idx, content, image_Url, user_idx} = newProduct;
 
   const navigate = useNavigate();
 
@@ -36,16 +44,29 @@ const ProductUpload = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    postProduct(newProduct, uploadImage)
+    if (isEdit) {
+      putProductEdit(newProduct.idx, newProduct, uploadImage)
       .then((response) => response.data)
       .then((result) => {
-        console.log("결과: ", result);
+        console.log("수정 결과: ", result);
         const idx = result.idx;
         navigate(`/product/detail/${idx}`, { replace: true });
       })
-      .catch((error) => console.error("Error:", error));
-  };
+      .catch((error) => console.error("수정 에러:", error));
+    } else {
+      postProduct(newProduct, uploadImage)
+        .then((response) => response.data)
+        .then((result) => {
+          console.log("결과: ", result);
+          const idx = result.idx;
+          navigate(`/product/detail/${idx}`, { replace: true });
+        })
+        .catch((error) => console.error("Error:", error));
+      }
+    };
 
+
+  
   return (
     <>
       <p className="pagetitle">상품 등록</p>

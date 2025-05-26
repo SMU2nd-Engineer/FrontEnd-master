@@ -36,7 +36,13 @@ export default function ProductDetail() {
     navigate(`/payment/trade/${product.idx}`,{
       state: {product}
     });
-  }
+    }
+    
+    const handleEdit = () => {
+      console.log("수정할 idx: ", idx);
+      navigate(`/product/edit/${idx}`);
+
+    }
 
   return (
     <div className="detailinfo">
@@ -75,6 +81,9 @@ export default function ProductDetail() {
           </div>
           <div className="salerinfo">
             {/* 판매자 정보 뜨게 하고 싶엉 */}
+          </div>
+          <div>
+            <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
           </div>
         </div> 
       
