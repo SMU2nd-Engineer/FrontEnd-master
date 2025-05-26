@@ -175,6 +175,7 @@ export default function UserRegistrationPage() {
         </div>
         <div className="registration-buttons">
           <Button
+            className="registerButton"
             text={"취소"}
             onClick={() => {
               sessionStorage.removeItem("socialId");
@@ -186,6 +187,7 @@ export default function UserRegistrationPage() {
           <input type="hidden" {...register("socialProvider")} />
           {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
           <Button
+            className="registerButton"
             text={"가입"}
             type="submit"
             disabled={
