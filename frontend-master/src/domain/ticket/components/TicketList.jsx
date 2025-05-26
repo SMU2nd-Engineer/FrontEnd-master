@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getTicketInfo, getSearchTicket } from "../services/ticketService";
-import PopupPage from "./popupPage";
+import { getCategory } from "@/services/Category";
+import { getCategoryIdx } from "@/utils/CategoryHandler";
+import PopupPage from "./PopupPage";
 import "../style/ticketPage.css";
 
 const TicketList = ({
@@ -13,23 +15,33 @@ const TicketList = ({
   const [selectedInfo, setSelectedInfo] = useState(null); // 팝업용 상태
   const [loading, setLoading] = useState(false);
   const [idx, setIdx] = useState();
+  const [genreName, setGenreName] = useState([]);
+  const [openGenres, setOpenGenres] = useState({}); // 장르별 오픈 상태
 
+  // 장르 리스트 불러오기
+  useEffect(() => {
+    getCategory(getCategoryIdx("ticket"))
+      .then((res) => {
+        setGenreName(res.data);
+      })
+      .catch((error) => console.error("장르 리스트 불러오기 실패:", error));
+  }, []);
+
+  // 팝업창(상세데이터)
   useEffect(() => {
     if (!idx) return; // idx가 null/undefined이면 실행하지 않음
 
-    console.log("idx 변경됨:", idx);
-
     getTicketInfo(idx)
       .then((res) => {
-        console.log("상세 데이터:", res.data);
         setSelectedInfo(res.data); // 팝업 열기
       })
       .catch((err) => console.log(err));
   }, [idx]);
 
+  // 티켓 검색 + 필터
   useEffect(() => {
+    // 로딩
     setLoading(true);
-
     const categoriesParam = selectedIds.join(",");
     getSearchTicket({
       categories: categoriesParam,
@@ -47,6 +59,15 @@ const TicketList = ({
       });
   }, [selectedIds, searchTitle, startDate, endDate]);
 
+  const groupByGenre = (tickets) => {
+    return tickets.reduce((acc, ticket) => {
+      const genre = ticket.sub_idx || "기타";
+      if (!acc[genre]) acc[genre] = [];
+      acc[genre].push(ticket);
+      return acc;
+    }, {});
+  };
+
   // 검색어가 있으면 필터링, 없으면 전체 infos 보여주기
   const filteredInfos = ticketInfos.filter((info) =>
     (info.title || info.name || "") // ticketInfos 중에서 title 또는 name 없을 경우 대비해서 "" 사용
@@ -54,33 +75,65 @@ const TicketList = ({
       .includes(searchTitle.toLowerCase())
   );
 
+  // 토글 버튼
+  const toggleGenre = (genre) => {
+    setOpenGenres((prev) => ({ ...prev, [genre]: !prev[genre] }));
+  };
+
+  // 장르맵 생성 (숫자 → 한글)
+  const genreMap = groupByGenre(filteredInfos);
+  const genreLabelMap = genreName.reduce((acc, cur) => {
+    acc[cur.sub_idx] = cur.categoryName;
+    return acc;
+  }, {});
+
   if (loading) return <p>정보 로딩 중...</p>;
-  console.log("ticketInfos:", ticketInfos);
   if (filteredInfos.length === 0) return <p>검색 결과가 없습니다.</p>;
 
   return (
     <>
-      <ul className="listDot">
-        {filteredInfos.map((info, i) => (
-          <li key={i}>
-            <div
-              onClick={() => {
-                console.log("선택된 idx:", info.idx);
-                setIdx(info.idx);
-              }}
-              style={{
-                cursor: "pointer",
-                textDecoration: "underline",
-                color: "blue",
-              }}
-            >
-              {info.title || info.name || JSON.stringify(info)} - {info.company}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="accordion-container">
+        {Object.entries(genreMap).map(([genreCode, tickets]) => {
+          const genreLabel = genreLabelMap[genreCode] || "기타";
 
-      {/* 팝업 컴포넌트 표시 */}
+          return (
+            <div key={genreCode} className="accordion-section">
+              <div
+                onClick={() => toggleGenre(genreCode)}
+                className="accordion-header"
+                style={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  margin: "10px 0",
+                }}
+              >
+                {genreLabel} ({tickets.length}){" "}
+                {openGenres[genreCode] ? "▲" : "▼"}
+              </div>
+
+              {openGenres[genreCode] && (
+                <ul className="listDot">
+                  {tickets.map((info, i) => (
+                    <li key={i}>
+                      <div
+                        onClick={() => setIdx(info.idx)}
+                        style={{
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                          color: "blue",
+                        }}
+                      >
+                        {info.title || info.name} - {info.company}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
       {selectedInfo && (
         <PopupPage
           info={selectedInfo}

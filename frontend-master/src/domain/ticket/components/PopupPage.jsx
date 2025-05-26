@@ -1,9 +1,7 @@
 import React from "react";
 import "../style/popup.css";
-import { useEffect } from "react";
 
 const PopupPage = ({ info, onClose }) => {
-  console.log("Popup info:", info);
   if (!info) return null;
 
   return (
@@ -29,9 +27,9 @@ const PopupPage = ({ info, onClose }) => {
           {info.sdate ? info.sdate.slice(0, 10) : "정보 없음"} ~{" "}
           {info.edate ? info.edate.slice(0, 10) : "정보 없음"}
         </p>
-        {/* <p>
+        <p>
           <strong>장소:</strong> {info.place}
-        </p> */}
+        </p>
         <p>
           <strong>공연 시간:</strong> {info.runningTime || "정보 없음"}
         </p>
@@ -55,19 +53,10 @@ const PopupPage = ({ info, onClose }) => {
               <button className="ticket-button">멜론 티켓 바로가기</button>
             </a>
           )}
-          {/* <ul>
-            {links.map((link, idx) => (
-              <li key={idx}>
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul> */}
         </div>
         {info.etc && (
           <p>
-            <strong>기타:</strong> {info.etc}
+            <strong>유의 사항:</strong> {info.etc}
           </p>
         )}
       </div>
