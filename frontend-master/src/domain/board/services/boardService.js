@@ -29,7 +29,7 @@ export const getBoardDetail = (id) => {
 
 // 게시글 상세페이지 - 댓글 목록 불러오기
 export const getBoardComment = (id) => {
-  return axiosInstance.get(`/board/comment/${id}`, { withCredentials: true });
+  return axiosInstance.get(`/board/comment`, {params : {idx : id}}, { withCredentials: true });
 };
 
 // 게시글 상세페이지 - 댓글 등록
@@ -43,5 +43,13 @@ export const getBoardAddComment = ({ id, text}) => {
      },
     { withCredentials: true }
   );
-
 };
+
+// 게시글 상세페이지 - 게시글 댓글 삭제 기능
+ export const postBoardDeleteComment = (index) => {
+  return axiosInstance.post(
+    `board/commentdelete`,
+    {idx : index},
+    { withCredentials: true }
+  );
+ }; 
