@@ -101,14 +101,13 @@ const TicketList = ({
               <div
                 onClick={() => toggleGenre(genreCode)}
                 className="accordion-header"
-                style={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  margin: "10px 0",
-                }}
               >
-                {genreLabel} ({tickets.length}){" "}
-                {openGenres[genreCode] ? "▲" : "▼"}
+                <div className="accordion-mainButton">
+                  <p>
+                    {genreLabel} ({tickets.length}){" "}
+                  </p>
+                </div>
+                <div>{openGenres[genreCode] ? "▲" : "▼"}</div>
               </div>
 
               {openGenres[genreCode] && (
@@ -116,14 +115,16 @@ const TicketList = ({
                   {tickets.map((info, i) => (
                     <li key={i}>
                       <div
+                        className="dataList"
                         onClick={() => setIdx(info.idx)}
-                        style={{
-                          cursor: "pointer",
-                          textDecoration: "underline",
-                          color: "blue",
-                        }}
                       >
-                        {info.title || info.name} - {info.company}
+                        <p className="ticketItemText-title">
+                          {info.title || info.name}
+                        </p>{" "}
+                        <p className="ticketItemText-company">
+                          {" "}
+                          - {info.company}
+                        </p>
                       </div>
                     </li>
                   ))}

@@ -7,8 +7,12 @@
 .showList {
   width: 45%;
 }
+
 .listDot {
   list-style-type: none;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #816b6b;
 }
 
 .accordion-container {
@@ -21,19 +25,140 @@
 }
 
 .accordion-header {
+  display: flex;
+  justify-content: space-between;
   background-color: #f0f0f0;
   padding: 8px;
   border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: "10px 0";
+}
+
+.accordion-mainButton {
+  color: #705959;
+}
+
+.topCategoryBar {
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 24px;
+}
+
+.selectCategory {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.searchTitleAndCast {
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.searchBox {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  gap: 12px; /* input과 button 사이 간격 */
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 300px; /* 너비 키우기 */
+  height: 48px; /* 높이 키우기 */
+  font-size: 16px; /* 텍스트 크기 */
+  padding: 0 12px; /* 좌우 여백 */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.searchButton {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+  background-color: #f0b8b8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #45a049;
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열로 나눔 */
+  gap: 15px; /* 체크박스 사이 간격 */
+  max-width: 750px; /* 전체 영역 너비 제한 */
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+.categoryCheckbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.checkboxTitle {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .seDate {
+  background-color: #f0b8b8;
+  padding: 8px;
+  border-radius: 5px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .startDate {
+  display: flex;
   width: 50%;
+  font-weight: bold;
+  color: #6b4b4b;
+  margin-left: 5px;
 }
 
 .endDate {
+  display: flex;
   width: 50%;
+  font-weight: bold;
+  color: #6b4b4b;
+  margin-left: 35px;
+}
+
+.endDate-input,
+.startDate-input {
+  margin-left: 5px;
+}
+
+.checkbox {
+  margin-bottom: 10px;
+}
+
+/* datePicker 전달/다음달 날짜 연하게 표시 */
+.react-datepicker__day--outside-month {
+  color: #ccc !important; /* 우선적용되게함 */
+}
+
+.dataList {
+  display: flex;
+  justify-content: baseline;
+}
+.ticketItemText-title {
+  font-size: 15px;
+}
+.ticketItemText-company {
+  font-size: 10px;
+  margin-bottom: 0;
 }

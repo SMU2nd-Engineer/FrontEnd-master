@@ -1,6 +1,6 @@
 .calendar {
   width: 100%;
-  max-width: 500px;
+  max-width: 530px;
   margin: 0 auto;
 }
 .header {
@@ -13,17 +13,26 @@
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
+  font-size: large;
+  color: #6b5a5a;
+  margin-bottom: 5px;
 }
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  font-weight: 500;
 }
+
 .day {
   border: 1px solid #eee;
   padding: 8px;
   min-height: 60px;
   position: relative;
 }
+.current-month-day {
+  color: #614242;
+}
+
 .prev-month-day,
 .next-month-day {
   color: #ccc;
@@ -36,8 +45,23 @@
   margin-top: 4px;
 }
 .performance {
-  color: purple;
+  color: rgb(180, 75, 180);
+  font-size: 0.7rem;
+  font-weight: 500;
 }
 .sports {
-  color: green;
+  color: rgb(99, 167, 99);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.monthMoveButton {
+  font-size: xx-large;
+  color: #816b6b;
+}
+.calendarTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 16px;
+  text-align: center;
+  color: #7a5353;
 }
