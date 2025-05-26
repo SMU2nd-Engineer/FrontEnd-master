@@ -9,7 +9,7 @@ import RegistrationName from "../components/RegistrationName";
 import RegistrationNickName from "../components/RegistrationNickName";
 import RegistrationId from "../components/RegistrationId";
 import RegistrationEmail from "../components/RegistrationEmail";
-import registrationService from "../services/RegistrationService";
+import registrationService from "../services/registrationService";
 import { useNavigate } from "react-router-dom";
 import { setAccessToken } from "@/utils/TokenManager";
 import { registrationUserFavorite } from "../services/registrationUserFavorite";
