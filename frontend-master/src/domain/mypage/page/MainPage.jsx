@@ -47,41 +47,40 @@ export default function MainPage() {
       <div className="sticky-navbar">
         <MyPageLink />
       </div>
-    <div className="mypage-container">
-      {/* <h1>MainPage</h1> */}
-      <div className="sidebar">
-        <MyPageLink />
-      </div>
-      <div className="header">
-        <MyName />
-      </div>
-      <div className="products">
-        <MySellList
-          isMain={true}
-          products={mainPageInfo.myMainSellProductList}
-        />
-      </div>
-      <div className="peak">
-        <MyMainPeak list={mainPageInfo.myMainPeakList} />
-      </div>
+      <div className="mypage-container">
+        {/* <h1>MainPage</h1> */}
 
-      <div className="rating">
-        <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
-      </div>
-      <div className="reviews">
-        <MyTransactionReview
-          reviewLists={mainPageInfo.myMainReview}
-          movePage={"myReview"}
-          isMain={true}
-        />
-      </div>
-      <div className="button">
-        <Button
-          text={"임시 홈 화면으로"}
-          onClick={() => {
-            navigate("/user/home");
-          }}
-        />
+        <div className="header">
+          <MyName />
+        </div>
+        <div className="products">
+          <MySellList
+            isMain={true}
+            products={mainPageInfo.myMainSellProductList}
+          />
+        </div>
+        <div className="peak">
+          <MyMainPeak list={mainPageInfo.myMainPeakList} />
+        </div>
+
+        <div className="rating">
+          <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
+        </div>
+        <div className="reviews">
+          <MyTransactionReview
+            reviewLists={mainPageInfo.myMainReview}
+            movePage={"myReview"}
+            isMain={true}
+          />
+        </div>
+        <div className="button">
+          <Button
+            text={"임시 홈 화면으로"}
+            onClick={() => {
+              navigate("/user/home");
+            }}
+          />
+        </div>
       </div>
     </div>
   );
