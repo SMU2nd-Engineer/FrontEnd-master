@@ -32,7 +32,6 @@ export default function LogingPage() {
         } else {
           localStorage.removeItem("savedUserId");
         }
-        alert("로그인 성공");
         navigate("/user/home");
       } else {
         console.log(

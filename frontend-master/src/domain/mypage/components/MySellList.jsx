@@ -49,33 +49,38 @@ export default function MySellList({ isMain = false, products = [] }) {
   };
 
   return (
-    <>
-      <a
-        href="#"
-        onClick={() => {
-          setCategory("all");
-        }}
-      >
-        전체
-      </a>
-      <a
-        href="#"
-        onClick={() => {
-          setCategory("onSale");
-        }}
-      >
-        / 판매중
-      </a>
-      <a
-        href="#"
-        onClick={() => {
-          setCategory("soldOut");
-        }}
-      >
-        / 판매완료
-      </a>
-      {isMain && <Link to="/mypage/sellAndPurchaselist/">더 보기</Link>}
-      <ProductList products={currentItems ?? ""} />
+    <div className="sell-container">
+      <h3> 내 상품 </h3>
+      <div className="sellOptions">
+        <a
+          href="#"
+          onClick={() => {
+            setCategory("all");
+          }}
+        >
+          전체
+        </a>
+        <a
+          href="#"
+          onClick={() => {
+            setCategory("onSale");
+          }}
+        >
+          / 판매중
+        </a>
+        <a
+          href="#"
+          onClick={() => {
+            setCategory("soldOut");
+          }}
+        >
+          / 판매완료
+        </a>
+      </div>
+      <div className="more-cell">
+        {isMain && <Link to="/mypage/sellAndPurchaselist/">더 보기</Link>}
+        <ProductList products={currentItems ?? ""} />
+      </div>
       {!isMain && (
         <MyPagination
           pageCount={totalPageCount}
@@ -83,6 +88,6 @@ export default function MySellList({ isMain = false, products = [] }) {
           pageRangeDisplayed={3}
         />
       )}
-    </>
+    </div>
   );
 }
