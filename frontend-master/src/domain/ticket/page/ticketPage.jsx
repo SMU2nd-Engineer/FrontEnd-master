@@ -3,7 +3,7 @@ import TicketList from "../components/TicketList";
 import CategoryPage from "../components/CategoryPage";
 import Calendar from "../components/Calendar";
 import SearchDate from "../components/SearchDate";
-import "../style/ticketPage.css";
+import * as TicketPages from "../style/TicketPageDesign";
 
 const TicketPage = () => {
   const [allCategoryIds, setAllCategoryIds] = useState([]);
@@ -35,7 +35,7 @@ const TicketPage = () => {
 
   return (
     <div className="ticketPage">
-      <div className="topCategoryBar">
+      <TicketPages.TopCategoryBar>
         <CategoryPage
           selectedIds={selectedIds}
           setSelectedIds={setSelectedIds}
@@ -47,10 +47,10 @@ const TicketPage = () => {
           setEndDate={setEndDate}
           setAllCategoryIds={setAllCategoryIds}
         />
-      </div>
+      </TicketPages.TopCategoryBar>
 
-      <div className="bottomArea">
-        <div className="calender">
+      <TicketPages.BottomArea>
+        <TicketPages.Calendar1>
           <Calendar
             selectedIds={selectedIds}
             setSelectedIds={setSelectedIds}
@@ -62,8 +62,8 @@ const TicketPage = () => {
             setEndDate={setEndDate}
             setAllCategoryIds={setAllCategoryIds}
           />
-        </div>
-        <div className="showList">
+        </TicketPages.Calendar1>
+        <TicketPages.ShowList>
           <SearchDate onDateChange={handleDateChange} />
           <TicketList
             selectedIds={categoriesToQuery}
@@ -71,8 +71,8 @@ const TicketPage = () => {
             startDate={startDate}
             endDate={endDate}
           />
-        </div>
-      </div>
+        </TicketPages.ShowList>
+      </TicketPages.BottomArea>
 
       {/* 팝업 컴포넌트 */}
       {popupInfo && <PopupPage info={popupInfo} onClose={closePopup} />}

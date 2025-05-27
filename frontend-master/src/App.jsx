@@ -8,7 +8,7 @@ import ProductsRoutes from "./domain/products/routes/ProductsRoutes";
 import PaymentRoutes from "./domain/payment/routes/PaymentRoutes";
 import BoardRoutes from "./domain/board/routes/BoardRoutes";
 import "./style/App.css";
-import TicketPage from "./domain/ticket/page/ticketPage";
+import TicketPages from "./domain/ticket/page/ticketPage";
 import Footer from "./page/footer/Footer";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path="/product/*" element={<ProductsRoutes />} />
           <Route path="/payment/*" element={<PaymentRoutes />} />
           <Route path="/board/*" element={<BoardRoutes />} />
-          <Route path="/ticket/*" element={<TicketPage />} />
+          <Route path="/ticket/*" element={<TicketPages />} />
         </Routes>
       </BodyComponent>
       <Footer />

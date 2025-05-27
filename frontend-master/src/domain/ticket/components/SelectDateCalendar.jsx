@@ -3,7 +3,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // 기본디자인 설정
 import { ko } from "date-fns/locale"; // 한국어 설정
-import "../style/ticketPage.css";
+import * as TicketPages from "../style/TicketPageDesign";
 
 const SelectDateCalendar = ({
   startDate,
@@ -12,10 +12,10 @@ const SelectDateCalendar = ({
   onEndChange,
 }) => {
   return (
-    <div className="seDate">
-      <div className="startDate">
+    <TicketPages.SeDate>
+      <TicketPages.StartDate>
         <label>시작일 : </label>
-        <div className="startDate-input">
+        <TicketPages.DateInput>
           {/* DatePicker는 달력 UI를 나타냄 */}
           <DatePicker
             locale={ko} // 한국어 설정
@@ -31,12 +31,12 @@ const SelectDateCalendar = ({
             endDate={endDate}
             placeholderText="날짜 선택"
           />
-        </div>
-      </div>
+        </TicketPages.DateInput>
+      </TicketPages.StartDate>
 
-      <div className="endDate">
+      <TicketPages.EndDate>
         <label>종료일 : </label>
-        <div className="endDate-input">
+        <TicketPages.DateInput>
           <DatePicker
             locale={ko}
             dateFormat="yyyy-MM-dd"
@@ -52,9 +52,9 @@ const SelectDateCalendar = ({
             minDate={startDate}
             placeholderText="날짜 선택"
           />
-        </div>
-      </div>
-    </div>
+        </TicketPages.DateInput>
+      </TicketPages.EndDate>
+    </TicketPages.SeDate>
   );
 };
 

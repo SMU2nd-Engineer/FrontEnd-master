@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/ticketPage.css";
+import * as TicketPages from "../style/TicketPageDesign";
 
 const SearchTitleAndCast = ({ onSearch }) => {
   const [query, setQuery] = useState("");
@@ -18,24 +18,22 @@ const SearchTitleAndCast = ({ onSearch }) => {
   };
 
   return (
-    <div className="searchBox">
+    <TicketPages.SearchBox>
       {/* 텍스트를 입력 받는 UI 요소 */}
-      <input
+      <TicketPages.SearchInput
         type="text"
         placeholder="공연 제목 또는 출연진을 입력하세요"
         value={query}
         onChange={handleInputChange} // 입력이 끝났을 때 발생하는 이벤트
         onKeyDown={handleKeyDown} // 키를 눌렀을 때 발생, 물리적인 키에만 반응(엔터치면 넘어가게)
-        className="searchInput"
       />
       {/* 검색하기 버튼 */}
-      <button
+      <TicketPages.SearchButton
         onClick={handleSearch} // 클릭하면 발생하는 이벤트
-        className="searchButton"
       >
         검색
-      </button>
-    </div>
+      </TicketPages.SearchButton>
+    </TicketPages.SearchBox>
   );
 };
 
