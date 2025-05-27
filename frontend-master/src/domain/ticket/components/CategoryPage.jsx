@@ -9,7 +9,7 @@ const CategoryPage = ({ setSelectedIds, setSearchTerm }) => {
   };
 
   return (
-    <div>
+    <div className="category">
       <div className="selectCategory">
         <SelectCategory onChange={setSelectedIds} />
       </div>
