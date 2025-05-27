@@ -1,19 +1,23 @@
 import axiosInstance from '@/lib/axiosInstance';
-import React from 'react';
 
-const KakaoPayCancel = async ( tid ) => {
+const KakaoPayCancel = async ( {tid} ) => {
 
   try {
-    const res = await axiosInstance.post("/payment/cancel?payMethod=6001", {
+    const res = await axiosInstance.post("/payment/cancel", {
       tid
     })
 
-    console.log(res.data);
-    return res.data;
+    if (res?.data) {
+      console.log("환불 성공 응답:", res.data);
+      return res.data;
+    } else {
+      console.warn("응답 데이터가 없습니다:", res);
+      return null;
+    }
   
   } catch (error) {
     console.error("환불 에러: ", error)
-    kakaoPayFail({tid, error});
+    throw error;
   }
 };
 
