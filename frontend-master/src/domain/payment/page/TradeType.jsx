@@ -38,19 +38,19 @@ const TradeType = () => {
   }
 
   const handleClick = () => {
-    navigate('/payment', {
-      state: {tradeType, product}
+    navigate(`/payment/${product.idx}`, {
+      state: {tradeType}
     });
   }
   return (
-    <div>
+    <div className='container'>
       <div className='trade'>
         <div>
-          <div>
+          <div className='img'>
             <img src={product.img} alt={product.title} />
           </div>
           <div>
-            <p><strong>{product.price}</strong></p>
+            <p><strong>{product.price}원</strong></p>
             <p>{product.title}</p>
           </div>
         </div>
