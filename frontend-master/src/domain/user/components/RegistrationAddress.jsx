@@ -43,7 +43,7 @@ export default function Address({ register, setValue, watch, errors }) {
           <Input type="text" {...register("address")} readOnly />
           <InputRightElement width="5.5rem">
             <Button
-              className="registerButton"
+              className="registerButton input-right-button"
               text={"주소 찾기"}
               onClick={() => {
                 open({ onComplete: handleComplete });
@@ -53,7 +53,7 @@ export default function Address({ register, setValue, watch, errors }) {
         </InputGroup>
         <FormErrorMessage>{errors.address?.message}</FormErrorMessage>
       </FormControl>
-      <FormControl isInvalid={!!errors.detailAddress} isRequired>
+      <FormControl isInvalid={!!errors.detailAddress}>
         <FormLabel htmlFor="detailAddress" mb={1}>
           상세 주소
         </FormLabel>

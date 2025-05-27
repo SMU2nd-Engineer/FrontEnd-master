@@ -69,6 +69,7 @@ export default function RegistrationEmail({
             h="2.5rem"
             variant="outline"
             flex="1"
+            mb={1}
           >
             <option value="type">직접 입력</option>
             <option value="naver.com">naver.com</option>
