@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../../components/Button";
 import naverLoginButton from "@/assets/naver_login_circle_.png";
+import { SocialButton } from "../style/LoginPageCss";
 
 export default function NaverLogin() {
   // 환경 변수에서 필요한 데이터 가져오기
@@ -16,13 +17,13 @@ export default function NaverLogin() {
   };
 
   return (
-    <div id="naverLoginId" className="social-button">
+    <SocialButton id="naverLoginId" className="social-button">
       <Button
         text={"네이버 로그인"}
         imgSrc={naverLoginButton}
         onClick={handleAutoNaver}
         imgStyle={{ width: 54, height: 54 }}
       />
-    </div>
+    </SocialButton>
   );
 }

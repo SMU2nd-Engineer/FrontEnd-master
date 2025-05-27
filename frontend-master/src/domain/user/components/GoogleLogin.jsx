@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../../components/Button";
 import googleLoginButton from "@/assets/goole_login_circle.svg";
+import { SocialButton } from "../style/LoginPageCss";
 
 export default function GoogleLogin() {
   // 환경 변수에서 필요한 데이터 가져오기
@@ -17,13 +18,13 @@ export default function GoogleLogin() {
   };
 
   return (
-    <div id="googleLoginIcon" className="social-button">
+    <SocialButton id="googleLoginIcon" className="social-button">
       <Button
         text={"구글 로그인"}
         imgSrc={googleLoginButton}
         onClick={handleAutoGoogle}
         imgStyle={{ width: 54, height: 54 }}
       />
-    </div>
+    </SocialButton>
   );
 }

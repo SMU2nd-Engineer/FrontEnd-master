@@ -2,11 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "@/domain/user/services/login";
 import { setAccessToken } from "@/utils/TokenManager";
-import Button from "../../../components/Button";
 import KaKaoLogin from "../components/KakaoLogin";
 import NaverLogin from "../components/NaverLogin";
 import GoogleLogin from "../components/GoogleLogin";
-import "@user/style/LoginPage.css";
+import {
+  LoginContainer,
+  LoginForm,
+  InputId,
+  InputPw,
+  LoginStyledButton,
+  LoginOption,
+  LoginHelp,
+  SocialLogin,
+  LoginOptionInput,
+  LoginOptionLabel,
+} from "../style/LoginPageCss";
 
 export default function LogingPage() {
   const [id, setUserId] = useState("");
@@ -61,46 +71,42 @@ export default function LogingPage() {
     [isLogin, navigate]
   );
   return (
-    <div id="LoginContainer">
-      <form onSubmit={handleLogin} className="login-form">
-        {/* <label htmlFor="id"> */}
-        <input
+    <LoginContainer id="LoginContainer">
+      <LoginForm onSubmit={handleLogin}>
+        <InputId
           id="id"
-          className="input-id"
           type="text"
           value={id}
           onChange={(e) => setUserId(e.target.value)}
           placeholder="아이디"
         />
-        {/* </label> */}
-        {/* <label htmlFor="pw"> */}
-        <input
+        <InputPw
           id="pw"
-          className="input-pw"
           placeholder="패스워드"
           type="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-        {/* </label> */}
-        <Button
+        <LoginStyledButton
           text={"로그인"}
           onClick={handleLogin}
           type={"submit"}
           className="login-button"
         />
-      </form>
-      <div className="login-option">
-        <label>
-          <input
+      </LoginForm>
+      <LoginOption>
+        <LoginOptionLabel htmlFor="rememberId">
+          <LoginOptionInput
+            id="rememberId"
             type="checkbox"
             checked={rememberId}
             onChange={(e) => setRememberId(e.target.checked)}
           />
           아이디 기억하기
-        </label>
-        <label>
-          <input
+        </LoginOptionLabel>
+        <LoginOptionLabel htmlFor="autoLogin">
+          <LoginOptionInput
+            id="autoLogin"
             type="checkbox"
             checked={autoLogin}
             onChange={(e) => {
@@ -110,9 +116,9 @@ export default function LogingPage() {
             }}
           />
           자동 로그인
-        </label>
-      </div>
-      <div className="login-help">
+        </LoginOptionLabel>
+      </LoginOption>
+      <LoginHelp>
         <Link
           to="/user/registration"
           onClick={() => {
@@ -124,12 +130,12 @@ export default function LogingPage() {
         </Link>
         <Link to="/user/find/id"> 아이디 찾기 </Link> /
         <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
-      </div>
-      <div className="social-login">
+      </LoginHelp>
+      <SocialLogin>
         <KaKaoLogin />
         <NaverLogin />
         <GoogleLogin />
-      </div>
-    </div>
+      </SocialLogin>
+    </LoginContainer>
   );
 }
