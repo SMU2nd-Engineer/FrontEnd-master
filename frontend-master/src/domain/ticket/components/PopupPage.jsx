@@ -1,109 +1,107 @@
 import React from "react";
-import "../style/popUp.css";
+import * as Popup from "../style/PopupPageDesign";
 
 const PopupPage = ({ info, onClose }) => {
   if (!info) return null;
 
   return (
-    <div className="popup-overlay" onClick={onClose}>
-      <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-        <button className="popup-close-btn" onClick={onClose}>
-          ×
-        </button>
+    <Popup.PopupOverlay onClick={onClose}>
+      <Popup.PopupContent onClick={(e) => e.stopPropagation()}>
+        <Popup.PopupCloseButton onClick={onClose}>×</Popup.PopupCloseButton>
         <div>
           <div>
             <h3>
               {info.title} - {info.company}
             </h3>
           </div>
-          <div className="ticket-infoBox">
-            <div className="ticket-info-img">
+          <Popup.TicketInfoBox>
+            <Popup.TicketInfoImg>
               {info.img && <img src={info.img} alt={info.title} />}
-            </div>
-            <div className="ticket-info">
+            </Popup.TicketInfoImg>
+            <Popup.TicketInfo>
               <p>
                 <strong>가격</strong> <br />{" "}
-                <span className="info-detail">
+                <Popup.InfoDetail>
                   {(info.price || "정보 없음").split("/").map((line, idx) => (
                     <React.Fragment key={idx}>
                       {line}
                       <br />
                     </React.Fragment>
                   ))}
-                </span>
+                </Popup.InfoDetail>
               </p>
               {info.cast && (
                 <p>
                   <strong>출연진:</strong>{" "}
-                  <span className="info-detail">
+                  <Popup.InfoDetail>
                     {" "}
                     {info.cast
                       .replace(/\s*\/\s*/g, ", ")
                       .replace(/,+$/, "")}{" "}
-                  </span>
+                  </Popup.InfoDetail>
                 </p>
               )}
               <p>
                 <strong>공연 기간</strong>
                 <br />
-                <span className="info-detail">
+                <Popup.InfoDetail>
                   {info.sdate ? info.sdate.slice(0, 10) : "정보 없음"} ~{" "}
                   {info.edate ? info.edate.slice(0, 10) : "정보 없음"}
-                </span>
+                </Popup.InfoDetail>
               </p>
               <p>
                 <strong>장소</strong>
                 <br />
-                <span className="info-detail">{info.place}</span>
+                <Popup.InfoDetail>{info.place}</Popup.InfoDetail>
               </p>
               <p>
                 <strong>공연 시간</strong>
                 <br />
-                <span className="info-detail">
+                <Popup.InfoDetail>
                   {info.runningTime || "정보 없음"}
-                </span>
+                </Popup.InfoDetail>
               </p>
-              <div className="ticket-age-and-button">
+              <Popup.TicketAgeAndButton>
                 <p>
                   <strong>관람 연령</strong>
                   <br />
-                  <span className="info-detail">
+                  <Popup.InfoDetail>
                     {info.grade || "전체 관람가"}
-                  </span>
+                  </Popup.InfoDetail>
                 </p>
                 {info.company === "인터파크" && (
                   <a href={info.link} target="_blank" rel="noopener noreferrer">
-                    <button className="ticket-button">
+                    <Popup.TicketLinkButton>
                       인터파크 티켓 바로가기
-                    </button>
+                    </Popup.TicketLinkButton>
                   </a>
                 )}
                 {info.company === "티켓링크" && (
                   <a href={info.link} target="_blank" rel="noopener noreferrer">
-                    <button className="ticket-button">
+                    <Popup.TicketLinkButton>
                       티켓링크 티켓 바로가기
-                    </button>
+                    </Popup.TicketLinkButton>
                   </a>
                 )}
                 {info.company === "멜론티켓" && (
                   <a href={info.link} target="_blank" rel="noopener noreferrer">
-                    <button className="ticket-button">
+                    <Popup.TicketLinkButton>
                       멜론 티켓 바로가기
-                    </button>
+                    </Popup.TicketLinkButton>
                   </a>
                 )}
-              </div>
-            </div>
-          </div>
+              </Popup.TicketAgeAndButton>
+            </Popup.TicketInfo>
+          </Popup.TicketInfoBox>
         </div>
         {info.etc && (
-          <div className="notice-section">
+          <Popup.NoticeSection>
             <h3>유의 사항</h3>
             <p>{info.etc}</p>
-          </div>
+          </Popup.NoticeSection>
         )}
-      </div>
-    </div>
+      </Popup.PopupContent>
+    </Popup.PopupOverlay>
   );
 };
 

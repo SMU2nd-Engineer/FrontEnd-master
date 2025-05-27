@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import SelectCategory from "./SelectCategory";
 import SearchTitleAndCast from "./SearchTitleAndCast";
-import "../style/ticketPage.css";
+// import "../style/ticketPage.css";
+import * as TicketPages from "../style/TicketPageDesign";
 
 const CategoryPage = ({ setSelectedIds, setSearchTerm }) => {
   const handleSearch = (query) => {
@@ -10,12 +11,12 @@ const CategoryPage = ({ setSelectedIds, setSearchTerm }) => {
 
   return (
     <div className="category">
-      <div className="selectCategory">
+      <TicketPages.SelectCategory>
         <SelectCategory onChange={setSelectedIds} />
-      </div>
-      <div className="searchTitleAndCast">
+      </TicketPages.SelectCategory>
+      <TicketPages.SearchTitleAndCastDiv>
         <SearchTitleAndCast onSearch={handleSearch} />
-      </div>
+      </TicketPages.SearchTitleAndCastDiv>
     </div>
   );
 };

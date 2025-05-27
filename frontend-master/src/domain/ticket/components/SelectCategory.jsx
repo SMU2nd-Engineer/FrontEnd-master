@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getCategory } from "@/services/Category";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
-import "../style/ticketPage.css";
+// import "../style/ticketPage.css";
+
+import * as TicketPages from "../style/TicketPageDesign";
 
 const SelectCategory = ({ onChange }) => {
   const [categories, setCategories] = useState([]);
@@ -24,21 +26,20 @@ const SelectCategory = ({ onChange }) => {
   };
 
   return (
-    <div className="categoryCheckboxMain">
-      <div className="checkboxGrid">
+    <TicketPages.CategoryCheckboxMain>
+      <TicketPages.CheckboxGrid>
         {categories.map((category) => (
-          <label key={category.sub_idx} className="categoryCheckbox">
-            <input
+          <TicketPages.CategoryCheckbox key={category.sub_idx}>
+            <TicketPages.CheckboxInput
               type="checkbox"
               checked={selected.includes(category.sub_idx)}
               onChange={() => toggleCategory(category.sub_idx)}
-              className="checkbox"
             />
             <span>{category.categoryName}</span>
-          </label>
+          </TicketPages.CategoryCheckbox>
         ))}
-      </div>
-    </div>
+      </TicketPages.CheckboxGrid>
+    </TicketPages.CategoryCheckboxMain>
   );
 };
 

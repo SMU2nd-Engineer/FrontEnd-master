@@ -3,7 +3,7 @@ import { getTicketInfo, getSearchTicket } from "../services/ticketService";
 import { getCategory } from "@/services/Category";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
 import PopupPage from "./PopupPage";
-import "../style/ticketPage.css";
+import * as TicketPages from "../style/TicketPageDesign";
 
 const TicketList = ({
   selectedIds,
@@ -92,48 +92,44 @@ const TicketList = ({
 
   return (
     <>
-      <div className="accordion-container">
+      <TicketPages.AccordionContainer>
         {Object.entries(genreMap).map(([genreCode, tickets]) => {
           const genreLabel = genreLabelMap[genreCode] || "기타";
 
           return (
-            <div key={genreCode} className="accordion-section">
-              <div
+            <TicketPages.AccordionSection key={genreCode}>
+              <TicketPages.AccordionHeader
                 onClick={() => toggleGenre(genreCode)}
-                className="accordion-header"
               >
-                <div className="accordion-mainButton">
+                <TicketPages.AccordionMainButton>
                   <p>
                     {genreLabel} ({tickets.length}){" "}
                   </p>
-                </div>
+                </TicketPages.AccordionMainButton>
                 <div>{openGenres[genreCode] ? "▲" : "▼"}</div>
-              </div>
+              </TicketPages.AccordionHeader>
 
               {openGenres[genreCode] && (
-                <ul className="listDot">
+                <TicketPages.ListDot>
                   {tickets.map((info, i) => (
                     <li key={i}>
-                      <div
-                        className="dataList"
-                        onClick={() => setIdx(info.idx)}
-                      >
-                        <p className="ticketItemText-title">
+                      <TicketPages.DataList onClick={() => setIdx(info.idx)}>
+                        <TicketPages.TicketItemTextTitle>
                           {info.title || info.name}
-                        </p>{" "}
-                        <p className="ticketItemText-company">
+                        </TicketPages.TicketItemTextTitle>{" "}
+                        <TicketPages.TicketItemTextCompany>
                           {" "}
                           - {info.company}
-                        </p>
-                      </div>
+                        </TicketPages.TicketItemTextCompany>
+                      </TicketPages.DataList>
                     </li>
                   ))}
-                </ul>
+                </TicketPages.ListDot>
               )}
-            </div>
+            </TicketPages.AccordionSection>
           );
         })}
-      </div>
+      </TicketPages.AccordionContainer>
 
       {selectedInfo && (
         <PopupPage

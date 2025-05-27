@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTicketCalendar } from "../services/ticketService";
-import "../style/Calendar.css";
+import * as Calendars from "../style/CalendarDesign";
 
 function Calendar({ selectedIds, setStartDate, setEndDate }) {
   const [date, setDate] = useState(new Date()); // 현재 기준 달
@@ -84,22 +84,22 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
   const nextMonth = () => setDate(new Date(year, month + 1, 1));
 
   return (
-    <div className="calendar">
-      <div className="header">
-        <button onClick={prevMonth} className="monthMoveButton">
+    <Calendars.CalendarMain>
+      <Calendars.CalendarHeader>
+        <Calendars.MonthMoveButton onClick={prevMonth}>
           ‹
-        </button>
-        <div className="calendarTitle">
+        </Calendars.MonthMoveButton>
+        <Calendars.CalendarTitle>
           <p>
             {year}년 {month + 1}월
           </p>
-        </div>
-        <button onClick={nextMonth} className="monthMoveButton">
+        </Calendars.CalendarTitle>
+        <Calendars.MonthMoveButton onClick={nextMonth}>
           ›
-        </button>
-      </div>
+        </Calendars.MonthMoveButton>
+      </Calendars.CalendarHeader>
 
-      <div className="weekdays">
+      <Calendars.Weekdays>
         <div>일</div>
         <div>월</div>
         <div>화</div>
@@ -107,15 +107,14 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
         <div>목</div>
         <div>금</div>
         <div>토</div>
-      </div>
+      </Calendars.Weekdays>
 
-      <div className="days-grid">
+      <Calendars.DaysGrid>
         {infos.map((info, idx) => (
-          <div
+          <Calendars.DayBox
             key={idx}
-            className={`day ${info.type}-month-day ${
-              selectedDate === info.dateStr ? "selected" : ""
-            }`}
+            type={info.type} // "current", "prev", "next"
+            selected={selectedDate === info.dateStr}
             onClick={() => {
               const isSame = selectedDate === info.dateStr;
               const newSelected = isSame ? null : info.dateStr;
@@ -138,21 +137,21 @@ function Calendar({ selectedIds, setStartDate, setEndDate }) {
             <div className="dataQuantity">
               {/* 이번달 데이터만 출력 */}
               {info.type === "current" && info.performance > 0 && (
-                <div className="event-badge performance">
+                <Calendars.PerformanceBadge>
                   <p>공연: {info.performance}건</p>
-                </div>
+                </Calendars.PerformanceBadge>
               )}
               {/* 이번달 데이터만 출력 */}
               {info.type === "current" && info.sports > 0 && (
-                <div className="event-badge sports">
+                <Calendars.SportsBadge>
                   <p>스포츠: {info.sports}건</p>
-                </div>
+                </Calendars.SportsBadge>
               )}
             </div>
-          </div>
+          </Calendars.DayBox>
         ))}
-      </div>
-    </div>
+      </Calendars.DaysGrid>
+    </Calendars.CalendarMain>
   );
 }
 
