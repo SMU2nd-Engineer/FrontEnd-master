@@ -13,7 +13,9 @@ export default function LogingPage() {
   const [password, setpassword] = useState("");
   const [autoLogin, setAutoLogin] = useState(false);
   const [rememberId, setRememberId] = useState(false);
-  const isLogin = !!localStorage.getItem("accessToken");
+  const isLogin =
+    !!localStorage.getItem("accessToken") ||
+    !!sessionStorage.getItem("accessToken");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
