@@ -22,7 +22,6 @@
   grid-template-columns: repeat(7, 1fr);
   font-weight: 500;
 }
-
 .day {
   border: 1px solid #eee;
   padding: 8px;

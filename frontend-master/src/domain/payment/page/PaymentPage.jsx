@@ -60,12 +60,14 @@ const PaymentPage = () => {
 
   const handlePaymentClick = async () => {
     
+
     const categoryIdx = Number(searchValue.category_idx);
     switch (categoryIdx) {
       case 6001:
         try {
           const result = await KakaoPayReady(product, user, tradeType);
           console.log("카카오 응답 ", result);
+      
           if (result) {
             window.location.href = result.nextRedirectPcUrl;
             console.log("카카오 응답 ", result);

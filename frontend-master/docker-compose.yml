@@ -1,5 +1,5 @@
 services:
-  react-app:
+  app:
     build:
       context: .
     container_name: react-app

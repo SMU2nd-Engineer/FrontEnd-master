@@ -1,29 +1,43 @@
+/* ticketPage - 하단 영역(달력, 공연 리스트) */
 .bottomArea {
   display: flex;
 }
+/* ticketPage - 달력 */
 .calender {
   width: 55%;
+  cursor: pointer;
 }
+/* ticketPage - 공연 리스트 */
 .showList {
   width: 45%;
 }
-
 .listDot {
   list-style-type: none;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
   color: #816b6b;
 }
+.listDot li {
+  margin-bottom: 6px;
+  color: #816b6b;
+  text-decoration: none;
+}
+.listDot li:hover {
+  /* text-decoration: underline; */
+  background-color: #f0f0f0;
+  color: #333;
+  /* transform: scale(1.02);
+  transition: transform 0.2s ease; */
+}
 
+/* TicketList - 공연 리스트 아코디언 UI */
 .accordion-container {
   margin-top: 1rem;
 }
-
 .accordion-section {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
 }
-
 .accordion-header {
   display: flex;
   justify-content: space-between;
@@ -34,46 +48,68 @@
   font-weight: bold;
   margin: "10px 0";
 }
-
 .accordion-mainButton {
   color: #705959;
 }
 
+/* ticketPage - 상단 영역(필터 선택 바) */
 .topCategoryBar {
   background-color: #f0f0f0;
-  padding: 8px;
+  padding: 0;
   border-radius: 5px;
   margin-bottom: 24px;
 }
-
+/* CategoryPage - 상단 영역 */
 .selectCategory {
   padding: 15px;
   border-radius: 5px;
 }
+/* SelectCategory - 체크박스 상세 */
+.categoryCheckboxMain {
+  padding: 1rem;
+  text-align: center;
+}
+.checkboxGrid {
+  display: flex; /* 가로 정렬 */
+  flex-wrap: nowrap; /* 줄바꿈 없이 한 줄에 출력 */
+  gap: 3rem; /* 각 체크박스 사이 간격 */
+  overflow-x: auto; /* 항목이 많을 경우 가로 스크롤 */
+  align-items: center;
+  justify-content: center;
+}
+.categoryCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 체크박스와 텍스트 사이 간격 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+.checkbox {
+  width: 16px;
+  height: 16px;
+}
 
+/* CategoryPage - 하단 영역 */
 .searchTitleAndCast {
   text-align: center;
   padding: 15px;
   border-radius: 5px;
 }
-
+/* SearchTitleAndCast - 검색어 입력 박스 */
 .searchBox {
   display: flex;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: center;
   align-items: center;
-  gap: 12px; /* input과 button 사이 간격 */
+  gap: 12px;
   margin-bottom: 20px;
 }
-
 .searchInput {
-  width: 300px; /* 너비 키우기 */
-  height: 48px; /* 높이 키우기 */
-  font-size: 16px; /* 텍스트 크기 */
-  padding: 0 12px; /* 좌우 여백 */
+  width: 300px;
+  height: 48px;
+  font-size: 16px;
+  padding: 0 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-
 .searchButton {
   height: 48px;
   padding: 0 20px;
@@ -84,34 +120,11 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
 .searchButton:hover {
-  background-color: #45a049;
+  background-color: #ec7d7d;
 }
 
-.checkboxGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4열로 나눔 */
-  gap: 15px; /* 체크박스 사이 간격 */
-  max-width: 750px; /* 전체 영역 너비 제한 */
-  margin: 0 auto; /* 가운데 정렬 */
-}
-
-.categoryCheckbox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fafafa;
-}
-
-.checkboxTitle {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
+/* SelectDateCalendar - 날짜 기간 검색 달력  */
 .seDate {
   background-color: #f0b8b8;
   padding: 8px;
@@ -120,7 +133,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
 .startDate {
   display: flex;
   width: 50%;
@@ -128,7 +140,6 @@
   color: #6b4b4b;
   margin-left: 5px;
 }
-
 .endDate {
   display: flex;
   width: 50%;
@@ -136,21 +147,16 @@
   color: #6b4b4b;
   margin-left: 35px;
 }
-
 .endDate-input,
 .startDate-input {
   margin-left: 5px;
 }
-
-.checkbox {
-  margin-bottom: 10px;
-}
-
 /* datePicker 전달/다음달 날짜 연하게 표시 */
 .react-datepicker__day--outside-month {
   color: #ccc !important; /* 우선적용되게함 */
 }
 
+/* TicketList - 데이터 불러올때 디자인 */
 .dataList {
   display: flex;
   justify-content: baseline;

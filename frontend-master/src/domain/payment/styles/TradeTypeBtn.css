@@ -7,9 +7,17 @@ div {
   align-items: center;
 }
 
-
-
 .select {
   border: 2px solid #000;
   border-radius: 8px;
+}
+.productInfo {
+  border-bottom: 1px solid gray;
+  display: flex;
+}
+.img {
+  padding: 10px;
+}
+.bottom{
+  display: flex;
 }

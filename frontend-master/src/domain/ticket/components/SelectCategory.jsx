@@ -25,7 +25,6 @@ const SelectCategory = ({ onChange }) => {
 
   return (
     <div className="categoryCheckboxMain">
-      {/* <h3 className="checkboxTitle">원하는 장르를 선택하세요.</h3> */}
       <div className="checkboxGrid">
         {categories.map((category) => (
           <label key={category.sub_idx} className="categoryCheckbox">

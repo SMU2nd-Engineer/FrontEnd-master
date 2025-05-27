@@ -46,15 +46,16 @@ const TradeType = () => {
     <div className='container'>
       <div className='trade'>
         <div>
+        <div className='productInfo'>
           <div className='img'>
             <img src={product.img} alt={product.title} />
           </div>
-          <div>
+          <div className='price_title'>
             <p><strong>{product.price}원</strong></p>
             <p>{product.title}</p>
           </div>
         </div>
-        <section>
+        <section className='selectTradeType'>
           <span>거래 방법 선택</span>
           <section>
             <TradeOptionBtn
@@ -77,7 +78,7 @@ const TradeType = () => {
           </section>
         </section>
       </div>
-      <footer>
+      <div className='bottom'>
         <section>
           <div>
             <div>
@@ -90,7 +91,7 @@ const TradeType = () => {
           </div>
           <button onClick={handleClick}>다음</button>
         </section>
-      </footer>
+      </div>
     </div>
   );
 };

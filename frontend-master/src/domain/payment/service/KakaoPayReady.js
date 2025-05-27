@@ -19,6 +19,7 @@ const KakaoPayReady = async (product, user, tradeType) => {
   try {
     const res = await axiosInstance.post(
       '/payment/ready?payMethod=6001',
+
       {
         partnerOrderId,
         partnerUserId,
