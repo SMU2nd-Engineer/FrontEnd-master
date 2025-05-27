@@ -40,7 +40,9 @@ export default function MyPeakPage() {
   }, []);
   return (
     <div>
-      <MyPageLink />
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       <div
         id="peakListBody"
         style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}

@@ -22,11 +22,11 @@ const TradeOptionBtn = ({
         textAlign: 'left'
       }}
     >
-      <div>
-        <h3>{title}</h3>
+      <div style={{textAlign: 'left', fontSize: '13px'}}>
+        <h3 style={{ fontSize: '15px', fontWeight: 'bold'}} >{title}</h3>
         <p>{description}</p>
       </div>
-      {price && <span style={{marginLeft: 'auto'}}>{price}원</span>}
+      {price && <span style={{marginLeft: '1rem', whiteSpace: 'nowrap'}}>{price}원</span>}
     </button>
   );
 };

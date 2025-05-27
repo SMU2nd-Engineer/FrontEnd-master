@@ -3,6 +3,7 @@ import MyPageLink from "../components/MyPageLink";
 import MyInfoPasswordCheck from "../components/MyInfoPasswordCheck";
 import MyInfoList from "../components/MyInfoList";
 import { getMyPageData } from "../services/getMyPageDate";
+import "@user/style/UserRegistrationPage.css";
 
 export default function MyInfo() {
   // 소셜 로그인의 경우 비밀번호가 없으니 pass
@@ -21,8 +22,9 @@ export default function MyInfo() {
   // console.log(isMyInfoPasswordCheck);
   return (
     <div>
-      <MyPageLink />
-      <p>개인정보수정</p>
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       <br />
       {!isMyInfoPasswordCheck ? (
         <MyInfoPasswordCheck

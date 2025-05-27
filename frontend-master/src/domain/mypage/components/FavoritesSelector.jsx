@@ -6,6 +6,8 @@ import Button from "@/components/Button";
 import { getMyPageData } from "../services/getMyPageDate";
 import { registrationUserFavorite } from "@user/services/registrationUserFavorite";
 import { updateUserFavorites } from "../services/updateUserFavorites";
+import "../style/favorite.css";
+import { div } from "framer-motion/client";
 
 export default function FavoritesSelector({ mode = "register" }) {
   // 선호도 카테고리 정보 저장할 배열
@@ -76,18 +78,30 @@ export default function FavoritesSelector({ mode = "register" }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
-      {categories.map((category) => (
-        <FavoriteCategory
-          key={category.subIdx}
-          category={category}
-          register={register}
-          setValue={setValue}
-        />
-      ))}
-      <br />
-      <Button text={"취소"} onClick={handleCancel} />
-      <Button text={mode === "edit" ? "수정하기" : "등록하기"} type="submit" />
-    </form>
+    <div className="favorite-main">
+      <form onSubmit={handleSubmit(submitForm)} className="category-form">
+        <div>
+          <h2 className="form-title">선호하는 카테고리를 선택해주세요.</h2>
+        </div>
+        <div className="category-grid">
+          {categories.map((category) => (
+            <FavoriteCategory
+              key={category.subIdx}
+              category={category}
+              register={register}
+              setValue={setValue}
+            />
+          ))}
+        </div>
+        <div className="form-actions">
+          <Button text={"취소"} onClick={handleCancel} className="button1" />
+          <Button
+            text={mode === "edit" ? "수정하기" : "등록하기"}
+            type="submit"
+            className="button2"
+          />
+        </div>
+      </form>
+    </div>
   );
 }

@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import PaymentAddress from '../components/PaymentAddress';
-import Button from '@/components/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SCHEMA } from '@/domain/user/utils/userFormValidator';
@@ -10,6 +8,9 @@ import SelectBox from '@/components/SelectBox';
 import { getCategoryIdx } from '@/utils/CategoryHandler';
 import { getProductDetail } from '@/domain/products/services/productService';
 import { useEffect } from 'react';
+import "../styles/Payment.css";
+import Address from '@/domain/user/components/RegistrationAddress';
+import PaymentProductInfo from '../components/PaymentProductInfo';
 
 const PaymentPage = () => {
   const {idx} = useParams();
@@ -92,37 +93,26 @@ const PaymentPage = () => {
   }
 
   return (
-    <div>
-      <p><strong>결제</strong></p>
-      <div>
-        <div className='img'>
-          <img src={product.img} alt="상품이미지" />
-        </div>
-        <div>
-          <p>{product.title}</p>
-          <h2>{product.price}원</h2>
-          <p>{product.content}</p>
+    <div className='box'>
+      <p style={{color: '#f0b8b8', textAlign: 'left', padding: '1px', marginLeft: '8px'}}><strong>결제 정보 입력</strong></p>
+      <div className='address'>
+        <p>배송지 입력</p>
+        <div className="form-row">
+          <Address
+            register={register}
+            setValue={setValue}
+            watch={watch}
+            errors={errors}
+          />
         </div>
       </div>
-      <div className="form-row">
-        <label htmlFor="address">배송지 입력</label>
-        <PaymentAddress
-          register={register}
-          setValue={setValue}
-          watch={watch}
-          errors={errors}
-        />
-      </div>
-      <div>
-        <label htmlFor='category_idx'>결제 방법</label>
+      <PaymentProductInfo product={product} />
+      <div className='paymethod'>
+        <label id='paymethod' htmlFor='category_idx'>결제 방법</label>
         <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
       </div>
       <div className='paybtn'>
-        <Button 
-          text={`${product.price}원 결제하기`}
-          type='submit'
-          onClick={handlePaymentClick}
-        />
+        <button className='payment' onClick={handlePaymentClick}>{product.price}원 결제하기</button>
       </div>
     </div>
   );

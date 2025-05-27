@@ -48,3 +48,11 @@ export const postChatMessage = async ({ content, chatRoomId }) => {
     { withCredentials: true }
   );
 };
+
+export const postChatRooms = async (salerId, title) => {
+  return await axiosInstance.post(
+    `chat/rooms`,
+    { users: [salerId], title: title },
+    { withCredentials: true }
+  );
+};
