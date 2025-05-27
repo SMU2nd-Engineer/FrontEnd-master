@@ -44,6 +44,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
     if (isEdit) {
       putProductEdit(newProduct.idx, newProduct, uploadImage)
       .then((response) => response.data)
@@ -69,7 +70,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
   
   return (
     <>
-      <p className="pagetitle">상품 등록</p>
+      <p className="pagetitle">{isEdit ? "상품 수정" : "상품 등록"}</p>
         <form onSubmit={handleSubmit}>
         
         <div className="form-row">
@@ -78,18 +79,6 @@ const ProductUpload = ({ initialData, isEdit }) => {
         </div>
         <div className="chakra-divider"> <Divider orientation='horizontal'/>  </div>
         
-        <div className="form-row">
-          <label htmlFor="user_idx">userID </label>
-          <Input
-            type="text"
-            id="user_idx"
-            name="user_idx"
-            value={user_idx}
-            onChange={handleChange}
-            placeholder="userID는 추후 삭제 예정"
-          />
-        </div>
-        <div className="chakra-divider"> <Divider orientation='horizontal'/>  </div>
         
         <div className="form-row">
           <label htmlFor="title">상품명 </label>
@@ -138,7 +127,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
           />
         </div>
         <div className="buttonbox" >
-          <button type="submit" id="upload">등록</button>
+          <button type="submit" id="upload">{isEdit ? "수정" : "등록"}</button>
         </div>
       </form>
     </>

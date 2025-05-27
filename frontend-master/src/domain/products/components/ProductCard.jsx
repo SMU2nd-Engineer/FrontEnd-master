@@ -5,9 +5,9 @@ import React from "react";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  // console.log('ProductCard product:', product);
+  console.log('ProductCard product:', product);
   if (!product) return null;
-  // console.log("imageList:", product.imageList);
+  console.log("imageList:", product.imageList);
   return (
     <div
       className="product_card"

@@ -21,12 +21,12 @@ const ProductImage = ({ imageList, title, mode = 'all' }) => {
         <img
           key={thumbnail.idx}
           src={BASE_URL+thumbnail.image_Url}
-          alt={`${title}_thumbnail`} // 썸네일 강조 스타일 예시
+          alt={`${title}_thumbnail`}
         />
       )}
       {/* 나머지 이미지 리스트 */}
       {others.map((img, i) => (
-        <img key={i} src={`${BASE_URL}/${img.image_Url}`} alt={`${title}_${i}`} />
+        <img key={i} src={`${BASE_URL}${img.image_Url}`} alt={`${title}_${i}`} />
       ))}
 
   </div>
