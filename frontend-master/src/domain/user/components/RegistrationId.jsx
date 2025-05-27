@@ -10,6 +10,13 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
+import {
+  RegistFormContainer,
+  RegistFormLabel,
+  RegistInputGroup,
+  RegistStyledInput,
+  RegistHelperText,
+} from "../style/UserRegistrationPageCss";
 
 export default function RegistrationId({
   register,
@@ -36,50 +43,49 @@ export default function RegistrationId({
   };
 
   const getHelperColor = () => {
-    if (errors.id || (!isIdCheck && id)) return "red.500";
-    if (isIdCheck && id) return "green.500";
+    if (errors.id || (!isIdCheck && id)) return "#e53e3e";
+    if (isIdCheck && id) return "#38a169";
     return "gray.500";
   };
 
   return (
-    <FormControl isInvalid={!!errors.id} isRequired width="100%">
-      <FormLabel htmlFor="id">아이디</FormLabel>
-      <InputGroup>
-        <Input
+    <RegistFormContainer>
+      <RegistFormLabel htmlFor="id">아이디</RegistFormLabel>
+      <RegistInputGroup>
+        <RegistStyledInput
           className="registerInput"
           type="text"
           {...register("id")}
           readOnly={isSocialLogin}
+          error={!!errors.id}
         />
-        <InputRightElement width="5.5rem">
-          {!isSocialLogin && (
-            <Button
-              className="registerButton input-right-button"
-              style={{ text: "50px" }}
-              text={"중복 체크"}
-              onClick={async () => {
-                try {
-                  const result = await duplicateCheckService(watch("id"), "id");
-                  if (result) {
-                    setIsIdCheck(true);
-                  } else {
-                    alert("중복입니다. 다른 아이디를 사용해주세요.");
-                    setIsIdCheck(false);
-                  }
-                } catch (e) {
-                  console.log(e.message);
-                  alert("문제가 발생했습니다. 다시 시도해주세요.");
+
+        {!isSocialLogin && (
+          <Button
+            className="registerButton input-right-button"
+            text={"중복 체크"}
+            onClick={async () => {
+              try {
+                const result = await duplicateCheckService(watch("id"), "id");
+                if (result) {
+                  setIsIdCheck(true);
+                } else {
+                  alert("중복입니다. 다른 아이디를 사용해주세요.");
+                  setIsIdCheck(false);
                 }
-              }}
-            />
-          )}
-        </InputRightElement>
-      </InputGroup>
+              } catch (e) {
+                console.log(e.message);
+                alert("문제가 발생했습니다. 다시 시도해주세요.");
+              }
+            }}
+          />
+        )}
+      </RegistInputGroup>
       {getHelperMessage() && (
-        <Text fontSize="sm" color={getHelperColor()} mt={1} height={2}>
+        <RegistHelperText color={getHelperColor()}>
           {getHelperMessage()}
-        </Text>
+        </RegistHelperText>
       )}
-    </FormControl>
+    </RegistFormContainer>
   );
 }

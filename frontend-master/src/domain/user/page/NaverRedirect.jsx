@@ -49,7 +49,7 @@ export default function NaverRedirect() {
       }
     };
     requestNaverAuth();
-  }, [naverErrorMessage, naverError, naverCode, stateKey, navigate]);
+  }, [naverErrorMessage, naverError, naverCode, stateKey, navigate, autoLogin]);
 
   return (
     <div>

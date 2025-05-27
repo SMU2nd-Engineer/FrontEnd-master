@@ -6,6 +6,13 @@ import {
   FormErrorMessage,
   VStack,
 } from "@chakra-ui/react";
+import {
+  RegistFlexColumn,
+  RegistFormControl,
+  RegistFormError,
+  RegistFormLabel,
+  RegistStyledInput,
+} from "../style/UserRegistrationPageCss";
 
 export default function RegistrationPassword({
   register,
@@ -14,37 +21,37 @@ export default function RegistrationPassword({
   errors,
 }) {
   return (
-    <VStack spacing={1} align="stretch" width="100%">
-      <FormControl isInvalid={!!errors.password} isRequired>
-        <FormLabel mb={1} htmlFor="password">
-          패스워드
-        </FormLabel>
-        <Input
+    <RegistFlexColumn>
+      <RegistFormControl>
+        <RegistFormLabel htmlFor="password">패스워드</RegistFormLabel>
+        <RegistStyledInput
           className="registerInput"
           type="password"
           {...register("password")}
           id="password"
           placeholder="비밀번호를 입력하세요"
+          error={!!errors.password}
         />
-        <FormErrorMessage>
-          {errors.password && errors.password.message}
-        </FormErrorMessage>
-      </FormControl>
+        {errors.password && (
+          <RegistFormError>{errors.password.message}</RegistFormError>
+        )}
+      </RegistFormControl>
 
-      <FormControl isInvalid={!!errors.passwordCheck} isRequired>
-        <FormLabel htmlFor="passwordCheck">패스워드확인</FormLabel>
-        <Input
+      <RegistFormControl>
+        <RegistFormLabel htmlFor="passwordCheck">패스워드확인</RegistFormLabel>
+        <RegistStyledInput
           className="registerInput"
           type="password"
           {...register("passwordCheck")}
           id="passwordCheck"
           placeholder="비밀번호를 다시 입력하세요"
+          error={!!errors.passwordCheck}
         />
 
-        <FormErrorMessage>
-          {errors.passwordCheck && errors.passwordCheck.message}
-        </FormErrorMessage>
-      </FormControl>
-    </VStack>
+        {errors.passwordCheck && (
+          <RegistFormError>{errors.passwordCheck.message}</RegistFormError>
+        )}
+      </RegistFormControl>
+    </RegistFlexColumn>
   );
 }

@@ -9,6 +9,14 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
+import {
+  RegistFormControl,
+  RegistFormLabel,
+  RegistInputGroup,
+  RegistHelperMessage,
+  RegistStyledButtonWrapper,
+  RegistStyledInput,
+} from "../style/UserRegistrationPageCss";
 
 export default function RegistrationNickName({
   register,
@@ -33,21 +41,22 @@ export default function RegistrationNickName({
   };
 
   const getHelperColor = () => {
-    if (errors.nickName || (!isNickNameCheck && nickName)) return "red.500";
-    if (isNickNameCheck && nickName) return "green.500";
+    if (errors.nickName || (!isNickNameCheck && nickName)) return "#e53e3e";
+    if (isNickNameCheck && nickName) return "#38a169";
     return "gray.500";
   };
 
   return (
-    <FormControl isInvalid={!!errors.nickName} isRequired width="100%">
-      <FormLabel htmlFor="nickName">닉네임 </FormLabel>
-      <InputGroup>
-        <Input
+    <RegistFormControl>
+      <RegistFormLabel htmlFor="nickName">닉네임 </RegistFormLabel>
+      <RegistInputGroup>
+        <RegistStyledInput
           className="registerInput"
           type="text"
           {...register("nickName")}
+          error={!!errors.nickName}
         />
-        <InputRightElement width="5.5rem">
+        <RegistStyledButtonWrapper>
           <Button
             className="registerButton input-right-button"
             text={"중복 체크"}
@@ -73,13 +82,13 @@ export default function RegistrationNickName({
               }
             }}
           />
-        </InputRightElement>
-      </InputGroup>
+        </RegistStyledButtonWrapper>
+      </RegistInputGroup>
       {getHelperMessage() && (
-        <Text fontSize="sm" color={getHelperColor()} mt={1} height={2}>
+        <RegistHelperMessage color={getHelperColor()}>
           {getHelperMessage()}
-        </Text>
+        </RegistHelperMessage>
       )}
-    </FormControl>
+    </RegistFormControl>
   );
 }
