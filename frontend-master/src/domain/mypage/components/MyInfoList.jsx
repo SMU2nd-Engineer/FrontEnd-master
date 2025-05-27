@@ -11,6 +11,7 @@ import RegistrationNickName from "@/domain/user/components/RegistrationNickName"
 import RegistrationAddress from "@user/components/RegistrationAddress";
 import RegistrationEmail from "@user/components/RegistrationEmail";
 import { getMyPageData } from "../services/getMyPageDate";
+import "@user/style/UserRegistrationPage.css";
 
 export default function MyInfoList({ isSocialLogin }) {
   //yup 스키마 사용하여 입력폼 유효성 정의의
@@ -116,70 +117,90 @@ export default function MyInfoList({ isSocialLogin }) {
     <div>
       <h1>개인 정보 페이지</h1>
       <br />
-      <form
-        onSubmit={handleSubmit(submitEditForm, (errors) => {
-          console.log("유효성 검증 실패", errors);
-        })}
-      >
-        <RegistrationName
-          register={register}
-          setValue={setValue}
-          watch={watch}
-          errors={errors}
-        />
-        {!isSocialLogin && (
-          <RegistrationPassword
-            register={register}
-            setValue={setValue}
-            watch={watch}
-            errors={errors}
-          />
-        )}
-        <RegistrationNickName
-          register={register}
-          setValue={setValue}
-          watch={watch}
-          errors={errors}
-          isNickNameCheck={isNickNameCheck}
-          setIsNickNameCheck={setIsNickNameCheck}
-          existingNickname={existingNickname}
-        />
-        <RegistrationAddress
-          register={register}
-          setValue={setValue}
-          watch={watch}
-          errors={errors}
-        />
-        <RegistrationEmail
-          register={register}
-          setValue={setValue}
-          watch={watch}
-          errors={errors}
-        />
-        <Button
-          text={"취소"}
-          onClick={() => {
-            navigate("/mypage/main");
-          }}
-        />
-        <Button
-          text={"수정하기"}
-          type="submit"
-          disabled={
-            !(
-              isNickNameCheck &&
-              (isSocialLogin || watch("password") === watch("passwordCheck"))
-            )
-          }
-        />
-        <Button
-          text={"회원탈퇴"}
-          onClick={() => {
-            navigate("/user/withdrawal");
-          }}
-          navigate={navigate}
-        />
-      </form>
+      <div className="RegistrationContainer">
+        <form
+          className="registration-form"
+          onSubmit={handleSubmit(submitEditForm, (errors) => {
+            console.log("유효성 검증 실패", errors);
+          })}
+        >
+          <div className="registration-name">
+            <RegistrationName
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              errors={errors}
+            />
+          </div>
+          {!isSocialLogin && (
+            <div className="registration-password">
+              <RegistrationPassword
+                register={register}
+                setValue={setValue}
+                watch={watch}
+                errors={errors}
+              />
+            </div>
+          )}
+          <div className="registration-nickname">
+            <RegistrationNickName
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              errors={errors}
+              isNickNameCheck={isNickNameCheck}
+              setIsNickNameCheck={setIsNickNameCheck}
+              existingNickname={existingNickname}
+            />
+          </div>
+          <div className="registration-address">
+            <RegistrationAddress
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              errors={errors}
+            />
+          </div>
+          <div className="registration-email">
+            <RegistrationEmail
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              errors={errors}
+            />
+          </div>
+          <div className="registration-buttons">
+            <Button
+              className="button-base cancle-button"
+              text={"취소"}
+              onClick={() => {
+                navigate("/mypage/main");
+              }}
+            />
+            <Button
+              className="button-base regist-button"
+              text={"수정하기"}
+              type="submit"
+              disabled={
+                !(
+                  isNickNameCheck &&
+                  (isSocialLogin ||
+                    watch("password") === watch("passwordCheck"))
+                )
+              }
+            />
+          </div>
+          <div className="button-base withdrawal-button">
+            <Button
+              text={"회원탈퇴"}
+              onClick={() => {
+                navigate("/user/withdrawal");
+              }}
+              navigate={navigate}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
