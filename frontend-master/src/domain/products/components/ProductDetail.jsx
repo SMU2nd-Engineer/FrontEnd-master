@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
 import ProductImage from "./ProductImage";
 import { title } from "framer-motion/client";
+import ProductDelete from "./ProductDelete";
 
 export default function ProductDetail() {
   const {idx} = useParams();
@@ -55,7 +56,8 @@ export default function ProductDetail() {
         </div>
         <div className="column">
           <p className="title">{product.title}</p>
-          <p className="price">{product.price}원</p>
+          <p className="price">{product.price}{product.nickname}원</p>
+          <p className="salerInfo"></p>
           <div className="chakra-divider">
             <Divider orientation='horizontal'/>
           </div>
@@ -84,6 +86,7 @@ export default function ProductDetail() {
           </div>
           <div>
             <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
+            <ProductDelete idx={idx} />
           </div>
         </div> 
       
