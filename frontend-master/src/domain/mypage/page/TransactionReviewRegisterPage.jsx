@@ -14,6 +14,8 @@ import TransactionEvaluation from "../components/TransactionEvaluation";
 import { registReview } from "../services/registReview";
 import { updateReview } from "../services/updateReview";
 
+import "../style/TransactionReview.css";
+
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
 
@@ -156,7 +158,7 @@ export default function TransactionReviewRegisterPage() {
     saveInfo();
   }, [setValue, reviewIdx]);
   return (
-    <div>
+    <div className="transactionReview-main">
       <h1>
         {sellerInfo && sellerInfo.sellerName
           ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
@@ -164,60 +166,68 @@ export default function TransactionReviewRegisterPage() {
       </h1>
       {/* <h1>{sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요</h1> */}
       <form
+        className="reviewMainForm"
         onSubmit={handleSubmit(submitForm, (error) => {
           console.log("유효성 검증 실패", error);
         })}
       >
-        <br />
-        <MyPageRating
-          myRating={rating}
-          isReadOnly={isReadOnly}
-          setRating={(val) => {
-            setValue("rating", val);
-          }}
-        />
-        {evalutaionCategories.map((category) => (
-          <TransactionEvaluation
-            key={category.subIdx}
-            category={category}
+        <div className="choiceStarRating">
+          <MyPageRating
+            myRating={rating}
+            isReadOnly={isReadOnly}
+            setRating={(val) => {
+              setValue("rating", val);
+            }}
+          />
+        </div>
+        <div className="checkReview">
+          {evalutaionCategories.map((category) => (
+            <TransactionEvaluation
+              key={category.subIdx}
+              category={category}
+              register={register}
+              setValue={setValue}
+              readOnly={isReadOnly}
+            />
+          ))}
+        </div>
+        <div className="textReview">
+          <TransactionTextReview
             register={register}
             setValue={setValue}
             readOnly={isReadOnly}
+            errors={errors}
           />
-        ))}
+        </div>
+        <div className="checkButton">
+          <input type="hidden" {...register("sellerIdx")} />
+          {isNewReview && (
+            <input type="hidden" {...register("transactionIdx")} />
+          )}
+          {isEditMode && <input type="hidden" {...register("reviewIdx")} />}
 
-        <TransactionTextReview
-          register={register}
-          setValue={setValue}
-          readOnly={isReadOnly}
-          errors={errors}
-        />
-
-        <input type="hidden" {...register("sellerIdx")} />
-        {isNewReview && <input type="hidden" {...register("transactionIdx")} />}
-        {isEditMode && <input type="hidden" {...register("reviewIdx")} />}
-
-        <Button
-          text={"다음에"}
-          onClick={() => {
-            navigate("/mypage/sellAndPurchaselist");
-          }}
-        />
-
-        {isNewReview && <Button type="submit" text={"리뷰 작성하기"} />}
-
-        {isReadOnly && (
           <Button
-            text={"수정하기"}
+            text={"다음에"}
             onClick={() => {
-              setIsEditMode(true);
+              navigate("/mypage/sellAndPurchaselist");
             }}
           />
-        )}
 
-        {isEditMode && !isNewReview && (
-          <Button type="submit" text={"리뷰 수정하기"} />
-        )}
+          {isNewReview && <Button type="submit" text={"리뷰 작성하기"} />}
+
+          {isReadOnly && (
+            <Button
+              text={"수정하기"}
+              onClick={() => {
+                setIsEditMode(true);
+              }}
+            />
+          )}
+
+          {isEditMode && !isNewReview && (
+            <Button type="submit" text={"리뷰 수정하기"} />
+          )}
+        </div>
       </form>
     </div>
   );
