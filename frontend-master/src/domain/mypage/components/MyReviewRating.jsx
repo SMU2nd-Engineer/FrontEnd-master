@@ -12,6 +12,7 @@ export default function MyPageRating({
 }) {
   return (
     <>
+      <h3> 내 점수 </h3>
       <MyRatingStar
         isReadOnly={isReadOnly}
         myReviewRating={myRating}

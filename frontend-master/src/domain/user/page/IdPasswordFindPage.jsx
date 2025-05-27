@@ -3,6 +3,7 @@ import React, { useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import userReducer from "../utils/userReducer";
 import idPasswordFindService from "../services/idPasswordFindService";
+import "@user/style/IdPasswordFindPage.css";
 import {
   Box,
   VStack,
@@ -36,97 +37,6 @@ export default function IdPasswordFindPage() {
   };
 
   return (
-    // <div className="find-container">
-    //   {type === "id" ? (
-    //     <>
-    //       <h2>아이디 찾기</h2>
-    //       <form onSubmit={(e) => e.preventDefault()}>
-    //         <label htmlFor="name">
-    //           이름 :
-    //           <input
-    //             type="text"
-    //             name="name"
-    //             value={state.name}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         이메일 :
-    //         <label htmlFor="email">
-    //           <input
-    //             type="text"
-    //             name="email"
-    //             value={state.email}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <Button
-    //           text={"아이디 찾기"}
-    //           onClick={() => {
-    //             idPasswordFindService(
-    //               { name: state.name, email: state.email },
-    //               navigate
-    //             );
-    //           }}
-    //           type={"submit"}
-    //         />
-    //       </form>
-    //     </>
-    //   ) : (
-    //     <>
-    //       <h2>비밀번호 찾기</h2>
-    //       <form onSubmit={(e) => e.preventDefault()}>
-    //         <label htmlFor="id">
-    //           아이디 :
-    //           <input
-    //             type="text"
-    //             name="id"
-    //             onChange={handleChange}
-    //             value={state.id}
-    //           />
-    //         </label>
-    //         이름 :
-    //         <label htmlFor="name">
-    //           <input
-    //             type="text"
-    //             name="name"
-    //             onChange={handleChange}
-    //             value={state.name}
-    //           />
-    //         </label>
-    //         이메일 :
-    //         <label htmlFor="email">
-    //           <input
-    //             type="text"
-    //             name="email"
-    //             onChange={handleChange}
-    //             value={state.email}
-    //           />
-    //         </label>
-    //         <Button
-    //           text={"비밀번호 찾기"}
-    //           onClick={() => {
-    //             idPasswordFindService(
-    //               {
-    //                 id: state.id,
-    //                 name: state.name,
-    //                 email: state.email,
-    //               },
-    //               navigate
-    //             );
-    //           }}
-    //           type={"submit"}
-    //         />
-    //       </form>
-    //     </>
-    //   )}
-    //   <Button
-    //     text={"로그인 화면으로 돌아가기"}
-    //     onClick={() => {
-    //       window.location.href = "/user/login";
-    //     }}
-    //   />
-    // </div>
-
     <Box
       maxW="lg"
       mx="auto"
@@ -164,6 +74,15 @@ export default function IdPasswordFindPage() {
         </FormControl>
 
         <Button
+          backgroundColor="#000000"
+          color="#ffffff"
+          _hover={{ backgroundColor: "#ffffff", color: "#000000" }}
+          fontSize="0.875rem"
+          fontWeight="500"
+          padding="0.5rem 1.25rem"
+          borderRadius="0.375rem"
+          border="1px solid transparent"
+          transition="all 0.2s ease-in-out"
           mt="2rem"
           colorScheme="teal"
           width="100%"
@@ -185,6 +104,15 @@ export default function IdPasswordFindPage() {
         </Button>
 
         <Button
+          backgroundColor="#ff9a9a"
+          color="#ffffff"
+          _hover={{ backgroundColor: "#ffffff", color: "#ff9a9a" }}
+          fontSize="0.875rem"
+          fontWeight="500"
+          padding="0.5rem 1.25rem"
+          borderRadius="0.375rem"
+          border="1px solid transparent"
+          transition="all 0.2s ease-in-out"
           variant="outline"
           width="100%"
           onClick={() => navigate("/user/login")}

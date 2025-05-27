@@ -127,15 +127,14 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
-
 .cancle-button {
-  background-color: #fff;
-  color: #ff9a9a;
+  background-color: #ff9a9a;
+  color: #fff;
 }
 
 .cancle-button:hover {
-  background-color: #ff9a9a;
-  color: #fff;
+  background-color: #fff;
+  color: #ff9a9a;
 }
 
 .regist-button {

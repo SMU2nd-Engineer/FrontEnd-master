@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { getMyPageData } from "../services/getMyPageDate";
 import MySellList from "../components/MySellList";
 import MyTransactionReview from "../components/MyTransactionReview";
+import "@mypage/style/MyPageCommon.css";
+import "@mypage/style/MainPage.css";
 
 import "../style/MyPageNav.css";
 
@@ -45,32 +47,41 @@ export default function MainPage() {
       <div className="sticky-navbar">
         <MyPageLink />
       </div>
+    <div className="mypage-container">
+      {/* <h1>MainPage</h1> */}
+      <div className="sidebar">
+        <MyPageLink />
+      </div>
+      <div className="header">
+        <MyName />
+      </div>
+      <div className="products">
+        <MySellList
+          isMain={true}
+          products={mainPageInfo.myMainSellProductList}
+        />
+      </div>
+      <div className="peak">
+        <MyMainPeak list={mainPageInfo.myMainPeakList} />
+      </div>
 
-      <div className="content">
-        {/* <h1>MainPage</h1> */}
-        <div>
-          <MyName />
-          <p> 내 상품 </p>
-          <MySellList
-            isMain={true}
-            products={mainPageInfo.myMainSellProductList}
-          />
-          {/* <p> 찜 목록 </p> */}
-          <MyMainPeak list={mainPageInfo.myMainPeakList} />
-          <p> 내 점수 </p>
-          <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
-          <MyTransactionReview
-            reviewLists={mainPageInfo.myMainReview}
-            movePage={"myReview"}
-            isMain={true}
-          />
-          <Button
-            text={"임시 홈 화면으로"}
-            onClick={() => {
-              navigate("/user/home");
-            }}
-          />
-        </div>
+      <div className="rating">
+        <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
+      </div>
+      <div className="reviews">
+        <MyTransactionReview
+          reviewLists={mainPageInfo.myMainReview}
+          movePage={"myReview"}
+          isMain={true}
+        />
+      </div>
+      <div className="button">
+        <Button
+          text={"임시 홈 화면으로"}
+          onClick={() => {
+            navigate("/user/home");
+          }}
+        />
       </div>
     </div>
   );
