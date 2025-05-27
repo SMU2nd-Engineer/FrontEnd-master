@@ -2,7 +2,7 @@ import React from "react";
 import KakaoPayCancel from "../service/KakaoPayCancel";
 import kakaoPayFail from "../service/KakaoPayFail";
 import Button from "@/components/Button";
-import PaymentAddress from "../components/PaymentAddress";
+import Address from "@/domain/user/components/RegistrationAddress";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SCHEMA } from '@/domain/user/utils/userFormValidator';
 import { useForm } from 'react-hook-form';
@@ -55,7 +55,7 @@ const PaymentCancelPage = () => {
       </div>
       <div className="form-row">
         <label htmlFor="address">반송 배송지 입력</label>
-        <PaymentAddress
+        <Address
           register={register}
           setValue={setValue}
           watch={watch}
