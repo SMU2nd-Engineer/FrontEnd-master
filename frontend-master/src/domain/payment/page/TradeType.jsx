@@ -45,7 +45,6 @@ const TradeType = () => {
   return (
     <div className='container'>
       <div className='trade'>
-        <div>
         <div className='productInfo'>
           <div className='img'>
             <img src={product.img} alt={product.title} />
