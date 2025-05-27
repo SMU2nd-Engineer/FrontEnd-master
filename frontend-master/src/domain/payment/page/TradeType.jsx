@@ -38,13 +38,14 @@ const TradeType = () => {
   }
 
   const handleClick = () => {
-    navigate('/payment', {
-      state: {tradeType, product}
+    navigate(`/payment/${product.idx}`, {
+      state: {tradeType}
     });
   }
   return (
     <div className='container'>
       <div className='trade'>
+        <div>
         <div className='productInfo'>
           <div className='img'>
             <img src={product.img} alt={product.title} />

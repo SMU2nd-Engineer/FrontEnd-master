@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PaymentAddress from '../components/PaymentAddress';
 import Button from '@/components/Button';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SCHEMA } from '@/domain/user/utils/userFormValidator';
-import { Input } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import KakaoPayReady from '../service/KakaoPayReady';
 import SelectBox from '@/components/SelectBox';
 import { getCategoryIdx } from '@/utils/CategoryHandler';
+import { getProductDetail } from '@/domain/products/services/productService';
+import { useEffect } from 'react';
 
 const PaymentPage = () => {
+  const {idx} = useParams();
+  const [product, setProduct] = useState(null);
   const YUPSCHEMA = SCHEMA;
   const location = useLocation();
-  const {product, tradeType} = location.state || {};
+  const tradeType = location.state?.tradeType;
   const user = {
     idx: 1,
     address: '제주특별자치도 안양시 동안구 봉은사3로 (현정김마을)'
@@ -23,9 +26,16 @@ const PaymentPage = () => {
     keyword : ""
   });
 
-  useState(()=>{
-    console.log(product, tradeType);
-  }, [tradeType])
+  useEffect(() => {
+      getProductDetail(idx)
+        .then((res) => res.data)
+        .then((data) => {
+          console.log("=================", data)
+          setProduct(data)
+        })
+        .catch((err) => console.error("상품 불러오기 실패: ", err));
+      
+    }, [idx]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,20 +54,20 @@ const PaymentPage = () => {
     mode: "onBlur", // 사용자에게 안내 메시지 출력
   });
 
+  if(!product) {
+    return <div>상품 정보를 불러오는 중입니다...</div>;
+  }
+
   const handlePaymentClick = async () => {
-    if(!product) {
-      alert("상품 정보가 없습니다. 다시 시도해주세요.")
-      return;
-    }
+    
+
     const categoryIdx = Number(searchValue.category_idx);
     switch (categoryIdx) {
       case 6001:
         try {
-          const result = await KakaoPayReady({
-            product, 
-            user, 
-            tradeType
-          });
+          const result = await KakaoPayReady(product, user, tradeType);
+          console.log("카카오 응답 ", result);
+      
           if (result) {
             window.location.href = result.nextRedirectPcUrl;
             console.log("카카오 응답 ", result);
