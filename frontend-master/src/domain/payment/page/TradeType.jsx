@@ -55,7 +55,7 @@ const TradeType = () => {
           </div>
         </div>
         <section className='selectTradeType'>
-          <span>거래 방법 선택</span>
+          <span className='text'>거래 방법 선택</span>
           <section>
             <TradeOptionBtn
               type={0}
@@ -63,8 +63,7 @@ const TradeType = () => {
               onClick={handleTradeType}
               title="택배로 받기"
               description="원하는 주소로 배송받기"
-              price="3000"
-            />
+              price={3000}            />
           </section>
           <section>
             <TradeOptionBtn
@@ -78,17 +77,17 @@ const TradeType = () => {
         </section>
       </div>
       <div className='bottom'>
-        <section>
-          <div>
-            <div>
-              <span>예상금액</span>
-              <div>
+        <section className='bottom_section'>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div className='price'>
+              <span style={{fontSize: '13px', textAlign:'left'}}>예상금액</span>
+              <div style={{textAlign: 'left', fontWeight: 'bold'}}>
                 <span>{product.price}원</span>
               </div>
             </div>
             <span></span>
           </div>
-          <button onClick={handleClick}>다음</button>
+          <button className='next' onClick={handleClick}>다음</button>
         </section>
       </div>
     </div>

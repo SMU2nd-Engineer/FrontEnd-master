@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "@/lib/axiosInstance";
 import kakaoPayApprove from "../service/KakaoPayApprove";
 import { getProductDetail } from "@/domain/products/services/productService";
 import kakaoPayFail from "../service/KakaoPayFail";
+import PaymentProductInfo from "../components/PaymentProductInfo";
+import "../styles/Payment.css"
 
 const PaymentSuccessPage = () => {
   const navigate = useNavigate();
@@ -73,19 +74,9 @@ const PaymentSuccessPage = () => {
 
       {!loading && success && (
         <>
-          <div>
-            <div className='img'>
-              <img src={product.img} alt="상품이미지" />
-            </div>
-            <div>
-              <p>{product.title}</p>
-              <h2>{product.price}원</h2>
-              <p>{product.content}</p>
-            </div>
-          </div>
-          <h1 style={{ color: "green" }}>결제가 성공적으로 완료되었습니다!</h1>
-          <p>감사합니다.</p>
-          <button onClick={handleGoReview}>후기 작성하기</button>
+          <h1>결제가 성공적으로 완료되었습니다!</h1>
+          <PaymentProductInfo product={product}/>
+          <button className="review" onClick={handleGoReview}>후기 작성하기</button>
         </>
       )}
     </div>
