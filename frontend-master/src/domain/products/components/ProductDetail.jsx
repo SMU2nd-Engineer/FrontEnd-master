@@ -5,6 +5,7 @@ import { Divider } from "@chakra-ui/react";
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
 import ProductImage from "./ProductImage";
+import ProductDelete from "./ProductDelete";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 
@@ -72,7 +73,8 @@ export default function ProductDetail() {
         </div>
         <div className="column">
           <p className="title">{product.title}</p>
-          <p className="price">{product.price}원</p>
+          <p className="price">{product.price}{product.nickname}원</p>
+          <p className="salerInfo"></p>
           <div className="chakra-divider">
             <Divider orientation="horizontal" />
           </div>
@@ -97,25 +99,14 @@ export default function ProductDetail() {
           <div className="chakra-divider">
             <Divider orientation="horizontal" />
           </div>
-          <ProductImage
-            imageList={product.imageList}
-            title={product.title}
-            mode="all"
-          />
-
-          <p className="detaillcontent">{product.content}</p>
-        </div>
-        <div className="chakra-divider">
-          <Divider orientation="vertical" height="400px" />
-        </div>
-        <div className="salerinfo">{/* 판매자 정보 뜨게 하고 싶엉 */}</div>
-        <div>
-          <Button
-            className="product_editbutton"
-            text={"수정"}
-            onClick={handleEdit}
-          />
-        </div>
+          <div className="salerinfo">
+            {/* 판매자 정보 뜨게 하고 싶엉 */}
+          </div>
+          <div>
+            <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
+            <ProductDelete idx={idx} />
+          </div>
+        </div> 
       </div>
     </div>
   );

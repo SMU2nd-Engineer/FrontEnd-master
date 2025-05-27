@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postProduct, putProductEdit } from "../services/productService";
+import { postProduct, putEditProduct } from "../services/productService";
 import { Divider, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
@@ -28,8 +28,6 @@ const ProductUpload = ({ initialData, isEdit }) => {
 
   const [uploadImage, setUploadImage] = useState([]);
 
-  const { title, price, category_idx, categorygenre_idx, content, image_Url, user_idx} = newProduct;
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -46,7 +44,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
 
 
     if (isEdit) {
-      putProductEdit(newProduct.idx, newProduct, uploadImage)
+      putEditProduct(newProduct.idx, newProduct, uploadImage)
       .then((response) => response.data)
       .then((result) => {
         console.log("수정 결과: ", result);
@@ -86,7 +84,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
             type="text"
             id="title"
             name="title"
-            value={title}
+            value={newProduct.title}
             onChange={handleChange}
             placeholder="이름"
           />
@@ -101,7 +99,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
               type="number"
               id="price"
               name="price"
-              value={price}
+              value={newProduct.price}
               onChange={handleChange}
               placeholder="금액을 입력해주세요"
               pl="40px"
@@ -112,15 +110,15 @@ const ProductUpload = ({ initialData, isEdit }) => {
         <div className="chakra-divider"> <Divider orientation='horizontal'/>  </div>
         <div className="form-row">
           <label htmlFor="category_idx">카테고리 </label>
-          <SelectBox id={"categorygenre_idx"} name={"categorygenre_idx"} category_idx={getCategoryIdx("contentsGenre")} handleChange={handleChange}/>
-          <SelectBox id={"category_idx"} name={"category_idx"} category_idx={getCategoryIdx("contents")} handleChange={handleChange}/>
+          <SelectBox id={"categorygenre_idx"} name={"categorygenre_idx"} category_idx={getCategoryIdx("contentsGenre")} handleChange={handleChange} defaultValue={newProduct.categorygenre_idx}/>
+          <SelectBox id={"category_idx"} name={"category_idx"} category_idx={getCategoryIdx("contents")} handleChange={handleChange} defaultValue={newProduct.category_idx}/>
         </div>
         <div className="chakra-divider"> <Divider orientation='horizontal'/>  </div>
         <div className="form-row">
           <label htmlFor="content" >상세정보 </label>
           <textarea
             id="content"
-            value={content}
+            value={newProduct.content}
             name="content"
             onChange={handleChange}
             placeholder="상세정보를 입력해주세요"

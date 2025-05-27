@@ -1,9 +1,9 @@
 import { getCategory } from '@/services/Category';
 import React, { useEffect, useState } from 'react';
 
-const SelectBox = ({id, name, category_idx, handleChange = f => f}) => {
+const SelectBox = ({id, name, category_idx, handleChange = f => f , defaultValue = 0}) => {
   const [options, setOptions] = useState([]);
-  const [selectValue, setSelectValue] = useState("");
+  const [selectValue, setSelectValue] = useState(defaultValue);
   useEffect(()=> {
     getCategory(category_idx)
       .then((res) => res.data)
@@ -14,7 +14,7 @@ const SelectBox = ({id, name, category_idx, handleChange = f => f}) => {
     <select
             id={id}
             name={name}
-            value={selectValue}
+            value={selectValue || defaultValue}
             onChange={(e)=> {
               handleChange(e)
               setSelectValue(e.target.value)

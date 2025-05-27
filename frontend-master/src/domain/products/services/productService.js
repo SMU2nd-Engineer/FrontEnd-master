@@ -29,7 +29,7 @@ export const getProductDetail = (idx) => {
   );
 };
 
-export const putProductEdit = (
+export const putEditProduct = (
   idx,
   newProduct,
   uploadImage) =>{
@@ -52,3 +52,8 @@ export const searchProducts = ({category_idx = 0, categorygenre_idx = 0, keyword
     {withCredentials: true } 
   );
 };
+
+export const deleteProducts = (idx) => {
+  return axiosInstance.put(
+    `product/delete/${idx}`,{}, { withCredentials: true })
+}
