@@ -57,10 +57,3 @@
   justify-content: space-between;
   gap: 1rem;
 }
-
-.registerButton {
-  display: flex;
-  font-size: smaller;
-  justify-content: center;
-  align-items: center;
-}

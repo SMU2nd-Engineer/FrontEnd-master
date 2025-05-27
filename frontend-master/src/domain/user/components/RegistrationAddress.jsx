@@ -1,15 +1,6 @@
 import React, { useRef } from "react";
-import Button from "@/components/Button";
+import Button from "../../../components/Button";
 import { useDaumPostcodePopup } from "react-daum-postcode";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  VStack,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
 
 export default function Address({ register, setValue, watch, errors }) {
   const inputFocus = useRef();
@@ -34,30 +25,13 @@ export default function Address({ register, setValue, watch, errors }) {
     inputFocus.current.focus();
   };
   return (
-    <VStack spacing={4} align="stretch">
-      <FormControl isInvalid={!!errors.address} isRequired>
-        <FormLabel htmlFor="address" mb={1}>
-          주소
-        </FormLabel>
-        <InputGroup>
-          <Input type="text" {...register("address")} readOnly />
-          <InputRightElement width="5.5rem">
-            <Button
-              className="registerButton"
-              text={"주소 찾기"}
-              onClick={() => {
-                open({ onComplete: handleComplete });
-              }}
-            />
-          </InputRightElement>
-        </InputGroup>
-        <FormErrorMessage>{errors.address?.message}</FormErrorMessage>
-      </FormControl>
-      <FormControl isInvalid={!!errors.detailAddress} isRequired>
-        <FormLabel htmlFor="detailAddress" mb={1}>
-          상세 주소
-        </FormLabel>
-        <Input
+    <>
+      <label>
+        <input type="text" {...register("address")} readOnly />
+      </label>
+      {errors.address && <p>{errors.address.message}</p>}
+      <label>
+        <input
           type="text"
           {...register("detailAddress")}
           ref={(el) => {
@@ -65,8 +39,14 @@ export default function Address({ register, setValue, watch, errors }) {
             inputFocus.current = el; // 그 다음에 포커스 용도로 저장
           }}
         />
-        <FormErrorMessage>{errors.detailAddress?.message}</FormErrorMessage>
-      </FormControl>
-    </VStack>
+      </label>
+      {errors.detailAddress && <p>{errors.detailAddress.message}</p>}
+      <Button
+        text={"주소 찾기"}
+        onClick={() => {
+          open({ onComplete: handleComplete });
+        }}
+      />
+    </>
   );
 }

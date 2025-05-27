@@ -7,8 +7,7 @@ import {
   Input,
   FormErrorMessage,
   Text,
-  InputGroup,
-  InputRightElement,
+  Flex,
 } from "@chakra-ui/react";
 
 export default function RegistrationId({
@@ -26,36 +25,21 @@ export default function RegistrationId({
     if (!isSocialLogin) {
       setIsIdCheck(false);
     }
-  }, [id, setIsIdCheck, isSocialLogin]);
-
-  const getHelperMessage = () => {
-    if (errors.id) return errors.id.message;
-    if (!isIdCheck && id) return "중복 체크 해주세요.";
-    if (isIdCheck && id) return "사용 가능합니다.";
-    return null;
-  };
-
-  const getHelperColor = () => {
-    if (errors.id || (!isIdCheck && id)) return "red.500";
-    if (isIdCheck && id) return "green.500";
-    return "gray.500";
-  };
+  }, [id, setIsIdCheck]);
 
   return (
-    <FormControl isInvalid={!!errors.id} isRequired width="100%">
-      <FormLabel htmlFor="id">아이디</FormLabel>
-      <InputGroup>
-        <Input
-          className="registerInput"
-          type="text"
-          {...register("id")}
-          readOnly={isSocialLogin}
-        />
-        <InputRightElement width="5.5rem">
-          {!isSocialLogin && (
+    <FormControl isInvalid={!!errors.id}>
+      <Flex align="spance-between" gap={4}>
+        <FormLabel htmlFor="id">
+          아이디
+          <Input type="text" {...register("id")} readOnly={isSocialLogin} />
+          <FormErrorMessage>
+            {errors.id && <p>{errors.id.message}</p>}
+          </FormErrorMessage>
+        </FormLabel>
+        {!isSocialLogin && (
+          <>
             <Button
-              className="registerButton"
-              style={{ text: "50px" }}
               text={"중복 체크"}
               onClick={async () => {
                 try {
@@ -63,7 +47,7 @@ export default function RegistrationId({
                   if (result) {
                     setIsIdCheck(true);
                   } else {
-                    alert("중복입니다. 다른 아이디를 사용해주세요.");
+                    alert("중복입니다. 다른 아이디를를 사용해주세요.");
                     setIsIdCheck(false);
                   }
                 } catch (e) {
@@ -72,14 +56,15 @@ export default function RegistrationId({
                 }
               }}
             />
-          )}
-        </InputRightElement>
-      </InputGroup>
-      {getHelperMessage() && (
-        <Text fontSize="sm" color={getHelperColor()} mt={1} height={2}>
-          {getHelperMessage()}
-        </Text>
-      )}
+            {watch("id") && !isIdCheck && !errors.id && (
+              <Text color="red.500">중복 체크 해주세요.</Text>
+            )}
+            {watch("id") && isIdCheck && !errors.id && (
+              <Text color="green.500">사용 가능합니다.</Text>
+            )}
+          </>
+        )}
+      </Flex>
     </FormControl>
   );
 }
