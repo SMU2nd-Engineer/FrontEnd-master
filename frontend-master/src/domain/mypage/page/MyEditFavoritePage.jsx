@@ -5,7 +5,9 @@ import MyPageLink from "../components/MyPageLink";
 export default function MyEditFavoritePage() {
   return (
     <div>
-      <MyPageLink />
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       <FavoritesSelector mode="edit" />
     </div>
   );
