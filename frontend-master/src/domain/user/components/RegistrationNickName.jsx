@@ -49,7 +49,7 @@ export default function RegistrationNickName({
         />
         <InputRightElement width="5.5rem">
           <Button
-            className="registerButton"
+            className="registerButton input-right-button"
             text={"중복 체크"}
             onClick={async () => {
               if (existingNickname === watch("nickName")) {

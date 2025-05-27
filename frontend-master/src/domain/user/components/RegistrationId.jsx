@@ -54,7 +54,7 @@ export default function RegistrationId({
         <InputRightElement width="5.5rem">
           {!isSocialLogin && (
             <Button
-              className="registerButton"
+              className="registerButton input-right-button"
               style={{ text: "50px" }}
               text={"중복 체크"}
               onClick={async () => {
