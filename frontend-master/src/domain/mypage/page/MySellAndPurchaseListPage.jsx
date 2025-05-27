@@ -17,7 +17,9 @@ export default function SellAndPurchaseList() {
   }, []);
   return (
     <div>
-      <MyPageLink />
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       <p>판매/구매이력</p>
       <p>판매 내역 컴포넌트</p>
       <MySellList products={myProductList.sellInfoList} />

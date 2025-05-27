@@ -20,7 +20,9 @@ export default function MyBoardPage() {
   return (
     <div>
       <p>마이페이지 게시판 입니다.</p>
-      <MyPageLink />
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       {/* <p>내가 작성한 게시글나오는 컴포넌트</p> */}
       <MyBoard boards={myBoardPageInfo.myBoardLists} navigate={navigate} />
       {/* <p>내가 작성한 댓글 나오는 컴포넌트</p> */}

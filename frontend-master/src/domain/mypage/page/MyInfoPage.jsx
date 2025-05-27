@@ -21,7 +21,9 @@ export default function MyInfo() {
   // console.log(isMyInfoPasswordCheck);
   return (
     <div>
-      <MyPageLink />
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       <p>개인정보수정</p>
       <br />
       {!isMyInfoPasswordCheck ? (

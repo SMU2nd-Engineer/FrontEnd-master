@@ -11,6 +11,8 @@ import MyTransactionReview from "../components/MyTransactionReview";
 import "@mypage/style/MyPageCommon.css";
 import "@mypage/style/MainPage.css";
 
+import "../style/MyPageNav.css";
+
 /**
  * 메인 화면
  * @returns 마이페이지 메인 화면 반환
@@ -41,6 +43,10 @@ export default function MainPage() {
     saveMainPageInfo();
   }, []);
   return (
+    <div className="main">
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
     <div className="mypage-container">
       {/* <h1>MainPage</h1> */}
       <div className="sidebar">

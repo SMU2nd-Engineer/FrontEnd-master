@@ -31,7 +31,9 @@ export default function MyReviewPage() {
   return (
     <div>
       <p>리뷰 페이지</p>
-      <MyPageLink />
+      <div className="sticky-navbar">
+        <MyPageLink />
+      </div>
       <MyName />
       <MyPageRating myRating={myReviewInfoList.myAverageRating} />
       <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />
