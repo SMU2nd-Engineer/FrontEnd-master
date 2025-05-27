@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import axiosInstance from "@/lib/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const PaymentTestPage = () => {
   const [payUrl, setPayUrl] = useState("");
   const [error, setError] = useState("");
+  const nevigate = useNavigate();
 
   const handleKakaoPayReady = async () => {
     try {
@@ -38,9 +40,14 @@ const PaymentTestPage = () => {
     }
   };
 
+  const ClickCancelBtn = () => {
+    nevigate("/payment/refund")
+  }
+
   return (
     <div style={{padding: "20px"}}>
       <h1>카카오페이 결제 테스트</h1>
+      <button onClick={ClickCancelBtn}>카카오페이 환불</button>
       <button onClick={handleKakaoPayReady}>카카오페이 결제 준비</button>
       {payUrl && (
         <div style={{marginTop: "20px"}}>

@@ -12,7 +12,7 @@ const PaymentRoutes = () => {
       <Route path="" element={<PaymentPage />} />
       <Route path="test" element={<PaymentTestPage />} />
       <Route path="success" element={<PaymentSuccessPage />} />
-      <Route path="cancel" element={<PaymentCancelPage />} />
+      <Route path="refund" element={<PaymentCancelPage />} />
       <Route path="fail" element={<PaymentFailPage />} />
       <Route path="trade/:idx" element={<TradeType />} />
     </Routes>

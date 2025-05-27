@@ -2,9 +2,9 @@ import axiosInstance from "@/lib/axiosInstance"
 
 const kakaoPayFail = async ({tid, error}) => {
   try {
-    const res = await axiosInstance.post("/payment/ready?payMethod=6001", {
+    await axiosInstance.post("/payment/fail", {
       tid,
-      reason: error.message || "카카오 결제 실패"
+      reason: error?.message || String(error) || "알 수 없는 오류"
     })
   } catch (error) {
     console.log("결제 실패 처리중 오류: ", error);
