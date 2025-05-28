@@ -115,7 +115,9 @@ const PaymentPage = () => {
         </PaymentDesign.AddressComponent>
       </PaymentDesign.Adderss>
       <PaymentDesign.OrderProduct>주문 상품</PaymentDesign.OrderProduct>
-      <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+      <PaymentDesign.ProductInfo>
+        <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+      </PaymentDesign.ProductInfo>
       <PaymentDesign.Paymethod>
         <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>
         <PaymentDesign.Select>

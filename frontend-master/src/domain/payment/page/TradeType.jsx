@@ -12,7 +12,6 @@ const TradeType = () => {
   const [tradeType, setTradeType] = useState(null);
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     getProductDetail(idx)
@@ -49,6 +48,8 @@ const TradeType = () => {
   } else if (tradeType === 1) {
     total = product.price;
   }
+
+  localStorage.setItem("tradeType", tradeType);
 
   return (
     <Trade.Container>

@@ -109,3 +109,16 @@ export const TRecaluation = styled.div`
     user-select: none;
   }
 `;
+
+export const PaymentProductInfo = styled.div`
+  display: flex;
+  text-align: center;
+  margin-left: 15px;
+  margin-bottom: 20px;
+`
+export const Line = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: #ddd;
+  margin-bottom: 15px;
+`
