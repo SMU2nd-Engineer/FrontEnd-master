@@ -2,6 +2,15 @@ import React, { useState } from "react";
 import MyTextReview from "./MyReviewText";
 import MyPagination from "./MyPaginationUI";
 import { Link } from "react-router-dom";
+import {
+  MoreReview,
+  TransactionReviewContainer,
+  TransactionReviewHedear,
+  TransactionReviewTable,
+  TransactionTableTh,
+} from "../style/MyMainPageDesign";
+
+import "../style/MyReviewPageDesign.css";
 
 /**
  * 거래 후기를 렌더링할 컴포넌트
@@ -39,17 +48,14 @@ export default function MyTransactionReview({
     );
 
   return (
-    <div
-      id="wishlistBody"
-      style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
-    >
-      <p>거래 후기</p>
+    <TransactionReviewContainer>
+      <TransactionReviewHedear>거래 후기</TransactionReviewHedear>
       <br />
-      <table>
+      <TransactionReviewTable>
         <thead>
           <tr>
-            <th>리뷰</th>
-            <th>날짜 </th>
+            <TransactionTableTh>리뷰</TransactionTableTh>
+            <TransactionTableTh>날짜 </TransactionTableTh>
           </tr>
         </thead>
         <tbody>
@@ -62,7 +68,7 @@ export default function MyTransactionReview({
             />
           ))}
         </tbody>
-      </table>
+      </TransactionReviewTable>
       {!isMain && (
         <MyPagination
           pageCount={totalPageCount}
@@ -70,7 +76,9 @@ export default function MyTransactionReview({
           pageRangeDisplayed={3}
         />
       )}
-      {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
-    </div>
+      <MoreReview>
+        {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
+      </MoreReview>
+    </TransactionReviewContainer>
   );
 }

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REVIEW_SCHEMA } from "@user/utils/userFormValidator";
 import Button from "@/components/Button";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import TransactionTextReview from "../components/TransactionTextReview";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -15,6 +15,7 @@ import { registReview } from "../services/registReview";
 import { updateReview } from "../services/updateReview";
 
 import * as TranReview from "../style/TransactionReviewDesign";
+import PaymentProductInfo from "@/domain/payment/components/PaymentProductInfo";
 
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
@@ -32,6 +33,10 @@ export default function TransactionReviewRegisterPage() {
   const [evalutaionCategories, setEvalutaionCategories] = useState([]); // 평가 항목
   const [originalReview, setOriginalReview] = useState({}); // 기존 리뷰 정보 저장.
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const tradeType = Number(searchParams.get('tradeType'));
+  const location = useLocation();
+  const product = location.state?.product;
 
   const {
     register, // 입력 폼 등록
@@ -159,6 +164,10 @@ export default function TransactionReviewRegisterPage() {
   }, [setValue, reviewIdx]);
   return (
     <TranReview.TRmain>
+      <TranReview.PaymentProductInfo>
+        <PaymentProductInfo product={product} tradeType={{tradeType}} />
+      </TranReview.PaymentProductInfo>
+      <TranReview.Line></TranReview.Line>
       <h1>
         {sellerInfo && sellerInfo.sellerName
           ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`

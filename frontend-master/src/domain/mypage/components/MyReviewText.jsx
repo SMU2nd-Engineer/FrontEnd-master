@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { TransactionTableTd } from "../style/MyMainPageDesign";
 
 export default function MyTextReview({ reviewText, reviewDate, reviewIdx }) {
   const navigate = useNavigate();
@@ -9,8 +10,8 @@ export default function MyTextReview({ reviewText, reviewDate, reviewIdx }) {
   };
   return (
     <tr onClick={handleOnClick}>
-      <td>{reviewText}</td>
-      <td>{reviewDate}</td>
+      <TransactionTableTd>{reviewText}</TransactionTableTd>
+      <TransactionTableTd>{reviewDate}</TransactionTableTd>
     </tr>
   );
 }

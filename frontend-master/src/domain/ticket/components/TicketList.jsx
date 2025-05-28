@@ -83,9 +83,15 @@ const TicketList = ({
 
   // 토글 버튼
   const toggleGenre = (genre) => {
-    setOpenGenres((prev) =>
-      Object.fromEntries(Object.keys(prev).map((key) => [key, key === genre]))
-    );
+    setOpenGenres((prev) => {
+      const isCurrentlyOpen = prev[genre];
+      return Object.fromEntries(
+        Object.keys(prev).map((key) => [
+          key,
+          key === genre ? !isCurrentlyOpen : false,
+        ])
+      );
+    });
   };
 
   // 장르맵 생성 (숫자 → 한글)

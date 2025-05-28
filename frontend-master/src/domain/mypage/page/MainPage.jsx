@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import { getMyPageData } from "../services/getMyPageDate";
 import MySellList from "../components/MySellList";
 import MyTransactionReview from "../components/MyTransactionReview";
-import "@mypage/style/MyPageCommon.css";
-
 import * as Nav from "../style/MyPageNavDesign";
-import * as Main from "../style/MainPageDesign";
+import {
+  MyMainContainer,
+  MyMainGridArea,
+  RatingAndReviewContainer,
+} from "../style/MyMainPageDesign";
+
 
 /**
  * 메인 화면
@@ -43,45 +46,42 @@ export default function MainPage() {
     saveMainPageInfo();
   }, []);
   return (
-    <Main.MainTool>
+    <div className="main">
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <Main.MyPageContainer>
-        {/* <h1>MainPage</h1> */}
 
-        <Main.Header>
+      <MyMainContainer>
+        <MyMainGridArea area="header">
           <MyName />
-        </Main.Header>
-        <Main.Products>
+        </MyMainGridArea>
+        <MyMainGridArea area="sell">
           <MySellList
             isMain={true}
             products={mainPageInfo.myMainSellProductList}
           />
-        </Main.Products>
-        <Main.Peak>
-          <MyMainPeak list={mainPageInfo.myMainPeakList} />
-        </Main.Peak>
-
-        <Main.Rating>
+        </MyMainGridArea>
+        <RatingAndReviewContainer>
           <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
-        </Main.Rating>
-        <Main.Reviews>
           <MyTransactionReview
             reviewLists={mainPageInfo.myMainReview}
             movePage={"myReview"}
             isMain={true}
           />
-        </Main.Reviews>
-        <Main.HomeButton>
+        </RatingAndReviewContainer>
+        <MyMainGridArea area="peak">
+          <MyMainPeak list={mainPageInfo.myMainPeakList} />
+        </MyMainGridArea>
+
+        <div className="button">
           <Button
             text={"임시 홈 화면으로"}
             onClick={() => {
               navigate("/user/home");
             }}
           />
-        </Main.HomeButton>
-      </Main.MyPageContainer>
-    </Main.MainTool>
+        </div>
+      </MyMainContainer>
+    </div>
   );
 }

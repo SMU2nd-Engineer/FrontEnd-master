@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
+import { StarRatingWrapper } from "../style/MySatrRatingDesign";
 
 /**
  * 별점을 위한 컴포넌트
@@ -33,7 +34,7 @@ export default function MyRatingStar({
   }, [myReviewRating]);
 
   return (
-    <div className="starRating">
+    <StarRatingWrapper>
       <Rating
         onClick={handleRating}
         initialValue={rating}
@@ -46,6 +47,6 @@ export default function MyRatingStar({
           reset
         </button>
       )}
-    </div>
+    </StarRatingWrapper>
   );
 }

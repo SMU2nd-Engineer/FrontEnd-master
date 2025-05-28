@@ -11,6 +11,7 @@ export const FavoriteMain = styled.div`
   padding: 8px;
   border-radius: 6px;
   transition: background-color 0.2s ease;
+  height: 100%;
   cursor: pointer;
   justify-content: center;
   &:hover {
@@ -34,6 +35,8 @@ export const CategoryGrid = styled.div`
   grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개 */
   gap: 12px;
   background-color: #f0f0f0;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 `;
 
 export const FormActions = styled.div`
@@ -44,11 +47,12 @@ export const FormActions = styled.div`
 `;
 
 export const FormTitle = styled.h2`
-  border-radius: 8px;
   background-color: #f0b8b8;
   color: white;
-  border: none;
-  border-radius: 6px;
+  border-bottom: 2px solid #ffffff;
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -67,4 +71,9 @@ export const EndButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const CategoryForm = styled.form`
+  width: 100%;
+  line-height: 400%;
 `;

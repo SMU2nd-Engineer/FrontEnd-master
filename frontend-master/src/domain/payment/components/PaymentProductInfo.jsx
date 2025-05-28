@@ -9,17 +9,17 @@ const PaymentProductInfo = ({product, tradeType}) => {
   }
   console.log(total);
   return (
-    <PaymentDesign.ProductInfo>
+    <>
       <PaymentDesign.Img>
         {/* <img src={product.image_Url} alt="상품이미지" /> */}
         <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
       </PaymentDesign.Img>
       <PaymentDesign.PriceTitle>
         <PaymentDesign.Title>{product.title}</PaymentDesign.Title>
-        <PaymentDesign.Price>{total}원</PaymentDesign.Price>
+        <PaymentDesign.Price>총 결제금액 {total}원</PaymentDesign.Price>
         <p>{product.content}</p>
       </PaymentDesign.PriceTitle>
-    </PaymentDesign.ProductInfo>
+    </>
   );
 };
 

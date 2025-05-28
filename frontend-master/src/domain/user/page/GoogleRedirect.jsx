@@ -63,9 +63,9 @@ export default function GoogleRedirect() {
   ]);
 
   return (
-    <div>
-      <p>로그인 진행 중입니다.</p>
-      <FadeLoader color="#999393" />
-    </div>
+    <SocialLoginLodingContainer>
+      <SocialLoginLodingText>로그인 진행 중입니다.</SocialLoginLodingText>
+      <FadeLoader color="#999393" height={12} width={4} margin={2} />
+    </SocialLoginLodingContainer>
   );
 }

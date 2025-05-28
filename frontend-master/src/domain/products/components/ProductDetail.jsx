@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../styles/ProductDetail.css";
+// import "../styles/ProductDetail.css";
 import * as ProductDetails from "../styles/ProductDetailDesign";
 import { Divider } from "@chakra-ui/react";
 import Button from "@/components/Button";
