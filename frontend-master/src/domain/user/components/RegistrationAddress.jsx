@@ -41,7 +41,6 @@ export default function Address({ register, setValue, watch, errors }) {
           <RegistStyledInput type="text" {...register("address")} readOnly />
           <RegistStyledButtonWrapper>
             <Button
-              className="registerButton input-right-button"
               text={"주소 찾기"}
               onClick={() => {
                 open({ onComplete: handleComplete });

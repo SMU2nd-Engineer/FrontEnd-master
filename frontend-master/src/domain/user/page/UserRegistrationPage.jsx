@@ -13,7 +13,13 @@ import registrationService from "../services/registrationService";
 import { useNavigate } from "react-router-dom";
 import { setAccessToken } from "@/utils/TokenManager";
 import { registrationUserFavorite } from "../services/registrationUserFavorite";
-import "@user/style/UserRegistrationPage.css";
+import {
+  RegistrationContainer,
+  RegistrationForm,
+  FormGridArea,
+  ButtonWrapper,
+  RegistButton,
+} from "../style/UserRegistrationPageDesign";
 
 /**
  * id : 아이디
@@ -111,14 +117,13 @@ export default function UserRegistrationPage() {
   };
 
   return (
-    <div className="RegistrationContainer">
-      <form
-        className="registration-form"
+    <RegistrationContainer>
+      <RegistrationForm
         onSubmit={handleSubmit(submitForm, (errors) => {
           console.log("유효성 검증 실패", errors);
         })}
       >
-        <div className="registration-id">
+        <FormGridArea area="id">
           <RegistrationId
             register={register}
             setValue={setValue}
@@ -128,26 +133,29 @@ export default function UserRegistrationPage() {
             isIdCheck={isIdCheck}
             setIsIdCheck={setIsIdCheck}
           />
-        </div>
-        <div className="registration-name">
+        </FormGridArea>
+
+        <FormGridArea area="name">
           <RegistrationName
             register={register}
             setValue={setValue}
             watch={watch}
             errors={errors}
           />
-        </div>
+        </FormGridArea>
+
         {!isSocialLogin && (
-          <div className="registration-password">
+          <FormGridArea area="password">
             <RegistrationPassword
               register={register}
               setValue={setValue}
               watch={watch}
               errors={errors}
             />
-          </div>
+          </FormGridArea>
         )}
-        <div className="registration-nickname">
+
+        <FormGridArea area="nickname">
           <RegistrationNickName
             register={register}
             setValue={setValue}
@@ -156,39 +164,43 @@ export default function UserRegistrationPage() {
             isNickNameCheck={isNickNameCheck}
             setIsNickNameCheck={setIsNickNameCheck}
           />
-        </div>
-        <div className="registration-address">
+        </FormGridArea>
+
+        <FormGridArea area="address">
           <Address
             register={register}
             setValue={setValue}
             watch={watch}
             errors={errors}
           />
-        </div>
-        <div className="registration-email">
+        </FormGridArea>
+
+        <FormGridArea area="email">
           <RegistrationEmail
             register={register}
             setValue={setValue}
             watch={watch}
             errors={errors}
           />
-        </div>
-        <div className="registration-buttons">
-          <Button
-            className="button-base cancle-button"
-            text={"취소"}
+        </FormGridArea>
+        {/* 값을 넘기기 위하여 보이지 않는 값을 설정하기 */}
+        <input type="hidden" {...register("socialProvider")} />
+        <ButtonWrapper>
+          <RegistButton
+            type="button"
+            className="cancel"
             onClick={() => {
               sessionStorage.removeItem("socialId");
               sessionStorage.removeItem("provider");
               window.location.href = "/user/login";
             }}
-          />
-          {/* 값을 넘기기 위하여 보이지 않는 값을 설정하기 */}
-          <input type="hidden" {...register("socialProvider")} />
+          >
+            취소
+          </RegistButton>
+
           {/* 회원 가입의 경우 동일한 비번일 때랑 아이디, 닉네임 체크가 모두 같을 때만 가능 */}
-          <Button
-            className="button-base regist-button"
-            text={"가입"}
+          <RegistButton
+            className="submit"
             type="submit"
             disabled={
               !(
@@ -197,9 +209,11 @@ export default function UserRegistrationPage() {
                 (isSocialLogin || watch("password") === watch("passwordCheck"))
               )
             }
-          />
-        </div>
-      </form>
-    </div>
+          >
+            가입
+          </RegistButton>
+        </ButtonWrapper>
+      </RegistrationForm>
+    </RegistrationContainer>
   );
 }
