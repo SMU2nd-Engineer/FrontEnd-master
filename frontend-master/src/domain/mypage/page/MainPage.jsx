@@ -8,14 +8,13 @@ import { useEffect, useState } from "react";
 import { getMyPageData } from "../services/getMyPageDate";
 import MySellList from "../components/MySellList";
 import MyTransactionReview from "../components/MyTransactionReview";
-
 import * as Nav from "../style/MyPageNavDesign";
 import {
   MyMainContainer,
   MyMainGridArea,
   RatingAndReviewContainer,
 } from "../style/MyMainPageDesign";
-// import "../style/MyPageNav.css";
+
 
 /**
  * 메인 화면
@@ -51,6 +50,7 @@ export default function MainPage() {
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
+
       <MyMainContainer>
         <MyMainGridArea area="header">
           <MyName />

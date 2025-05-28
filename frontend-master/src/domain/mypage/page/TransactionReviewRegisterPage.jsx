@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REVIEW_SCHEMA } from "@user/utils/userFormValidator";
 import Button from "@/components/Button";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import TransactionTextReview from "../components/TransactionTextReview";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -14,7 +14,8 @@ import TransactionEvaluation from "../components/TransactionEvaluation";
 import { registReview } from "../services/registReview";
 import { updateReview } from "../services/updateReview";
 
-import "../style/TransactionReview.css";
+import * as TranReview from "../style/TransactionReviewDesign";
+import PaymentProductInfo from "@/domain/payment/components/PaymentProductInfo";
 
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
@@ -32,6 +33,10 @@ export default function TransactionReviewRegisterPage() {
   const [evalutaionCategories, setEvalutaionCategories] = useState([]); // 평가 항목
   const [originalReview, setOriginalReview] = useState({}); // 기존 리뷰 정보 저장.
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const tradeType = Number(searchParams.get('tradeType'));
+  const location = useLocation();
+  const product = location.state?.product;
 
   const {
     register, // 입력 폼 등록
@@ -158,20 +163,23 @@ export default function TransactionReviewRegisterPage() {
     saveInfo();
   }, [setValue, reviewIdx]);
   return (
-    <div className="transactionReview-main">
+    <TranReview.TRmain>
+      <TranReview.PaymentProductInfo>
+        <PaymentProductInfo product={product} tradeType={{tradeType}} />
+      </TranReview.PaymentProductInfo>
+      <TranReview.Line></TranReview.Line>
       <h1>
         {sellerInfo && sellerInfo.sellerName
           ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
           : "거래 정보 로딩 중..."}
       </h1>
       {/* <h1>{sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요</h1> */}
-      <form
-        className="reviewMainForm"
+      <TranReview.ReviewMainForm
         onSubmit={handleSubmit(submitForm, (error) => {
           console.log("유효성 검증 실패", error);
         })}
       >
-        <div className="choiceStarRating">
+        <TranReview.ChoiceStarRating>
           <MyPageRating
             myRating={rating}
             isReadOnly={isReadOnly}
@@ -179,8 +187,8 @@ export default function TransactionReviewRegisterPage() {
               setValue("rating", val);
             }}
           />
-        </div>
-        <div className="checkReview">
+        </TranReview.ChoiceStarRating>
+        <TranReview.CheckReview>
           {evalutaionCategories.map((category) => (
             <TransactionEvaluation
               key={category.subIdx}
@@ -190,16 +198,16 @@ export default function TransactionReviewRegisterPage() {
               readOnly={isReadOnly}
             />
           ))}
-        </div>
-        <div className="textReview">
+        </TranReview.CheckReview>
+        <TranReview.TextReview>
           <TransactionTextReview
             register={register}
             setValue={setValue}
             readOnly={isReadOnly}
             errors={errors}
           />
-        </div>
-        <div className="checkButton">
+        </TranReview.TextReview>
+        <TranReview.CheckButton>
           <input type="hidden" {...register("sellerIdx")} />
           {isNewReview && (
             <input type="hidden" {...register("transactionIdx")} />
@@ -227,8 +235,8 @@ export default function TransactionReviewRegisterPage() {
           {isEditMode && !isNewReview && (
             <Button type="submit" text={"리뷰 수정하기"} />
           )}
-        </div>
-      </form>
-    </div>
+        </TranReview.CheckButton>
+      </TranReview.ReviewMainForm>
+    </TranReview.TRmain>
   );
 }

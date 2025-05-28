@@ -34,7 +34,6 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   useEffect(() => {
     if (room == 0) return;
     getChatRoomMessage(room).then((res) => {
-      console.log(res.data);
       setChatList(res.data.chatList);
       setFromUser(res.data.fromidx);
     });

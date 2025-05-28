@@ -10,6 +10,8 @@ import {
   TransactionTableTh,
 } from "../style/MyMainPageDesign";
 
+import "../style/MyReviewPageDesign.css";
+
 /**
  * 거래 후기를 렌더링할 컴포넌트
  * @param {List<Object>} reviewLists: 리뷰 정보가 담긴 배열

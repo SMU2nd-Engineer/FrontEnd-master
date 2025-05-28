@@ -23,6 +23,12 @@ const TicketList = ({
     getCategory(getCategoryIdx("ticket"))
       .then((res) => {
         setGenreName(res.data);
+        // 장르 리스트 (닫힘으로 초기화)
+        const initialGenreState = Object.fromEntries(
+          //키-값 쌍 배열을 객체로 변환하는 자바스크립트 내장 함수
+          res.data.map((item) => [item.sub_idx, false])
+        );
+        setOpenGenres(initialGenreState);
       })
       .catch((error) => console.error("장르 리스트 불러오기 실패:", error));
   }, []);
@@ -77,7 +83,15 @@ const TicketList = ({
 
   // 토글 버튼
   const toggleGenre = (genre) => {
-    setOpenGenres((prev) => ({ ...prev, [genre]: !prev[genre] }));
+    setOpenGenres((prev) => {
+      const isCurrentlyOpen = prev[genre];
+      return Object.fromEntries(
+        Object.keys(prev).map((key) => [
+          key,
+          key === genre ? !isCurrentlyOpen : false,
+        ])
+      );
+    });
   };
 
   // 장르맵 생성 (숫자 → 한글)
@@ -112,7 +126,7 @@ const TicketList = ({
               {openGenres[genreCode] && (
                 <TicketPages.ListDot>
                   {tickets.map((info, i) => (
-                    <li key={i}>
+                    <div key={i}>
                       <TicketPages.DataList onClick={() => setIdx(info.idx)}>
                         <TicketPages.TicketItemTextTitle>
                           {info.title || info.name}
@@ -122,7 +136,7 @@ const TicketList = ({
                           - {info.company}
                         </TicketPages.TicketItemTextCompany>
                       </TicketPages.DataList>
-                    </li>
+                    </div>
                   ))}
                 </TicketPages.ListDot>
               )}

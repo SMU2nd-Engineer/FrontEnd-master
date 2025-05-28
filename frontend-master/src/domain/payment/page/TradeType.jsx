@@ -4,14 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getProductDetail } from '@/domain/products/services/productService';
 import { useEffect } from 'react';
 import TradeOptionBtn from '../components/TradeOptionBtn';
-import "../styles/TradeTypeBtn.css"
+import * as Trade from '../styles/PaymentTradeTypeDesign';
+import ProductImage from '@/domain/products/components/ProductImage';
 
 const TradeType = () => {
   const {idx} = useParams(); 
   const [tradeType, setTradeType] = useState(null);
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     getProductDetail(idx)
@@ -38,24 +38,34 @@ const TradeType = () => {
   }
 
   const handleClick = () => {
-    navigate(`/payment/${product.idx}`, {
-      state: {tradeType}
+    navigate(`/payment/${product.idx}?tradeType=${tradeType}`, {
     });
   }
+
+  let total
+  if (tradeType === 0) {
+    total = product.price + 3000;
+  } else if (tradeType === 1) {
+    total = product.price;
+  }
+
+  localStorage.setItem("tradeType", tradeType);
+
   return (
-    <div className='container'>
-      <div className='trade'>
-        <div className='productInfo'>
-          <div className='img'>
-            <img src={product.img} alt={product.title} />
-          </div>
-          <div className='price_title'>
+    <Trade.Container>
+      <div>
+        <Trade.ProductInfo>
+          <Trade.ImgDiv>
+            {/* <img src={product.image_Url} alt={product.title} /> */}
+            <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
+          </Trade.ImgDiv>
+          <Trade.PriceTitle>
             <p><strong>{product.price}원</strong></p>
-            <p>{product.title}</p>
-          </div>
-        </div>
-        <section className='selectTradeType'>
-          <span className='text'>거래 방법 선택</span>
+            <Trade.Title>{product.title}</Trade.Title>
+          </Trade.PriceTitle>
+        </Trade.ProductInfo>
+        <section>
+          <Trade.Test>거래 방법 선택</Trade.Test>
           <section>
             <TradeOptionBtn
               type={0}
@@ -76,21 +86,20 @@ const TradeType = () => {
           </section>
         </section>
       </div>
-      <div className='bottom'>
-        <section className='bottom_section'>
+      <div>
+        <Trade.BottomSection>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <div className='price'>
-              <span style={{fontSize: '13px', textAlign:'left'}}>예상금액</span>
-              <div style={{textAlign: 'left', fontWeight: 'bold'}}>
-                <span>{product.price}원</span>
-              </div>
-            </div>
-            <span></span>
+            <Trade.Price>
+              <Trade.ExpectedAmount>예상금액</Trade.ExpectedAmount>
+              <Trade.Total>
+                <span>{total}원</span>
+              </Trade.Total>
+            </Trade.Price>
           </div>
-          <button className='next' onClick={handleClick}>다음</button>
-        </section>
+          <Trade.NextBotton onClick={handleClick}>다음</Trade.NextBotton>
+        </Trade.BottomSection>
       </div>
-    </div>
+    </Trade.Container>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import EvaluationList from "./EvaluationList";
+import "../style/MyReviewPageDesign.css";
 
 export default function MyTransactionEvaluation({
   evaluationLists = [],
@@ -12,13 +13,13 @@ export default function MyTransactionEvaluation({
     myEvaluationLists["EVAL_5001"]
   );
   return (
-    <>
+    <div className="CheckReviewMain">
       <h3>거래 평가</h3>
       <br />
       {evaluationLists.length === 0 ? (
         <p> 아직 받은 평가가 없어요.</p>
       ) : (
-        <table>
+        <table className="detailCheckReview-list">
           <thead>
             <tr>
               <th> 평가 내용 </th>
@@ -38,6 +39,6 @@ export default function MyTransactionEvaluation({
           </tbody>
         </table>
       )}
-    </>
+    </div>
   );
 }
