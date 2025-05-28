@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import MainPage from "../page/MainPage";
 import MyInfo from "../page/MyInfoPage";
-import MySellAndPurchaseListPage from "../page/MySellAndPurchaseListPage";
+import MySellAndPurchaseListPage from "../page/MySellAndBuyListPage";
 import MyPeakPage from "../page/MyPeakPage";
 import MyReviewPage from "../page/MyReviewPage";
 import MyBoardPage from "../page/MyBoardPage";
