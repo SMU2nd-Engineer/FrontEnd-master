@@ -13,12 +13,20 @@ export const getBoardSearch = (searchType, category, keyword) => {
 };
 
 
-// 게시글 등록
-export const getBoardSubmit = ({ category_idx, title, content }) => {
+// 게시글 등록 - 텍스트 에디터 텍스트 + 이미지 포함
+export const getBoardSubmit = ( postContent, postFiles ) => {
+  const formData = new FormData();
+  formData.append("contents", new Blob([JSON.stringify(postContent)], { type: 'application/json' }))
+  postFiles.forEach((img) => formData.append("files", img))
+  
   return axiosInstance.post(
     "board/submit",
-    { category_idx, title, content },
-    { withCredentials: true }
+    formData,
+    { withCredentials: true,
+      headers: {
+          "Content-Type": `multipart/form-data`,
+        },
+     }
   );
 };
 
