@@ -5,6 +5,7 @@ import { getProductDetail } from "@/domain/products/services/productService";
 import kakaoPayFail from "../service/KakaoPayFail";
 import PaymentProductInfo from "../components/PaymentProductInfo";
 import "../styles/Payment.css"
+import * as PaymentDesign from "../styles/PaymentPageDesign"
 
 const PaymentSuccessPage = () => {
   const navigate = useNavigate();
@@ -53,8 +54,8 @@ const PaymentSuccessPage = () => {
     approvePayment();
   }, []);
 
-  const handleRetry = () => {
-    window.location.reload();
+  const handleGoHome = () => {
+    navigate("/")
   };
 
   const handleGoReview = () => {
@@ -74,10 +75,20 @@ const PaymentSuccessPage = () => {
 
       {!loading && success && (
         <>
-          <h1>결제가 성공적으로 완료되었습니다!</h1>
-          <PaymentProductInfo product={product}/>
-          <button className="review" onClick={handleGoReview}>후기 작성하기</button>
+          <PaymentDesign.Box>
+            <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
+            <PaymentProductInfo product={product} tradeType={1}/>
+            <PaymentDesign.Review onClick={handleGoReview}>후기 작성하기</PaymentDesign.Review>
+          </PaymentDesign.Box>
         </>
+      )}
+      {!loading && error && (
+        <PaymentDesign.Box>
+          <PaymentDesign.PaySuccess>결제가 실패하였습니다.</PaymentDesign.PaySuccess>
+          <PaymentDesign.PayError>Error 원인 : {error}</PaymentDesign.PayError>
+          <PaymentProductInfo product={product} tradeType={1}/>
+          <PaymentDesign.Review onClick={handleGoHome}>홈으로 이동하기</PaymentDesign.Review>
+        </PaymentDesign.Box>
       )}
     </div>
   );
