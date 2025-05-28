@@ -1,4 +1,5 @@
 import React from "react";
+import * as TranReview from "../style/TransactionReviewDesign";
 
 export default function TransactionEvaluation({
   category,
@@ -7,7 +8,7 @@ export default function TransactionEvaluation({
 }) {
   return (
     <div className="reviewCheckbox">
-      <div className="reviewCheckbox-child">
+      <TranReview.TRecaluation>
         <input
           type="checkbox"
           {...register("evaluation[]")}
@@ -16,7 +17,7 @@ export default function TransactionEvaluation({
           disabled={readOnly}
         />
         <label htmlFor={`${category.subIdx}`}> {category.name} </label>
-      </div>
+      </TranReview.TRecaluation>
     </div>
   );
 }
