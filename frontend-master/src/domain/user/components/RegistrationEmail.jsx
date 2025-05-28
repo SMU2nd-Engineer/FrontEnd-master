@@ -9,6 +9,16 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
+import {
+  RegistAtSymbol,
+  RegistEmailDomainSelect,
+  RegistEmailRow,
+  RegistFormContainer,
+  RegistFormControl,
+  RegistFormError,
+  RegistFormLabel,
+  RegistStyledInput,
+} from "../style/UserRegistrationPageDesign";
 
 export default function RegistrationEmail({
   register,
@@ -31,45 +41,33 @@ export default function RegistrationEmail({
   };
 
   return (
-    <VStack spacing={4} align="stretch" width="100%">
+    <RegistFormContainer>
       {/* 이메일 입력 */}
-      <FormControl isInvalid={!!errors.emailLocal} isRequired>
-        <FormLabel htmlFor="emailLocal" mb={1}>
-          이메일
-        </FormLabel>
-        <HStack spacing={2} align="center" width="100%">
-          <Input
+      <RegistFormControl>
+        <RegistFormLabel htmlFor="emailLocal">이메일</RegistFormLabel>
+        <RegistEmailRow>
+          <RegistStyledInput
             type="text"
             {...register("emailLocal")}
             placeholder="이메일 아이디"
-            h="2.5rem"
-            variant="outline"
-            flex="1"
+            $error={!!errors.emailLocal}
           />
-          <Text fontSize="md" lineHeight="2.5rem" minW="1rem">
-            @
-          </Text>
-          <Input
+          <RegistAtSymbol>@</RegistAtSymbol>
+          <RegistStyledInput
             key={isManualDomain ? "editable" : "readonly"}
             type="text"
             {...register("emailDomain")}
             value={watch("emailDomain") || ""} // 초기화 undefined 오류를 해결하기 위하여 "" 로 설정
             onChange={(e) => setValue("emailDomain", e.target.value)}
             disabled={!isManualDomain}
-            h="2.5rem"
-            variant="outline"
-            flex="1"
+            $error={!!errors.emailLocal}
           />
 
           {/* 도메인 선택 */}
 
-          <Select
+          <RegistEmailDomainSelect
             value={watch("emailDomain") || "type"}
             onChange={handleDomainChange}
-            h="2.5rem"
-            variant="outline"
-            flex="1"
-            mb={1}
           >
             <option value="type">직접 입력</option>
             <option value="naver.com">naver.com</option>
@@ -78,10 +76,12 @@ export default function RegistrationEmail({
             <option value="outlook.com">outlook.com</option>
             <option value="yahoo.com">yahoo.com</option>
             <option value="icloud.com">icloud.com</option>
-          </Select>
-        </HStack>
-        <FormErrorMessage>{errors.emailLocal?.message}</FormErrorMessage>
-      </FormControl>
-    </VStack>
+          </RegistEmailDomainSelect>
+        </RegistEmailRow>
+        {errors.emailLocal && (
+          <RegistFormError>{errors.emailLocal.message}</RegistFormError>
+        )}
+      </RegistFormControl>
+    </RegistFormContainer>
   );
 }
