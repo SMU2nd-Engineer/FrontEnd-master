@@ -73,7 +73,10 @@ export default function ProductDetail() {
         </div>
         <div className="column">
           <p className="title">{product.title}</p>
-          <p className="price">{product.price}{product.nickname}원</p>
+          <p className="price">
+            {product.price}
+            {product.nickname}원
+          </p>
           <p className="salerInfo"></p>
           <div className="chakra-divider">
             <Divider orientation="horizontal" />
@@ -99,14 +102,16 @@ export default function ProductDetail() {
           <div className="chakra-divider">
             <Divider orientation="horizontal" />
           </div>
-          <div className="salerinfo">
-            {/* 판매자 정보 뜨게 하고 싶엉 */}
-          </div>
+          <div className="salerinfo">{/* 판매자 정보 뜨게 하고 싶엉 */}</div>
           <div>
-            <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
+            <Button
+              className="product_editbutton"
+              text={"수정"}
+              onClick={handleEdit}
+            />
             <ProductDelete idx={idx} />
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );

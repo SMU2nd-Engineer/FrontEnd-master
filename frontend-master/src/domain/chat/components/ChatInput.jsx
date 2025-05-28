@@ -38,4 +38,4 @@ const ChatInput = ({ handleMessageSend }) => {
   );
 };
 
-export default ChatInput;
+export default React.memo(ChatInput);
