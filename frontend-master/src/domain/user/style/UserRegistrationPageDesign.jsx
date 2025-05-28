@@ -18,10 +18,12 @@ export const RegistInputGroup = styled.div`
 
 export const RegistStyledInput = styled.input`
   flex: 1;
+  width: 100%;
   padding: 0.5rem;
   border: 1px solid ${({ $error }) => ($error ? "#e53e3e" : "#ddd")};
   border-radius: 5px;
   font-size: 1rem;
+  height: 3rem;
 `;
 
 export const RegistHelperText = styled.p`
@@ -49,10 +51,35 @@ export const RegistFormError = styled.span`
 `;
 
 export const RegistStyledButtonWrapper = styled.div`
-  width: 5.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 200%;
+
+  button {
+    background-color: #f0b8b8;
+    border: #ddd 1px solid;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: all 0.2s ease-in-out;
+    transform-origin: center center;
+    font-size: 1rem;
+    height: 3rem;
+    &:hover {
+      background-color: #f8f8f8;
+      color: #f0b8b8;
+      transform: scale(1.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: scale(1.05);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
 `;
 
 export const RegistHelperMessage = styled.p`

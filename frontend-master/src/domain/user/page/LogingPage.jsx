@@ -16,7 +16,7 @@ import {
   SocialLogin,
   LoginOptionInput,
   LoginOptionLabel,
-} from "../style/LoginPageCss";
+} from "../style/LoginPageDesign";
 
 export default function LogingPage() {
   const [id, setUserId] = useState("");

@@ -2,21 +2,13 @@ import React, { useEffect } from "react";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-} from "@chakra-ui/react";
-import {
   RegistFormControl,
   RegistFormLabel,
   RegistInputGroup,
   RegistHelperMessage,
   RegistStyledButtonWrapper,
   RegistStyledInput,
-} from "../style/UserRegistrationPageCss";
+} from "../style/UserRegistrationPageDesign";
 
 export default function RegistrationNickName({
   register,
@@ -58,7 +50,6 @@ export default function RegistrationNickName({
         />
         <RegistStyledButtonWrapper>
           <Button
-            className="registerButton input-right-button"
             text={"중복 체크"}
             onClick={async () => {
               if (existingNickname === watch("nickName")) {

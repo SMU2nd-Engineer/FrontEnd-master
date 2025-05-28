@@ -12,7 +12,7 @@ import {
   RegistFormError,
   RegistFormLabel,
   RegistStyledInput,
-} from "../style/UserRegistrationPageCss";
+} from "../style/UserRegistrationPageDesign";
 
 export default function RegistrationPassword({
   register,

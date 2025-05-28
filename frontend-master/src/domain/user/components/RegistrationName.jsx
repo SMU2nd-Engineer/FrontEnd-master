@@ -12,7 +12,7 @@ import {
   RegistFormLabel,
   RegistHelperText,
   RegistStyledInput,
-} from "../style/UserRegistrationPageCss";
+} from "../style/UserRegistrationPageDesign";
 
 export default function RegistrationName({
   register,

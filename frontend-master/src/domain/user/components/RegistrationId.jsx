@@ -1,22 +1,15 @@
 import React, { useEffect } from "react";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Text,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+
 import {
   RegistFormContainer,
   RegistFormLabel,
   RegistInputGroup,
   RegistStyledInput,
   RegistHelperText,
-} from "../style/UserRegistrationPageCss";
+  RegistStyledButtonWrapper,
+} from "../style/UserRegistrationPageDesign";
 
 export default function RegistrationId({
   register,
@@ -61,24 +54,25 @@ export default function RegistrationId({
         />
 
         {!isSocialLogin && (
-          <Button
-            className="registerButton input-right-button"
-            text={"중복 체크"}
-            onClick={async () => {
-              try {
-                const result = await duplicateCheckService(watch("id"), "id");
-                if (result) {
-                  setIsIdCheck(true);
-                } else {
-                  alert("중복입니다. 다른 아이디를 사용해주세요.");
-                  setIsIdCheck(false);
+          <RegistStyledButtonWrapper>
+            <Button
+              text={"중복 체크"}
+              onClick={async () => {
+                try {
+                  const result = await duplicateCheckService(watch("id"), "id");
+                  if (result) {
+                    setIsIdCheck(true);
+                  } else {
+                    alert("중복입니다. 다른 아이디를 사용해주세요.");
+                    setIsIdCheck(false);
+                  }
+                } catch (e) {
+                  console.log(e.message);
+                  alert("문제가 발생했습니다. 다시 시도해주세요.");
                 }
-              } catch (e) {
-                console.log(e.message);
-                alert("문제가 발생했습니다. 다시 시도해주세요.");
-              }
-            }}
-          />
+              }}
+            />
+          </RegistStyledButtonWrapper>
         )}
       </RegistInputGroup>
       {getHelperMessage() && (
