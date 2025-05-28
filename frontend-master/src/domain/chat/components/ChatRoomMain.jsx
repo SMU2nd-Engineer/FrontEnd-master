@@ -4,6 +4,11 @@ import ChatInput from "./ChatInput";
 import { getChatRoomMessage, postChatMessage } from "../services/ChatService";
 import { useChatSocket } from "../hooks/useChatSocket";
 import "../styles/chatRoom.css";
+import {
+  ChatRoomMainDiv,
+  ChatTitle,
+  NullChatDiv,
+} from "../styles/ChatPageDesign";
 
 /**
  * 채팅방 컴포넌트
@@ -11,7 +16,7 @@ import "../styles/chatRoom.css";
  * @param {number} obj.selectRoom 선택한 채팅방 idx
  * @returns
  */
-const ChatRoomMain = ({ selectRoom }) => {
+const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   const [room, setRoom] = useState(selectRoom);
   const [chatList, setChatList] = useState([]);
 
@@ -44,21 +49,21 @@ const ChatRoomMain = ({ selectRoom }) => {
 
   if (selectRoom == 0) {
     return (
-      <div className="chatMain">
-        <div className="chatTitle">채팅 내역</div>
-        <div className="nullchat">
+      <ChatRoomMainDiv type={type}>
+        <ChatTitle>채팅 내역</ChatTitle>
+        <NullChatDiv>
           <div>채팅방을 선택해주세요.</div>
-        </div>
-      </div>
+        </NullChatDiv>
+      </ChatRoomMainDiv>
     );
   }
 
   return (
-    <div className="chatMain">
-      <div className="chatTitle">채팅 내역</div>
+    <ChatRoomMainDiv type={type}>
+      <ChatTitle>채팅 내역</ChatTitle>
       <ChatList chatList={chatList} />
       <ChatInput handleMessageSend={handleMessageSend} />
-    </div>
+    </ChatRoomMainDiv>
   );
 };
 

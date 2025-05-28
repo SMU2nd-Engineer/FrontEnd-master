@@ -7,6 +7,7 @@ import {
   ChatRoomStateContext,
 } from "../store/chatContext";
 import "../styles/chatPage.css";
+import { ChatPageDiv } from "../styles/ChatPageDesign";
 
 /**
  * 채팅 목록 컴포넌트
@@ -29,7 +30,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="chatpage">
+    <ChatPageDiv>
       <ChatRoomStateContext.Provider value={chatRooms}>
         <ChatRoomDispatchContext.Provider
           value={{ handleRoomClick, handleRoomDeleteClick }}
@@ -38,7 +39,7 @@ const ChatPage = () => {
           <ChatRoomMain selectRoom={selectRoom} />
         </ChatRoomDispatchContext.Provider>
       </ChatRoomStateContext.Provider>
-    </div>
+    </ChatPageDiv>
   );
 };
 

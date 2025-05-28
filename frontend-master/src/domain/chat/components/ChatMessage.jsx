@@ -1,5 +1,15 @@
 import { stringToTime } from "@/utils/Time";
 import React from "react";
+import {
+  MessageDiv,
+  MessageFromDiv,
+  MessageFromTextSpan,
+  MessageFromTextP,
+  MessageToDiv,
+  MessageToTextP,
+  MessageToTextSpan,
+  MessageToTimeSpan,
+} from "../styles/ChatPageDesign";
 
 /**
  * 채팅 메시지 컴포넌트
@@ -7,16 +17,24 @@ import React from "react";
  * @returns
  */
 const ChatMessage = ({ type = "", content = " ", createdAt = "" }) => {
-  const messageType = type == "from" ? "message-from" : "message-to";
   return (
-    <div className={"message"}>
-      <div className={messageType}>
-        <span className={messageType + "-text"}>
-          <p>{content}</p>
-        </span>
-        <span className={messageType + "-time"}>{stringToTime(createdAt)}</span>
-      </div>
-    </div>
+    <MessageDiv>
+      {type == "from" ? (
+        <MessageFromDiv>
+          <MessageFromTextSpan>
+            <MessageFromTextP>{content}</MessageFromTextP>
+          </MessageFromTextSpan>
+          <MessageFromTimeDiv>{stringToTime(createdAt)}</MessageFromTimeDiv>
+        </MessageFromDiv>
+      ) : (
+        <MessageToDiv>
+          <MessageToTextSpan>
+            <MessageToTextP>{content}</MessageToTextP>
+          </MessageToTextSpan>
+          <MessageToTimeSpan>{stringToTime(createdAt)}</MessageToTimeSpan>
+        </MessageToDiv>
+      )}
+    </MessageDiv>
   );
 };
 
