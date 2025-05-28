@@ -17,3 +17,27 @@ export const SellAndBuyContainer = styled.div`
 export const SellAndBuyHeader = styled.h1`
   font-weight: 500;
 `;
+
+/**
+ * 내 구매 스타일 헤더
+ */
+export const BuyHedear = styled.h2`
+  font-weight: 500;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  color: #9a8a8a;
+`;
+
+/**
+ * 마이 메인 구매 상품 컨테이너
+ */
+export const BuyContainer = styled.div`
+  width: 100;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 1rem;
+  gap: 1rem;
+`;

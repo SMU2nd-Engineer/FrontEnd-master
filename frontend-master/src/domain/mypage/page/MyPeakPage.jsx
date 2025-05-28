@@ -4,8 +4,8 @@ import MyPagination from "../components/MyPaginationUI";
 import { getMyPageData } from "../services/getMyPageDate";
 import MyPeakList from "../components/MyPeakList";
 import { updateUserPeak } from "../services/updateUserPeak";
-
 import * as Nav from "../style/MyPageNavDesign";
+import { PeakContainer, PeakHedear } from "../style/MyPagePeakDesign";
 
 export default function MyPeakPage() {
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
@@ -45,12 +45,8 @@ export default function MyPeakPage() {
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <div
-        id="peakListBody"
-        style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
-      >
-        <p>찜 목록</p>
-        <br />
+      <PeakContainer id="peakListBody">
+        <PeakHedear>찜 목록</PeakHedear>
         {/* 카드 형태 렌더링 만들기 
         여기 또는 하위에서 카드를 눌렀을 때 상세페이지로 이동하게끔 구현해야함 */}
         <MyPeakList products={currentItems} handlePeak={handlePeak} />
@@ -60,7 +56,7 @@ export default function MyPeakPage() {
           onPageChange={onPageChange}
           pageRangeDisplayed={3}
         />
-      </div>
+      </PeakContainer>
     </div>
   );
 }

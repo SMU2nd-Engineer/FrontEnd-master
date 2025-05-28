@@ -33,7 +33,6 @@ export default function MyReviewPage() {
 
   return (
     <div>
-      <p>리뷰 페이지</p>
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>

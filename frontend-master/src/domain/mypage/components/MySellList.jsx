@@ -58,7 +58,7 @@ export default function MySellList({ isMain = false, products = [] }) {
 
   return (
     <SellContainer>
-      <SellHedear> {내 상품} </SellHedear>
+      <SellHedear> {isMain ? "내 상품" : "판 매"} </SellHedear>
       <SellOptionsWrapper>
         <SellOptionButton
           onClick={() => {

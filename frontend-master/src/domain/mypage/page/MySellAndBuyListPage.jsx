@@ -27,9 +27,8 @@ export default function SellAndPurchaseList() {
         <MyPageLink />
       </Nav.StickyNavbar>
       <SellAndBuyContainer>
-        <SellAndBuyHeader>판매/구매이력</SellAndBuyHeader>
+        <SellAndBuyHeader>판매 / 구매 관리</SellAndBuyHeader>
         <MySellList products={myProductList.sellInfoList} />
-        <p>구매 내역 컴포넌트</p>
         <MyBuyList products={myProductList.buyInfoList} />
       </SellAndBuyContainer>
     </div>

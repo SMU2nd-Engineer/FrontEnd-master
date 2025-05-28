@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import BoardListcomp from "./BoardListcomp";
 import MyPagination from "./MyPaginationUI";
+import {
+  ContentsAndCommentTable,
+  ContentsAndCommentTableDayTh,
+  ContentsAndCommentTableTh,
+  MyBoardContentsContainer,
+} from "../style/MypageBoardDesign";
 
 export default function MyBoard({ navigate, boards = [] }) {
   // 한페이지에 보여줄 숫자
@@ -22,13 +28,17 @@ export default function MyBoard({ navigate, boards = [] }) {
   }
 
   return (
-    <div>
-      <table>
+    <MyBoardContentsContainer>
+      <ContentsAndCommentTable>
         <thead>
           <tr>
-            <th>작성한 게시글 제목</th>
-            <th>분류</th>
-            <th>작성한 날짜</th>
+            <ContentsAndCommentTableTh>
+              작성한 게시글 제목
+            </ContentsAndCommentTableTh>
+            <ContentsAndCommentTableTh>분류</ContentsAndCommentTableTh>
+            <ContentsAndCommentTableDayTh>
+              작성한 날짜
+            </ContentsAndCommentTableDayTh>
           </tr>
         </thead>
         <tbody>
@@ -43,8 +53,8 @@ export default function MyBoard({ navigate, boards = [] }) {
             />
           ))}
         </tbody>
-      </table>
+      </ContentsAndCommentTable>
       <MyPagination pageCount={totalPageCount} onPageChange={onPageChange} />
-    </div>
+    </MyBoardContentsContainer>
   );
 }
