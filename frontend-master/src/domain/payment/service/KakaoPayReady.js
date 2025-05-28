@@ -18,7 +18,7 @@ const KakaoPayReady = async (product, user, tradeType) => {
   const failUrl = "http://localhost:5173/payment/fail/"+productIdx;
   try {
     const res = await axiosInstance.post(
-      '/payment/ready?payMethod=6001',
+      '/payment/ready',
 
       {
         partnerOrderId,

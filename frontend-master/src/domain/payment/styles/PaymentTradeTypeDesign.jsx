@@ -1,30 +1,23 @@
+import styled, {css} from "styled-components";
 
-/* .selectTradeType>span{
-  display: flex;
-  padding: 10px;
-  text-align: left;
-} */
-/* .container {
-  width: 60%;
+export const Container = styled.div`
+  width: 50%;
   align-items: center;
   text-align: center;
-  border-radius: 3%;
   margin: 1rem;
   margin-left: 12rem;
-} */
+`;
 
-/* .text {
+export const Test = styled.span`
   color: #816b6b;
   padding: 0.5rem;
   margin: 5px;
   font-weight: bold;
-} */
-/* 
-.select {
-  border: 2px solid #f0b8b8;
-  border-radius: 8px;
-} */
-/* .productInfo {
+  text-align: left;
+  display: flex;
+`;
+
+export const ProductInfo = styled.div`
   border-bottom: 1px #ddd solid;
   width: 100%;
   height: 100px;
@@ -32,37 +25,49 @@
   padding-bottom: 5px;
   display: flex;
   text-align: left;
-} */
-/* .img {
+`;
+
+export const ImgDiv = styled.div`
   padding: 5px;
   margin-left: 5px;
-  margin-top: 0;
+  margin-right: 10px;
+  margin-top: 10px;
   display: flex;
   width: 100px;
-  
-} */
-/* .price_title {
+`;
+
+export const PriceTitle = styled.div`
   margin-top: 1rem;
   text-align: left;
   padding: 5px;
   font-size: 15px;
-} */
-
-/* .price{
+`
+export const Price = styled.div`
   display: flex;
   align-items: left;
   flex-direction: column;
-} */
+  margin-left: 15px;
+`
 
-/* .bottom_section{
+export const ExpectedAmount = styled.span`
+  font-size: 13px;
+  text-align: left;
+`
+
+export const Total = styled.div`
+  text-align: left;
+  font-weight: bold;
+`
+
+export const BottomSection = styled.section`
   display: flex;
   align-items: center;
   width: 100%;
   margin-top: 15rem;
   justify-content: space-between;
   height: 20px;
-}
+`
 
-button.next {
+export const NextBotton = styled.button`
   background-color: #f0b8b8;
-} */
+`
