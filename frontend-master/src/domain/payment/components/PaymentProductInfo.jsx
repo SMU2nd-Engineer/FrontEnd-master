@@ -1,3 +1,4 @@
+import ProductImage from '@/domain/products/components/ProductImage';
 import * as PaymentDesign from '../styles/PaymentPageDesign'
 
 const PaymentProductInfo = ({product, tradeType}) => {
@@ -10,7 +11,8 @@ const PaymentProductInfo = ({product, tradeType}) => {
   return (
     <PaymentDesign.ProductInfo>
       <PaymentDesign.Img>
-        <img src={product.img} alt="상품이미지" />
+        {/* <img src={product.image_Url} alt="상품이미지" /> */}
+        <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
       </PaymentDesign.Img>
       <PaymentDesign.PriceTitle>
         <PaymentDesign.Title>{product.title}</PaymentDesign.Title>

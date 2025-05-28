@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getProductDetail } from '@/domain/products/services/productService';
 import { useEffect } from 'react';
 import TradeOptionBtn from '../components/TradeOptionBtn';
-import "../styles/TradeTypeBtn.css"
 import * as Trade from '../styles/PaymentTradeTypeDesign';
+import ProductImage from '@/domain/products/components/ProductImage';
 
 const TradeType = () => {
   const {idx} = useParams(); 
@@ -55,11 +55,12 @@ const TradeType = () => {
       <div>
         <Trade.ProductInfo>
           <Trade.ImgDiv>
-            <img src={product.img} alt={product.title} />
+            {/* <img src={product.image_Url} alt={product.title} /> */}
+            <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
           </Trade.ImgDiv>
           <Trade.PriceTitle>
             <p><strong>{product.price}원</strong></p>
-            <p>{product.title}</p>
+            <Trade.Title>{product.title}</Trade.Title>
           </Trade.PriceTitle>
         </Trade.ProductInfo>
         <section>

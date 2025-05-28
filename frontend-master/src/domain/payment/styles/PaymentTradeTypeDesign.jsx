@@ -20,27 +20,27 @@ export const Test = styled.span`
 export const ProductInfo = styled.div`
   border-bottom: 1px #ddd solid;
   width: 100%;
-  height: 100px;
-  margin: 10px;
-  padding-bottom: 5px;
+  height: auto;
+  margin: 5px;
+  padding-bottom: 18px;
   display: flex;
   text-align: left;
 `;
 
 export const ImgDiv = styled.div`
-  padding: 5px;
-  margin-left: 5px;
-  margin-right: 10px;
-  margin-top: 10px;
+  /* padding: 5px; */
+  margin-left: 15px;
+  margin-right: 15px;
   display: flex;
   width: 100px;
+  height: auto;
 `;
 
 export const PriceTitle = styled.div`
-  margin-top: 1rem;
+  margin-top: 5px;
   text-align: left;
-  padding: 5px;
-  font-size: 15px;
+  /* padding: 5px; */
+  font-size: 20px;
 `
 export const Price = styled.div`
   display: flex;
@@ -70,4 +70,8 @@ export const BottomSection = styled.section`
 
 export const NextBotton = styled.button`
   background-color: #f0b8b8;
+`
+
+export const Title = styled.p`
+  font-size: 15px;
 `

@@ -118,7 +118,9 @@ const PaymentPage = () => {
       <PaymentProductInfo product={product} tradeType={{tradeType}}/>
       <PaymentDesign.Paymethod>
         <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>
-        <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
+        <PaymentDesign.Select>
+          <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
+        </PaymentDesign.Select>
       </PaymentDesign.Paymethod>
       <div className='paybtn'>
         <PaymentDesign.PaymentBtn onClick={handlePaymentClick}>{total}원 결제하기</PaymentDesign.PaymentBtn>

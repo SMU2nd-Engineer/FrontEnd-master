@@ -37,22 +37,24 @@ export const AddressP = styled.p`
 `
 
 export const AddressComponent = styled.div`
+  text-align: left;
   margin-top: 30px;
   padding: 5px;
 `
 
 export const Paymethod = styled.div`
+  width: 100%;
   text-align: left;
   padding: 5px;
 `
 
 export const PaymentMethod = styled.label`
-  border-right: 1px solid #ddd;
-  padding: 5px;
+  /* border-right: 1px solid #ddd; */
+  /* padding: 5px; */
   padding-right: 20px;
   font-weight: bold;
-  margin: 10px;
-  margin-right: 25px;
+  margin-left : 10px;
+  margin-right: 20px;
 `
 
 export const PaymentBtn = styled.button`
@@ -60,7 +62,7 @@ export const PaymentBtn = styled.button`
   width: 100%;
   padding: 5px;
   margin: 5px;
-  margin-top: 10px;
+  margin-top: 5rem;
   font-weight: bold;
 `
 
@@ -70,17 +72,17 @@ export const ProductInfo = styled.div`
   text-align: center;
   /* margin: 5px; */
   padding: 10px;
-  height: 10rem;
+  /* height: 10rem; */
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   border-radius: 5px;
-  margin-left: 10px;
+  margin: 5px;
   margin-top: 10px;
 `
 export const Img = styled.div`
-  width: auto;
+  width: 100px;
   margin: 5px;
-  padding: 5px;
+  /* padding: 5px; */
 `
 
 export const PriceTitle = styled.div`
@@ -122,4 +124,13 @@ export const OrderProduct = styled.p`
   margin-top: 30px;
   margin-left: 10px;
   font-weight: bold;
+`
+
+export const Select = styled.div`
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  width: 180px;
+  height: 30%px;
+  margin-top: 15px;
 `
