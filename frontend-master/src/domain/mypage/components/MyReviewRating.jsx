@@ -1,5 +1,4 @@
 import MyRatingStar from "./MyRatingStar";
-import "../style/TransactionReview.css";
 import { StarRatingContainer } from "../style/MySatrRatingDesign";
 import { MyRatingName } from "../style/MyMainPageDesign";
 
