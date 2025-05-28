@@ -14,9 +14,9 @@ export function useChatSocket(roomId, onMessage) {
 
     // EC2 주소나 localhost에 맞게 수정하세요
     const socket = new WebSocket(
-      `ws://${
-        window.location.host
-      }/ws/chat?roomId=${roomId}&token=${getAccessToken()}`
+      `${
+        import.meta.env.VITE_BACK_WEB_SOCKET_URL
+      }/chat?roomId=${roomId}&token=${getAccessToken()}`
     );
     socketRef.current = socket;
 

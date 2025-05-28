@@ -39,7 +39,7 @@ const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage, count }) => {
         </div>
         {/* <span>{toUser}</span> */}
       </RoomInfoDiv>
-      {count > 0 ? <div>count</div> : ""}
+      {count > 0 ? <div>{count}</div> : ""}
       <button type="button" onClick={onClick}>
         X
       </button>
