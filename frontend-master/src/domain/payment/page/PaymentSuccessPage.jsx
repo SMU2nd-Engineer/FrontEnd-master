@@ -4,7 +4,6 @@ import kakaoPayApprove from "../service/KakaoPayApprove";
 import { getProductDetail } from "@/domain/products/services/productService";
 import kakaoPayFail from "../service/KakaoPayFail";
 import PaymentProductInfo from "../components/PaymentProductInfo";
-import "../styles/Payment.css"
 import * as PaymentDesign from "../styles/PaymentPageDesign"
 
 const PaymentSuccessPage = () => {
@@ -52,7 +51,7 @@ const PaymentSuccessPage = () => {
     };
 
     approvePayment();
-  }, []);
+  }, [tid]);
 
   const handleGoHome = () => {
     navigate("/")
@@ -73,7 +72,7 @@ const PaymentSuccessPage = () => {
     <div style={{ textAlign: "center", padding: "40px" }}>
       {loading && <h2>결제 승인 중입니다... </h2>}
 
-      {!loading && success && (
+      {!loading && success && !error && (
         <>
           <PaymentDesign.Box>
             <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
