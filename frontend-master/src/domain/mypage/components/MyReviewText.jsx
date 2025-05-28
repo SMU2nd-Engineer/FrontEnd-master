@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "../style/MyReviewPageDesign.css";
 
 export default function MyTextReview({ reviewText, reviewDate, reviewIdx }) {
   const navigate = useNavigate();

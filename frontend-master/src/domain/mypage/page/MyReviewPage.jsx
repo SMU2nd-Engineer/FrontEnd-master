@@ -7,6 +7,7 @@ import MyTransactionReview from "../components/MyTransactionReview";
 import MyTransactionEvaluation from "../components/MyTransactionEvaluation";
 
 import * as Nav from "../style/MyPageNavDesign";
+import "../style/MyReviewPageDesign.css";
 
 export default function MyReviewPage() {
   // 별점 평균 및 나머지 정보를 저장할 state
@@ -36,13 +37,27 @@ export default function MyReviewPage() {
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <MyName />
-      <MyPageRating myRating={myReviewInfoList.myAverageRating} />
-      <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />
-      <MyTransactionEvaluation
-        evaluationLists={myReviewInfoList.evaluationList}
-        myEvaluationLists={myReviewInfoList.myEvaluationList}
-      />
+      <div className="ReviewPageMain">
+        <div className="ReviewUserName">
+          <MyName />
+        </div>
+        <div className="ReviewPageLeft">
+          <div className="ReviewMyStars">
+            <MyPageRating myRating={myReviewInfoList.myAverageRating} />
+          </div>
+          <div className="DetailTextReview">
+            <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />
+          </div>
+        </div>
+        <div className="ReviewPageRight">
+          <div className="DetailCheckReview">
+            <MyTransactionEvaluation
+              evaluationLists={myReviewInfoList.evaluationList}
+              myEvaluationLists={myReviewInfoList.myEvaluationList}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

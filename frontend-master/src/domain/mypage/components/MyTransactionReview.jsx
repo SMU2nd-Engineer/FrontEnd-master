@@ -3,6 +3,8 @@ import MyTextReview from "./MyReviewText";
 import MyPagination from "./MyPaginationUI";
 import { Link } from "react-router-dom";
 
+import "../style/MyReviewPageDesign.css";
+
 /**
  * 거래 후기를 렌더링할 컴포넌트
  * @param {List<Object>} reviewLists: 리뷰 정보가 담긴 배열
@@ -39,38 +41,39 @@ export default function MyTransactionReview({
     );
 
   return (
-    <div
-      id="wishlistBody"
-      style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
-    >
-      <p>거래 후기</p>
+    <div className="detailTextReview-Main">
+      <p>내가 남긴 거래 후기</p>
       <br />
-      <table>
-        <thead>
-          <tr>
-            <th>리뷰</th>
-            <th>날짜 </th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((item) => (
-            <MyTextReview
-              key={item.idx}
-              reviewIdx={item.idx}
-              reviewText={item.review}
-              reviewDate={item.sdate}
+      <div className="detailTextReview-body">
+        <table className="detailTextReview-list">
+          <thead>
+            <tr>
+              <th>리뷰</th>
+              <th>날짜 </th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((item) => (
+              <MyTextReview
+                key={item.idx}
+                reviewIdx={item.idx}
+                reviewText={item.review}
+                reviewDate={item.sdate}
+              />
+            ))}
+          </tbody>
+        </table>
+        <div className="pageNation">
+          {!isMain && (
+            <MyPagination
+              pageCount={totalPageCount}
+              onPageChange={onPageChange}
+              pageRangeDisplayed={3}
             />
-          ))}
-        </tbody>
-      </table>
-      {!isMain && (
-        <MyPagination
-          pageCount={totalPageCount}
-          onPageChange={onPageChange}
-          pageRangeDisplayed={3}
-        />
-      )}
-      {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
+          )}
+          {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
+        </div>
+      </div>
     </div>
   );
 }
