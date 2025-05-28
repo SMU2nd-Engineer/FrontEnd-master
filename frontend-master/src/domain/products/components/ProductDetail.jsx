@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/ProductDetail.css";
+import * as ProductDetails from "../styles/ProductDetailDesign";
 import { Divider } from "@chakra-ui/react";
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
@@ -60,24 +61,22 @@ export default function ProductDetail() {
       {chatPopup === 0 || (
         <ChatPopup selectRoom={chatPopup} handleClose={closePopup} />
       )}
-      <div className="detail-top">
-        <div className="image">
+      <ProductDetails.DetailTop>
+        <ProductDetails.ThumbnailBox>
           <ProductImage
             imageList={product.imageList}
             title={product.title}
             mode="thumbnail"
           />
-        </div>
-        <div className="chakra-divider">
-          <Divider orientation="vertical" height="400px" />
-        </div>
-        <div className="column">
+        </ProductDetails.ThumbnailBox>
+        
+        <ProductDetails.VerticalDivider />
+        
+        <ProductDetails.Column>
           <p className="title">{product.title}</p>
-          <p className="price">{product.price}{product.nickname}원</p>
-          <p className="salerInfo"></p>
-          <div className="chakra-divider">
-            <Divider orientation="horizontal" />
-          </div>
+          <p className="price">{product.price}원</p>
+          <p className="salerInfo">{product.nickName}</p>
+          <ProductDetails.HorizontalDivider />
           <div className="buttonbox">
             <button className="pickbutton">찜</button>
             <Button
@@ -91,23 +90,23 @@ export default function ProductDetail() {
               onClick={handleClick}
             />
           </div>
-        </div>
-      </div>
-      <div className="detail-bottom">
+        </ProductDetails.Column>
+      </ProductDetails.DetailTop>
+      <ProductDetails.DetailBottom>
         <div className="dcbox">
           <p className="detailcontent-label">상세 정보</p>
-          <div className="chakra-divider">
-            <Divider orientation="horizontal" />
-          </div>
+          
+          <ProductDetails.HorizontalDivider />
+          <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+          <p className="detailContent">{product.content}</p>
           <div className="salerinfo">
-            {/* 판매자 정보 뜨게 하고 싶엉 */}
           </div>
           <div>
             <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
             <ProductDelete idx={idx} />
           </div>
         </div> 
-      </div>
+      </ProductDetails.DetailBottom>
     </div>
   );
 }
