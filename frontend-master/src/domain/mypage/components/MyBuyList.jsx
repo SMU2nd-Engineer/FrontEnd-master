@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
 import MyPagination from "./MyPaginationUI";
+import { BuyContainer, BuyHedear } from "../style/SellAndBuyPageDsign";
 
 export default function MyBuyList({ products = [] }) {
   console.log("buylist  products: ", products);
@@ -20,13 +21,14 @@ export default function MyBuyList({ products = [] }) {
   };
   console.log("buylist : ", currentItems);
   return (
-    <>
+    <BuyContainer>
+      <BuyHedear>구매</BuyHedear>
       <ProductList products={currentItems} />
       <MyPagination
         pageCount={totalPageCount}
         onPageChange={onPageChange}
         pageRangeDisplayed={3}
       />
-    </>
+    </BuyContainer>
   );
 }

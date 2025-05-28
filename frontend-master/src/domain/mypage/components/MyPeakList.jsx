@@ -1,5 +1,8 @@
-import Button from "@/components/Button";
 import ProductCard from "@products/components/ProductCard";
+import {
+  CardAndButtonWrapper,
+  PeakDeleteButton,
+} from "../style/MyPagePeakDesign";
 
 /**
  * 상품 목록을 가져와서 만든 유저 찜 목록 컴포넌트
@@ -10,17 +13,18 @@ const MyPeakList = ({ products = [], handlePeak }) => {
   if (!products.length) return <p>상품이 없습니다. </p>;
 
   return (
-    <div className="product_list">
+    <div>
       {products.map((product) => (
-        <div key={product.idx}>
-          <ProductCard product={product} />
-          <Button
-            text={"찜 목록 삭제"}
+        <CardAndButtonWrapper key={product.idx}>
+          <PeakDeleteButton
             onClick={() => {
               handlePeak(product.idx);
             }}
-          />
-        </div>
+          >
+            x
+          </PeakDeleteButton>
+          <ProductCard product={product} />
+        </CardAndButtonWrapper>
       ))}
     </div>
   );

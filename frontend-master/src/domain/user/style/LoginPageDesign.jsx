@@ -1,20 +1,22 @@
 import Button from "@/components/Button";
 import styled from "styled-components";
 
+export const LoginWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const LoginContainer = styled.div`
-  display: grid;
-  grid-template-areas:
-    "form"
-    "options"
-    "helps"
-    "socials";
-  grid-template-rows: auto auto auto auto;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  max-width: fit-content;
-  margin: 4rem auto;
   padding: 2rem;
   border: 1px solid #ddd;
   border-radius: 1rem;
+  margin: 3rem;
+  width: 100%;
+  width: max-content;
 `;
 
 export const LoginForm = styled.form`
