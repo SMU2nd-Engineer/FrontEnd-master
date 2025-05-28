@@ -11,7 +11,8 @@ import MyTransactionReview from "../components/MyTransactionReview";
 import "@mypage/style/MyPageCommon.css";
 import "@mypage/style/MainPage.css";
 
-import "../style/MyPageNav.css";
+import * as Nav from "../style/MyPageNavDesign";
+// import "../style/MyPageNav.css";
 
 /**
  * 메인 화면
@@ -44,9 +45,9 @@ export default function MainPage() {
   }, []);
   return (
     <div className="main">
-      <div className="sticky-navbar">
+      <Nav.StickyNavbar>
         <MyPageLink />
-      </div>
+      </Nav.StickyNavbar>
       <div className="mypage-container">
         {/* <h1>MainPage</h1> */}
 

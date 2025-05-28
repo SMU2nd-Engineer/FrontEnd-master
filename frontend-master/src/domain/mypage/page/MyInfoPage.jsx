@@ -5,6 +5,8 @@ import MyInfoList from "../components/MyInfoList";
 import { getMyPageData } from "../services/getMyPageDate";
 import "@user/style/UserRegistrationPage.css";
 
+import * as Nav from "../style/MyPageNavDesign";
+
 export default function MyInfo() {
   // 소셜 로그인의 경우 비밀번호가 없으니 pass
   useEffect(() => {
@@ -22,9 +24,9 @@ export default function MyInfo() {
   // console.log(isMyInfoPasswordCheck);
   return (
     <div>
-      <div className="sticky-navbar">
+      <Nav.StickyNavbar>
         <MyPageLink />
-      </div>
+      </Nav.StickyNavbar>
       <br />
       {!isMyInfoPasswordCheck ? (
         <MyInfoPasswordCheck

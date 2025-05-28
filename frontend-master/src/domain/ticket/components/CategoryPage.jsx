@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SelectCategory from "./SelectCategory";
 import SearchTitleAndCast from "./SearchTitleAndCast";
-// import "../style/ticketPage.css";
 import * as TicketPages from "../style/TicketPageDesign";
 
 const CategoryPage = ({ setSelectedIds, setSearchTerm }) => {

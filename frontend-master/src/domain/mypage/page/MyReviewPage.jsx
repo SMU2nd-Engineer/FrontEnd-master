@@ -6,6 +6,8 @@ import { getMyPageData } from "../services/getMyPageDate";
 import MyTransactionReview from "../components/MyTransactionReview";
 import MyTransactionEvaluation from "../components/MyTransactionEvaluation";
 
+import * as Nav from "../style/MyPageNavDesign";
+
 export default function MyReviewPage() {
   // 별점 평균 및 나머지 정보를 저장할 state
   const [myReviewInfoList, setMyReviewInfoList] = useState({});
@@ -31,9 +33,9 @@ export default function MyReviewPage() {
   return (
     <div>
       <p>리뷰 페이지</p>
-      <div className="sticky-navbar">
+      <Nav.StickyNavbar>
         <MyPageLink />
-      </div>
+      </Nav.StickyNavbar>
       <MyName />
       <MyPageRating myRating={myReviewInfoList.myAverageRating} />
       <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />

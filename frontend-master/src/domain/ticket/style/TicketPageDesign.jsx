@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-// ticketPage - 하단 영역(달력, 공연 리스트)
+// import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
+// import * as TicketPages from "../style/TicketPageDesign";
+
 export const BottomArea = styled.div`
   display: flex;
 `;

@@ -1,5 +1,10 @@
-/* FavoriteCategory - 관심사 정보 체크 박스 */
-.favorite-main {
+import React from "react";
+import styled from "styled-components";
+
+// import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
+// import * as Favorite from "../style/FavoriteDesign";
+
+export const FavoriteMain = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -8,34 +13,37 @@
   transition: background-color 0.2s ease;
   cursor: pointer;
   justify-content: center;
-}
-.favorite-main:hover {
-  background-color: #f5f5f5;
-}
-.favorite-CheckBox {
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
+export const FavoriteCheckbox = styled.input`
   width: 16px;
   height: 16px;
-  accent-color: #2563eb; /* 파란 체크박스 */
-}
-.favorite-label {
+  accent-color: #2563eb;
+`;
+
+export const FavoriteLabel = styled.label`
   font-size: 14px;
   color: #333;
-}
+`;
 
-/* FavoritesSelector */
-.category-grid {
+export const CategoryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개 */
   gap: 12px;
   background-color: #f0f0f0;
-}
-.form-actions {
+`;
+
+export const FormActions = styled.div`
   display: flex;
   gap: 16px;
   justify-content: flex-end;
   margin-top: 20px;
-}
-.form-title {
+`;
+
+export const FormTitle = styled.h2`
   border-radius: 8px;
   background-color: #f0b8b8;
   color: white;
@@ -45,11 +53,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-}
+  margin-top: 20px;
+`;
 
-.button1,
-.button2 {
+export const EndButton = styled.button`
   font-size: 16px;
   border-radius: 8px;
   background-color: #f0b8b8;
@@ -60,4 +67,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
+`;

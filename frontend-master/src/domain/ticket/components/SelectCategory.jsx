@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCategory } from "@/services/Category";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
-// import "../style/ticketPage.css";
 
 import * as TicketPages from "../style/TicketPageDesign";
 

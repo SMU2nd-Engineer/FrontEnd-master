@@ -1,6 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
+// import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
+// import * as Calendars from "../style/CalendarDesign";
+
 export const CalendarMain = styled.div`
   width: 100%;
   max-width: 530px;

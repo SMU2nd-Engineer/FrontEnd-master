@@ -5,6 +5,8 @@ import { getMyPageData } from "../services/getMyPageDate";
 import MyPeakList from "../components/MyPeakList";
 import { updateUserPeak } from "../services/updateUserPeak";
 
+import * as Nav from "../style/MyPageNavDesign";
+
 export default function MyPeakPage() {
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
   const [wishListInfo, setWishListInfo] = useState([]);
@@ -40,9 +42,9 @@ export default function MyPeakPage() {
   }, []);
   return (
     <div>
-      <div className="sticky-navbar">
+      <Nav.StickyNavbar>
         <MyPageLink />
-      </div>
+      </Nav.StickyNavbar>
       <div
         id="peakListBody"
         style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
