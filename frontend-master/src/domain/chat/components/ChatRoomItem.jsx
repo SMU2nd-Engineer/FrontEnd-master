@@ -1,6 +1,13 @@
 import { stringToTime } from "@/utils/Time";
 import React, { useContext } from "react";
 import { ChatRoomDispatchContext } from "../store/chatContext";
+import {
+  ChatRoomItemDiv,
+  InfoLastMessageDiv,
+  InfoTextDiv,
+  InfoTitleDiv,
+  RoomInfoDiv,
+} from "../styles/ChatPageDesign";
 
 /**
  * 채팅방 요약 컴포넌트
@@ -18,25 +25,24 @@ const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage }) => {
   };
 
   return (
-    <div
-      className="chatRoomItme"
+    <ChatRoomItemDiv
       onClick={() => {
         handleRoomClick(id);
       }}
     >
       {/* <img src="" alt="" /> */}
-      <div className="roomInfo">
-        <div className="info-title">{title}</div>
+      <RoomInfoDiv>
+        <InfoTitleDiv>{title}</InfoTitleDiv>
         <div>
-          <div className="info-last">{lastMessage}</div>
-          <div className="info-text">{stringToTime(lastMessageAt)}</div>
+          <InfoLastMessageDiv>{lastMessage}</InfoLastMessageDiv>
+          <InfoTextDiv>{stringToTime(lastMessageAt)}</InfoTextDiv>
         </div>
         {/* <span>{toUser}</span> */}
-      </div>
+      </RoomInfoDiv>
       <button type="button" onClick={onClick}>
         X
       </button>
-    </div>
+    </ChatRoomItemDiv>
   );
 };
 

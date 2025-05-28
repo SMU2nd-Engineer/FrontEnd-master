@@ -2,6 +2,7 @@ import React from "react";
 import ChatMessage from "./ChatMessage";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { ChatListDiv } from "../styles/ChatPageDesign";
 
 /**
  * 채팅 내역 컴포넌트
@@ -21,7 +22,7 @@ const ChatList = ({ chatList = [] }) => {
 
   if (typeof chatList == typeof "") return;
   return (
-    <div className="chatList" ref={messagesEndRef}>
+    <ChatListDiv ref={messagesEndRef}>
       {chatList.map((chat) => {
         return chat.user_idx == 1 ? (
           <ChatMessage key={chat.id} type={"from"} {...chat} />
@@ -29,7 +30,7 @@ const ChatList = ({ chatList = [] }) => {
           <ChatMessage key={chat.id} type={"to"} {...chat} />
         );
       })}
-    </div>
+    </ChatListDiv>
   );
 };
 

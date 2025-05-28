@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import {
+  ChatInputDiv,
+  ChatMessageButton,
+  ChatMessageInput,
+} from "../styles/ChatPageDesign";
 
 /**
  * 채팅 입력 컴포넌트
@@ -15,8 +20,8 @@ const ChatInput = ({ handleMessageSend }) => {
   };
 
   return (
-    <div className="chatInput">
-      <input
+    <ChatInputDiv>
+      <ChatMessageInput
         type="text"
         name="message"
         id="messageBox"
@@ -24,11 +29,12 @@ const ChatInput = ({ handleMessageSend }) => {
         value={message}
         placeholder="메시지를 입력하세요."
         onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={(e) => e.key == "Enter" && onSumit()}
       />
-      <button className="input-message-button" type="button" onClick={onSumit}>
+      <ChatMessageButton type="button" onClick={onSumit}>
         보내기
-      </button>
-    </div>
+      </ChatMessageButton>
+    </ChatInputDiv>
   );
 };
 
