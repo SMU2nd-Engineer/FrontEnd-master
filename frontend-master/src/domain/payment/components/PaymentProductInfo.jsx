@@ -1,15 +1,23 @@
-const PaymentProductInfo = ({product}) => {
+import * as PaymentDesign from '../styles/PaymentPageDesign'
+
+const PaymentProductInfo = ({product, tradeType}) => {
+  let total = product.price;
+  console.log(tradeType);
+  if (tradeType.tradeType === 0) {
+    total += 3000;
+  }
+  console.log(total);
   return (
-    <div className='productInfo'>
-      <div className='img'>
-        <img className='img' src={product.img} alt="상품이미지" />
-      </div>
-      <div className='price_title'>
-        <p id="title">{product.title}</p>
-        <h2>{product.price}원</h2>
+    <PaymentDesign.ProductInfo>
+      <PaymentDesign.Img>
+        <img src={product.img} alt="상품이미지" />
+      </PaymentDesign.Img>
+      <PaymentDesign.PriceTitle>
+        <PaymentDesign.Title>{product.title}</PaymentDesign.Title>
+        <PaymentDesign.Price>{total}원</PaymentDesign.Price>
         <p>{product.content}</p>
-      </div>
-    </div>
+      </PaymentDesign.PriceTitle>
+    </PaymentDesign.ProductInfo>
   );
 };
 
