@@ -16,6 +16,7 @@ const PaymentSuccessPage = () => {
   const partnerUserId = sessionStorage.getItem("partnerUserId");
   const [searchParams] = useSearchParams();
   const pgToken = searchParams.get("pg_token");
+  const tradeType = Number(searchParams.get('tradeType'));
   const [product, setProduct] = useState(null);
   const {idx} = useParams();
 
@@ -58,7 +59,7 @@ const PaymentSuccessPage = () => {
   };
 
   const handleGoReview = () => {
-    navigate("/mypage/transactionReviewRegist", {
+    navigate(`/mypage/transactionReviewRegist?tradeType=${tradeType}`, {
       state: {product}
     });
 
@@ -76,7 +77,9 @@ const PaymentSuccessPage = () => {
         <>
           <PaymentDesign.Box>
             <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
-            <PaymentProductInfo product={product} tradeType={1}/>
+            <PaymentDesign.ProductInfo>
+              <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+            </PaymentDesign.ProductInfo>
             <PaymentDesign.Review onClick={handleGoReview}>후기 작성하기</PaymentDesign.Review>
           </PaymentDesign.Box>
         </>
@@ -85,7 +88,9 @@ const PaymentSuccessPage = () => {
         <PaymentDesign.Box>
           <PaymentDesign.PaySuccess>결제가 실패하였습니다.</PaymentDesign.PaySuccess>
           <PaymentDesign.PayError>Error 원인 : {error}</PaymentDesign.PayError>
-          <PaymentProductInfo product={product} tradeType={1}/>
+          <PaymentDesign.ProductInfo>
+            <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+          </PaymentDesign.ProductInfo>
           <PaymentDesign.Review onClick={handleGoHome}>홈으로 이동하기</PaymentDesign.Review>
         </PaymentDesign.Box>
       )}

@@ -9,13 +9,18 @@ const KakaoPayReady = async (product, user, tradeType) => {
   const partnerUserId = `user${user.idx}`;
   const itemName = product.title;
   const productIdx = product.idx;
-  const amount = product.price;
+  let amount = product.price;
   const deliveryAddress = user.address;
   const buyerIdx = user.idx;
   const sellerIdx = product.user_idx;
-  const approvalUrl = "http://localhost:5173/payment/success/"+productIdx;
-  const cancelUrl = "http://localhost:5173/payment/cancel/"+productIdx;
-  const failUrl = "http://localhost:5173/payment/fail/"+productIdx;
+  const approvalUrl = `http://localhost:5173/payment/success/${productIdx}?tradeType=${tradeType}`;
+  const cancelUrl = `http://localhost:5173/payment/cancel/${productIdx}?tradeType=${tradeType}`;
+  const failUrl = `http://localhost:5173/payment/fail/${productIdx}?tradeType=${tradeType}`;
+
+  if (tradeType === 0) {
+    amount += 3000;
+  }
+
   try {
     const res = await axiosInstance.post(
       '/payment/ready',
