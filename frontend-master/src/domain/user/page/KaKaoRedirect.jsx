@@ -39,7 +39,7 @@ export default function KaKaoRedirect() {
       }
     };
     requestKaKaoAuth();
-  }, [kakaoCode, stateKey, navigate]);
+  }, [kakaoCode, stateKey, navigate, autoLogin]);
 
   return (
     <div>

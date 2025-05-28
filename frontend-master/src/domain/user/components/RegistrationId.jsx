@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
+
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Text,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+  RegistFormContainer,
+  RegistFormLabel,
+  RegistInputGroup,
+  RegistStyledInput,
+  RegistHelperText,
+  RegistStyledButtonWrapper,
+} from "../style/UserRegistrationPageDesign";
 
 export default function RegistrationId({
   register,
@@ -36,26 +36,26 @@ export default function RegistrationId({
   };
 
   const getHelperColor = () => {
-    if (errors.id || (!isIdCheck && id)) return "red.500";
-    if (isIdCheck && id) return "green.500";
+    if (errors.id || (!isIdCheck && id)) return "#e53e3e";
+    if (isIdCheck && id) return "#38a169";
     return "gray.500";
   };
 
   return (
-    <FormControl isInvalid={!!errors.id} isRequired width="100%">
-      <FormLabel htmlFor="id">아이디</FormLabel>
-      <InputGroup>
-        <Input
+    <RegistFormContainer>
+      <RegistFormLabel htmlFor="id">아이디</RegistFormLabel>
+      <RegistInputGroup>
+        <RegistStyledInput
           className="registerInput"
           type="text"
           {...register("id")}
           readOnly={isSocialLogin}
+          error={!!errors.id}
         />
-        <InputRightElement width="5.5rem">
-          {!isSocialLogin && (
+
+        {!isSocialLogin && (
+          <RegistStyledButtonWrapper>
             <Button
-              className="registerButton input-right-button"
-              style={{ text: "50px" }}
               text={"중복 체크"}
               onClick={async () => {
                 try {
@@ -72,14 +72,14 @@ export default function RegistrationId({
                 }
               }}
             />
-          )}
-        </InputRightElement>
-      </InputGroup>
+          </RegistStyledButtonWrapper>
+        )}
+      </RegistInputGroup>
       {getHelperMessage() && (
-        <Text fontSize="sm" color={getHelperColor()} mt={1} height={2}>
+        <RegistHelperText color={getHelperColor()}>
           {getHelperMessage()}
-        </Text>
+        </RegistHelperText>
       )}
-    </FormControl>
+    </RegistFormContainer>
   );
 }

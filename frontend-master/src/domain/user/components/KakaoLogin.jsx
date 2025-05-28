@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../../components/Button";
 import kakaoLoginButton from "@/assets/kakao_login_large_narrow_symbol.png";
+import { SocialButton } from "../style/LoginPageDesign";
 
 export default function KaKaoLogin() {
   // 환경 변수에서 필요한 데이터 가져오기
@@ -16,13 +17,12 @@ export default function KaKaoLogin() {
   };
 
   return (
-    <div id="kakoLoginIcon" className="social-button">
+    <SocialButton id="kakoLoginIcon">
       <Button
         text={"카카오 로그인"}
         imgSrc={kakaoLoginButton}
         onClick={handleAutoKaKao}
-        imgStyle={{ width: 54, height: 54 }}
       />
-    </div>
+    </SocialButton>
   );
 }

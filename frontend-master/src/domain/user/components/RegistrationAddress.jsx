@@ -2,14 +2,14 @@ import React, { useRef } from "react";
 import Button from "@/components/Button";
 import { useDaumPostcodePopup } from "react-daum-postcode";
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  VStack,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+  RegistFormContainer,
+  RegistFormLabel,
+  RegistInputGroup,
+  RegistStyledInput,
+  RegistFormControl,
+  RegistFormError,
+  RegistStyledButtonWrapper,
+} from "../style/UserRegistrationPageDesign";
 
 export default function Address({ register, setValue, watch, errors }) {
   const inputFocus = useRef();
@@ -34,30 +34,28 @@ export default function Address({ register, setValue, watch, errors }) {
     inputFocus.current.focus();
   };
   return (
-    <VStack spacing={4} align="stretch">
-      <FormControl isInvalid={!!errors.address} isRequired>
-        <FormLabel htmlFor="address" mb={1}>
-          주소
-        </FormLabel>
-        <InputGroup>
-          <Input type="text" {...register("address")} readOnly />
-          <InputRightElement width="5.5rem">
+    <RegistFormContainer>
+      <RegistFormControl>
+        <RegistFormLabel htmlFor="address">주소</RegistFormLabel>
+        <RegistInputGroup>
+          <RegistStyledInput type="text" {...register("address")} readOnly />
+          <RegistStyledButtonWrapper>
             <Button
-              className="registerButton input-right-button"
               text={"주소 찾기"}
               onClick={() => {
                 open({ onComplete: handleComplete });
               }}
             />
-          </InputRightElement>
-        </InputGroup>
-        <FormErrorMessage>{errors.address?.message}</FormErrorMessage>
-      </FormControl>
-      <FormControl isInvalid={!!errors.detailAddress}>
-        <FormLabel htmlFor="detailAddress" mb={1}>
-          상세 주소
-        </FormLabel>
-        <Input
+          </RegistStyledButtonWrapper>
+        </RegistInputGroup>
+        {errors.address && (
+          <RegistFormError>{errors.address.message}</RegistFormError>
+        )}
+      </RegistFormControl>
+
+      <RegistFormControl>
+        <RegistFormLabel htmlFor="detailAddress">상세 주소</RegistFormLabel>
+        <RegistStyledInput
           type="text"
           {...register("detailAddress")}
           ref={(el) => {
@@ -65,8 +63,10 @@ export default function Address({ register, setValue, watch, errors }) {
             inputFocus.current = el; // 그 다음에 포커스 용도로 저장
           }}
         />
-        <FormErrorMessage>{errors.detailAddress?.message}</FormErrorMessage>
-      </FormControl>
-    </VStack>
+        {errors.detailAddress && (
+          <RegistFormError>{errors.detailAddress.message}</RegistFormError>
+        )}
+      </RegistFormControl>
+    </RegistFormContainer>
   );
 }
