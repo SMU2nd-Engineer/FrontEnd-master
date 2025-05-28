@@ -9,7 +9,7 @@ import { ChatListDiv } from "../styles/ChatPageDesign";
  * @param {[ChatDTO]} param0
  * @returns
  */
-const ChatList = ({ chatList = [] }) => {
+const ChatList = ({ chatList = [], fromUser = 0 }) => {
   const messagesEndRef = useRef(null);
   console.log(chatList);
 
@@ -24,7 +24,7 @@ const ChatList = ({ chatList = [] }) => {
   return (
     <ChatListDiv ref={messagesEndRef}>
       {chatList.map((chat) => {
-        return chat.user_idx == 1 ? (
+        return chat.userIdx != fromUser ? (
           <ChatMessage key={chat.id} type={"from"} {...chat} />
         ) : (
           <ChatMessage key={chat.id} type={"to"} {...chat} />

@@ -14,7 +14,7 @@ import {
  * @param {{id : number, title : string, time : DateTime}} param0
  * @returns
  */
-const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage }) => {
+const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage, count }) => {
   const { handleRoomClick, handleRoomDeleteClick } = useContext(
     ChatRoomDispatchContext
   );
@@ -39,6 +39,7 @@ const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage }) => {
         </div>
         {/* <span>{toUser}</span> */}
       </RoomInfoDiv>
+      {count > 0 ? <div>count</div> : ""}
       <button type="button" onClick={onClick}>
         X
       </button>

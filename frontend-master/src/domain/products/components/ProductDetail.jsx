@@ -69,9 +69,9 @@ export default function ProductDetail() {
             mode="thumbnail"
           />
         </ProductDetails.ThumbnailBox>
-        
+
         <ProductDetails.VerticalDivider />
-        
+
         <ProductDetails.Column>
           <p className="title">{product.title}</p>
           <p className="price">{product.price}원</p>
@@ -95,17 +95,24 @@ export default function ProductDetail() {
       <ProductDetails.DetailBottom>
         <div className="dcbox">
           <p className="detailcontent-label">상세 정보</p>
-          
+
           <ProductDetails.HorizontalDivider />
-          <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+          <ProductImage
+            imageList={product.imageList}
+            title={product.title}
+            mode="all"
+          />
           <p className="detailContent">{product.content}</p>
-          <div className="salerinfo">
-          </div>
+          <div className="salerinfo"></div>
           <div>
-            <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
+            <Button
+              className="product_editbutton"
+              text={"수정"}
+              onClick={handleEdit}
+            />
             <ProductDelete idx={idx} />
           </div>
-        </div> 
+        </div>
       </ProductDetails.DetailBottom>
     </div>
   );
