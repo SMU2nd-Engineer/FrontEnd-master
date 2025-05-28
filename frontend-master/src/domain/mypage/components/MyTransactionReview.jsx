@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import MyTextReview from "./MyReviewText";
 import MyPagination from "./MyPaginationUI";
 import { Link } from "react-router-dom";
+import {
+  MoreReview,
+  TransactionReviewContainer,
+  TransactionReviewHedear,
+  TransactionReviewTable,
+  TransactionTableTh,
+} from "../style/MyMainPageDesign";
 
 import "../style/MyReviewPageDesign.css";
 
@@ -41,39 +48,37 @@ export default function MyTransactionReview({
     );
 
   return (
-    <div className="detailTextReview-Main">
-      <p>내가 남긴 거래 후기</p>
+    <TransactionReviewContainer>
+      <TransactionReviewHedear>거래 후기</TransactionReviewHedear>
       <br />
-      <div className="detailTextReview-body">
-        <table className="detailTextReview-list">
-          <thead>
-            <tr>
-              <th>리뷰</th>
-              <th>날짜 </th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((item) => (
-              <MyTextReview
-                key={item.idx}
-                reviewIdx={item.idx}
-                reviewText={item.review}
-                reviewDate={item.sdate}
-              />
-            ))}
-          </tbody>
-        </table>
-        <div className="pageNation">
-          {!isMain && (
-            <MyPagination
-              pageCount={totalPageCount}
-              onPageChange={onPageChange}
-              pageRangeDisplayed={3}
+      <TransactionReviewTable>
+        <thead>
+          <tr>
+            <TransactionTableTh>리뷰</TransactionTableTh>
+            <TransactionTableTh>날짜 </TransactionTableTh>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((item) => (
+            <MyTextReview
+              key={item.idx}
+              reviewIdx={item.idx}
+              reviewText={item.review}
+              reviewDate={item.sdate}
             />
-          )}
-          {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
-        </div>
-      </div>
-    </div>
+          ))}
+        </tbody>
+      </TransactionReviewTable>
+      {!isMain && (
+        <MyPagination
+          pageCount={totalPageCount}
+          onPageChange={onPageChange}
+          pageRangeDisplayed={3}
+        />
+      )}
+      <MoreReview>
+        {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
+      </MoreReview>
+    </TransactionReviewContainer>
   );
 }

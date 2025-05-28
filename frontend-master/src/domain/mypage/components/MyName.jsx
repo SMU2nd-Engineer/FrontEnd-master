@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getMyPageData } from "../services/getMyPageDate";
+import { MyMainName } from "../style/MyMainPageDesign";
 
 export default function MyName() {
   const [userName, setUserName] = useState("");
@@ -10,5 +11,5 @@ export default function MyName() {
     };
     getUserName();
   }, []);
-  return <p>{userName}님</p>;
+  return <MyMainName>{userName}님</MyMainName>;
 }

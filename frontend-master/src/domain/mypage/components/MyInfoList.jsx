@@ -11,7 +11,14 @@ import RegistrationNickName from "@/domain/user/components/RegistrationNickName"
 import RegistrationAddress from "@user/components/RegistrationAddress";
 import RegistrationEmail from "@user/components/RegistrationEmail";
 import { getMyPageData } from "../services/getMyPageDate";
-import "@user/style/UserRegistrationPage.css";
+import {
+  MyInfoButtonWrapper,
+  MyInfoContainer,
+  MyInfoFormGridArea,
+  MyPageInfoContainer,
+  MyPageInfoForm,
+  WithdrawalButtonWrapper,
+} from "../style/MyPageInfoDesign";
 
 export default function MyInfoList({ isSocialLogin }) {
   //yup 스키마 사용하여 입력폼 유효성 정의의
@@ -114,35 +121,33 @@ export default function MyInfoList({ isSocialLogin }) {
   };
 
   return (
-    <div>
+    <MyInfoContainer>
       <h1>개인 정보 페이지</h1>
-      <br />
-      <div className="RegistrationContainer">
-        <form
-          className="registration-form"
+      <MyPageInfoContainer>
+        <MyPageInfoForm
           onSubmit={handleSubmit(submitEditForm, (errors) => {
             console.log("유효성 검증 실패", errors);
           })}
         >
-          <div className="registration-name">
+          <MyInfoFormGridArea area="name">
             <RegistrationName
               register={register}
               setValue={setValue}
               watch={watch}
               errors={errors}
             />
-          </div>
+          </MyInfoFormGridArea>
           {!isSocialLogin && (
-            <div className="registration-password">
+            <MyInfoFormGridArea area="password">
               <RegistrationPassword
                 register={register}
                 setValue={setValue}
                 watch={watch}
                 errors={errors}
               />
-            </div>
+            </MyInfoFormGridArea>
           )}
-          <div className="registration-nickname">
+          <MyInfoFormGridArea area="nickname">
             <RegistrationNickName
               register={register}
               setValue={setValue}
@@ -152,24 +157,24 @@ export default function MyInfoList({ isSocialLogin }) {
               setIsNickNameCheck={setIsNickNameCheck}
               existingNickname={existingNickname}
             />
-          </div>
-          <div className="registration-address">
+          </MyInfoFormGridArea>
+          <MyInfoFormGridArea area="address">
             <RegistrationAddress
               register={register}
               setValue={setValue}
               watch={watch}
               errors={errors}
             />
-          </div>
-          <div className="registration-email">
+          </MyInfoFormGridArea>
+          <MyInfoFormGridArea area="email">
             <RegistrationEmail
               register={register}
               setValue={setValue}
               watch={watch}
               errors={errors}
             />
-          </div>
-          <div className="registration-buttons">
+          </MyInfoFormGridArea>
+          <MyInfoButtonWrapper>
             <Button
               className="button-base cancle-button"
               text={"취소"}
@@ -179,7 +184,7 @@ export default function MyInfoList({ isSocialLogin }) {
             />
             <Button
               className="button-base regist-button"
-              text={"수정하기"}
+              text={"수정"}
               type="submit"
               disabled={
                 !(
@@ -189,8 +194,8 @@ export default function MyInfoList({ isSocialLogin }) {
                 )
               }
             />
-          </div>
-          <div className="button-base withdrawal-button">
+          </MyInfoButtonWrapper>
+          <WithdrawalButtonWrapper>
             <Button
               text={"회원탈퇴"}
               onClick={() => {
@@ -198,9 +203,9 @@ export default function MyInfoList({ isSocialLogin }) {
               }}
               navigate={navigate}
             />
-          </div>
-        </form>
-      </div>
-    </div>
+          </WithdrawalButtonWrapper>
+        </MyPageInfoForm>
+      </MyPageInfoContainer>
+    </MyInfoContainer>
   );
 }
