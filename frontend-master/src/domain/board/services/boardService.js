@@ -22,7 +22,11 @@ export const getBoardSubmit = ( postContent, postFiles ) => {
   return axiosInstance.post(
     "board/submit",
     formData,
-    { withCredentials: true }
+    { withCredentials: true,
+      headers: {
+          "Content-Type": `multipart/form-data`,
+        },
+     }
   );
 };
 
