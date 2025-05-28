@@ -53,7 +53,14 @@ export default function GoogleRedirect() {
       }
     };
     requestGoogleAuth();
-  }, [googleErrorMessage, googleError, googleCode, stateKey, navigate]);
+  }, [
+    googleErrorMessage,
+    googleError,
+    googleCode,
+    stateKey,
+    navigate,
+    autoLogin,
+  ]);
 
   return (
     <div>
