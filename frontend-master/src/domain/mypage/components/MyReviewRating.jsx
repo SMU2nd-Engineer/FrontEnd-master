@@ -1,6 +1,5 @@
 import MyRatingStar from "./MyRatingStar";
 
-import "../style/TransactionReview.css";
 /**
  * 마이페이지 홈 및 리뷰에서 총 별점을 표시하기 위한 컴포넌트
  * @param {int} myRating
