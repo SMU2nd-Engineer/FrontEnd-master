@@ -6,6 +6,22 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { CloseButton } from "@chakra-ui/react"
 
+
+// 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
+// 여러개의 이미지를 순서에 따라 넣음
+function pushImgSrc(html, getBoardImageUrls) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  const boardImgTags = doc.querySelectorAll('img');
+
+  boardImgTags.forEach((img, index) => {
+    img.setAttribute('src', getBoardImageUrls[index] || ''); // 순서대로 적용
+  });
+
+  return doc.body.innerHTML;
+}
+
 // 게시글 상세 페이지
 const BoardDetailPage = () => {
 
@@ -21,6 +37,10 @@ const BoardDetailPage = () => {
     sdate:"",
   }); 
 
+  
+  // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
+  // const [contentsQuillHtml, setContentsQuillHtml] = useState("");
+
   // 새 댓글 입력값
   const [newCommentText, setNewCommentText] = useState("");
 
@@ -34,6 +54,22 @@ const BoardDetailPage = () => {
   // 게시글 상세데이터 상태
   const [loading, setLoading] = useState(); // 로딩 상태
 
+    // 카테고리 구분자 사용
+    const getText = (category_idx) => {
+      switch (category_idx) {
+        case 4001: // 잡담
+          return '잡담';
+        case 4002: // 삽니다
+          return '삽니다';
+        case 4003: // 팝니다
+          return '팝니다';
+        case 4004: // 기타
+          return '기타';  
+        default:
+          return category_idx;
+       }   
+    }
+
   useEffect(() => console.log(newCommentText), [commentList])
 
   useEffect(() => {
@@ -41,6 +77,21 @@ const BoardDetailPage = () => {
     getBoardDetail(id) // API 호출
       .then((response) => {
         setDetailBoard(response.data); // 받아온 등록 데이터 상태에 저장
+
+        // 이미지 URL 배열을 detailImageList에서 꺼내기
+        const imageUrls = response.data.detailImageList.map(item => item.image_url);
+
+        // pushImgSrc 함수를 호출 시 두 번째 인자로 imageUrls 넣기
+        const processedContent = pushImgSrc(response.data.content, imageUrls);
+
+        console.log("배열 밖으로 나왔니? ",processedContent);
+
+        // 상태에 저장 후 렌더링
+        setDetailBoard({
+          ...response.data,
+          content: processedContent,
+        });
+
         setLoading(false); // 로딩 완료 표시
       });
     // 댓글 목록 가져오는 서비스 작성(DB 포함)
@@ -53,11 +104,9 @@ const BoardDetailPage = () => {
   }, []);
 
   // 댓글 등록 버튼 선택
-  const handleSubmit =async function(e){
+  const handleSubmit = async function(e){
   // preventDefault: 페이지 새로고침 방지
     e.preventDefault();
-
-    console.log(newCommentText)
 
     // 서버에 댓글 등록 요청 보내는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
@@ -128,7 +177,7 @@ const BoardDetailPage = () => {
       <p>상세페이지</p>
 
       {/* 카테고리 : 잡담 / 팝니다 / 삽니다 / 기타 */}
-      <h2>{detailBoard.category_idx}</h2>
+      <h2>{getText(detailBoard.category_idx)}</h2>
 
       {/* 제목 */}
       <h2>{detailBoard.title}</h2>

@@ -11,10 +11,14 @@ import { useRef } from "react";
 
 
 // 본문 HTML 저장 전 clearImgSrc 함수로 src 빈 문자열로 치환 후 저장하는 함수
-function removeImgSrc(html) {
+function clearImgSrc(html) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
-  doc.querySelectorAll('img').forEach(img => img.removeAttribute('src'));
+
+  doc.querySelectorAll('img').forEach(img => {
+    img.setAttribute('src', '');
+  });
+
   return doc.body.innerHTML;
 }
 
@@ -35,6 +39,9 @@ const BoardSubmitPage = () => {
   const { category_idx, title, content } = newsubmit;
   // 글 내용 입력 - quill 툴바 커스텀
   const [ contentData, setContentData ] = useState (""); 
+
+  // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
+  const [contentsQuillHtml, setContentsQuillHtml] = useState("");
 
   // 페이지 이동을 처리 하는 함수
   const navigate = useNavigate();
@@ -108,14 +115,14 @@ const BoardSubmitPage = () => {
         console.log('이미지 URL:', src);
       }
     });
-    const filterdData = removeImgSrc(tempdata)
+    const filterdData = clearImgSrc(tempdata)
 
     // 게시글 등록 요청을 서버로 보낼때 사용될 데이터 객체 만듬
     const postContent = {
       category_idx: newsubmit.category_idx,
       title: newsubmit.title,
       content: filterdData, // 글 내용 입력 - 리액트 에디터 내용 => tempdata
-      // uploadImage를 백엔드로 넘겨주는 건 밑에서 함
+      // uploadImage를 백엔드로 넘겨주는 건 위에서 함
       
     };
     console.log("postContent: ", postContent);
@@ -127,7 +134,7 @@ const BoardSubmitPage = () => {
         console.log("서버응답 확인: ", data)
 
         // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
-        navigate(`/board/detail/${data}`);
+        navigate(`/board/detail/${data.idx}`);
       })
       .catch((error) => {
         console.error("게시글 등록 실패: ", error);

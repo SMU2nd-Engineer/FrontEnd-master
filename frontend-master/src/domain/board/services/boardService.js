@@ -35,6 +35,7 @@ export const getBoardDetail = (id) => {
   return axiosInstance.get(`board/detail/${id}`,{ withCredentials: true });
 };
 
+
 // 게시글 상세페이지 - 댓글 목록 불러오기
 export const getBoardComment = (id) => {
   return axiosInstance.get(`/board/comment`, {params : {idx : id}}, { withCredentials: true });
