@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../style/MyPageNav.css";
+// import "../style/MyPageNav.css";
+import * as Nav from "../style/MyPageNavDesign";
 
 export default function MyPageLink() {
   return (
-    <div className="navbar">
-      <div className="navbar-inner">
+    <Nav.NavBar>
+      <Nav.NavBarInner>
         <Link to="/mypage/main">마이페이지</Link>
-      </div>
+      </Nav.NavBarInner>
       <div>
-        <ul className="navbar-menu">
+        <Nav.NavbarMenu>
           <li>
             <Link to="/mypage/myInfo">개인 정보</Link>
           </li>
@@ -28,8 +29,8 @@ export default function MyPageLink() {
           <li>
             <Link to="/mypage/myEditFavorite">관심사</Link>
           </li>
-        </ul>
+        </Nav.NavbarMenu>
       </div>
-    </div>
+    </Nav.NavBar>
   );
 }

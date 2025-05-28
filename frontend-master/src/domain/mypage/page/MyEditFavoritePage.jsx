@@ -1,13 +1,14 @@
 import React from "react";
 import FavoritesSelector from "../components/FavoritesSelector";
 import MyPageLink from "../components/MyPageLink";
+import * as Nav from "../style/MyPageNavDesign";
 
 export default function MyEditFavoritePage() {
   return (
     <div>
-      <div className="sticky-navbar">
+      <Nav.StickyNavbar>
         <MyPageLink />
-      </div>
+      </Nav.StickyNavbar>
       <FavoritesSelector mode="edit" />
     </div>
   );

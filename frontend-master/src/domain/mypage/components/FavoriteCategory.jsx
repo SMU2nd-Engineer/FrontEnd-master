@@ -1,20 +1,19 @@
 import React from "react";
-import "../style/favorite.css";
+import * as Favorite from "../style/FavoriteDesign";
 
 export default function FavoriteCategory({ category, register }) {
   return (
-    <div className="favorite-main">
-      <input
+    <Favorite.FavoriteMain>
+      <Favorite.FavoriteCheckbox
         type="checkbox"
         {...register("favorites[]")}
         value={`FAV_${category.subIdx}`}
         id={`${category.subIdx}`}
-        className="favorite-CheckBox"
       />
-      <label htmlFor={`${category.subIdx}`} className="favorite-label">
+      <Favorite.FavoriteLabel htmlFor={`${category.subIdx}`}>
         {" "}
         {category.name}{" "}
-      </label>
-    </div>
+      </Favorite.FavoriteLabel>
+    </Favorite.FavoriteMain>
   );
 }

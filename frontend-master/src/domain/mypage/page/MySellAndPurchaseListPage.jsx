@@ -4,6 +4,8 @@ import MySellList from "../components/MySellList";
 import MyBuyList from "../components/MyBuyList";
 import { getMyPageData } from "../services/getMyPageDate";
 
+import * as Nav from "../style/MyPageNavDesign";
+
 export default function SellAndPurchaseList() {
   // 거래 내용 및 상품 정보 담을 상태 생성
   const [myProductList, setMyProductList] = useState({});
@@ -17,9 +19,9 @@ export default function SellAndPurchaseList() {
   }, []);
   return (
     <div>
-      <div className="sticky-navbar">
+      <Nav.StickyNavbar>
         <MyPageLink />
-      </div>
+      </Nav.StickyNavbar>
       <p>판매/구매이력</p>
       <p>판매 내역 컴포넌트</p>
       <MySellList products={myProductList.sellInfoList} />
