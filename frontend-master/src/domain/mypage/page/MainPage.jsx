@@ -9,10 +9,9 @@ import { getMyPageData } from "../services/getMyPageDate";
 import MySellList from "../components/MySellList";
 import MyTransactionReview from "../components/MyTransactionReview";
 import "@mypage/style/MyPageCommon.css";
-import "@mypage/style/MainPage.css";
 
 import * as Nav from "../style/MyPageNavDesign";
-// import "../style/MyPageNav.css";
+import * as Main from "../style/MainPageDesign";
 
 /**
  * 메인 화면
@@ -44,45 +43,45 @@ export default function MainPage() {
     saveMainPageInfo();
   }, []);
   return (
-    <div className="main">
+    <Main.MainTool>
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <div className="mypage-container">
+      <Main.MyPageContainer>
         {/* <h1>MainPage</h1> */}
 
-        <div className="header">
+        <Main.Header>
           <MyName />
-        </div>
-        <div className="products">
+        </Main.Header>
+        <Main.Products>
           <MySellList
             isMain={true}
             products={mainPageInfo.myMainSellProductList}
           />
-        </div>
-        <div className="peak">
+        </Main.Products>
+        <Main.Peak>
           <MyMainPeak list={mainPageInfo.myMainPeakList} />
-        </div>
+        </Main.Peak>
 
-        <div className="rating">
+        <Main.Rating>
           <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
-        </div>
-        <div className="reviews">
+        </Main.Rating>
+        <Main.Reviews>
           <MyTransactionReview
             reviewLists={mainPageInfo.myMainReview}
             movePage={"myReview"}
             isMain={true}
           />
-        </div>
-        <div className="button">
+        </Main.Reviews>
+        <Main.HomeButton>
           <Button
             text={"임시 홈 화면으로"}
             onClick={() => {
               navigate("/user/home");
             }}
           />
-        </div>
-      </div>
-    </div>
+        </Main.HomeButton>
+      </Main.MyPageContainer>
+    </Main.MainTool>
   );
 }

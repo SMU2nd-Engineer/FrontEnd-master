@@ -17,15 +17,18 @@ export const ShowList = styled.div`
   width: 45%;
 `;
 
-export const ListDot = styled.ul`
+export const ListDot = styled.div`
   list-style-type: none;
   cursor: pointer;
   text-decoration: none;
   color: #816b6b;
-  li {
+  max-height: 400px;
+  overflow-y: scroll;
+  div {
     margin-bottom: 6px;
     color: #816b6b;
     text-decoration: none;
+    height: 100%;
     &:hover {
       background-color: #f0f0f0;
       color: #333;
