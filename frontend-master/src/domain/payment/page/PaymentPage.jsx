@@ -2,22 +2,22 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SCHEMA } from '@/domain/user/utils/userFormValidator';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import KakaoPayReady from '../service/KakaoPayReady';
 import SelectBox from '@/components/SelectBox';
 import { getCategoryIdx } from '@/utils/CategoryHandler';
 import { getProductDetail } from '@/domain/products/services/productService';
 import { useEffect } from 'react';
-import "../styles/Payment.css";
 import Address from '@/domain/user/components/RegistrationAddress';
 import PaymentProductInfo from '../components/PaymentProductInfo';
+import * as PaymentDesign from '../styles/PaymentPageDesign'
 
 const PaymentPage = () => {
   const {idx} = useParams();
   const [product, setProduct] = useState(null);
   const YUPSCHEMA = SCHEMA;
-  const location = useLocation();
-  const tradeType = location.state?.tradeType;
+  const [searchParams] = useSearchParams();
+  const tradeType = Number(searchParams.get('tradeType'));
   const user = {
     idx: 1,
     address: '제주특별자치도 안양시 동안구 봉은사3로 (현정김마을)'
@@ -55,7 +55,8 @@ const PaymentPage = () => {
     mode: "onBlur", // 사용자에게 안내 메시지 출력
   });
 
-  if(!product) {
+  if(!product || tradeType === null) {
+    console.log('tradeType : ', tradeType);
     return <div>상품 정보를 불러오는 중입니다...</div>;
   }
 
@@ -92,29 +93,39 @@ const PaymentPage = () => {
     }
   }
 
+  let total
+  if (tradeType === 0) {
+    total = product.price + 3000;
+  } else if (tradeType === 1) {
+    total = product.price;
+  }
+
   return (
-    <div className='box'>
-      <p style={{color: '#f0b8b8', textAlign: 'left', padding: '1px', marginLeft: '8px'}}><strong>결제 정보 입력</strong></p>
-      <div className='address'>
-        <p>배송지 입력</p>
-        <div className="form-row">
+    <PaymentDesign.Box>
+      <PaymentDesign.PaymentInfo>결제 정보 입력</PaymentDesign.PaymentInfo>
+      <PaymentDesign.Adderss>
+        <PaymentDesign.AddressP>배송지 입력</PaymentDesign.AddressP>
+        <PaymentDesign.AddressComponent>
           <Address
             register={register}
             setValue={setValue}
             watch={watch}
             errors={errors}
           />
-        </div>
-      </div>
-      <PaymentProductInfo product={product} />
-      <div className='paymethod'>
-        <label id='paymethod' htmlFor='category_idx'>결제 방법</label>
-        <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
-      </div>
+        </PaymentDesign.AddressComponent>
+      </PaymentDesign.Adderss>
+      <PaymentDesign.OrderProduct>주문 상품</PaymentDesign.OrderProduct>
+      <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+      <PaymentDesign.Paymethod>
+        <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>
+        <PaymentDesign.Select>
+          <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
+        </PaymentDesign.Select>
+      </PaymentDesign.Paymethod>
       <div className='paybtn'>
-        <button className='payment' onClick={handlePaymentClick}>{product.price}원 결제하기</button>
+        <PaymentDesign.PaymentBtn onClick={handlePaymentClick}>{total}원 결제하기</PaymentDesign.PaymentBtn>
       </div>
-    </div>
+    </PaymentDesign.Box>
   );
 };
 
