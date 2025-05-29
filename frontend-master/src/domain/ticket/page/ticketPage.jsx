@@ -34,7 +34,7 @@ const TicketPage = () => {
   };
 
   return (
-    <div className="ticketPage">
+    <TicketPages.TicketPageMain>
       <TicketPages.TopCategoryBar>
         <CategoryPage
           selectedIds={selectedIds}
@@ -76,7 +76,7 @@ const TicketPage = () => {
 
       {/* 팝업 컴포넌트 */}
       {popupInfo && <PopupPage info={popupInfo} onClose={closePopup} />}
-    </div>
+    </TicketPages.TicketPageMain>
   );
 };
 
