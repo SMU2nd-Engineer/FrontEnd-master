@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import * as UpImg from "../styles/ImageUploadDesign"
 
 const ImageUpload = ({uploadImage, setUploadImage}) => {
   const [previewUrl, setPreviewUrl] = useState([]);
@@ -41,8 +42,11 @@ const ImageUpload = ({uploadImage, setUploadImage}) => {
 
 
  return (
-     <div>
-      <input type="file" multiple onChange={handleFileChange} />
+     <UpImg.SelectImg>
+      <label htmlFor="input-file-button"  >
+       사진 선택
+      </label>
+      <input type="file" id="input-file-button" style={{display: 'none'}} multiple onChange={handleFileChange} />
 
       <div className="preimagelist">
         {previewUrl.map((image, idx) => (
@@ -52,7 +56,7 @@ const ImageUpload = ({uploadImage, setUploadImage}) => {
           </div>
         ))}
       </div>
-    </div>
+    </UpImg.SelectImg>
 );
 }
 
