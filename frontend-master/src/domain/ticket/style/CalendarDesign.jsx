@@ -36,8 +36,8 @@ export const DaysGrid = styled.div`
 
 export const DayBox = styled.div`
   border: 1px solid #eee;
-  padding: 8px;
-  min-height: 60px;
+  padding-top: 10px;
+  height: 75px;
   position: relative;
   text-align: center;
   cursor: pointer;
@@ -73,12 +73,18 @@ export const PerformanceBadge = styled(EventBadge)`
   color: rgb(186, 160, 230);
   font-size: 0.7rem;
   font-weight: 500;
+  p {
+    margin-bottom: 7px;
+  }
 `;
 
 export const SportsBadge = styled(EventBadge)`
   color: rgb(135, 175, 226);
   font-size: 0.7rem;
   font-weight: 500;
+  p {
+    margin: 0;
+  }
 `;
 
 export const MonthMoveButton = styled.button`

@@ -14,7 +14,7 @@ const SelectDateCalendar = ({
   return (
     <TicketPages.SeDate>
       <TicketPages.StartDate>
-        <label>시작일 : </label>
+        <label>시작일 :</label>
         <TicketPages.DateInput>
           {/* DatePicker는 달력 UI를 나타냄 */}
           <DatePicker
@@ -35,7 +35,7 @@ const SelectDateCalendar = ({
       </TicketPages.StartDate>
 
       <TicketPages.EndDate>
-        <label>종료일 : </label>
+        <label>종료일 :</label>
         <TicketPages.DateInput>
           <DatePicker
             locale={ko}
