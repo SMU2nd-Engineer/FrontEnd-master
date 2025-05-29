@@ -52,6 +52,7 @@ const TradeType = () => {
   localStorage.setItem("tradeType", tradeType);
 
   return (
+    <Trade.Box>
     <Trade.Container>
       <div>
         <Trade.ProductInfo>
@@ -100,6 +101,7 @@ const TradeType = () => {
         </Trade.BottomSection>
       </div>
     </Trade.Container>
+    </Trade.Box>
   );
 };
 

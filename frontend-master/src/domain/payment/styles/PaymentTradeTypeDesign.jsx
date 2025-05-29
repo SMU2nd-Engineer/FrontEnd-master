@@ -1,11 +1,21 @@
 import styled, {css} from "styled-components";
 
+export const Box = styled.div`
+  width: 100%;
+  display: inline-block;
+  align-items: center;
+  text-align: center;
+  justify-items: center;
+  /* margin: 1rem; */
+  /* padding: 5px; */
+`
+
 export const Container = styled.div`
   width: 50%;
   align-items: center;
   text-align: center;
   margin: 1rem;
-  margin-left: 12rem;
+  /* margin-left: 12rem; */
 `;
 
 export const Test = styled.span`

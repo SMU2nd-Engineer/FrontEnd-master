@@ -3,9 +3,11 @@ import * as PaymentDesign from '../styles/PaymentPageDesign'
 
 const PaymentProductInfo = ({product, tradeType}) => {
   let total = product.price;
+  let deliveryFee = 0;
   console.log(tradeType);
   if (tradeType.tradeType === 0) {
     total += 3000;
+    deliveryFee += 3000;
   }
   console.log(total);
   return (
@@ -16,8 +18,11 @@ const PaymentProductInfo = ({product, tradeType}) => {
       </PaymentDesign.Img>
       <PaymentDesign.PriceTitle>
         <PaymentDesign.Title>{product.title}</PaymentDesign.Title>
-        <PaymentDesign.Price>총 결제금액 {total}원</PaymentDesign.Price>
-        <PaymentDesign.Content>{product.content}</PaymentDesign.Content>
+        <PaymentDesign.Price>{product.price}원</PaymentDesign.Price>
+        <PaymentDesign.DeliveryFee>배송비 ({deliveryFee}원)</PaymentDesign.DeliveryFee>
+        <div>
+          <PaymentDesign.Total>총 결제금액 : {total}원</PaymentDesign.Total>
+        </div>
       </PaymentDesign.PriceTitle>
     </>
   );
