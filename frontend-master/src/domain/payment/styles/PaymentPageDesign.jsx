@@ -134,3 +134,8 @@ export const Select = styled.div`
   height: 30%px;
   margin-top: 15px;
 `
+
+export const Content = styled.p`
+  font-size: 12px;
+  padding: 1px;
+`
