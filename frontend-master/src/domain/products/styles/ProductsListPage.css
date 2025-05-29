@@ -14,10 +14,11 @@ input {
 }
 
 @font-face {
-    font-family: 'Pretendard-Medium';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Pretendard-Medium";
+  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
 }
 
 #searchButton {
@@ -27,14 +28,13 @@ input {
   font-size: 90%;
 }
 
-.pluploadbutton{
+.pluploadbutton {
   text-decoration: underline;
   font-size: 90%;
   color: #666666;
 }
 
 .product_list {
-  
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 50px;
@@ -43,15 +43,13 @@ input {
 }
 
 .product_card {
-  
   width: 240px;
   height: 340px;
   border: 1px solid #ddd;
   border-radius: 8px;
   /* overflow: hidden; */
   background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* .image {
@@ -71,7 +69,7 @@ input {
 }
 
 .product_title {
-  font-family: 'Pretendard-Medium';
+  font-family: "Pretendard-Medium";
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 170px;

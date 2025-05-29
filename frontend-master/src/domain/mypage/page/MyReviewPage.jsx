@@ -7,7 +7,7 @@ import MyTransactionReview from "../components/MyTransactionReview";
 import MyTransactionEvaluation from "../components/MyTransactionEvaluation";
 
 import * as Nav from "../style/MyPageNavDesign";
-import "../style/MyReviewPageDesign.css";
+import * as MyReview from "../style/MyReviewPageDesign";
 
 export default function MyReviewPage() {
   // 별점 평균 및 나머지 정보를 저장할 state
@@ -22,6 +22,7 @@ export default function MyReviewPage() {
       const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
       //   setMyReviewInfoList(results);
       setMyReviewInfoList({
+        myPageGetUserInfo: results.myPageGetUserInfo ?? {},
         myAverageRating: ceilRating,
         reviewLists: results.reviewLists ?? [],
         myEvaluationList: results.myEvaluationList ?? [],
@@ -36,27 +37,27 @@ export default function MyReviewPage() {
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <div className="ReviewPageMain">
-        <div className="ReviewUserName">
-          <MyName />
-        </div>
-        <div className="ReviewPageLeft">
-          <div className="ReviewMyStars">
+      <MyReview.ReviewPageMain>
+        <MyReview.ReviewUserName>
+          <MyName name={myReviewInfoList.myPageGetUserInfo?.name} />
+        </MyReview.ReviewUserName>
+        <MyReview.ReviewPageLeft>
+          <MyReview.ReviewMyStars>
             <MyPageRating myRating={myReviewInfoList.myAverageRating} />
-          </div>
-          <div className="DetailTextReview">
+          </MyReview.ReviewMyStars>
+          <MyReview.DetailTextReview>
             <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />
-          </div>
-        </div>
-        <div className="ReviewPageRight">
-          <div className="DetailCheckReview">
+          </MyReview.DetailTextReview>
+        </MyReview.ReviewPageLeft>
+        <MyReview.ReviewPageRight>
+          <MyReview.DetailCheckReview>
             <MyTransactionEvaluation
               evaluationLists={myReviewInfoList.evaluationList}
               myEvaluationLists={myReviewInfoList.myEvaluationList}
             />
-          </div>
-        </div>
-      </div>
+          </MyReview.DetailCheckReview>
+        </MyReview.ReviewPageRight>
+      </MyReview.ReviewPageMain>
     </div>
   );
 }

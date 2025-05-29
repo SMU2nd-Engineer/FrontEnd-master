@@ -9,8 +9,7 @@ import {
   TransactionReviewTable,
   TransactionTableTh,
 } from "../style/MyMainPageDesign";
-
-import "../style/MyReviewPageDesign.css";
+import * as MyReview from "../style/MyReviewPageDesign";
 
 /**
  * 거래 후기를 렌더링할 컴포넌트
@@ -48,37 +47,41 @@ export default function MyTransactionReview({
     );
 
   return (
-    <TransactionReviewContainer>
-      <TransactionReviewHedear>거래 후기</TransactionReviewHedear>
-      <br />
-      <TransactionReviewTable>
-        <thead>
-          <tr>
-            <TransactionTableTh>리뷰</TransactionTableTh>
-            <TransactionTableTh>날짜 </TransactionTableTh>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((item) => (
-            <MyTextReview
-              key={item.idx}
-              reviewIdx={item.idx}
-              reviewText={item.review}
-              reviewDate={item.sdate}
-            />
-          ))}
-        </tbody>
-      </TransactionReviewTable>
-      {!isMain && (
-        <MyPagination
-          pageCount={totalPageCount}
-          onPageChange={onPageChange}
-          pageRangeDisplayed={3}
-        />
-      )}
-      <MoreReview>
-        {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
-      </MoreReview>
-    </TransactionReviewContainer>
+    <MyReview.DetailTextReviewMain>
+      <p>거래 후기</p>
+      <MyReview.DetailTextReviewArray>
+        <div>
+          <MyReview.DetailTextReviewList>
+            <thead>
+              <tr>
+                <th>리뷰</th>
+                <th>날짜 </th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems.map((item) => (
+                <MyTextReview
+                  key={item.idx}
+                  reviewIdx={item.idx}
+                  reviewText={item.review}
+                  reviewDate={item.sdate}
+                />
+              ))}
+            </tbody>
+          </MyReview.DetailTextReviewList>
+        </div>
+
+        {!isMain && (
+          <MyPagination
+            pageCount={totalPageCount}
+            onPageChange={onPageChange}
+            pageRangeDisplayed={3}
+          />
+        )}
+        <MoreReview>
+          {movePage && <Link to={`/mypage/${movePage}`}>더 보기</Link>}
+        </MoreReview>
+      </MyReview.DetailTextReviewArray>
+    </MyReview.DetailTextReviewMain>
   );
 }

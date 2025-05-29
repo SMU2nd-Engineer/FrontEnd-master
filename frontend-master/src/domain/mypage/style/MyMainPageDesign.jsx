@@ -34,11 +34,14 @@ export const MyMainGridArea = styled.div`
  */
 
 export const MyMainName = styled.h2`
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 28px;
   display: flex;
-  justify-content: baseline;
-  align-items: center;
-  color: black;
+  justify-content: center;
+  color: #555;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 2px solid #cfcfcf;
 `;
 
 /* --------------------------------------------------- */
@@ -59,8 +62,9 @@ export const SellOptionsWrapper = styled.div`
 export const SellOptionButton = styled.button`
   background: none;
   border: none;
-  font-size: 1rem;
+  font-size: ${({ selected }) => (selected ? "1.1rem" : "1rem")};
   color: ${({ selected }) => (selected ? "#000" : "#666")};
+
   cursor: pointer;
   padding: 0;
   position: relative;
@@ -68,6 +72,14 @@ export const SellOptionButton = styled.button`
 
   &:hover {
     text-decoration: underline;
+  }
+  &:active {
+    border: none;
+    outline: none;
+  }
+  &:focus {
+    border: none;
+    outline: none;
   }
 `;
 
@@ -125,6 +137,9 @@ export const RatingAndReviewContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   grid-area: "reviewAndrating";
+  align-items: center;
+  margin-right: 30px;
+  height: 97%;
 `;
 
 /**
@@ -132,6 +147,7 @@ export const RatingAndReviewContainer = styled.div`
  */
 export const MyRatingName = styled.h3`
   font-weight: 500;
+  font-size: 22px;
   display: flex;
   justify-content: baseline;
   align-items: center;

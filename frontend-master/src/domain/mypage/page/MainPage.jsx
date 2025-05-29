@@ -15,7 +15,6 @@ import {
   RatingAndReviewContainer,
 } from "../style/MyMainPageDesign";
 
-
 /**
  * 메인 화면
  * @returns 마이페이지 메인 화면 반환
@@ -37,6 +36,7 @@ export default function MainPage() {
       const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
       console.log("ceilRating : ", ceilRating);
       setMainPageInfo({
+        myPageGetUserInfo: result.myPageGetUserInfo ?? {},
         myPageAverageRating: ceilRating,
         myMainSellProductList: result.myMainSellProductList ?? [],
         myMainPeakList: result.myMainPeakList ?? [],
@@ -53,7 +53,7 @@ export default function MainPage() {
 
       <MyMainContainer>
         <MyMainGridArea area="header">
-          <MyName />
+          <MyName name={mainPageInfo.myPageGetUserInfo?.name} />
         </MyMainGridArea>
         <MyMainGridArea area="sell">
           <MySellList

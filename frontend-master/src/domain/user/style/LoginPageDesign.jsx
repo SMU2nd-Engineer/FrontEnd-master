@@ -107,6 +107,10 @@ export const SocialButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover {
+    border: none;
+    outline: none;
+  }
 
   button {
     width: 56px;
@@ -117,6 +121,15 @@ export const SocialButton = styled.button`
     text-align: center;
     border-radius: 50%;
     overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      border: none;
+      outline: none;
+      transform: scale(1.1);
+    }
+    &:active {
+      transform: scale(0.9);
+    }
   }
 `;
 

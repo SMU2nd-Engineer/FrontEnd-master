@@ -70,13 +70,13 @@ export const EventBadge = styled.div`
 `;
 
 export const PerformanceBadge = styled(EventBadge)`
-  color: rgb(180, 75, 180);
+  color: rgb(186, 160, 230);
   font-size: 0.7rem;
   font-weight: 500;
 `;
 
 export const SportsBadge = styled(EventBadge)`
-  color: rgb(99, 167, 99);
+  color: rgb(135, 175, 226);
   font-size: 0.7rem;
   font-weight: 500;
 `;

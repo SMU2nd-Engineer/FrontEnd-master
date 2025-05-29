@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import FavoriteCategory from "../components/FavoriteCategory";
 import { useNavigate } from "react-router-dom";
-import Button from "@/components/Button";
 import { getMyPageData } from "../services/getMyPageDate";
 import { registrationUserFavorite } from "@user/services/registrationUserFavorite";
 import { updateUserFavorites } from "../services/updateUserFavorites";
-import { div } from "framer-motion/client";
 
 import * as Favorite from "../style/FavoriteDesign";
 
@@ -26,21 +24,20 @@ export default function FavoritesSelector({ mode = "register" }) {
   // 마운트시 카테고리 정보 저장하기 및 mode === edit일 때 기존 정보 가져오기 넣기
   useEffect(() => {
     const saveCategoryAndInfo = async () => {
-      const result = await getMyPageData("FAVORITE_CATEGORIES");
-      setCategories(result);
       if (mode === "edit") {
         const userFavorites = await getMyPageData("USER_FAVORITES");
-        console.log("userFavorites````````````", userFavorites.userFavoriteMap);
+        setCategories(userFavorites.categories);
         // 가져온 데이터가 key:value 형태의 map이므로 처리하기 위해서
         const selectedKeys = Object.entries(userFavorites.userFavoriteMap) // 객체의 값만 가져옴(map객체)
           .filter(([key, value]) => value === 1) // 선택된 값만 선택
           .map(([key]) => key);
-        // 기존 항목 저장.
-        console.log("selectedKeys : ", selectedKeys);
         // 렌더링 과정에 순서때문인지 받아오지 못 해서 간격을 줌.
         setTimeout(() => {
           setValue("favorites[]", selectedKeys);
         }, 0);
+      } else {
+        const result = await getMyPageData("FAVORITE_CATEGORIES");
+        setCategories(result);
       }
     };
     saveCategoryAndInfo();
@@ -49,7 +46,6 @@ export default function FavoritesSelector({ mode = "register" }) {
   // 콜백 함수를 만들어서 API 호출
   const submitForm = async (formData) => {
     try {
-      console.log("formData ~~~~~~~~~~~~ : ", formData);
       if (mode === "edit") {
         await updateUserFavorites(formData);
         alert("정상적으로 수정되었습니다.");
