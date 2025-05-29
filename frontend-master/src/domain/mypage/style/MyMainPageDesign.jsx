@@ -146,6 +146,7 @@ export const RatingAndReviewContainer = styled.div`
  * 내 점수 헤더 스타일
  */
 export const MyRatingName = styled.h3`
+  margin: 10px;
   font-weight: 500;
   font-size: 22px;
   display: flex;
