@@ -35,9 +35,18 @@ const PaymentSuccessPage = () => {
     console.log("pgToken:", pgToken);
     console.log("tid:", tid);
 
+    const isApproved = sessionStorage.getItem("approved");
+
+    if (isApproved === "true") {
+      setSuccess(true);
+      setLoading(false);
+      return;
+    }
+
     const approvePayment = async () => {
       try {
         await kakaoPayApprove({tid, partnerOrderId, partnerUserId, pgToken});
+        sessionStorage.setItem("approved", "true");
         setSuccess(true);
       } catch (err) {
         console.error("Approve 에러:", err);
@@ -52,7 +61,7 @@ const PaymentSuccessPage = () => {
     };
 
     approvePayment();
-  }, [tid]);
+  }, [idx]);
 
   const handleGoHome = () => {
     navigate("/")
@@ -76,11 +85,16 @@ const PaymentSuccessPage = () => {
       {!loading && success && !error && (
         <>
           <PaymentDesign.Box>
-            <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
-            <PaymentDesign.ProductInfo>
-              <PaymentProductInfo product={product} tradeType={{tradeType}}/>
-            </PaymentDesign.ProductInfo>
-            <PaymentDesign.Review onClick={handleGoReview}>후기 작성하기</PaymentDesign.Review>
+            <PaymentDesign.PaymentBox>
+              <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
+              <PaymentDesign.ProductInfo>
+                <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+              </PaymentDesign.ProductInfo>
+              <PaymentDesign.ReviewBox>
+                <PaymentDesign.Review onClick={handleGoReview}>후기 작성하기</PaymentDesign.Review>
+                <PaymentDesign.Next onClick={handleGoHome}>다음에 작성하기</PaymentDesign.Next>
+              </PaymentDesign.ReviewBox>
+            </PaymentDesign.PaymentBox>
           </PaymentDesign.Box>
         </>
       )}

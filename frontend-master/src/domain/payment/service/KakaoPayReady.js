@@ -11,7 +11,6 @@ const KakaoPayReady = async (product, user, tradeType) => {
   const productIdx = product.idx;
   let amount = product.price;
   const deliveryAddress = user.address;
-  const buyerIdx = user.idx;
   const sellerIdx = product.user_idx;
   const approvalUrl = `http://localhost:5173/payment/success/${productIdx}?tradeType=${tradeType}`;
   const cancelUrl = `http://localhost:5173/payment/cancel/${productIdx}?tradeType=${tradeType}`;
@@ -38,7 +37,6 @@ const KakaoPayReady = async (product, user, tradeType) => {
         failUrl,
         tradeType,
         deliveryAddress,
-        buyerIdx,
         sellerIdx
       },
       {withCredentials: true}
@@ -52,18 +50,7 @@ const KakaoPayReady = async (product, user, tradeType) => {
     return res.data;
   } catch (error) {
     console.error(error);
-    // const tid = sessionStorage.getItem("tid");
-    // kakaoPayFail({tid, error});
-    console.log(partnerOrderId);
-    console.log(partnerUserId);
-    console.log(itemName);
-    console.log(amount);
-    console.log(productIdx);
-    console.log(tradeType);
-    console.log(buyerIdx);
     console.log(deliveryAddress);
-    console.log(sellerIdx);
-    console.log(approvalUrl);
   }
 };
 

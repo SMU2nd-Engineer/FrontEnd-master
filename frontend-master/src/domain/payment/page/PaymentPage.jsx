@@ -11,6 +11,8 @@ import { useEffect } from 'react';
 import Address from '@/domain/user/components/RegistrationAddress';
 import PaymentProductInfo from '../components/PaymentProductInfo';
 import * as PaymentDesign from '../styles/PaymentPageDesign'
+import { useRef } from 'react';
+import { getMyPageData } from '@/domain/mypage/services/getMyPageDate';
 
 const PaymentPage = () => {
   const {idx} = useParams();
@@ -18,14 +20,16 @@ const PaymentPage = () => {
   const YUPSCHEMA = SCHEMA;
   const [searchParams] = useSearchParams();
   const tradeType = Number(searchParams.get('tradeType'));
-  const user = {
-    idx: 1,
-    address: '제주특별자치도 안양시 동안구 봉은사3로 (현정김마을)'
-  }
+  const hasFetched = useRef(false);
+  const [user, setUser] = useState({
+    address: ""
+  });
   const [searchValue, setSearchValue] = useState({
     category_idx: 0,
     keyword : ""
   });
+
+  console.log('배송지 : ' , user.address);
 
   useEffect(() => {
       getProductDetail(idx)
@@ -55,6 +59,51 @@ const PaymentPage = () => {
     mode: "onBlur", // 사용자에게 안내 메시지 출력
   });
 
+  useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+    const getUserInfoByToken = async () => {
+      const userInfo = await getMyPageData("USER_INFO");
+      const edituserInfo = userInfoSplit(userInfo);
+      setValue("address", edituserInfo.address);
+    };
+    getUserInfoByToken();
+  }, [setValue]);
+
+  const userInfoSplit = (userInfo) => {
+    // 괄호로 나눈다. ex: '도로명주소 (지번)' 나뉘고 나머지: 상세주소
+    const fullAddress = userInfo.address ?? "";
+    // 정규 표현식으로 나누기
+    const addressMatch = fullAddress.match(/^(.*?)\)\s*(.*)$/);
+
+    // 분리가 안되면 기존 주소를 사용하기 위하여 미리 선언
+    let address = fullAddress;
+    let detailAddress = "";
+
+    if (addressMatch) {
+      // Match의 경우 전체 값이 0 번에 위치하여 1번부터 사용
+      address = addressMatch[1] + ")";
+      detailAddress = addressMatch[2];
+    }
+
+    return {
+      ...userInfo,
+      address: address.trim(),
+      detailAddress: detailAddress.trim()
+    };
+  };
+
+  const watchedAddress = watch("address");
+  const watchedDetail = watch("detailAddress");
+
+  useEffect(() => {
+    // 주소나 상세주소가 바뀌면 user.address를 업데이트
+    if (watchedAddress || watchedDetail) {
+      const fullAddress = `${watchedAddress || ""} ${watchedDetail || ""}`.trim();
+      setUser(prev => ({ ...prev, address: fullAddress }));
+    }
+  }, [watchedAddress, watchedDetail]);
+
   if(!product || tradeType === null) {
     console.log('tradeType : ', tradeType);
     return <div>상품 정보를 불러오는 중입니다...</div>;
@@ -78,6 +127,7 @@ const PaymentPage = () => {
           }
         } catch (error) {
           console.error("카카오페이 요청 중 오류 발생: ", error);
+          
           alert("결제 요청 중 오류가 발생했습니다. 다시 시도해주세요.")
         }
         break;
@@ -102,31 +152,33 @@ const PaymentPage = () => {
 
   return (
     <PaymentDesign.Box>
-      <PaymentDesign.PaymentInfo>결제 정보 입력</PaymentDesign.PaymentInfo>
-      <PaymentDesign.Adderss>
-        <PaymentDesign.AddressP>배송지 입력</PaymentDesign.AddressP>
-        <PaymentDesign.AddressComponent>
-          <Address
-            register={register}
-            setValue={setValue}
-            watch={watch}
-            errors={errors}
-          />
-        </PaymentDesign.AddressComponent>
-      </PaymentDesign.Adderss>
-      <PaymentDesign.OrderProduct>주문 상품</PaymentDesign.OrderProduct>
-      <PaymentDesign.ProductInfo>
-        <PaymentProductInfo product={product} tradeType={{tradeType}}/>
-      </PaymentDesign.ProductInfo>
-      <PaymentDesign.Paymethod>
-        <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>
-        <PaymentDesign.Select>
-          <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
-        </PaymentDesign.Select>
-      </PaymentDesign.Paymethod>
-      <div className='paybtn'>
-        <PaymentDesign.PaymentBtn onClick={handlePaymentClick}>{total}원 결제하기</PaymentDesign.PaymentBtn>
-      </div>
+      <PaymentDesign.PaymentBox>
+        <PaymentDesign.PaymentInfo>결제 정보 입력</PaymentDesign.PaymentInfo>
+        <PaymentDesign.Adderss>
+          <PaymentDesign.AddressP>배송지 입력</PaymentDesign.AddressP>
+          <PaymentDesign.AddressComponent area="address">
+            <Address
+              register={register}
+              setValue={setValue}
+              watch={watch}
+              errors={errors}
+            />
+          </PaymentDesign.AddressComponent>
+        </PaymentDesign.Adderss>
+        <PaymentDesign.OrderProduct>주문 상품</PaymentDesign.OrderProduct>
+        <PaymentDesign.ProductInfo>
+          <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+        </PaymentDesign.ProductInfo>
+        <PaymentDesign.Paymethod>
+          <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>
+          <PaymentDesign.Select>
+            <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
+          </PaymentDesign.Select>
+        </PaymentDesign.Paymethod>
+        <div>
+          <PaymentDesign.PaymentBtn onClick={handlePaymentClick}>{total}원 결제하기</PaymentDesign.PaymentBtn>
+        </div>
+      </PaymentDesign.PaymentBox>
     </PaymentDesign.Box>
   );
 };
