@@ -17,7 +17,7 @@ const PaymentProductInfo = ({product, tradeType}) => {
       <PaymentDesign.PriceTitle>
         <PaymentDesign.Title>{product.title}</PaymentDesign.Title>
         <PaymentDesign.Price>총 결제금액 {total}원</PaymentDesign.Price>
-        <p>{product.content}</p>
+        <PaymentDesign.Content>{product.content}</PaymentDesign.Content>
       </PaymentDesign.PriceTitle>
     </>
   );
