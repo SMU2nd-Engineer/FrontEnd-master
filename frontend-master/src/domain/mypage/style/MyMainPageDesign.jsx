@@ -59,8 +59,9 @@ export const SellOptionsWrapper = styled.div`
 export const SellOptionButton = styled.button`
   background: none;
   border: none;
-  font-size: 1rem;
+  font-size: ${({ selected }) => (selected ? "1.1rem" : "1rem")};
   color: ${({ selected }) => (selected ? "#000" : "#666")};
+
   cursor: pointer;
   padding: 0;
   position: relative;
@@ -68,6 +69,14 @@ export const SellOptionButton = styled.button`
 
   &:hover {
     text-decoration: underline;
+  }
+  &:active {
+    border: none;
+    outline: none;
+  }
+  &:focus {
+    border: none;
+    outline: none;
   }
 `;
 

@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import { setAccessToken } from "@/utils/TokenManager";
 import { googleLogin } from "../services/googleLogin";
+import {
+  SocialLoginLodingContainer,
+  SocialLoginLodingText,
+} from "../style/SocialLoginLodingDesign";
 
 export default function GoogleRedirect() {
   const navigate = useNavigate();
