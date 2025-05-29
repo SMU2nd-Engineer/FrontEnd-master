@@ -1,3 +1,5 @@
+import { OtherImages } from "../styles/ProductDetailDesign";
+
 const ProductImage = ({ imageList, title, mode = 'all' }) => {
   const BASE_URL = import.meta.env.VITE_BACK_API_IMG_URL;
 
@@ -16,7 +18,7 @@ const ProductImage = ({ imageList, title, mode = 'all' }) => {
   const others = filteredImageList.slice(1);
 
   return (
-  <div className="image_box">
+  <OtherImages>
     {/* 썸네일 먼저 보여주기 */}
       {thumbnail && (
         <img
@@ -30,7 +32,7 @@ const ProductImage = ({ imageList, title, mode = 'all' }) => {
         <img key={i} src={BASE_URL+img.image_Url} alt={`${title}_${i}`} />
       ))}
 
-  </div>
+  </OtherImages>
 )
 };
 

@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // import "../styles/ProductDetail.css";
 import * as ProductDetails from "../styles/ProductDetailDesign";
-import { Divider } from "@chakra-ui/react";
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
 import ProductImage from "./ProductImage";
 import ProductDelete from "./ProductDelete";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
+import ImageSlider from "./ImageSlider";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -56,6 +56,7 @@ export default function ProductDetail() {
     setChatPopup(0);
   };
 
+  
   return (
     <div className="detailinfo">
       {chatPopup === 0 || (
@@ -63,21 +64,29 @@ export default function ProductDetail() {
       )}
       <ProductDetails.DetailTop>
         <ProductDetails.ThumbnailBox>
-          <ProductImage
-            imageList={product.imageList}
-            title={product.title}
-            mode="thumbnail"
-          />
-        </ProductDetails.ThumbnailBox>
 
-        <ProductDetails.VerticalDivider />
-
+        {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
+          <ImageSlider imageList={product.imageList} />
+         
+        <ProductDetails.OtherImages>
+          <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+        </ProductDetails.OtherImages>
+      </ProductDetails.ThumbnailBox>
+        
+        
+        {/* <ProductDetails.VerticalDivider /> */}
         <ProductDetails.Column>
           <p className="title">{product.title}</p>
           <p className="price">{product.price}원</p>
-          <p className="salerInfo">{product.nickName}</p>
+
           <ProductDetails.HorizontalDivider />
-          <div className="buttonbox">
+
+            <ProductDetails.NickNDate>
+              <p className="salerInfo">{product.nickName}</p>
+              <p>등록일: {new Date(product.sdate).toLocaleDateString()}</p>
+            </ProductDetails.NickNDate>
+          
+          <ProductDetails.Buttonbox>
             <button className="pickbutton">찜</button>
             <Button
               className="chatbutton"
@@ -89,30 +98,22 @@ export default function ProductDetail() {
               text={"바로구매"}
               onClick={handleClick}
             />
-          </div>
+          </ProductDetails.Buttonbox>
         </ProductDetails.Column>
       </ProductDetails.DetailTop>
       <ProductDetails.DetailBottom>
-        <div className="dcbox">
-          <p className="detailcontent-label">상세 정보</p>
 
+        
+          <ProductDetails.PDetailLabel>상세 정보</ProductDetails.PDetailLabel>          
           <ProductDetails.HorizontalDivider />
-          <ProductImage
-            imageList={product.imageList}
-            title={product.title}
-            mode="all"
-          />
-          <p className="detailContent">{product.content}</p>
-          <div className="salerinfo"></div>
-          <div>
-            <Button
-              className="product_editbutton"
-              text={"수정"}
-              onClick={handleEdit}
-            />
+          <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+          {/* <ImageSlider imageList={product.imageList} /> */}
+          <ProductDetails.PDetailContent>{product.content}</ProductDetails.PDetailContent>
+          <ProductDetails.EditDeleteBox>
+            <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
             <ProductDelete idx={idx} />
-          </div>
-        </div>
+          </ProductDetails.EditDeleteBox>
+        
       </ProductDetails.DetailBottom>
     </div>
   );

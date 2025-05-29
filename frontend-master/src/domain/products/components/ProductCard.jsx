@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       <div className="image">
            <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
         </div>
-      <ProductCardInfo title={product.title} price={product.price} ninkName={product.ninkName} />
+      <ProductCardInfo title={product.title} price={product.price} sdate={product.sdate} />
     </div>
   );
 };
