@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
 // import * as Nav from "../style/MyPageNavDesign";
@@ -32,9 +33,14 @@ export const NavbarMenu = styled.ul`
   }
 `;
 
+export const NavLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
 export const StickyNavbar = styled.div`
-  position: sticky;
-  top: 0;
+  /* position: sticky; */
+  top: 10px;
   background-color: white;
   padding: 10px 20px;
   background-color: #f0b8b8;

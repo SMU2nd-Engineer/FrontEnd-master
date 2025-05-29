@@ -24,7 +24,7 @@ export default function MyTransactionReview({
   // 한페이지에 보여줄 숫자
   let itemsPerPage = 0;
   {
-    isMain ? (itemsPerPage = 2) : (itemsPerPage = 4);
+    isMain ? (itemsPerPage = 2) : (itemsPerPage = 5);
   }
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 설정
