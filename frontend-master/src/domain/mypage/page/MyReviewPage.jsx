@@ -22,6 +22,7 @@ export default function MyReviewPage() {
       const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
       //   setMyReviewInfoList(results);
       setMyReviewInfoList({
+        myPageGetUserInfo: results.myPageGetUserInfo ?? {},
         myAverageRating: ceilRating,
         reviewLists: results.reviewLists ?? [],
         myEvaluationList: results.myEvaluationList ?? [],
@@ -38,7 +39,7 @@ export default function MyReviewPage() {
       </Nav.StickyNavbar>
       <MyReview.ReviewPageMain>
         <MyReview.ReviewUserName>
-          <MyName />
+          <MyName name={myReviewInfoList.myPageGetUserInfo?.name} />
         </MyReview.ReviewUserName>
         <MyReview.ReviewPageLeft>
           <MyReview.ReviewMyStars>
