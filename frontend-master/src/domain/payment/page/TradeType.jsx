@@ -61,8 +61,8 @@ const TradeType = () => {
             <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
           </Trade.ImgDiv>
           <Trade.PriceTitle>
-            <p><strong>{product.price}원</strong></p>
-            <Trade.Title>{product.title}</Trade.Title>
+            <Trade.TradePrice>{product.price}원</Trade.TradePrice>
+            <Trade.TradeTitle>{product.title}</Trade.TradeTitle>
           </Trade.PriceTitle>
         </Trade.ProductInfo>
         <section>
