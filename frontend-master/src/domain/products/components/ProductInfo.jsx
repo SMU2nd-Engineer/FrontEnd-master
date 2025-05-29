@@ -1,14 +1,18 @@
+import * as PInfo from "../styles/ProductInfoDesign"
+
 const ProductInfo = ({ title, price, content, sdate}) => {
 
+  
+
   return (
-    <div className="product_info">
+    <PInfo.Product_Info>
       <h3 className="product_title">{title}</h3>
-      <div className="price_date">
+      <PInfo.Price_Date>
       <p className="product_price"> {Number(price).toLocaleString()}원</p>
       <p>{sdate ? new Date(sdate).toLocaleDateString() : ''}</p>
-      </div>
+      </PInfo.Price_Date>
       {/* <p>{content && "상세정보 "}</p> */}{/* <p> 판매자 : {nickName}</p> */}
-    </div>
+    </PInfo.Product_Info>
   );
 };
 

@@ -9,6 +9,7 @@ import ProductDelete from "./ProductDelete";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
+import GlobalStyle from "@/style/AppDesign";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -63,29 +64,29 @@ export default function ProductDetail() {
         <ChatPopup selectRoom={chatPopup} handleClose={closePopup} />
       )}
       <ProductDetails.DetailTop>
+        {/* 이미지 슬라이드, 이미지 리스트 */}
         <ProductDetails.ThumbnailBox>
-
         {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
-          <ImageSlider imageList={product.imageList} />
-         
-        <ProductDetails.OtherImages>
-          <ProductImage imageList={product.imageList} title={product.title} mode="all" />
-        </ProductDetails.OtherImages>
-      </ProductDetails.ThumbnailBox>
+          <ImageSlider imageList={product.imageList} />     
+          <ProductDetails.OtherImages>
+            <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+          </ProductDetails.OtherImages>
+        </ProductDetails.ThumbnailBox>
         
-        
-        {/* <ProductDetails.VerticalDivider /> */}
+        {/* 상품 상세, 버튼 */}
         <ProductDetails.Column>
           <p className="title">{product.title}</p>
           <p className="price">{product.price}원</p>
 
           <ProductDetails.HorizontalDivider />
-
-            <ProductDetails.NickNDate>
-              <p className="salerInfo">{product.nickName}</p>
-              <p>등록일: {new Date(product.sdate).toLocaleDateString()}</p>
-            </ProductDetails.NickNDate>
+            
+          {/* 닉네임 날짜 */}
+          <ProductDetails.NickNDate>
+            <p className="salerInfo">{product.nickName}</p>
+            <p>등록일: {new Date(product.sdate).toLocaleDateString()}</p>
+          </ProductDetails.NickNDate>
           
+          {/* 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
             <button className="pickbutton">찜</button>
             <Button
@@ -101,14 +102,20 @@ export default function ProductDetail() {
           </ProductDetails.Buttonbox>
         </ProductDetails.Column>
       </ProductDetails.DetailTop>
+      
+      {/* 큰 이미지, 삭제 수정 버튼박스 */}
       <ProductDetails.DetailBottom>
 
         
           <ProductDetails.PDetailLabel>상세 정보</ProductDetails.PDetailLabel>          
+         
           <ProductDetails.HorizontalDivider />
+         
           <ProductImage imageList={product.imageList} title={product.title} mode="all" />
           {/* <ImageSlider imageList={product.imageList} /> */}
+         
           <ProductDetails.PDetailContent>{product.content}</ProductDetails.PDetailContent>
+         
           <ProductDetails.EditDeleteBox>
             <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
             <ProductDelete idx={idx} />

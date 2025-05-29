@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "../styles/ProductsListPage.css";
+// import "../styles/ProductsListPage.css";
 import ProductList from "../components/ProductList";
 import ProductSearch from "../components/ProductSearch"
 import { getProductList, searchProducts } from "../services/productService";
 import Button from "@/components/Button";
 import { useNavigate } from "react-router-dom";
-
+import * as List from "../styles/ProductsListPageDesign"
 
 
 const ProductListPage = () => {
@@ -45,12 +45,14 @@ const ProductListPage = () => {
 
   return (
     <div className="new_product">
-      <div className="productpage-top">
+      <List.Product_top>
         <p className="pagetitle"> 상품 전체보기 </p>
         <Button className="pluploadbutton" text={"상품등록"} onClick={handleClick} /> 
-      </div>
+      </List.Product_top>
       <ProductSearch onSearch = {handleSearch} />
-      <ProductList products={products} />
+      <List.Product_list>
+        <ProductList products={products} />
+      </List.Product_list>
     </div>
   );
 };

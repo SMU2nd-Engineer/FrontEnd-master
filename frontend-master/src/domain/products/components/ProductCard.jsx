@@ -2,6 +2,7 @@ import ProductCardInfo from "./ProductInfo";
 import ProductImage from "./ProductImage";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import * as Card from "../styles/ProductCardDesign"
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -9,15 +10,14 @@ const ProductCard = ({ product }) => {
   if (!product) return null;
   console.log("imageList:", product.imageList);
   return (
-    <div
-      className="product_card"
+    <Card.Product_card
       onClick={() => navigate(`/product/detail/${product.idx}`)}
     >
-      <div className="image">
+      <Card.Thumbnail>
            <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
-        </div>
+      </Card.Thumbnail>
       <ProductCardInfo title={product.title} price={product.price} sdate={product.sdate} />
-    </div>
+    </Card.Product_card>
   );
 };
 
