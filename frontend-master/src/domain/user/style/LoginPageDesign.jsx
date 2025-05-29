@@ -5,18 +5,19 @@ export const LoginWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem;
   border: 1px solid #ddd;
   border-radius: 1rem;
   margin: 3rem;
   width: 100%;
-  width: max-content;
+  max-width: 40%;
 `;
 
 export const LoginForm = styled.form`
@@ -27,7 +28,7 @@ export const LoginForm = styled.form`
     "input-pw login-button";
   gap: 1rem;
   margin-left: 10px;
-  line-height: 3rem;
+  justify-content: center;
 `;
 
 export const InputId = styled.input`
@@ -37,6 +38,7 @@ export const InputId = styled.input`
   border-radius: 10px;
   text-align: center;
   width: 100%;
+  height: 2rem;
 `;
 
 export const InputPw = styled.input`
@@ -46,6 +48,7 @@ export const InputPw = styled.input`
   border-radius: 10px;
   text-align: center;
   width: 100%;
+  height: 2rem;
 `;
 
 export const LoginStyledButton = styled(Button)`
@@ -82,7 +85,8 @@ export const LoginStyledButton = styled(Button)`
 export const LoginOption = styled.div`
   grid-area: options;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 2rem;
   font-size: 14px;
 `;
 
@@ -93,6 +97,12 @@ export const LoginHelp = styled.div`
   color: #555;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
+
+  a {
+    text-decoration: none; // 밑줄 제거
+    color: inherit; // 글자 색상 상속
+    margin: 0 4px;
+  }
 `;
 
 export const SocialLogin = styled.div`
@@ -129,6 +139,21 @@ export const SocialButton = styled.button`
     }
     &:active {
       transform: scale(0.9);
+      border: none;
+    }
+    &:focus {
+      border: none;
+      outline: none;
+    }
+    img {
+      width: auto;
+      height: auto;
+      overflow: hidden;
+      border-radius: 50%;
+      &:focus {
+        border: none;
+        outline: none;
+      }
     }
   }
 `;

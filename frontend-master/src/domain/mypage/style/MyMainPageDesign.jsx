@@ -115,6 +115,16 @@ export const MoreCell = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
+
+  a {
+    text-decoration: none; // 밑줄 제거
+    color: inherit; // 글자 색상 상속
+    margin: 0 4px;
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.2s ease-in-out;
+    }
+  }
 `;
 
 /**
@@ -212,6 +222,11 @@ export const TransactionTableTd = styled.td`
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
 `;
 
 /**
@@ -255,4 +270,13 @@ export const MorePeak = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
+  a {
+    text-decoration: none; // 밑줄 제거
+    color: inherit; // 글자 색상 상속
+    margin: 0 4px;
+    &:hover {
+      transform: scale(1.1);
+      transition: all 0.2s ease-in-out;
+    }
+  }
 `;
