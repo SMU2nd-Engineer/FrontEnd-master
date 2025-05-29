@@ -4,7 +4,7 @@ services:
       context: .
     container_name: react-app
     ports:
-      - "5174:80"
+      - "80:80"
     networks:
       - culturemoa-network
 
