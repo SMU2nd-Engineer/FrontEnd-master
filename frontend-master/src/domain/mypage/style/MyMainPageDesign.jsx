@@ -34,11 +34,14 @@ export const MyMainGridArea = styled.div`
  */
 
 export const MyMainName = styled.h2`
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 28px;
   display: flex;
-  justify-content: baseline;
-  align-items: center;
-  color: black;
+  justify-content: center;
+  color: #555;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 2px solid #cfcfcf;
 `;
 
 /* --------------------------------------------------- */
@@ -125,6 +128,9 @@ export const RatingAndReviewContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   grid-area: "reviewAndrating";
+  align-items: center;
+  margin-right: 30px;
+  height: 97%;
 `;
 
 /**
@@ -132,6 +138,7 @@ export const RatingAndReviewContainer = styled.div`
  */
 export const MyRatingName = styled.h3`
   font-weight: 500;
+  font-size: 22px;
   display: flex;
   justify-content: baseline;
   align-items: center;

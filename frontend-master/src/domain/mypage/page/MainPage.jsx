@@ -15,7 +15,6 @@ import {
   RatingAndReviewContainer,
 } from "../style/MyMainPageDesign";
 
-
 /**
  * 메인 화면
  * @returns 마이페이지 메인 화면 반환

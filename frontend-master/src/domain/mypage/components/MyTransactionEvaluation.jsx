@@ -19,7 +19,7 @@ export default function MyTransactionEvaluation({
       {evaluationLists.length === 0 ? (
         <p> 아직 받은 평가가 없어요.</p>
       ) : (
-        <detailCheckReviewList>
+        <MyReview.DetailCheckReviewList>
           <thead>
             <tr>
               <th> 평가 내용 </th>
@@ -37,7 +37,7 @@ export default function MyTransactionEvaluation({
               />
             ))}
           </tbody>
-        </detailCheckReviewList>
+        </MyReview.DetailCheckReviewList>
       )}
     </MyReview.CheckReviewMain>
   );

@@ -20,4 +20,5 @@ export const StarRatingContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   margin: 1rem;
+  align-items: center;
 `;
