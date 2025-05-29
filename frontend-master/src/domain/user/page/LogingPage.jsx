@@ -128,9 +128,9 @@ export default function LogingPage() {
               sessionStorage.removeItem("provider");
             }}
           >
-            회원 가입 /
+            회원 가입
           </Link>
-          <Link to="/user/find/id"> 아이디 찾기 </Link> /
+          /<Link to="/user/find/id"> 아이디 찾기 </Link> /
           <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
         </LoginHelp>
         <SocialLogin>
