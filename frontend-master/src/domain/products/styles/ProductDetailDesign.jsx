@@ -1,56 +1,136 @@
 import styled from "styled-components";
 
-export const hr = styled.hr`
-  border: 0;
-  width: 80%;
-  height: 1px;
-  background: #bbb;
-`;
+// export const hr = styled.hr`
+//   border: 0;
+//   width: 80%;
+//   height: 1px;
+//   background: #bbb;
+// `;
 
 export const VerticalDivider = styled.div`
   width: 1px;
-  background-color:#bbb;
+  background-color:#d4d4d4;
   margin: 0 10px;
 `
 export const HorizontalDivider = styled.div`
   height: 1px;
-  background-color: #bbb;
+  width: 100%;
+  background-color: #d4d4d4;
   margin: 10px 0;
 `
 
 export const DetailTop = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 50px;
   width: 100%;
   padding: 20px; 
 `
 export const ThumbnailBox = styled.div`
   flex: 1;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 `
+export const OtherImages = styled.div`
+  display: flex;
+  gap: 12px; /* 이미지 사이 간격 */
+  flex-wrap: nowrap; /* 줄바꿈 없이 한 줄에 나열 */
+  overflow-x: auto;
+
+  img{
+    width: 60px;
+  }
+`
+
+
 // 상품명, 가격, 판매자명
 export const Column = styled.div`
   flex : 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: first baseline;
   text-align: left;
+
+   .title {
+    font-size: 3em;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+
+  .price {
+    font-size: 1.8em;
+    /* margin-bottom: 30px; */
+  }
+`
+export const NickNDate = styled.div`
+  display: flex ;
+  justify-content: space-between;
+  align-items: center;
+  gap: 150px;
+
+  font-size: 18px;
+  color: #c4c4c4 ;
+`
+export const Buttonbox = styled.div`
+  width: auto;
+  display: flex;
+  gap: 20px;
+  margin-top: 60px;
+
+  justify-content: center;
+  font-size: 20px;
+  color: rgb(85, 77, 68);
+  
+  .pickbutton {
+  background-color: rgb(238, 238, 186);
+}
+
+.chatbutton {
+  background-color: rgb(186, 236, 238);
+  width: 90px;
+}
+
+.orderbutton {
+  background-color: rgb(238, 186, 186);
+  width: 90px;
+}
 `
 
 export const DetailBottom = styled.div`
+  width: 100%;
   height: auto;
   text-align: left;
   margin-top: 20px;
   padding: 10px;
   border: 1px dotted rgb(168, 168, 168);
+
+  img{
+    width: 500px;
+  }
+
+  p{
+    margin-top: 30px;
+  }
 `
 
+export const PDetailLabel = styled.p`
+    background-size: contain;
+    font-size: 35px;
+    font-weight: bold;
+    color: rgb(111, 111, 112);
+`
 
+export const PDetailContent = styled.p`
+  font-size: 25px;
+  margin-top: 10px;
+`
 
-// export const title
+export const EditDeleteBox = styled.div`
+  display: flex;
+  gap: 10px;
+`
 
 
 
