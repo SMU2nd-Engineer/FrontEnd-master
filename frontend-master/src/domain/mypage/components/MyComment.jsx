@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import CommentListcomp from "./CommentListcomp";
 import MyPagination from "./MyPaginationUI";
+import {
+  ContentsAndCommentTable,
+  ContentsAndCommentTableDayTh,
+  ContentsAndCommentTableTh,
+  MyBoardCommentContainer,
+} from "../style/MypageBoardDesign";
 
 export default function MyComment({ navigate, comments = [] }) {
   // 한페이지에 보여줄 숫자
@@ -21,13 +27,15 @@ export default function MyComment({ navigate, comments = [] }) {
     return <p>댓글 정보가 없습니다.</p>;
   }
   return (
-    <div>
-      <table>
+    <MyBoardCommentContainer>
+      <ContentsAndCommentTable>
         <thead>
           <tr>
-            <th>게시글 제목</th>
-            <th>작성한 댓글</th>
-            <th>작성한 날짜</th>
+            <ContentsAndCommentTableTh>게시글 제목</ContentsAndCommentTableTh>
+            <ContentsAndCommentTableTh>작성한 댓글</ContentsAndCommentTableTh>
+            <ContentsAndCommentTableDayTh>
+              작성한 날짜
+            </ContentsAndCommentTableDayTh>
           </tr>
         </thead>
         <tbody>
@@ -43,8 +51,8 @@ export default function MyComment({ navigate, comments = [] }) {
             />
           ))}
         </tbody>
-      </table>
+      </ContentsAndCommentTable>
       <MyPagination pageCount={totalPageCount} onPageChange={onPageChange} />
-    </div>
+    </MyBoardCommentContainer>
   );
 }

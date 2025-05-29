@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../styles/ProductDetail.css";
+// import "../styles/ProductDetail.css";
 import * as ProductDetails from "../styles/ProductDetailDesign";
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
@@ -64,6 +64,7 @@ export default function ProductDetail() {
       )}
       <ProductDetails.DetailTop>
         <ProductDetails.ThumbnailBox>
+
         {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
           <ImageSlider imageList={product.imageList} />
          
@@ -74,7 +75,6 @@ export default function ProductDetail() {
         
         
         {/* <ProductDetails.VerticalDivider /> */}
-        
         <ProductDetails.Column>
           <p className="title">{product.title}</p>
           <p className="price">{product.price}원</p>
@@ -102,6 +102,7 @@ export default function ProductDetail() {
         </ProductDetails.Column>
       </ProductDetails.DetailTop>
       <ProductDetails.DetailBottom>
+
         
           <ProductDetails.PDetailLabel>상세 정보</ProductDetails.PDetailLabel>          
           <ProductDetails.HorizontalDivider />

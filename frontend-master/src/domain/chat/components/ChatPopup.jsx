@@ -1,18 +1,23 @@
 import React from "react";
 import ChatRoomMain from "./ChatRoomMain";
 import Button from "@/components/Button";
+import {
+  ChatPopupContentDiv,
+  ChatPopupDiv,
+  ChatPopupOverlayDiv,
+} from "../styles/ChatPageDesign";
 
 const ChatPopup = ({ selectRoom, handleClose = (f) => f }) => {
   return (
-    <div className="chat-popup">
-      <div className="popup-overlay" onClick={handleClose}>
+    <ChatPopupDiv>
+      <ChatPopupOverlayDiv onClick={handleClose}>
         <Button text={"×"} onClick={handleClose} className="popup-close-btn" />
-        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-          <ChatRoomMain selectRoom={selectRoom} />
-        </div>
-      </div>
-    </div>
+        <ChatPopupContentDiv onClick={(e) => e.stopPropagation()}>
+          <ChatRoomMain selectRoom={selectRoom} type={"popup"} />
+        </ChatPopupContentDiv>
+      </ChatPopupOverlayDiv>
+    </ChatPopupDiv>
   );
 };
 
-export default ChatPopup;
+export default React.memo(ChatPopup);

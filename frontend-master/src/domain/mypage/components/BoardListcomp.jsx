@@ -1,5 +1,5 @@
-import Button from "@/components/Button";
 import React from "react";
+import { ContentsAndCommentTableTd } from "../style/MypageBoardDesign";
 
 export default function BoardListcomp({
   navigate,
@@ -14,9 +14,9 @@ export default function BoardListcomp({
   };
   return (
     <tr onClick={handleOnClick}>
-      <td>{title}</td>
-      <td>{categoryName}</td>
-      <td>{sDate}</td>
+      <ContentsAndCommentTableTd>{title}</ContentsAndCommentTableTd>
+      <ContentsAndCommentTableTd>{categoryName}</ContentsAndCommentTableTd>
+      <ContentsAndCommentTableTd>{sDate}</ContentsAndCommentTableTd>
     </tr>
   );
 }

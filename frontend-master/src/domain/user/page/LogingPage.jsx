@@ -16,6 +16,7 @@ import {
   SocialLogin,
   LoginOptionInput,
   LoginOptionLabel,
+  LoginWrapper,
 } from "../style/LoginPageDesign";
 
 export default function LogingPage() {
@@ -71,71 +72,73 @@ export default function LogingPage() {
     [isLogin, navigate]
   );
   return (
-    <LoginContainer id="LoginContainer">
-      <LoginForm onSubmit={handleLogin}>
-        <InputId
-          id="id"
-          type="text"
-          value={id}
-          onChange={(e) => setUserId(e.target.value)}
-          placeholder="아이디"
-        />
-        <InputPw
-          id="pw"
-          placeholder="패스워드"
-          type="password"
-          value={password}
-          onChange={(e) => setpassword(e.target.value)}
-        />
-        <LoginStyledButton
-          text={"로그인"}
-          onClick={handleLogin}
-          type={"submit"}
-          className="login-button"
-        />
-      </LoginForm>
-      <LoginOption>
-        <LoginOptionLabel htmlFor="rememberId">
-          <LoginOptionInput
-            id="rememberId"
-            type="checkbox"
-            checked={rememberId}
-            onChange={(e) => setRememberId(e.target.checked)}
+    <LoginWrapper>
+      <LoginContainer id="LoginContainer">
+        <LoginForm onSubmit={handleLogin}>
+          <InputId
+            id="id"
+            type="text"
+            value={id}
+            onChange={(e) => setUserId(e.target.value)}
+            placeholder="아이디"
           />
-          아이디 기억하기
-        </LoginOptionLabel>
-        <LoginOptionLabel htmlFor="autoLogin">
-          <LoginOptionInput
-            id="autoLogin"
-            type="checkbox"
-            checked={autoLogin}
-            onChange={(e) => {
-              const checked = e.target.checked;
-              setAutoLogin(checked);
-              sessionStorage.setItem("autoLogin", String(checked));
+          <InputPw
+            id="pw"
+            placeholder="패스워드"
+            type="password"
+            value={password}
+            onChange={(e) => setpassword(e.target.value)}
+          />
+          <LoginStyledButton
+            text={"로그인"}
+            onClick={handleLogin}
+            type={"submit"}
+            className="login-button"
+          />
+        </LoginForm>
+        <LoginOption>
+          <LoginOptionLabel htmlFor="rememberId">
+            <LoginOptionInput
+              id="rememberId"
+              type="checkbox"
+              checked={rememberId}
+              onChange={(e) => setRememberId(e.target.checked)}
+            />
+            아이디 기억하기
+          </LoginOptionLabel>
+          <LoginOptionLabel htmlFor="autoLogin">
+            <LoginOptionInput
+              id="autoLogin"
+              type="checkbox"
+              checked={autoLogin}
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setAutoLogin(checked);
+                sessionStorage.setItem("autoLogin", String(checked));
+              }}
+            />
+            자동 로그인
+          </LoginOptionLabel>
+        </LoginOption>
+        <LoginHelp>
+          <Link
+            to="/user/registration"
+            onClick={() => {
+              sessionStorage.removeItem("socialId");
+              sessionStorage.removeItem("provider");
             }}
-          />
-          자동 로그인
-        </LoginOptionLabel>
-      </LoginOption>
-      <LoginHelp>
-        <Link
-          to="/user/registration"
-          onClick={() => {
-            sessionStorage.removeItem("socialId");
-            sessionStorage.removeItem("provider");
-          }}
-        >
-          회원 가입 /
-        </Link>
-        <Link to="/user/find/id"> 아이디 찾기 </Link> /
-        <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
-      </LoginHelp>
-      <SocialLogin>
-        <KaKaoLogin />
-        <NaverLogin />
-        <GoogleLogin />
-      </SocialLogin>
-    </LoginContainer>
+          >
+            회원 가입 /
+          </Link>
+          <Link to="/user/find/id"> 아이디 찾기 </Link> /
+          <Link to="/user/find/password"> 비밀번호 찾기 </Link> /
+        </LoginHelp>
+        <SocialLogin>
+          <KaKaoLogin />
+          <NaverLogin />
+          <GoogleLogin />
+        </SocialLogin>
+      </LoginContainer>
+    </LoginWrapper>
   );
 }

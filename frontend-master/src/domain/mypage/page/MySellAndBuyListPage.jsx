@@ -5,6 +5,10 @@ import MyBuyList from "../components/MyBuyList";
 import { getMyPageData } from "../services/getMyPageDate";
 
 import * as Nav from "../style/MyPageNavDesign";
+import {
+  SellAndBuyContainer,
+  SellAndBuyHeader,
+} from "../style/SellAndBuyPageDsign";
 
 export default function SellAndPurchaseList() {
   // 거래 내용 및 상품 정보 담을 상태 생성
@@ -22,11 +26,11 @@ export default function SellAndPurchaseList() {
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <p>판매/구매이력</p>
-      <p>판매 내역 컴포넌트</p>
-      <MySellList products={myProductList.sellInfoList} />
-      <p>구매 내역 컴포넌트</p>
-      <MyBuyList products={myProductList.buyInfoList} />
+      <SellAndBuyContainer>
+        <SellAndBuyHeader>판매 / 구매 관리</SellAndBuyHeader>
+        <MySellList products={myProductList.sellInfoList} />
+        <MyBuyList products={myProductList.buyInfoList} />
+      </SellAndBuyContainer>
     </div>
   );
 }

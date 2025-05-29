@@ -259,3 +259,49 @@ export const ChatMessageButton = styled.button`
   position: relative;
   padding: 15px 0px 13px;
 `;
+
+export const ChatPopupDiv = styled.div`
+  width: 500px;
+`;
+
+export const ChatPopupOverlayDiv = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+export const ChatPopupContentDiv = styled.div`
+  background-color: #fefefe;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 500px;
+  padding: 40px 50px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  max-height: 90vh;
+`;
+
+// export const
+
+// /* 닫기 버튼 */
+// .popup-close-btn {
+//   position: absolute;
+//   top: 20px;
+//   right: 20px;
+//   background: transparent;
+//   border: none;
+//   font-size: 1.8rem;
+//   cursor: pointer;
+//   font-weight: bold;
+//   color: #333;
+//   transition: color 0.3s;
+// }
+// .popup-close-btn:hover {
+//   color: #ff4d4d;
+// }

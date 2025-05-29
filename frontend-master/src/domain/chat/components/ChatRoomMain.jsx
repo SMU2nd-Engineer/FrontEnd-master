@@ -19,6 +19,7 @@ import {
 const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   const [room, setRoom] = useState(selectRoom);
   const [chatList, setChatList] = useState([]);
+  const [fromUser, setFromUser] = useState(0);
 
   useEffect(() => {
     if (selectRoom == 0) return;
@@ -32,7 +33,10 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
 
   useEffect(() => {
     if (room == 0) return;
-    getChatRoomMessage(room).then((res) => setChatList(res.data));
+    getChatRoomMessage(room).then((res) => {
+      setChatList(res.data.chatList);
+      setFromUser(res.data.fromidx);
+    });
   }, [room]);
 
   /**
@@ -44,6 +48,7 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
     if (room === 0) return;
     if (!chat.content.trim()) return;
     chat.chatRoomId = room;
+    chat.userIdx = fromUser;
     postChatMessage(chat).then((res) => setChatList([...chatList, res.data]));
   };
 
@@ -61,7 +66,7 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   return (
     <ChatRoomMainDiv type={type}>
       <ChatTitle>채팅 내역</ChatTitle>
-      <ChatList chatList={chatList} />
+      <ChatList chatList={chatList} fromUser={fromUser} />
       <ChatInput handleMessageSend={handleMessageSend} />
     </ChatRoomMainDiv>
   );

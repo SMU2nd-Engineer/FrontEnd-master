@@ -9,6 +9,7 @@ import {
   MessageToTextP,
   MessageToTextSpan,
   MessageToTimeSpan,
+  MessageFromTimeDiv,
 } from "../styles/ChatPageDesign";
 
 /**

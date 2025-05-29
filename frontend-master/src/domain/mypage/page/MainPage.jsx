@@ -8,11 +8,13 @@ import { useEffect, useState } from "react";
 import { getMyPageData } from "../services/getMyPageDate";
 import MySellList from "../components/MySellList";
 import MyTransactionReview from "../components/MyTransactionReview";
-import "@mypage/style/MyPageCommon.css";
-import "@mypage/style/MainPage.css";
-
 import * as Nav from "../style/MyPageNavDesign";
-// import "../style/MyPageNav.css";
+import {
+  MyMainContainer,
+  MyMainGridArea,
+  RatingAndReviewContainer,
+} from "../style/MyMainPageDesign";
+
 
 /**
  * 메인 화면
@@ -48,32 +50,29 @@ export default function MainPage() {
       <Nav.StickyNavbar>
         <MyPageLink />
       </Nav.StickyNavbar>
-      <div className="mypage-container">
-        {/* <h1>MainPage</h1> */}
 
-        <div className="header">
+      <MyMainContainer>
+        <MyMainGridArea area="header">
           <MyName />
-        </div>
-        <div className="products">
+        </MyMainGridArea>
+        <MyMainGridArea area="sell">
           <MySellList
             isMain={true}
             products={mainPageInfo.myMainSellProductList}
           />
-        </div>
-        <div className="peak">
-          <MyMainPeak list={mainPageInfo.myMainPeakList} />
-        </div>
-
-        <div className="rating">
+        </MyMainGridArea>
+        <RatingAndReviewContainer>
           <MyMainRating myRating={mainPageInfo.myPageAverageRating} />
-        </div>
-        <div className="reviews">
           <MyTransactionReview
             reviewLists={mainPageInfo.myMainReview}
             movePage={"myReview"}
             isMain={true}
           />
-        </div>
+        </RatingAndReviewContainer>
+        <MyMainGridArea area="peak">
+          <MyMainPeak list={mainPageInfo.myMainPeakList} />
+        </MyMainGridArea>
+
         <div className="button">
           <Button
             text={"임시 홈 화면으로"}
@@ -82,7 +81,7 @@ export default function MainPage() {
             }}
           />
         </div>
-      </div>
+      </MyMainContainer>
     </div>
   );
 }

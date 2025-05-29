@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import ProductList from "@/domain/products/components/ProductList";
 import MyPagination from "./MyPaginationUI";
 import { Link } from "react-router-dom";
+import {
+  SellOptionButton,
+  SellOptionsWrapper,
+  SellDividerText,
+  MoreCell,
+  SellContainer,
+  SellHedear,
+} from "../style/MyMainPageDesign";
 
 /**
  * 상품 판매 리스트 컴포넌트
@@ -49,38 +57,36 @@ export default function MySellList({ isMain = false, products = [] }) {
   };
 
   return (
-    <div className="sell-container">
-      <h3> 내 상품 </h3>
-      <div className="sellOptions">
-        <a
-          href="#"
+    <SellContainer>
+      <SellHedear> {isMain ? "내 상품" : "판 매"} </SellHedear>
+      <SellOptionsWrapper>
+        <SellOptionButton
           onClick={() => {
             setCategory("all");
           }}
+          selected={category === "all"}
         >
           전체
-        </a>
-        <a
-          href="#"
-          onClick={() => {
-            setCategory("onSale");
-          }}
+        </SellOptionButton>
+        <SellDividerText>/</SellDividerText>
+        <SellOptionButton
+          onClick={() => setCategory("onSale")}
+          selected={category === "onSale"}
         >
-          / 판매중
-        </a>
-        <a
-          href="#"
-          onClick={() => {
-            setCategory("soldOut");
-          }}
+          판매중
+        </SellOptionButton>
+        <SellDividerText>/</SellDividerText>
+        <SellOptionButton
+          onClick={() => setCategory("soldOut")}
+          selected={category === "soldOut"}
         >
-          / 판매완료
-        </a>
-      </div>
-      <div className="more-cell">
+          판매완료
+        </SellOptionButton>
+      </SellOptionsWrapper>
+      <MoreCell>
         {isMain && <Link to="/mypage/sellAndPurchaselist/">더 보기</Link>}
-        <ProductList products={currentItems ?? ""} />
-      </div>
+      </MoreCell>
+      <ProductList products={currentItems ?? ""} />
       {!isMain && (
         <MyPagination
           pageCount={totalPageCount}
@@ -88,6 +94,6 @@ export default function MySellList({ isMain = false, products = [] }) {
           pageRangeDisplayed={3}
         />
       )}
-    </div>
+    </SellContainer>
   );
 }
