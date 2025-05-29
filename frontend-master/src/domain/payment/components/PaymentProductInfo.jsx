@@ -12,10 +12,10 @@ const PaymentProductInfo = ({product, tradeType}) => {
   console.log(total);
   return (
     <>
-      <PaymentDesign.Img>
+      <PaymentDesign.Image>
         {/* <img src={product.image_Url} alt="상품이미지" /> */}
         <ProductImage imageList={[{ image_Url: product.image_Url, idx: product.idx, flag: true }]} title={product.title} mode="thumbnail" />
-      </PaymentDesign.Img>
+      </PaymentDesign.Image>
       <PaymentDesign.PriceTitle>
         <PaymentDesign.Title>{product.title}</PaymentDesign.Title>
         <PaymentDesign.Price>{product.price}원</PaymentDesign.Price>

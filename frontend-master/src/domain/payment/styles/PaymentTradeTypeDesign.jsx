@@ -4,10 +4,11 @@ export const Box = styled.div`
   width: 100%;
   display: inline-block;
   align-items: center;
+  justify-items: center;
   text-align: center;
   justify-items: center;
   /* margin: 1rem; */
-  /* padding: 5px; */
+  padding: 5px;
 `
 
 export const Container = styled.div`
@@ -31,27 +32,41 @@ export const ProductInfo = styled.div`
   border-bottom: 1px #ddd solid;
   width: 100%;
   height: auto;
-  margin: 5px;
-  padding-bottom: 18px;
+  margin: 1px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   display: flex;
   text-align: left;
 `;
 
 export const ImgDiv = styled.div`
-  /* padding: 5px; */
-  margin-left: 15px;
+  padding: 5px;
+  /* margin-left: 15px; */
   margin-right: 15px;
   display: flex;
   width: 100px;
-  height: auto;
+  height: 100px;
 `;
 
 export const PriceTitle = styled.div`
-  margin-top: 5px;
+  /* margin-top: 5px; */
   text-align: left;
   /* padding: 5px; */
-  font-size: 20px;
+  display: block;
 `
+
+export const TradeTitle = styled.p`
+  font-size: 15px;
+  margin-left: 1px;
+`
+
+export const TradePrice = styled.p`
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 1px;
+`
+
 export const Price = styled.div`
   display: flex;
   align-items: left;
@@ -72,6 +87,7 @@ export const Total = styled.div`
 export const BottomSection = styled.section`
   display: flex;
   align-items: center;
+  text-align: center;
   width: 100%;
   margin-top: 15rem;
   justify-content: space-between;
@@ -80,8 +96,4 @@ export const BottomSection = styled.section`
 
 export const NextBotton = styled.button`
   background-color: #f0b8b8;
-`
-
-export const Title = styled.p`
-  font-size: 15px;
 `

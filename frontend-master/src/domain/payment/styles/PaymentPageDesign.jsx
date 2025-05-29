@@ -89,26 +89,34 @@ export const ProductInfo = styled.div`
   margin: 5px;
   margin-top: 10px;
 `
-export const Img = styled.div`
-  width: 70px;
+export const Image = styled.div`
+  display: flex;
+  width: 120px;
+  height: 120px;
   margin: 5px;
   /* padding: 5px; */
+  
 `
 
 export const PriceTitle = styled.div`
-  padding: 5px;
+  padding: 0px;
   margin-left: 15px;
   text-align: left;
+  h2, p{
+    margin: 3px;
+    padding-bottom: 5px;
+  }
 `
 
 export const Price = styled.h2`
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 600;
+  font-size: 25px;
 `
 
 export const Title = styled.p`
   font-size: 16px;
   font-weight: bold;
+  /* margin: ; */
 `
 
 export const Review = styled.button`
@@ -161,6 +169,10 @@ export const Select = styled.div`
   align-items: center;
   margin-top: 10px;
   grid-area: ${(props) => props.area};
+  select{
+  border-color: transparent;
+
+  }
 `
 
 export const DeliveryFee = styled.p`
