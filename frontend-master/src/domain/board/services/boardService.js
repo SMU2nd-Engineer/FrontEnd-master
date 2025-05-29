@@ -13,8 +13,8 @@ export const getBoardSearch = (searchType, category, keyword) => {
 };
 
 
-// 게시글 등록 - 텍스트 에디터 텍스트 + 이미지 포함
-export const getBoardSubmit = ( postContent, postFiles ) => {
+// 게시글 등록 - 카테고리 선택, 제목입력, 글내용입력(텍스트 에디터 텍스트 + 이미지 포함)
+export const postBoardSubmit = ( postContent, postFiles ) => {
   const formData = new FormData();
   formData.append("contents", new Blob([JSON.stringify(postContent)], { type: 'application/json' }))
   postFiles.forEach((img) => formData.append("files", img))
@@ -35,15 +35,42 @@ export const getBoardDetail = (id) => {
   return axiosInstance.get(`board/detail/${id}`,{ withCredentials: true });
 };
 
+// 게시글 상세페이지 수정
+// id : 게시글 리스트에 있는 idx(순번). 이름만 id
+export const putEditContentsDetail = ( id, postContent, postFiles ) => {
+  const formData = new FormData();
+  formData.append("contents", new Blob([JSON.stringify(postContent)], { type: 'application/json' }))
+  postFiles.forEach((img) => formData.append("files", img))
+  
+  return axiosInstance.post(
+    "board/edit",
+    formData,
+    { withCredentials: true,
+      headers: {
+          "Content-Type": `multipart/form-data`,
+        },
+     }
+  );
+};
+
+// 게시글 상세페이지 삭제
+export const deleteContentsDetail = (id) => {
+  return axiosInstance.put(
+    `board/delete/${id}`,
+    {},
+    { withCredentials: true }
+  );
+};
 
 // 게시글 상세페이지 - 댓글 목록 불러오기
+// id : 게시글 리스트에 있는 idx(순번). 이름만 id
 export const getBoardComment = (id) => {
   return axiosInstance.get(`/board/comment`, {params : {idx : id}}, { withCredentials: true });
 };
 
 // 게시글 상세페이지 - 댓글 등록
 // commentTextData: 댓글 등록하는 text 가지고 있음
-export const getBoardAddComment = ({ id, text}) => {
+export const postBoardAddComment = ({ id, text}) => {
   return axiosInstance.post(
     `board/comment`, 
      {

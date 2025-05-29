@@ -1,6 +1,6 @@
 // BoardSubmitPage.jsx
 import { useState } from "react";
-import { getBoardSubmit, getBoardDetail } from "../services/boardService"
+import { getBoardDetail, postBoardSubmit, putEditContentsDetail } from "../services/boardService"
 import { div, title } from "framer-motion/client";
 import BoardEditorQuill from "../components/BoardEditorQuill";
 import { useEffect } from "react";
@@ -22,23 +22,19 @@ function clearImgSrc(html) {
   return doc.body.innerHTML;
 }
 
-// 게시글 등록 페이지
-const BoardSubmitPage = () => {
-
-  // 게시글을 등록하고 저장하는 함수 
-  // boardSubs: 게시글 입력한 데이터 담아서 백엔드로 보냄 
+// 게시글 등록 페이지 - id : 게시글 리스트에 있는 idx(순번). 이름만 id
+const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
 
   // 게시글 등록 (제목, 등록일자, 작성자(닉네임), 이미지, 글내용(React Quill Toollbar))
   const [ newsubmit, setNewSubmit ] = useState({
     category_idx: "",
     title: "",
-    // imageUrl: "",
     content: "",
   });   
   
   const { category_idx, title, content } = newsubmit;
   // 글 내용 입력 - quill 툴바 커스텀
-  const [ contentData, setContentData ] = useState (""); 
+  const [ contentData, setContentData ] = useState ({}); 
 
   // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
   const [contentsQuillHtml, setContentsQuillHtml] = useState("");
@@ -48,6 +44,14 @@ const BoardSubmitPage = () => {
 
   // quill 확인
   const quillRef = useRef();
+
+  // 처음렌더링 됬을때 조건이 맞으면 실행되는 것
+  useEffect(() => {
+    if ( updateContentsData && isModify && id) {
+      setNewSubmit(updateContentsData);
+      setContentData(updateContentsData.content)
+    }
+  }, [updateContentsData, isModify, id]);
 
   // 입력 값 처리 함수
   const handleChange = (e) => {
@@ -66,25 +70,11 @@ const BoardSubmitPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(quillRef.current);
-
-    // // 1. 에디터 내용 가져오기
-    // const originalHtml = quillRef.current.root.innerHTML;
-
-    // console.log(originalHtml);
-
-
-    // // 2. 이미지 src 속성만 제거
-    // const deleteSrcHtml = removeImgSrc(originalHtml);
-
-    // // 3. 텍스트 에디터 quill에 상태 저장
-    // setContentData(deleteSrcHtml);
-
     // quill 에서 img_src 태그만 별도로 처리
     // tempdata: <img > src 프로퍼티> 안에 base64 형식 이미지를 파일형식 변환 후
     // 데이터를  uploadImage에 저장하고 src 프로퍼티 안에 내용을 지움
     // postFiles: Blob 객체 받음
-    let tempdata = contentData
+    let tempdata = contentData 
     // img 태그 src 속성만 빈 문자열로 변경
     // tempdata = clearImgSrc(tempdata);
     let uploadImage = []
@@ -113,6 +103,8 @@ const BoardSubmitPage = () => {
         postFiles.push(file)
       } else { // 이미지 URL인 경우
         console.log('이미지 URL:', src);
+        
+        postFiles.push(src);
       }
     });
     const filterdData = clearImgSrc(tempdata)
@@ -128,18 +120,37 @@ const BoardSubmitPage = () => {
     console.log("postContent: ", postContent);
     // => 게시글 등록버튼 눌렀을때 성공하면 게시글 상세페이지로 이동
     // 서버에 게시글 등록 요청을 보내는 함수
-    getBoardSubmit(postContent, postFiles)
-      .then((response) => response.data)
-      .then((data) => {
-        console.log("서버응답 확인: ", data)
 
-        // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
-        navigate(`/board/detail/${data.idx}`);
-      })
-      .catch((error) => {
-        console.error("게시글 등록 실패: ", error);
-        alert("게시글 등록 실패했습니다...");
-      });
+    // 게시판 양식 사용 - 수정
+    if (isModify) {      
+      putEditContentsDetail(id, postContent, postFiles)
+        .then((response) => response.data)
+        .then((data) => {
+          console.log("서버응답 확인: ", data)
+
+          // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
+          navigate(`/board/detail/${data.idx}`);
+        })
+        .catch((error) => {
+          console.error("게시글 수정 실패: ", error);
+          alert("게시글 수정 실패했습니다...");
+        });      
+      } else {
+        // 게시판 등록하는 양식
+        postBoardSubmit(postContent, postFiles)
+        .then((response) => response.data)
+        .then((data) => {
+          console.log("서버응답 확인: ", data)
+
+          // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
+          navigate(`/board/detail/${data.idx}`);
+        })
+        .catch((error) => {
+          console.error("게시글 등록 실패: ", error);
+          alert("게시글 등록 실패했습니다...");
+        }); 
+      }
+
   };
 
   // 게시글 취소 버튼 누르면 게시글 리스트 페이지로 이동하는 함수
@@ -172,33 +183,48 @@ const BoardSubmitPage = () => {
   return (
     <div className='new_board_submit'>
  
-        {/* 카테고리 선택 : 잡담 / 팝니다 / 삽니다 / 기타 */}  
-        <SelectBox 
-          id="category_idx"
-          name="category_idx" 
-          category_idx={getCategoryIdx("BOARD")}
-          handleChange={handleChange}/>
+      <div style={{border: "1px solid black"}}>
+          {/* 카테고리 선택 : 잡담 / 팝니다 / 삽니다 / 기타 */}  
+          <SelectBox 
+            id="category_idx"
+            name="category_idx"
+            defaultValue={category_idx} 
+            category_idx={getCategoryIdx("BOARD")}
+            handleChange={handleChange}/>
+      </div>
+      <br />
 
-        {/* 제목 입력창 */}
-        <input 
-          type="text"
-          id="title"
-          name="title"
-          value={title}
-          onChange={handleChange}
-          placeholder="제목을 입력해주세요."     
-        />   
+      <div style={{border:"1px solid black"}}>
+          {/* 제목 입력창 */}
+          <input 
+            type="text"
+            id="title"
+            name="title"
+            value={title}
+            onChange={handleChange}
+            placeholder="제목을 입력해주세요."     
+          />   
+      </div>
+      <br />
 
-        {/* 글 내용 입력하는 창 */}
-        <p>글 내용</p>
-        <BoardEditorQuill
-        contentData={contentData} setContentData={setContentData} quillRef={quillRef}/>
-     
-      {/* 게시글 등록 페이지 - 게시글 등록 버튼 */}        
-      <button onClick={handleSubmit}>등록</button>
+      <div style={{border:"1px solid black"}}>
+          {/* 글 내용 입력하는 창 */}
+          <p>글 내용</p>
+          <BoardEditorQuill
+          contentData={contentData} setContentData={setContentData} quillRef={quillRef}/>
+      </div>
+      <br />
 
-      {/* 게시글 등록 페이지 - 게시글 취소 버튼 */}        
-      <button onClick={handleCancel}>취소</button>
+      <div style={{border:"1px solid black"}}>
+        {/* 게시글 등록 페이지 - 게시글 등록 버튼 */}        
+        <button onClick={handleSubmit}>등록</button>
+      </div>
+      <br />
+
+      <div style={{border:"1px solid black"}}>
+        {/* 게시글 등록 페이지 - 게시글 취소 버튼 */}        
+        <button onClick={handleCancel}>취소</button>
+      </div>  
     </div>
   )
 

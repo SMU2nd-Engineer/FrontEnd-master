@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import BoardListPage from "../page/BoardListPage";
 import BoardSubmitPage from "../page/BoardSubmitPage";
 import BoardDetailPage from "../page/BoardDetailPage";
+import BoardEdit from "../components/BoardEdit";
 
 
 const BoardRoutes = () => {
@@ -23,6 +24,9 @@ const BoardRoutes = () => {
         {/* 게시글 상세 페이지 - 게시판 등록 후 */}
         <Route path="/detail/:id" element={<BoardDetailPage />} />  
         
+        {/* 게시글 상세 페이지 - 수정 */}
+        <Route path="/edit/:id" element={<BoardEdit />} />  
+
       </Routes>
     </div>
   );

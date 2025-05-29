@@ -19,7 +19,7 @@ const BoardPageHeader = () => {
 
   return (
       <div className='board_page_header'>
-        <p>게시판</p>
+        <p>게시판</p> 
         <button onClick={handleRegister}>게시글 등록</button>
         {/* <button onClick={handleEdit}>게시글 수정</button> */}
       </div>

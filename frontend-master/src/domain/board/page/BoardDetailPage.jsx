@@ -1,8 +1,8 @@
 import { p, title } from 'framer-motion/client';
 import React from 'react';
-import {getBoardComment, getBoardDetail, getBoardAddComment, postBoardDeleteComment} from "../services/boardService"
+import {getBoardComment, getBoardDetail, postBoardDeleteComment, postBoardAddComment, deleteContentsDetail} from "../services/boardService"
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { CloseButton } from "@chakra-ui/react"
 
@@ -16,7 +16,7 @@ function pushImgSrc(html, getBoardImageUrls) {
   const boardImgTags = doc.querySelectorAll('img');
 
   boardImgTags.forEach((img, index) => {
-    img.setAttribute('src', getBoardImageUrls[index] || ''); // 순서대로 적용
+    img.setAttribute('src', "http://localhost:8100/board"+getBoardImageUrls[index] || ''); // 순서대로 적용
   });
 
   return doc.body.innerHTML;
@@ -37,6 +37,7 @@ const BoardDetailPage = () => {
     sdate:"",
   }); 
 
+  const navigate = useNavigate();
   
   // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
   // const [contentsQuillHtml, setContentsQuillHtml] = useState("");
@@ -103,6 +104,24 @@ const BoardDetailPage = () => {
     
   }, []);
 
+  // 게시글 수정 버튼 선택
+  const handleRegister = () => {
+    console.log("게시글 수정 클릭")
+    navigate(`/board/edit/${id}`)
+  };
+
+  // 게시글 삭제 버튼 선택
+  const handleDeleteDetail = async () => {
+   try {
+    await deleteContentsDetail(id);
+    alert("게시글 삭제 클릭");
+    navigate(`/board/list`); // 게시판 리스트로 이동
+   } catch (error) {
+    console.error("삭제 실패:", error);
+    alert("게시글 삭제 실패했습니다.");
+   }
+  };
+
   // 댓글 등록 버튼 선택
   const handleSubmit = async function(e){
   // preventDefault: 페이지 새로고침 방지
@@ -110,7 +129,7 @@ const BoardDetailPage = () => {
 
     // 서버에 댓글 등록 요청 보내는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
-    await getBoardAddComment({id, text: newCommentText})
+    await postBoardAddComment({id, text: newCommentText})
       .then((res) => {
         console.log("댓글정보:" , newCommentText)
         alert('댓글 등록 성공');
@@ -176,16 +195,16 @@ const BoardDetailPage = () => {
     <div className='board_detail'>
       <p>상세페이지</p>
 
+      {/* 게시글 버튼 - 수정 + 삭제 */}
+      <button onClick={handleRegister}>게시글 수정</button>
+
+      <button onClick={handleDeleteDetail}>게시글 삭제</button>
+
       {/* 카테고리 : 잡담 / 팝니다 / 삽니다 / 기타 */}
       <h2>{getText(detailBoard.category_idx)}</h2>
 
       {/* 제목 */}
       <h2>{detailBoard.title}</h2>
-
-      {/* 게시글 버튼 - 수정 + 삭제 */}
-      <button className='board_change'>게시글 수정</button>
-
-      <button className='board_delete'>게시글 삭제</button>
 
       {/* 작성자 */}
       <h2>{detailBoard.nickname}</h2>
