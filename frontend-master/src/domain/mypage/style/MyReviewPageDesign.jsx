@@ -40,15 +40,15 @@ export const ReviewMyStars = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0 30px;
+  margin: 20px 0 22px;
   height: 20%;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
 `;
 
 export const DetailTextReview = styled.div`
-  height: 70%;
+  height: 73%;
 `;
 
 export const DetailCheckReview = styled.div`
@@ -66,7 +66,7 @@ export const CheckReviewMain = styled.div`
     text-align: center;
     margin-bottom: 10px;
     color: #222;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 2px solid #cfcfcf;
   }
 `;
@@ -107,7 +107,7 @@ export const DetailTextReviewMain = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
   p {
     font-size: 22px;
@@ -134,7 +134,7 @@ export const DetailTextReviewMain = styled.div`
 export const DetailTextReviewList = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 5px;
   thead {
     th {
       background-color: #f4f7fb;

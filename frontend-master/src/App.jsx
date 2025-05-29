@@ -7,7 +7,7 @@ import BodyComponent from "./components/BodyComponent";
 import ProductsRoutes from "./domain/products/routes/ProductsRoutes";
 import PaymentRoutes from "./domain/payment/routes/PaymentRoutes";
 import BoardRoutes from "./domain/board/routes/BoardRoutes";
-import "./style/App.css";
+// import "./style/App.css";
 import TicketPages from "./domain/ticket/page/ticketPage";
 import Footer from "./page/footer/Footer";
 
