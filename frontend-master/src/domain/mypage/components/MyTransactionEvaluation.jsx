@@ -15,7 +15,6 @@ export default function MyTransactionEvaluation({
   return (
     <MyReview.CheckReviewMain>
       <h3>거래 평가</h3>
-      <br />
       {evaluationLists.length === 0 ? (
         <p> 아직 받은 평가가 없어요.</p>
       ) : (

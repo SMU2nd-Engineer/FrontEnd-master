@@ -48,25 +48,26 @@ export const ReviewMyStars = styled.div`
 `;
 
 export const DetailTextReview = styled.div`
-  height: 73%;
+  height: 65%;
 `;
 
 export const DetailCheckReview = styled.div`
-  padding: 30px;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
-  margin: 20px auto 20px;
+  margin-top: 20px;
   max-width: 800px;
-  height: 96%;
+  height: 87%;
 `;
 export const CheckReviewMain = styled.div`
   h3 {
     font-size: 22px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     color: #222;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
     border-bottom: 2px solid #cfcfcf;
   }
 `;
@@ -94,6 +95,7 @@ export const DetailCheckReviewList = styled.table`
       padding: 14px 15px;
       font-size: 15px;
       /* color: #161616; */
+      border-bottom: 1px solid #eee;
       vertical-align: top;
       &:last-child {
         color: #888;
@@ -104,7 +106,6 @@ export const DetailCheckReviewList = styled.table`
   }
 `;
 export const DetailTextReviewMain = styled.div`
-  width: 100%;
   height: 100%;
   border-radius: 12px;
   padding: 15px;
@@ -113,15 +114,16 @@ export const DetailTextReviewMain = styled.div`
     font-size: 22px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 25px;
+    margin-top: 15px;
+    margin-bottom: 30px;
     color: #222;
-    padding: 20px;
+    padding: 15px;
     border-bottom: 2px solid #cfcfcf;
   }
   a {
     display: block;
     text-align: right;
-    margin-top: 20px;
+    margin-top: 10px;
     color: #007bff;
     font-weight: 500;
     text-decoration: none;

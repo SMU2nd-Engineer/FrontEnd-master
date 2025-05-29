@@ -58,6 +58,7 @@ export const FormTitle = styled.h2`
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 0;
 `;
 
 export const EndButton = styled.button`
@@ -76,4 +77,8 @@ export const EndButton = styled.button`
 export const CategoryForm = styled.form`
   width: 100%;
   line-height: 400%;
+`;
+
+export const MyEditFavoritePage = styled.div`
+  padding-bottom: 30px;
 `;

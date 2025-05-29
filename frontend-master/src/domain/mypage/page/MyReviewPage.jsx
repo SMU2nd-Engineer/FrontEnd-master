@@ -41,6 +41,7 @@ export default function MyReviewPage() {
         <MyReview.ReviewUserName>
           <MyName name={myReviewInfoList.myPageGetUserInfo?.name} />
         </MyReview.ReviewUserName>
+
         <MyReview.ReviewPageLeft>
           <MyReview.ReviewMyStars>
             <MyPageRating myRating={myReviewInfoList.myAverageRating} />
@@ -49,6 +50,7 @@ export default function MyReviewPage() {
             <MyTransactionReview reviewLists={myReviewInfoList.reviewLists} />
           </MyReview.DetailTextReview>
         </MyReview.ReviewPageLeft>
+
         <MyReview.ReviewPageRight>
           <MyReview.DetailCheckReview>
             <MyTransactionEvaluation
