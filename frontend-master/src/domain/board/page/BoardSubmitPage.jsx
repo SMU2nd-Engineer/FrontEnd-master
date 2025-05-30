@@ -163,7 +163,7 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
 
     // 취소 누르면 게시글 등록페이지에 머무름
     if(!submitCancel) return;
-
+ 
     // 상태 초기화
     setNewSubmit({
       category_idx: "",
