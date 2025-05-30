@@ -9,10 +9,14 @@ const BoardItem = ({ item }) => {
   //console.log(typeof item.category_idx)
   const getText = (category_idx) => {
       switch (category_idx) {
+        case 4001: // 잡담
+          return '잡담';
         case 4002: // 삽니다
           return '삽니다';
         case 4003: // 팝니다
           return '팝니다';
+        case 4004: // 기타
+          return '기타';  
         default:
           return category_idx;
        }   

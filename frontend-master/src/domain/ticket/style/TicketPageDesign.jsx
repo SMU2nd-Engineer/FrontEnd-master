@@ -4,17 +4,22 @@ import styled from "styled-components";
 // import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
 // import * as TicketPages from "../style/TicketPageDesign";
 
+export const TicketPageMain = styled.div`
+  height: 1000px;
+`;
+
 export const BottomArea = styled.div`
   display: flex;
+  gap: 10px;
 `;
 
 export const Calendar1 = styled.div`
-  width: 55%;
+  width: 50%;
   cursor: pointer;
 `;
 
 export const ShowList = styled.div`
-  width: 45%;
+  width: 50%;
 `;
 
 export const ListDot = styled.div`
@@ -38,22 +43,26 @@ export const ListDot = styled.div`
 
 export const AccordionContainer = styled.div`
   margin-top: 1rem;
+  height: 100%;
 `;
 
 export const AccordionSection = styled.div`
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
+  /* border-bottom: 1px solid #ccc; */
+  padding-bottom: 8px;
 `;
 
 export const AccordionHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  /* text-align: center; */
+  align-items: center;
   background-color: #f0f0f0;
-  padding: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 50px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  margin: "10px 0";
 `;
 
 export const AccordionMainButton = styled.div`
@@ -64,7 +73,7 @@ export const TopCategoryBar = styled.div`
   background-color: #f0f0f0;
   padding: 0;
   border-radius: 5px;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
 `;
 
 export const SelectCategory = styled.div`
@@ -142,6 +151,7 @@ export const SeDate = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
 `;
 
 export const StartDate = styled.div`
@@ -150,6 +160,11 @@ export const StartDate = styled.div`
   font-weight: bold;
   color: #6b4b4b;
   margin-left: 5px;
+  label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 `;
 
 export const EndDate = styled.div`
@@ -158,6 +173,11 @@ export const EndDate = styled.div`
   font-weight: bold;
   color: #6b4b4b;
   margin-left: 35px;
+  label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 `;
 
 export const DateInput = styled.div`
@@ -165,15 +185,21 @@ export const DateInput = styled.div`
   .react-datepicker__day--outside-month {
     color: #ccc !important;
   }
+  .react-datepicker__input-container input {
+    width: 150px !important;
+    padding: 6px 8px !important;
+    font-size: 14px !important;
+  }
 `;
 
 export const DataList = styled.div`
   display: flex;
   justify-content: baseline;
+  height: 10px;
 `;
 
 export const TicketItemTextTitle = styled.p`
-  font-size: 15px;
+  font-size: 16px;
 `;
 
 export const TicketItemTextCompany = styled.p`

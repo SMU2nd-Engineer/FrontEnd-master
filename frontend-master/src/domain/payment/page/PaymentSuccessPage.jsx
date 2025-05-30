@@ -19,17 +19,18 @@ const PaymentSuccessPage = () => {
   const tradeType = Number(searchParams.get('tradeType'));
   const [product, setProduct] = useState(null);
   const {idx} = useParams();
+  const [isApproved, setIsApproved] = useState(false);
 
   useEffect(() => {
-        getProductDetail(idx)
-          .then((res) => res.data)
-          .then((data) => {
-            console.log("=================", data)
-            setProduct(data)
-          })
-          .catch((err) => console.error("상품 불러오기 실패: ", err));
-        
-      }, [idx]);
+    getProductDetail(idx)
+      .then((res) => res.data)
+      .then((data) => {
+        console.log("=================", data)
+        setProduct(data)
+      })
+      .catch((err) => console.error("상품 불러오기 실패: ", err));
+    
+  }, [idx]);
 
   useEffect(() => {
     console.log("pgToken:", pgToken);
@@ -37,7 +38,11 @@ const PaymentSuccessPage = () => {
 
     const approvePayment = async () => {
       try {
-        await kakaoPayApprove({tid, partnerOrderId, partnerUserId, pgToken});
+        const result = await kakaoPayApprove({tid, partnerOrderId, partnerUserId, pgToken});
+        console.log("승인결과", result);
+        console.log("세션 저장 완료:", sessionStorage.getItem("paymentApproved"));
+
+        setIsApproved(true);
         setSuccess(true);
       } catch (err) {
         console.error("Approve 에러:", err);
@@ -48,11 +53,20 @@ const PaymentSuccessPage = () => {
         })
       } finally {
         setLoading(false);
+        console.log("승인함수 종료함");
       }
     };
 
     approvePayment();
   }, [tid]);
+
+  console.log("승인여부", isApproved);
+
+  if (isApproved === "true") {
+    setSuccess(true);
+    setLoading(false);
+    return;
+  }
 
   const handleGoHome = () => {
     navigate("/")
@@ -76,11 +90,16 @@ const PaymentSuccessPage = () => {
       {!loading && success && !error && (
         <>
           <PaymentDesign.Box>
-            <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
-            <PaymentDesign.ProductInfo>
-              <PaymentProductInfo product={product} tradeType={{tradeType}}/>
-            </PaymentDesign.ProductInfo>
-            <PaymentDesign.Review onClick={handleGoReview}>후기 작성하기</PaymentDesign.Review>
+            <PaymentDesign.PaymentBox>
+              <PaymentDesign.PaySuccess>결제가 성공적으로 완료되었습니다!</PaymentDesign.PaySuccess>
+              <PaymentDesign.ProductInfo>
+                <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+              </PaymentDesign.ProductInfo>
+              <PaymentDesign.ReviewBox>
+                <PaymentDesign.Review onClick={handleGoReview}>후기 작성하기</PaymentDesign.Review>
+                <PaymentDesign.Next onClick={handleGoHome}>다음에 작성하기</PaymentDesign.Next>
+              </PaymentDesign.ReviewBox>
+            </PaymentDesign.PaymentBox>
           </PaymentDesign.Box>
         </>
       )}

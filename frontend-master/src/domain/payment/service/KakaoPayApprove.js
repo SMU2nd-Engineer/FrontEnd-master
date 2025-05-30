@@ -1,7 +1,7 @@
 import axiosInstance from "@/lib/axiosInstance";
 
 const kakaoPayApprove = async ({tid, partnerOrderId, partnerUserId, pgToken}) => {
-
+  console.log("승인 요청 시작");
 
   try {
     const res = await axiosInstance.post("/payment/approve", {

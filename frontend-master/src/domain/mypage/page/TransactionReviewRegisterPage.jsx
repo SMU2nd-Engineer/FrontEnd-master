@@ -154,7 +154,7 @@ export default function TransactionReviewRegisterPage() {
         }, 0);
       } else {
         const result = await getMyPageData("SELLER_AND_CATEGORIES");
-        setSellerInfo(result.sellerInfo);
+        setSellerInfo(result.sellerInfo??"");
         setEvalutaionCategories(result.evaluationCategories);
         setValue("sellerIdx", result?.sellerInfo?.sellerIdx ?? 0); // 폼 제출이 안되서 지정해주기
         setValue("transactionIdx", result?.sellerInfo?.transactionIdx ?? 0); // 폼 제출이 안되서 지정해주기
@@ -165,12 +165,12 @@ export default function TransactionReviewRegisterPage() {
   return (
     <TranReview.TRmain>
       <TranReview.PaymentProductInfo>
-        <PaymentProductInfo product={product} tradeType={{tradeType}} />
+        {/* <PaymentProductInfo product={product} tradeType={{tradeType}} /> */}
       </TranReview.PaymentProductInfo>
       <TranReview.Line></TranReview.Line>
       <h1>
-        {sellerInfo && sellerInfo.sellerName
-          ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
+        {sellerInfo && sellerInfo[0].sellerName
+          ? `${sellerInfo[0].sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
           : "거래 정보 로딩 중..."}
       </h1>
       {/* <h1>{sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요</h1> */}

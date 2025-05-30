@@ -20,6 +20,7 @@ const StyledButton = styled.button`
 const TextWrapper = styled.div`
   text-align: left;
   font-size: 13px;
+  padding-top: 12px;
 `;
 
 const Title = styled.h3`
@@ -29,6 +30,7 @@ const Title = styled.h3`
 `;
 
 const Description = styled.p`
+  margin-top: 5px;
 `;
 
 const Price = styled.span`

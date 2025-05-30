@@ -22,13 +22,12 @@ export function useChatSocket(roomId, onMessage) {
 
     socket.onopen = () => {
       console.log("🔌 WebSocket connected");
-      const token = getAccessToken();
       // 특정 채팅방 구독 요청
       socket.send(
         JSON.stringify({
           type: "join",
           chatRoomId: roomId,
-          token: token,
+          token: getAccessToken(),
         })
       );
     };

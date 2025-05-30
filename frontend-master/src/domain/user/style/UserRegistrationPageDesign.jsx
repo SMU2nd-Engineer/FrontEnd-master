@@ -15,6 +15,7 @@ export const RegistInputGroup = styled.div`
   align-items: stretch;
   gap: 0.5rem;
   width: 100%;
+  margin-bottom: 5px;
 `;
 
 export const RegistStyledInput = styled.input`
@@ -24,7 +25,7 @@ export const RegistStyledInput = styled.input`
   border: 1px solid ${({ $error }) => ($error ? "#e53e3e" : "#ddd")};
   border-radius: 5px;
   font-size: 1rem;
-  height: 3rem;
+  height: 2.6rem;
   box-sizing: border-box;
 `;
 
@@ -56,7 +57,7 @@ export const RegistStyledButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3rem;
+  height: 2.6rem;
 
   button {
     background-color: #f0b8b8;

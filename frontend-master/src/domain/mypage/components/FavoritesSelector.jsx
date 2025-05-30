@@ -76,28 +76,24 @@ export default function FavoritesSelector({ mode = "register" }) {
 
   return (
     <Favorite.CategoryForm onSubmit={handleSubmit(submitForm)}>
-      <div style={{ height: "100%" }}>
-        <Favorite.FormTitle>
-          선호하는 카테고리를 선택해주세요.
-        </Favorite.FormTitle>
+      <Favorite.FormTitle>선호하는 카테고리를 선택해주세요.</Favorite.FormTitle>
 
-        <Favorite.CategoryGrid>
-          {categories.map((category) => (
-            <FavoriteCategory
-              key={category.subIdx}
-              category={category}
-              register={register}
-              setValue={setValue}
-            />
-          ))}
-        </Favorite.CategoryGrid>
-        <Favorite.FormActions>
-          <Favorite.EndButton onClick={handleCancel}>취소</Favorite.EndButton>
-          <Favorite.EndButton type="submit">
-            {mode === "edit" ? "수정하기" : "등록하기"}
-          </Favorite.EndButton>
-        </Favorite.FormActions>
-      </div>
+      <Favorite.CategoryGrid>
+        {categories.map((category) => (
+          <FavoriteCategory
+            key={category.subIdx}
+            category={category}
+            register={register}
+            setValue={setValue}
+          />
+        ))}
+      </Favorite.CategoryGrid>
+      <Favorite.FormActions>
+        <Favorite.EndButton onClick={handleCancel}>취소</Favorite.EndButton>
+        <Favorite.EndButton type="submit">
+          {mode === "edit" ? "수정하기" : "등록하기"}
+        </Favorite.EndButton>
+      </Favorite.FormActions>
     </Favorite.CategoryForm>
   );
 }
