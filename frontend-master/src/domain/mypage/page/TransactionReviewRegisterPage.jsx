@@ -165,7 +165,7 @@ export default function TransactionReviewRegisterPage() {
   return (
     <TranReview.TRmain>
       <TranReview.PaymentProductInfo>
-        <PaymentProductInfo product={product} tradeType={{tradeType}} />
+        {/* <PaymentProductInfo product={product} tradeType={{tradeType}} /> */}
       </TranReview.PaymentProductInfo>
       <TranReview.Line></TranReview.Line>
       <h1>
