@@ -9,7 +9,6 @@ import BoardEdit from "../components/BoardEdit";
 
 const BoardRoutes = () => {
   return (
-    <div className="contents">
       <Routes>
         {/* 1. 홈페이지 주소창에 htttps://localhost8100/board 
             2. path = 'board'로 들어가도 list화면으로 가게 설정됨 */}
@@ -28,7 +27,6 @@ const BoardRoutes = () => {
         <Route path="/edit/:id" element={<BoardEdit />} />  
 
       </Routes>
-    </div>
   );
 };
 
