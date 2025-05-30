@@ -37,8 +37,6 @@ const BoardDetailPage = () => {
     text: "",
     sdate:"",
   }); 
-
-  const navigate = useNavigate();
   
   // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
   // const [contentsQuillHtml, setContentsQuillHtml] = useState("");
@@ -105,23 +103,7 @@ const BoardDetailPage = () => {
     
   }, []);
 
-  // 게시글 수정 버튼 선택
-  const handleRegister = () => {
-    console.log("게시글 수정 클릭")
-    navigate(`/board/edit/${id}`)
-  };
 
-  // 게시글 삭제 버튼 선택
-  const handleDeleteDetail = async () => {
-   try {
-    await deleteContentsDetail(id);
-    alert("게시글 삭제 클릭");
-    navigate(`/board/list`); // 게시판 리스트로 이동
-   } catch (error) {
-    console.error("삭제 실패:", error);
-    alert("게시글 삭제 실패했습니다.");
-   }
-  };
 
   // 댓글 등록 버튼 선택
   const handleSubmit = async function(e){
@@ -197,8 +179,7 @@ const BoardDetailPage = () => {
     
       <BoardDetailHeader 
         category_idx={getText(detailBoard.category_idx)} title={detailBoard.title} 
-        handleRegister={handleRegister} handleDeleteDetail={handleDeleteDetail}
-        nickname={detailBoard.nickname}
+        nickname={detailBoard.nickname} id={id}
       />
       
       {/* 상세내용 */}
