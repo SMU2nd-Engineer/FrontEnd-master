@@ -24,6 +24,7 @@ const BoardDetailHeader = ({category_idx, title, nickname, id}) => {
     }
   };
 
+  // 화면에 표시될 내용 
   return (
     <div>
       <div>
