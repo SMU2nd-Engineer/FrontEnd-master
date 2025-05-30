@@ -104,7 +104,7 @@ export const DetailBottom = styled.div`
   text-align: left;
   margin-top: 20px;
   padding: 10px;
-  border: 1px dotted rgb(168, 168, 168);
+  border-top: 1px dotted rgb(168, 168, 168);
 
   img{
     width: 500px;

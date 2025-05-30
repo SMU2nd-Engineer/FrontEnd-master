@@ -12,7 +12,7 @@ export const Thumbnail = styled.div`
 `
 
 export const Product_card = styled.div `
-  width: 240px;
+  width: 210px;
   height: 340px;
   border: 1px solid #ddd;
   border-radius: 8px;
