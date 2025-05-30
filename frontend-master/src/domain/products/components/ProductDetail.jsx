@@ -57,7 +57,6 @@ export default function ProductDetail() {
     setChatPopup(0);
   };
 
-  
   return (
     <div className="detailinfo">
       {chatPopup === 0 || (
@@ -66,26 +65,30 @@ export default function ProductDetail() {
       <ProductDetails.DetailTop>
         {/* 이미지 슬라이드, 이미지 리스트 */}
         <ProductDetails.ThumbnailBox>
-        {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
-          <ImageSlider imageList={product.imageList} />     
+          {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
+          <ImageSlider imageList={product.imageList} />
           <ProductDetails.OtherImages>
-            <ProductImage imageList={product.imageList} title={product.title} mode="all" />
+            <ProductImage
+              imageList={product.imageList}
+              title={product.title}
+              mode="all"
+            />
           </ProductDetails.OtherImages>
         </ProductDetails.ThumbnailBox>
-        
+
         {/* 상품 상세, 버튼 */}
         <ProductDetails.Column>
           <p className="title">{product.title}</p>
           <p className="price">{product.price}원</p>
 
           <ProductDetails.HorizontalDivider />
-            
+
           {/* 닉네임 날짜 */}
           <ProductDetails.NickNDate>
             <p className="salerInfo">{product.nickName}</p>
             <p>등록일: {new Date(product.sdate).toLocaleDateString()}</p>
           </ProductDetails.NickNDate>
-          
+
           {/* 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
             <button className="pickbutton">찜</button>
@@ -102,25 +105,32 @@ export default function ProductDetail() {
           </ProductDetails.Buttonbox>
         </ProductDetails.Column>
       </ProductDetails.DetailTop>
-      
+
       {/* 큰 이미지, 삭제 수정 버튼박스 */}
       <ProductDetails.DetailBottom>
+        <ProductDetails.PDetailLabel>상세 정보</ProductDetails.PDetailLabel>
 
-        
-          <ProductDetails.PDetailLabel>상세 정보</ProductDetails.PDetailLabel>          
-         
-          <ProductDetails.HorizontalDivider />
-         
-          <ProductImage imageList={product.imageList} title={product.title} mode="all" />
-          {/* <ImageSlider imageList={product.imageList} /> */}
-         
-          <ProductDetails.PDetailContent>{product.content}</ProductDetails.PDetailContent>
-         
-          <ProductDetails.EditDeleteBox>
-            <Button className='product_editbutton' text={"수정"} onClick={handleEdit}/>
-            <ProductDelete idx={idx} />
-          </ProductDetails.EditDeleteBox>
-        
+        <ProductDetails.HorizontalDivider />
+
+        <ProductImage
+          imageList={product.imageList}
+          title={product.title}
+          mode="all"
+        />
+        {/* <ImageSlider imageList={product.imageList} /> */}
+
+        <ProductDetails.PDetailContent>
+          {product.content}
+        </ProductDetails.PDetailContent>
+
+        <ProductDetails.EditDeleteBox>
+          <Button
+            className="product_editbutton"
+            text={"수정"}
+            onClick={handleEdit}
+          />
+          <ProductDelete idx={idx} />
+        </ProductDetails.EditDeleteBox>
       </ProductDetails.DetailBottom>
     </div>
   );

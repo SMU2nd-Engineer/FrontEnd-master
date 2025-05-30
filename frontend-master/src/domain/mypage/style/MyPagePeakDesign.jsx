@@ -25,6 +25,7 @@ export const PeakHedear = styled.h2`
   gap: 1rem;
   margin: 1rem;
   padding: 1rem;
+  border-bottom: 1px solid #ddd;
 `;
 
 /**
