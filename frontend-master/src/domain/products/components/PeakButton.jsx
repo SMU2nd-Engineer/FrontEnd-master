@@ -1,41 +1,54 @@
 import { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { getProductDetail, postPeak } from "../services/productService";
+import { getUserPeakInfo } from "@user/services/getUserPeakInfo";
+import { updateUserPeak } from "@mypage/services/updateUserPeak";
+import { insertUserPeak } from "@/domain/mypage/services/insertUserPeak";
 
 const PeakButton = ({ idx }) => {
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isPeak, setIsPeak] = useState(0);
+  const [isPeak, setIsPeak] = useState(false);
 
   useEffect(() => {
-    getProductDetail(idx)
-      .then((res) => res.data)
-      .then((data) => {
-        console.log("#########", data);
-        setProduct(data);
-        setLoading(false);
-      })
-      .catch((err) => console.error("상품 불러오기 실패:", err));
+    // 상품 정보와 내 정보를 이용해서 찜 상품인지 아닌지 확인을 위한 정보 호출
+    const saveUserPeakInfo = async () => {
+      try {
+        const result = await getUserPeakInfo(idx);
+        setIsPeak(!!result.isPeak);
+      } catch (error) {
+        console.log(`내 찜 정보 불러오기 실패! ${error}`);
+        throw error;
+      }
+    };
+    saveUserPeakInfo();
   }, [idx]);
 
-  const handleClick = (e) => {
-    e.stopPropagation();
-    postPeak(idx);
+  const handleClick = async (e) => {
+    e.stopPropagation(); // 찜만 클릭되도록 버블링 방지위해 추가됨
+    if (isPeak) {
+      const confirmed = confirm("찜 목록에서 삭제하시겠습니까?");
+      if (confirmed) {
+        await updateUserPeak(idx);
+        alert("찜 목록에서 삭제되었습니다.");
+      }
+      setIsPeak(false);
+      // 찜 상태에서 누르면 찜 삭제 기능이 작동해야함.
+    } else {
+      // 찜이 아닌 상태에서 누르면 찜 테이블에 값이 들어가야함.
+      await insertUserPeak(idx);
+      setIsPeak(true);
+    }
 
-    const isPeak = flag === 1 ? 0 : 1;
-    setIsPeak(isPeak);
-    if (onToggle) onToggle(idx, isPeak);
+    //     if (onToggle) onToggle(idx, isPeak);
   };
 
-  if (loading || !product) return null;
+  //   if (loading || !product) return null;
 
   return (
     <button onClick={handleClick}>
-      {/* {flag === 1 ? (
+      {isPeak ? (
         <AiFillHeart size={24} color="red" />
       ) : (
         <AiOutlineHeart size={24} color="gray" />
-      )} */}
+      )}
     </button>
   );
 };
