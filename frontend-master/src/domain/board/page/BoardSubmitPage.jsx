@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
 import { useRef } from "react";
+import BoardSubmitHeader from "../components/BoardSubmitHeader";
+import BoardSubmitFooter from "../components/BoardSubmitFooter";
 
 
 // 본문 HTML 저장 전 clearImgSrc 함수로 src 빈 문자열로 치환 후 저장하는 함수
@@ -183,29 +185,10 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
   return (
     <div className='new_board_submit'>
  
-      <div style={{border: "1px solid black"}}>
-          {/* 카테고리 선택 : 잡담 / 팝니다 / 삽니다 / 기타 */}  
-          <SelectBox 
-            id="category_idx"
-            name="category_idx"
-            defaultValue={category_idx} 
-            category_idx={getCategoryIdx("BOARD")}
-            handleChange={handleChange}/>
-      </div>
-      <br />
-
-      <div style={{border:"1px solid black"}}>
-          {/* 제목 입력창 */}
-          <input 
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={handleChange}
-            placeholder="제목을 입력해주세요."     
-          />   
-      </div>
-      <br />
+      {/* 등록페이지 카테고리 선택 + 제목 입력창 */}
+      <BoardSubmitHeader category_idx={category_idx} getCategoryIdx={getCategoryIdx}
+                         handleChange={handleChange} title={title}
+      />
 
       <div style={{border:"1px solid black"}}>
           {/* 글 내용 입력하는 창 */}
@@ -213,18 +196,10 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
           <BoardEditorQuill
           contentData={contentData} setContentData={setContentData} quillRef={quillRef}/>
       </div>
-      <br />
 
-      <div style={{border:"1px solid black"}}>
-        {/* 게시글 등록 페이지 - 게시글 등록 버튼 */}        
-        <button onClick={handleSubmit}>등록</button>
-      </div>
-      <br />
+      {/* 게시글 등록 + 취소 버튼 */}
+      <BoardSubmitFooter handleSubmit={handleSubmit} handleCancel={handleCancel} />
 
-      <div style={{border:"1px solid black"}}>
-        {/* 게시글 등록 페이지 - 게시글 취소 버튼 */}        
-        <button onClick={handleCancel}>취소</button>
-      </div>  
     </div>
   )
 

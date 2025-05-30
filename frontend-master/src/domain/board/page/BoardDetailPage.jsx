@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { CloseButton } from "@chakra-ui/react"
+import BoardDetailHeader from '../components/BoardDetailHeader';
 
 
 // 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
@@ -193,21 +194,12 @@ const BoardDetailPage = () => {
   // 화면에 표시될 내용
   return (
     <div className='board_detail'>
-      <p>상세페이지</p>
-
-      {/* 게시글 버튼 - 수정 + 삭제 */}
-      <button onClick={handleRegister}>게시글 수정</button>
-
-      <button onClick={handleDeleteDetail}>게시글 삭제</button>
-
-      {/* 카테고리 : 잡담 / 팝니다 / 삽니다 / 기타 */}
-      <h2>{getText(detailBoard.category_idx)}</h2>
-
-      {/* 제목 */}
-      <h2>{detailBoard.title}</h2>
-
-      {/* 작성자 */}
-      <h2>{detailBoard.nickname}</h2>
+    
+      <BoardDetailHeader 
+        category_idx={getText(detailBoard.category_idx)} title={detailBoard.title} 
+        handleRegister={handleRegister} handleDeleteDetail={handleDeleteDetail}
+        nickname={detailBoard.nickname}
+      />
       
       {/* 상세내용 */}
       <p>상세내용</p>
