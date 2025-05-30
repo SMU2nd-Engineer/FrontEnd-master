@@ -28,6 +28,7 @@ const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage, count }) => {
     <ChatRoomItemDiv
       onClick={() => {
         handleRoomClick(id);
+        count = 0;
       }}
     >
       {/* <img src="" alt="" /> */}
