@@ -85,7 +85,7 @@ export const ProductInfo = styled.div`
   /* height: 10rem; */
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   margin: 5px;
   margin-top: 10px;
 `
@@ -124,14 +124,14 @@ export const Review = styled.button`
   width: 125px;
   height: 50px;
   padding: 5px;
-  margin-left: 5px;
+  margin-left: 7px;
   margin-top: 2rem;
   font-weight: bold;
 `
 
 export const Next = styled.button`
   background-color: #ddd;
-  width: 125px;
+  width: 130px;
   padding: 5px;
   height: 50px;
   /* margin: 5px; */
@@ -142,6 +142,7 @@ export const Next = styled.button`
 export const ReviewBox = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 539px;
 `
 
 export const PaySuccess = styled.h2`
