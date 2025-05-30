@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBoardDetail, putEditContentsDetail } from '../services/boardService';
 import BoardSubmitPage from '../page/BoardSubmitPage';
+import usePreventBackNavigation from '@/hooks/usePreventBackNavigation';
 
 // 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
 // 여러개의 이미지를 순서에 따라 넣음
@@ -32,6 +33,9 @@ const BoardEdit = () => {
     title: "",
     content: "",
   }); 
+
+  // 뒤로가기 방지 hook 사용
+  usePreventBackNavigation();
 
   // idx 값이 변하면 게시글 내용을 계속 불러옴   
   useEffect(() => {
