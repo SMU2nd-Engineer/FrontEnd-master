@@ -64,7 +64,7 @@ export const PaymentMethod = styled.label`
   padding-right: 20px;
   font-weight: bold;
   margin-left : 10px;
-  margin-right: 20px;
+  margin-right: 12px;
 `
 
 export const PaymentBtn = styled.button`
