@@ -72,7 +72,8 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
 
       {/* 게시글 등록 + 취소 버튼 */}
       <BoardSubmitFooter contentData={contentData} newsubmit={newsubmit}
-                         isModify={isModify} id={id} 
+                         isModify={isModify} id={id} setNewSubmit={setNewSubmit}
+                         setContentData={setContentData}
       />
 
     </div>

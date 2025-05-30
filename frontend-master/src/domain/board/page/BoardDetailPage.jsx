@@ -72,6 +72,19 @@ const BoardDetailPage = () => {
        }   
     }
 
+  useEffect(() => {
+  // 현재 주소로 히스토리 덮기 (등록/수정 페이지 제거)
+    window.history.replaceState(null, '', window.location.pathname);
+
+    const handlePopState = () => {
+      // 뒤로가기로 등록/수정 페이지로 못 돌아가게 막음 (그냥 현재 페이지 유지)
+      window.history.go(1);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+  
   useEffect(() => console.log(newCommentText), [commentList])
 
   useEffect(() => {

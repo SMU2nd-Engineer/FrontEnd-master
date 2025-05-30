@@ -14,12 +14,14 @@ function clearImgSrc(html) {
   return doc.body.innerHTML;
 }
 
-const BoardSubmitFooter = ({contentData, newsubmit, isModify, id}) => {
+const BoardSubmitFooter = (
+  {contentData, newsubmit, isModify, id, setNewSubmit, setContentData}) => {
 
   // 페이지 이동을 처리 하는 함수
   const navigate = useNavigate();
 
-    // 게시글 내용 입력 후 클릭하는 버튼
+  // 게시글 내용 입력 후 클릭하는 버튼 - 게시글 등록 버튼
+  // 등록 성공시 게시글 상세페이지로 이동
   // preventDefault: 페이지 새로고침 방지
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +74,7 @@ const BoardSubmitFooter = ({contentData, newsubmit, isModify, id}) => {
       
     };
     console.log("postContent: ", postContent);
-    // => 게시글 등록버튼 눌렀을때 성공하면 게시글 상세페이지로 이동
+    // => 
     // 서버에 게시글 등록 요청을 보내는 함수
 
     // 게시판 양식 사용 - 수정
@@ -82,8 +84,11 @@ const BoardSubmitFooter = ({contentData, newsubmit, isModify, id}) => {
         .then((data) => {
           console.log("서버응답 확인: ", data)
 
-          // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
-          navigate(`/board/detail/${data.idx}`);
+          /* 상세페이지의 게시글 수정 버튼 누르면 발생
+             - 게시글 등록페이지 틀과 동일하게 입력된 값 불러옴  
+             replace: true - 수정모드일때 다시 수정하는 페이지로 돌아가지 않도록 함(뒤로가기 방지)
+          */
+          navigate(`/board/detail/${data.idx}`, { replace: true });
         })
         .catch((error) => {
           console.error("게시글 수정 실패: ", error);
@@ -96,8 +101,11 @@ const BoardSubmitFooter = ({contentData, newsubmit, isModify, id}) => {
         .then((data) => {
           console.log("서버응답 확인: ", data)
 
-          // 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자)
-          navigate(`/board/detail/${data.idx}`);
+          /* 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자) 
+             replace: true - 새로운 글 등록시 뒤로가기 버튼을 눌러도 기존의 등록페이지로
+             돌아가는 걸 막음(뒤로가기 방지) 
+          */ 
+          navigate(`/board/detail/${data.idx}`, { replace: true });
         })
         .catch((error) => {
           console.error("게시글 등록 실패: ", error);
