@@ -1,10 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Divider } from '@chakra-ui/react'
+import * as F from "../../style/FooterDesign"
+
 
 const Footer = () => {
   return (
-     <nav className="footer-nav">
+     <F.Footer_nav>
+      <div className="navigation">
       <div className="ftMenu">
         <NavLink
           to="/company"
@@ -76,7 +79,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </nav>
+      </div>
+    </F.Footer_nav>
   );
 };
 

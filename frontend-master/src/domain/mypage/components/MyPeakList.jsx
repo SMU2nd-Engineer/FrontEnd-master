@@ -23,7 +23,7 @@ const MyPeakList = ({ products = [], handlePeak }) => {
           >
             x
           </PeakDeleteButton>
-          <ProductCard product={product} />
+          <ProductCard key={product.idx} product={product} />
         </CardAndButtonWrapper>
       ))}
     </div>
