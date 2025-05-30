@@ -1,13 +1,12 @@
-import { p, title } from 'framer-motion/client';
 import React from 'react';
-import {getBoardComment, getBoardDetail, postBoardDeleteComment, postBoardAddComment, deleteContentsDetail} from "../services/boardService"
+import {getBoardComment, getBoardDetail} from "../services/boardService"
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { CloseButton } from "@chakra-ui/react"
 import BoardDetailHeader from '../components/BoardDetailHeader';
 import BoardDetailTextEditor from '../components/BoardDetailTextEditor';
 import BoardDetailFooter from '../components/BoardDetailFooter';
+import usePreventBackNavigation from '@/hooks/usePreventBackNavigation';
 
 
 // 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
@@ -72,19 +71,9 @@ const BoardDetailPage = () => {
        }   
     }
 
-  useEffect(() => {
-  // 현재 주소로 히스토리 덮기 (등록/수정 페이지 제거)
-    window.history.replaceState(null, '', window.location.pathname);
+  // 뒤로가기 방지 hook 사용
+  usePreventBackNavigation();
 
-    const handlePopState = () => {
-      // 뒤로가기로 등록/수정 페이지로 못 돌아가게 막음 (그냥 현재 페이지 유지)
-      window.history.go(1);
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
-  
   useEffect(() => console.log(newCommentText), [commentList])
 
   useEffect(() => {

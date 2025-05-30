@@ -1,15 +1,12 @@
 // BoardSubmitPage.jsx
 import { useState } from "react";
-import { getBoardDetail, postBoardSubmit, putEditContentsDetail } from "../services/boardService"
-import { div, title } from "framer-motion/client";
 import BoardEditorQuill from "../components/BoardEditorQuill";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
 import { useRef } from "react";
 import BoardSubmitHeader from "../components/BoardSubmitHeader";
 import BoardSubmitFooter from "../components/BoardSubmitFooter";
+import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
 
 // 게시글 등록 페이지 - id : 게시글 리스트에 있는 idx(순번). 이름만 id
 const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
@@ -30,6 +27,9 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
 
   // quill 확인
   const quillRef = useRef();
+
+  // 뒤로가기 방지 hook 사용
+  usePreventBackNavigation();
 
   // 처음렌더링 됬을때 조건이 맞으면 실행되는 것
   useEffect(() => {
