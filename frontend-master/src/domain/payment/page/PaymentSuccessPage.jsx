@@ -19,34 +19,30 @@ const PaymentSuccessPage = () => {
   const tradeType = Number(searchParams.get('tradeType'));
   const [product, setProduct] = useState(null);
   const {idx} = useParams();
+  const [isApproved, setIsApproved] = useState(false);
 
   useEffect(() => {
-        getProductDetail(idx)
-          .then((res) => res.data)
-          .then((data) => {
-            console.log("=================", data)
-            setProduct(data)
-          })
-          .catch((err) => console.error("상품 불러오기 실패: ", err));
-        
-      }, [idx]);
+    getProductDetail(idx)
+      .then((res) => res.data)
+      .then((data) => {
+        console.log("=================", data)
+        setProduct(data)
+      })
+      .catch((err) => console.error("상품 불러오기 실패: ", err));
+    
+  }, [idx]);
 
   useEffect(() => {
     console.log("pgToken:", pgToken);
     console.log("tid:", tid);
 
-    const isApproved = sessionStorage.getItem("approved");
-
-    if (isApproved === "true") {
-      setSuccess(true);
-      setLoading(false);
-      return;
-    }
-
     const approvePayment = async () => {
       try {
-        await kakaoPayApprove({tid, partnerOrderId, partnerUserId, pgToken});
-        sessionStorage.setItem("approved", "true");
+        const result = await kakaoPayApprove({tid, partnerOrderId, partnerUserId, pgToken});
+        console.log("승인결과", result);
+        console.log("세션 저장 완료:", sessionStorage.getItem("paymentApproved"));
+
+        setIsApproved(true);
         setSuccess(true);
       } catch (err) {
         console.error("Approve 에러:", err);
@@ -57,11 +53,20 @@ const PaymentSuccessPage = () => {
         })
       } finally {
         setLoading(false);
+        console.log("승인함수 종료함");
       }
     };
 
     approvePayment();
-  }, [idx]);
+  }, [tid]);
+
+  console.log("승인여부", isApproved);
+
+  if (isApproved === "true") {
+    setSuccess(true);
+    setLoading(false);
+    return;
+  }
 
   const handleGoHome = () => {
     navigate("/")
