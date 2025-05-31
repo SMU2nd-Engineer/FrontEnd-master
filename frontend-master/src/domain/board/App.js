@@ -1,11 +1,11 @@
-import ContentsListPage from "./page/BoardListPage";
+// import ContentsListPage from "./page/BoardListPage";
 
-function App() {
-  return (
-    <div>
-      <ContentsListPage/>
-    </div>
-  );
-}
+// function App() {
+//   return (
+//     <div>
+//       <ContentsListPage/>
+//     </div>
+//   );
+// }
 
-export default App;
+// export default App;

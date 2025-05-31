@@ -60,7 +60,7 @@ export const ChatRoomItemDiv = styled.div`
   unicode-bidi: isolate;
   border-top: 1px solid rgb(246, 246, 246);
   border-bottom: 1px solid rgb(246, 246, 246);
-  &: hover {
+  &:hover {
     background-color: rgb(246, 246, 246);
   }
 `;

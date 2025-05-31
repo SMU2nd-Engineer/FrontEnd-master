@@ -3,6 +3,7 @@ import BoardList from "../components/BoardList";
 import { getBoardSearch, getBoardList } from '../services/boardService';
 import BoardPageHeader from '../components/BoardPageHeader';
 import BoardPageFooter from '../components/BoardPageFooter';
+import * as board from "../styles/BoardListPageDesign";
  
 const BoardListPage = () => {
  
@@ -27,16 +28,20 @@ const BoardListPage = () => {
 
   // 화면에 표시할 내용
   return (
-    <div className='new_board'>
+    <board.Board_main>
 
-      {/* 상단 Header('게시판' 버튼1:게시글등록, 버튼2:게시글수정) 컴포넌트 */}
-      <BoardPageHeader /> 
+      <div>
+        {/* 상단 Header('게시판' 버튼1:게시글등록, 버튼2:게시글수정) 컴포넌트 */}
+        <BoardPageHeader /> 
+      </div>
 
-      <BoardList boards={boards}/> {/* 게시글 목록 */}
+      <board.Board_middleList>
+        <BoardList boards={boards}/> {/* 게시글 목록 */}
+        {/* 하단 Footer(카테고리 드롭박스 선택, 검색어 입력창, 버튼:게시글 검색) 컴포넌트 */}
+        <BoardPageFooter handleOnclick={handleOnclick}/> 
+      </board.Board_middleList>
 
-      {/* 하단 Footer(카테고리 드롭박스 선택, 검색어 입력창, 버튼:게시글 검색) 컴포넌트 */}
-      <BoardPageFooter handleOnclick={handleOnclick}/> 
-    </div>
+    </board.Board_main>
   );
 };
 
