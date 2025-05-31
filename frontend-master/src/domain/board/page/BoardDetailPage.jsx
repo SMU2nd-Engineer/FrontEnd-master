@@ -7,6 +7,11 @@ import BoardDetailHeader from "../components/BoardDetailHeader";
 import BoardDetailTextEditor from "../components/BoardDetailTextEditor";
 import BoardDetailFooter from "../components/BoardDetailFooter";
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
+import * as Details from "../styles/BoardDetailDesign";
+import { useCallback } from "react";
+import ChatPopup from "@/domain/chat/components/ChatPopup";
+import { postChatRooms } from "@/domain/chat/services/ChatService";
+
 
 // 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
 // 여러개의 이미지를 순서에 따라 넣음
@@ -17,7 +22,11 @@ function pushImgSrc(html, getBoardImageUrls) {
   const boardImgTags = doc.querySelectorAll("img");
 
   boardImgTags.forEach((img, index) => {
-    img.setAttribute("src", getBoardImageUrls[index] || ""); // 순서대로 적용
+    img.setAttribute(
+      "src",
+      "http://localhost:8100/board" + getBoardImageUrls[index] || ""
+    ); // 순서대로 적용
+    // img.setAttribute("width", 183);
   });
 
   return doc.body.innerHTML;
@@ -53,6 +62,8 @@ const BoardDetailPage = () => {
   // 게시글 상세데이터 상태
   const [loading, setLoading] = useState(); // 로딩 상태
 
+  const [chatPopup, setChatPopup] = useState(0);
+
   // 카테고리 구분자 사용
   const getText = (category_idx) => {
     switch (category_idx) {
@@ -70,7 +81,7 @@ const BoardDetailPage = () => {
   };
 
   // 뒤로가기 방지 hook 사용
-  usePreventBackNavigation();
+  // usePreventBackNavigation();
 
   useEffect(() => console.log(newCommentText), [commentList]);
 
@@ -106,30 +117,50 @@ const BoardDetailPage = () => {
       });
   }, []);
 
+
+  const handleRoomClick = useCallback(() => {
+    postChatRooms(userIdx, detailBoard.title).then((res) => {
+      setChatPopup(res.data.id);
+    });
+  }, []);
+
+  const closePopup = () => {
+    setChatPopup(0);
+  };
+
   // 화면에 표시될 내용
   return (
-    <div className="board_detail">
-      {/* 카테고리 선택, 제목, 작성자, 게시글 수정+삭제 버튼 */}
-      <BoardDetailHeader
-        category_idx={getText(detailBoard.category_idx)}
-        title={detailBoard.title}
-        nickname={detailBoard.nickname}
-        id={id}
-      />
-
-      {/* 상세내용 */}
-      <BoardDetailTextEditor content={{ __html: detailBoard.content }} />
-
-      {/* 댓글 등록 + 삭제버튼, 댓글 목록 보이기 */}
-      <BoardDetailFooter
-        newCommentText={newCommentText}
-        setNewCommentText={setNewCommentText}
-        commentList={commentList}
-        setCommentList={setCommentList}
-        id={id}
-        setLoading={setLoading}
-      />
-    </div>
+    <Details.BoardDetailMain>
+      {chatPopup === 0 || (
+        <ChatPopup selectRoom={chatPopup} handleClose={closePopup} />
+      )}
+      <Details.BoardDetailTop>
+        {/* 카테고리 선택, 제목, 작성자, 게시글 수정+삭제 버튼 */}
+        <BoardDetailHeader
+          category_idx={getText(detailBoard.category_idx)}
+          title={detailBoard.title}
+          nickname={detailBoard.nickname}
+          id={id}
+          sdate={detailBoard.sdate}
+          handleRoomClick={handleRoomClick}
+        />
+      </Details.BoardDetailTop>
+      <Details.BoardDetailMiddle>
+        {/* 상세내용 */}
+        <BoardDetailTextEditor content={{ __html: detailBoard.content }} />
+      </Details.BoardDetailMiddle>
+      <Details.BoardDetailBottom>
+        {/* 댓글 등록 + 삭제버튼, 댓글 목록 보이기 */}
+        <BoardDetailFooter
+          newCommentText={newCommentText}
+          setNewCommentText={setNewCommentText}
+          commentList={commentList}
+          setCommentList={setCommentList}
+          id={id}
+          setLoading={setLoading}
+        />
+      </Details.BoardDetailBottom>
+    </Details.BoardDetailMain>
   );
 };
 
