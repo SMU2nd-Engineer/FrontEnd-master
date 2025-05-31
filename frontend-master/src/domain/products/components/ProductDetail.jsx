@@ -10,6 +10,7 @@ import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
 import GlobalStyle from "@/style/AppDesign";
+import PeakButton from "./PeakButton";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -91,7 +92,9 @@ export default function ProductDetail() {
 
           {/* 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
-            <button className="pickbutton">찜</button>
+            <PeakButton idx={idx} className="pickbutton">
+              찜
+            </PeakButton>
             <Button
               className="chatbutton"
               text={"1:1 채팅"}

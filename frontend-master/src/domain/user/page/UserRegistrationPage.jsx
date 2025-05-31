@@ -20,6 +20,7 @@ import {
   ButtonWrapper,
   RegistButton,
 } from "../style/UserRegistrationPageDesign";
+import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
 
 /**
  * id : 아이디
@@ -51,6 +52,7 @@ export default function UserRegistrationPage() {
     resolver: yupResolver(YUPSCHEMA),
     mode: "onBlur", // 사용자에게 안내 메시지 출력
   });
+  usePreventBackNavigation();
 
   const [isIdCheck, setIsIdCheck] = useState(false);
   const [isNickNameCheck, setIsNickNameCheck] = useState(false);

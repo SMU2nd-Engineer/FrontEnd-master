@@ -7,11 +7,11 @@ import BoardDetailHeader from "../components/BoardDetailHeader";
 import BoardDetailTextEditor from "../components/BoardDetailTextEditor";
 import BoardDetailFooter from "../components/BoardDetailFooter";
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
-
 import * as Details from "../styles/BoardDetailDesign";
 import { useCallback } from "react";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
+
 
 // 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
 // 여러개의 이미지를 순서에 따라 넣음
@@ -116,6 +116,7 @@ const BoardDetailPage = () => {
         setLoading(false); // 로딩 완료 표시
       });
   }, []);
+
 
   const handleRoomClick = useCallback(() => {
     postChatRooms(userIdx, detailBoard.title).then((res) => {

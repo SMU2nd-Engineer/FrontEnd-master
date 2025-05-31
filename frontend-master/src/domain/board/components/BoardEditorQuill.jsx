@@ -1,8 +1,13 @@
-// BoardEditorQuill.jsx
 import React, { useMemo } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, {Quill} from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import BoardCustomToolbar from "./BoardCustomToolbar"; // 툴바 컴포넌트 import
+import { ImageActions } from '@xeger/quill-image-actions';
+import { ImageFormats } from '@xeger/quill-image-formats';
+
+// quill 이미지 모듈 등록
+Quill.register('modules/imageActions', ImageActions);
+Quill.register('modules/imageFormats', ImageFormats);
 
 const BoardEditorQuill = ({ contentData, setContentData }) => {
   // 에디터의 사용할 기능(글꼴, 색상, 스타일 등)들을 모아놓은 항목들
@@ -20,15 +25,21 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
     "bullet",
     "indent",
     "image",
+    "height",
+    "width"
   ];
 
   // Quill에서 설정할 모듈: 툴바 container만 지정
   // useMemo: 성능 최적화를 위해 사용(렌더링할때 마다 modules 객체 생성 방지용)
   const modules = useMemo(
     () => ({
+      // quill 이미지 사이즈 조절(높이, 넓이) 하는 모듈
+      imageActions: {},
+      imageFormats: {},
       toolbar: {
         container: "#toolbar", // 툴바 ID로 연결하여 설정함
       },
+
     }),
     []
   );
@@ -78,6 +89,7 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
           onChange={setContentData}
           modules={modules}
           formats={formats}
+          theme="snow"
         />
       </div>
     </div>

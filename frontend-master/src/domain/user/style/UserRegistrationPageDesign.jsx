@@ -75,6 +75,7 @@ export const RegistStyledButtonWrapper = styled.div`
     &:hover {
       background-color: #f8f8f8;
       color: #f0b8b8;
+      border: 1px solid #f0b8b8;
       transform: scale(1.1);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
