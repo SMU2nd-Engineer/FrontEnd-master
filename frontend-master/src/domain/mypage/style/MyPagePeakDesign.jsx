@@ -50,6 +50,11 @@ export const PeakDeleteButton = styled.button`
   }
 `;
 
+export const PickListContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
 export const CardAndButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;

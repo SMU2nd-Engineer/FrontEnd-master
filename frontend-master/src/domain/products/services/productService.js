@@ -19,9 +19,9 @@ export const postProduct = (newProduct, uploadImage) => {
   });
 };
 
-export const postPeak = (idx) => {
-  return axiosInstance.post("product/peak", { idx }, { withCredentials: true });
-};
+// export const postPeak = (idx) => {
+//   return axiosInstance.post("product/peak", { idx }, { withCredentials: true });
+// };
 
 export const getProductDetail = (idx) => {
   return axiosInstance.get(
