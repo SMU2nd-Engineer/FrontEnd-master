@@ -11,7 +11,6 @@ import { ChatListDiv } from "../styles/ChatPageDesign";
  */
 const ChatList = ({ chatList = [], fromUser = 0 }) => {
   const messagesEndRef = useRef(null);
-  console.log(chatList);
 
   // 메시지가 업데이트되면 스크롤 아래로 이동
   useEffect(() => {

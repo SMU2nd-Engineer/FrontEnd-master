@@ -7,6 +7,7 @@ import BodyComponent from "./components/BodyComponent";
 import ProductsRoutes from "./domain/products/routes/ProductsRoutes";
 import PaymentRoutes from "./domain/payment/routes/PaymentRoutes";
 import BoardRoutes from "./domain/board/routes/BoardRoutes";
+import SearchAllPage from "./domain/search/page/SearchAllPage";
 // import "./style/App.css";
 import TicketPages from "./domain/ticket/page/ticketPage";
 import Footer from "./page/footer/Footer";
@@ -25,6 +26,7 @@ function App() {
           <Route path="/payment/*" element={<PaymentRoutes />} />
           <Route path="/board/*" element={<BoardRoutes />} />
           <Route path="/ticket/*" element={<TicketPages />} />
+          <Route path="/search/*" element={<SearchAllPage />} />
         </Routes>
       </BodyComponent>
       <Footer />

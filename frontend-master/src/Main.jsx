@@ -7,8 +7,8 @@ import GlobalStyle from "./style/AppDesign"
 
 // import "./style/index.css";
 // import "./style/App.css";
-import "./style/Header.css";
-import "./style/Footer.css";
+// import "./style/Header.css";
+// import "./style/Footer.css";
 
 import App from "./App";
 

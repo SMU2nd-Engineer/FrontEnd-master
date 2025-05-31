@@ -1,15 +1,34 @@
 import { useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
+import * as H from "../../style/HeaderDesing"
+import MyName from "@/domain/mypage/components/MyName";
+import { jwtDecode } from "jwt-decode";
+import LogoutButton from "@/domain/user/components/LogoutButton";
+import { getAccessToken } from "@/utils/TokenManager";
 
 const selectedStyle = {
   backgroundColor: "none",
 };
 
+// const isLogin = sessionStorage.getItem("accessToken") || localStorage.getItem("accessToken") 
+
 // 헤더 메뉴
-export const HeaderMenu = () => {
+export const HeaderMenu = ({}) => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(()=> {
+    const checkLogin = () => {
+      const token = getAccessToken();
+      setIsLogin(!!token);
+    };
+    checkLogin();
+
+  }, [])
+//  sessionStorage.setItem("userId", jwtDecode(isLogin).userId);
+  
   return (
-    <nav className="header-nav">
+    <H.Header_nav>
      <div className="navigation">
       <div className="nav-top">
           <NavLink
@@ -69,13 +88,19 @@ export const HeaderMenu = () => {
           
           <div className="nav-right">
             <div className="login">
-            <NavLink
+               
+           {!isLogin ?
+            (<NavLink
               to="/login"
               style={({ isActive }) => (isActive ? selectedStyle : undefined)}
             >
               {" "}
               로그인{" "}
-            </NavLink>
+            </NavLink> 
+            ): (
+            <H.Logout>
+              <LogoutButton />
+            </H.Logout>)} 
             </div>
             <NavLink
               to="/chat"
@@ -88,7 +113,7 @@ export const HeaderMenu = () => {
         </div>
       </div>
       
-    </nav>
+    </H.Header_nav>
   );
 };
 

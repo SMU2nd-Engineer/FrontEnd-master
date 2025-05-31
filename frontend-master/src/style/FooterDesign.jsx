@@ -1,18 +1,24 @@
-.footer-nav {
-  position: absolute;
+import styled from "styled-components";
+
+export const Footer_nav = styled.nav`
+  /* position: fixed; */
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 100px;
+  /* height: 200px; */
   background: #f3f2f2;
 
   border-top: 1px solid #eeeeee !important ;
-
-  text-align: center;
+  display: block;
+  box-sizing: border-box;
+  /* text-align: center; */
   padding: 30px;
-  /* margin-top: 100px; */
 
+.navigation {
+  width: 1020px;
+  flex-direction: column;
+  margin: 0 auto;
   
 }
 
@@ -55,3 +61,5 @@
   font-size: 14px;
   margin-left: 5px;
 }
+
+`

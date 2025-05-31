@@ -9,6 +9,7 @@ import {
   ChatTitle,
   NullChatDiv,
 } from "../styles/ChatPageDesign";
+import { useCallback } from "react";
 
 /**
  * 채팅방 컴포넌트
@@ -21,15 +22,18 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   const [chatList, setChatList] = useState([]);
   const [fromUser, setFromUser] = useState(0);
 
+  const onMessage = useCallback((msg) => {
+    // 메시지 처리 로직
+    setChatList((prevMessages) => [...prevMessages, msg]);
+  }, []);
+
   useEffect(() => {
     if (selectRoom == 0) return;
     setRoom(selectRoom);
   }, [selectRoom]);
 
   // 새 메시지 수신 시 처리
-  useChatSocket(room, (msg) => {
-    chatList.setChatList([...chatList, msg]);
-  });
+  useChatSocket(room, onMessage);
 
   useEffect(() => {
     if (room == 0) return;

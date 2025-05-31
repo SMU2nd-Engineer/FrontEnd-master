@@ -20,6 +20,12 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
 
+body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Pretendard-Regular';
   background: #ffffff;
@@ -35,21 +41,20 @@ body {
   background: #ffffff;
   min-height: 100%;
   margin-top: 170px;
-  margin-bottom: 50px;
-  padding-bottom: 300px;
-  
+  /* margin-bottom: 50px; */
+  padding-bottom: 100px;
+  flex: 1;
 }
 
-.app-main {
-  width: 100%;
-  max-width: 1024px;
+.app-main {    
   margin: 0 auto;
-  min-height: 100vh;
   background: #ffffff;
   display: flex;
   flex-direction: column;
-
-  position: relative;
+  min-height: 100%;
+  width: 100%;
+  max-width: 1024px;
+  /* position: relative; */
 }
 
 .pagetitle {
@@ -90,6 +95,14 @@ button {
   cursor: pointer;
   flex-shrink: 0;
   background-color: transparent;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: none;
 }
 `
 
