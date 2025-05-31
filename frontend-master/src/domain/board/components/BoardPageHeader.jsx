@@ -12,17 +12,11 @@ const BoardPageHeader = () => {
     navigate("/board/submit")
   };
 
-  // 페이지 상단 게시글 수정 버튼 클릭 핸들러 
-  // - 게시글 읽기 페이지에서 게시글 수정 넣을 것임 
-  // const handleEdit = () => {
-  //   console.log("게시글 수정 클릭");
-  // };
-
   return (
       <board.Board_top>
-        <p>게시판</p> 
-        <button onClick={handleRegister}>게시글 등록</button>
-        {/* <button onClick={handleEdit}>게시글 수정</button> */}
+        <p className="pagetitle">게시판</p>
+        {/* 게시글 등록 버튼 */} 
+        <button onClick={handleRegister}>등록</button>
       </board.Board_top>
   );
 };

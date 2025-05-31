@@ -37,12 +37,9 @@ const BoardListPage = () => {
 
       <board.Board_middleList>
         <BoardList boards={boards}/> {/* 게시글 목록 */}
-      </board.Board_middleList>
-
-      <div>
         {/* 하단 Footer(카테고리 드롭박스 선택, 검색어 입력창, 버튼:게시글 검색) 컴포넌트 */}
         <BoardPageFooter handleOnclick={handleOnclick}/> 
-      </div>  
+      </board.Board_middleList>
 
     </board.Board_main>
   );
