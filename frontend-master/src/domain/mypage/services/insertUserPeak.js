@@ -7,7 +7,7 @@ export const insertUserPeak = async (productIdx) => {
   try {
     const res = await axiosInstance.post(
       "/mypage/insertUserPeak",
-      { productIdx },
+      { idx: productIdx },
       { withCredentials: true }
     );
   } catch (error) {

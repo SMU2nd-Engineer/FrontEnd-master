@@ -3,8 +3,10 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { getUserPeakInfo } from "@user/services/getUserPeakInfo";
 import { updateUserPeak } from "@mypage/services/updateUserPeak";
 import { insertUserPeak } from "@/domain/mypage/services/insertUserPeak";
+import usePickStore from "@/domain/mypage/store/usePickStore";
 
 const PeakButton = ({ idx }) => {
+  const { triggerRefresh } = usePickStore();
   const [isPeak, setIsPeak] = useState(false);
 
   useEffect(() => {
@@ -12,7 +14,7 @@ const PeakButton = ({ idx }) => {
     const saveUserPeakInfo = async () => {
       try {
         const result = await getUserPeakInfo(idx);
-        setIsPeak(!!result.isPeak);
+        setIsPeak(!!result.isPick);
       } catch (error) {
         console.log(`내 찜 정보 불러오기 실패! ${error}`);
         throw error;
@@ -24,23 +26,20 @@ const PeakButton = ({ idx }) => {
   const handleClick = async (e) => {
     e.stopPropagation(); // 찜만 클릭되도록 버블링 방지위해 추가됨
     if (isPeak) {
+      // 찜 상태에서 누르면 찜 삭제 기능이 작동해야함.
       const confirmed = confirm("찜 목록에서 삭제하시겠습니까?");
       if (confirmed) {
         await updateUserPeak(idx);
         alert("찜 목록에서 삭제되었습니다.");
       }
       setIsPeak(false);
-      // 찜 상태에서 누르면 찜 삭제 기능이 작동해야함.
     } else {
       // 찜이 아닌 상태에서 누르면 찜 테이블에 값이 들어가야함.
       await insertUserPeak(idx);
       setIsPeak(true);
     }
-
-    //     if (onToggle) onToggle(idx, isPeak);
+    triggerRefresh();
   };
-
-  //   if (loading || !product) return null;
 
   return (
     <button onClick={handleClick}>

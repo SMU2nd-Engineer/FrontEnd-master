@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import * as Card from "../styles/ProductCardDesign";
 
-const ProductCard = ({ product, onToggle }) => {
+const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   console.log("ProductCard product:", product);
   if (!product) return null;
@@ -29,7 +29,7 @@ const ProductCard = ({ product, onToggle }) => {
         sdate={product.sdate}
       />
       <div onClick={(e) => e.stopPropagation()}>
-        {/* <PeakButton idx={product.idx} onToggle={onToggle} /> */}
+        <PeakButton idx={product.idx} />
       </div>
     </Card.Product_card>
   );

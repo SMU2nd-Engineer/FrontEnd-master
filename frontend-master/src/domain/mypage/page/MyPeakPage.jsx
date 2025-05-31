@@ -3,11 +3,14 @@ import MyPageLink from "../components/MyPageLink";
 import MyPagination from "../components/MyPaginationUI";
 import { getMyPageData } from "../services/getMyPageDate";
 import MyPeakList from "../components/MyPeakList";
-import { updateUserPeak } from "../services/updateUserPeak";
 import * as Nav from "../style/MyPageNavDesign";
 import { PeakContainer, PeakHedear } from "../style/MyPagePeakDesign";
+import usePickStore from "../store/usePickStore";
 
 export default function MyPeakPage() {
+  // 전역 변수 가져오기
+  const { refreshFlag } = usePickStore();
+
   // 처음 렌더링 할 때 데이터를 가져올 useEffect
   const [wishListInfo, setWishListInfo] = useState([]);
   // 한페이지에 보여줄 숫자
@@ -24,12 +27,6 @@ export default function MyPeakPage() {
     setCurrentPage(selected);
   };
 
-  // 찜 목록 삭제하기
-  const handlePeak = async (productIdx) => {
-    await updateUserPeak(productIdx);
-    totalInfoList();
-  };
-
   // 찜 목록 불러오기 함수
   const totalInfoList = async () => {
     const result = await getMyPageData("PEAK_LIST_INFO");
@@ -39,7 +36,8 @@ export default function MyPeakPage() {
   //카드 정보에 넣을 찜 목록 가져오기 - 데이터 보여지기 전까지 주석 처리
   useEffect(() => {
     totalInfoList();
-  }, []);
+  }, [refreshFlag]);
+
   return (
     <div>
       <Nav.StickyNavbar>
@@ -49,7 +47,7 @@ export default function MyPeakPage() {
         <PeakHedear>찜 목록</PeakHedear>
         {/* 카드 형태 렌더링 만들기 
         여기 또는 하위에서 카드를 눌렀을 때 상세페이지로 이동하게끔 구현해야함 */}
-        <MyPeakList products={currentItems} handlePeak={handlePeak} />
+        <MyPeakList products={currentItems} />
         {/* 페이지네이션 자리 */}
         <MyPagination
           pageCount={totalPageCount}
