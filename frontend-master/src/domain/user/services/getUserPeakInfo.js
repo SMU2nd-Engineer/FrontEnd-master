@@ -1,5 +1,10 @@
 import axiosInstance from "@/lib/axiosInstance";
 
+/**
+ * 유저 pick 정보를 가져오는 서비스
+ * @param {int} idx : 상품 idx
+ * @returns : 사용자 정보를 가져오는 함수
+ */
 export const getUserPeakInfo = async (idx) => {
   try {
     const res = await axiosInstance.post(
