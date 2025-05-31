@@ -1,55 +1,63 @@
 import React from 'react';
-import { searchProducts } from '@/domain/products/services/productService';
-import { getBoardSearch } from '@/domain/board/services/boardService';
 import SearchAll from '../components/SearchAll';
 import ProductList from '@/domain/products/components/ProductList';
 import BoardList from '@/domain/board/components/BoardList';
 import { useState } from 'react';
+import * as SA from "../styles/SearchAllPageDesign";
+import { searchAll } from '../services/SearchService';
 
 
 
 const SearchAllPage = () => {
   const [productResult, setProductResult] = useState([]);
-  const [postResult, setPostResult] = useState([]);
+  const [boardResult, setBoardResult] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const handleAllSearch = async (searchValue) => {
   if (!searchValue || !searchValue.keyword) {
-    setPostResult([]);
     setProductResult([]);
+    setBoardResult([]);
+    setSearchKeyword("");
     return;
   }
 
   try {
-    const [productRes, postRes] = await Promise.all([
-      searchProducts({ keyword: searchValue.keyword }), 
-      getBoardSearch(0, 0, searchValue.keyword),  
-    ]);
-
-    setProductResult(productRes.data);
-    setPostResult(postRes.data);
-  } catch (error) {
+      const res = await searchAll(searchValue.keyword);
+      setProductResult(res.data.products);  
+      setBoardResult(res.data.contents);    
+      setSearchKeyword(searchValue.keyword); 
+    } catch (error) {
     console.error("통합 검색 실패:", error);
   }
 };
 
   return (
-    <div>
-      <SearchAll onSearch={handleAllSearch} />
+    
+    <SA.SearchContainer>
+      <p className="pagetitle">통합검색</p>
+      <SA.SearchAllBar>
+        <SearchAll onSearch={handleAllSearch} />
+      </SA.SearchAllBar>
       
-      <h2>상품 검색 결과</h2>
-      {productResult.length > 0 ? (
-        <ProductList products={productResult} />
-      ) : (
-        <p>상품 검색 결과가 없습니다.</p>
-      )}
-
-      <h2>게시글 검색 결과</h2>
-      {postResult.length > 0 ? (
-        <BoardList posts={postResult} />
-      ) : (
-        <p>게시글 검색 결과가 없습니다.</p>
-      )}
-    </div>
+      <SA.SearchResult>
+        {/* <SA.ProductResult> */}
+          <h2> <span>{searchKeyword}</span> 상품 검색 결과</h2>
+          {productResult.length > 0 ? (
+            <ProductList products={productResult} />
+          ) : (
+            <p> <span>{searchKeyword}</span> 상품 검색 결과가 없습니다.</p>
+          )}
+        {/* </SA.ProductResult> */}
+        {/* <SA.PostResult> */}
+          <h2><span>{searchKeyword}</span> 게시글 검색 결과</h2>
+          {boardResult.length > 0 ? (
+            <BoardList contents={boardResult} />
+          ) : (
+            <p><span>{searchKeyword}</span> 게시글 검색 결과가 없습니다.</p>
+          )}
+        {/* </SA.PostResult> */}
+      </SA.SearchResult>
+    </SA.SearchContainer>
     
   );
 };
