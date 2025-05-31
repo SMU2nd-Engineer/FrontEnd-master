@@ -11,6 +11,7 @@ import ShowFindIdPage from "../page/ShowFindIdPage";
 import ChangePasswordPage from "../page/ChangePasswordPage";
 import ChooseFavoritePage from "../page/ChooseFavoritePage";
 import UserWithdrawalPage from "../page/UserWithdrawalPage";
+import HomePage from "../page/HomePage";
 
 export default function UserRoutes() {
   return (
@@ -18,7 +19,8 @@ export default function UserRoutes() {
       <Routes>
         <Route path="" element={<Navigate to="login" />} />
         <Route path="login" element={<LogingPage />} />
-        <Route path="home" element={<TempHomePage />} />
+        <Route path="temphome" element={<TempHomePage />} />
+        <Route path="home" element={<HomePage />} />
         <Route path="kakaoauth" element={<KaKaoRedirect />} />
         <Route path="naverauth" element={<NaverRedirect />} />
         <Route path="googleauth" element={<GoogleRedirect />} />

@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => {
         "@products": path.resolve(__dirname, "./src/domain/products"),
         "@mypage": path.resolve(__dirname, "src/domain/mypage"),
         "@chat": path.resolve(__dirname, "src/domain/chat"),
+        "@board": path.resolve(__dirname, "src/domain/board"),
       },
     },
     server: {

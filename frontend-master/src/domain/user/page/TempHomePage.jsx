@@ -7,9 +7,15 @@ export default function TempHomePage() {
   const navigate = useNavigate();
   return (
     <div>
-      <h1>임시 로그인 페이지 입니다.</h1>
+      <h1>임시 홈 페이지 입니다.</h1>
       <hr />
       <LogoutButton />
+      <Button
+        text={"홈으로 이동"}
+        onClick={() => {
+          navigate("/mypage/home");
+        }}
+      />
       <Button
         text={"리뷰 남기기 페이지 이동"}
         onClick={() => {
