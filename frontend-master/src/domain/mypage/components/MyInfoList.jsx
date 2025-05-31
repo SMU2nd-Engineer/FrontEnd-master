@@ -201,7 +201,6 @@ export default function MyInfoList({ isSocialLogin }) {
               onClick={() => {
                 navigate("/user/withdrawal");
               }}
-              navigate={navigate}
             />
           </WithdrawalButtonWrapper>
         </MyPageInfoForm>

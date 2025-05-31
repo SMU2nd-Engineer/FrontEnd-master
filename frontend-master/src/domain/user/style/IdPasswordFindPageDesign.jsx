@@ -15,6 +15,8 @@ export const FindHeading = styled.h2`
   text-align: center;
   margin-bottom: 1.5rem;
   color: #f0b8b8;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
 `;
 
 export const FindForm = styled.form`
