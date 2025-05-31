@@ -33,3 +33,7 @@ export const SearchResult = styled.div`
   }
 `
 
+export const ProductResult = styled.div`
+  margin-bottom: 60px;
+`
+

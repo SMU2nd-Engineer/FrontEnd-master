@@ -9,7 +9,7 @@ img {
 
 label{
   padding: 6px 25px;
-  background-color:#bdbdbd;
+  background-color:rgb(194, 194, 194);
   border-radius: 4px;
   color: white;
   cursor: pointer;
