@@ -7,20 +7,22 @@ import { useRef } from "react";
 import BoardSubmitHeader from "../components/BoardSubmitHeader";
 import BoardSubmitFooter from "../components/BoardSubmitFooter";
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
+import * as Submit from "../styles/BoardSubmitDesign";
+import { FaPencilAlt } from "react-icons/fa";
+import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 
 // 게시글 등록 페이지 - id : 게시글 리스트에 있는 idx(순번). 이름만 id
-const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
-
+const BoardSubmitPage = ({ updateContentsData, isModify, id }) => {
   // 게시글 등록 (제목, 등록일자, 작성자(닉네임), 이미지, 글내용(React Quill Toollbar))
-  const [ newsubmit, setNewSubmit ] = useState({
+  const [newsubmit, setNewSubmit] = useState({
     category_idx: "",
     title: "",
     content: "",
-  });   
-  
+  });
+
   const { category_idx, title, content } = newsubmit;
   // 글 내용 입력 - quill 툴바 커스텀
-  const [ contentData, setContentData ] = useState ({}); 
+  const [contentData, setContentData] = useState({});
 
   // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
   const [contentsQuillHtml, setContentsQuillHtml] = useState("");
@@ -33,9 +35,9 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
 
   // 처음렌더링 됬을때 조건이 맞으면 실행되는 것
   useEffect(() => {
-    if ( updateContentsData && isModify && id) {
+    if (updateContentsData && isModify && id) {
       setNewSubmit(updateContentsData);
-      setContentData(updateContentsData.content)
+      setContentData(updateContentsData.content);
     }
   }, [updateContentsData, isModify, id]);
 
@@ -47,39 +49,53 @@ const BoardSubmitPage = ({updateContentsData, isModify, id}) => {
     // 사용자가 선택한 타입에 따라 파일 등록 처리 함수(imageUrl != value)
     setNewSubmit((prev) => ({
       ...prev,
-      [name]: value, 
+      [name]: value,
     }));
   };
-   console.log(quillRef);
-
-
+  console.log(quillRef);
 
   // 화면에 표시될 내용
   return (
-    <div className='new_board_submit'>
- 
-      {/* 등록페이지 카테고리 선택 + 제목 입력창 */}
-      <BoardSubmitHeader category_idx={category_idx} getCategoryIdx={getCategoryIdx}
-                         handleChange={handleChange} title={title}
-      />
+    <Submit.SubmitMain>
+      <Submit.SubmitTop>
+        <Submit.SubmitSubTitle>
+          {" "}
+          <HiOutlineChatBubbleLeftRight
+            style={{ marginRight: "6px", color: "#6b4b4b" }}
+          />
+          자유 게시판
+        </Submit.SubmitSubTitle>
+        {/* 등록페이지 카테고리 선택 + 제목 입력창 */}
+        <BoardSubmitHeader
+          category_idx={category_idx}
+          getCategoryIdx={getCategoryIdx}
+          handleChange={handleChange}
+          title={title}
+        />
+      </Submit.SubmitTop>
 
-      <div style={{border:"1px solid black"}}>
-          {/* 글 내용 입력하는 창 */}
-          <p>글 내용</p>
-          <BoardEditorQuill
-          contentData={contentData} setContentData={setContentData} quillRef={quillRef}/>
-      </div>
+      <Submit.SubmitMiddle>
+        {/* 글 내용 입력하는 창 */}
+        <BoardEditorQuill
+          contentData={contentData}
+          setContentData={setContentData}
+          quillRef={quillRef}
+        />
+      </Submit.SubmitMiddle>
 
-      {/* 게시글 등록 + 취소 버튼 */}
-      <BoardSubmitFooter contentData={contentData} newsubmit={newsubmit}
-                         isModify={isModify} id={id} setNewSubmit={setNewSubmit}
-                         setContentData={setContentData}
-      />
-
-    </div>
-  )
-
-
+      <Submit.SubmitBottom>
+        {/* 게시글 등록 + 취소 버튼 */}
+        <BoardSubmitFooter
+          contentData={contentData}
+          newsubmit={newsubmit}
+          isModify={isModify}
+          id={id}
+          setNewSubmit={setNewSubmit}
+          setContentData={setContentData}
+        />
+      </Submit.SubmitBottom>
+    </Submit.SubmitMain>
+  );
 };
 
 export default BoardSubmitPage;

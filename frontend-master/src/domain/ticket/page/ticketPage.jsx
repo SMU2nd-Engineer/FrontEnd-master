@@ -4,6 +4,7 @@ import CategoryPage from "../components/CategoryPage";
 import Calendar from "../components/Calendar";
 import SearchDate from "../components/SearchDate";
 import * as TicketPages from "../style/TicketPageDesign";
+import { useCallback } from "react";
 
 const TicketPage = () => {
   const [allCategoryIds, setAllCategoryIds] = useState([]);
@@ -24,14 +25,14 @@ const TicketPage = () => {
   };
 
   // 팝업 닫기 함수
-  const closePopup = () => {
+  const closePopup = useCallback(() => {
     setPopupInfo(null);
-  };
+  }, []);
 
-  const handleDateChange = (start, end) => {
+  const handleDateChange = useCallback((start, end) => {
     setStartDate(start);
     setEndDate(end);
-  };
+  }, []);
 
   return (
     <TicketPages.TicketPageMain>

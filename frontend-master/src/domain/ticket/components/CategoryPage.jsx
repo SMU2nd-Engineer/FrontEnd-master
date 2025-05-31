@@ -20,4 +20,4 @@ const CategoryPage = ({ setSelectedIds, setSearchTerm }) => {
   );
 };
 
-export default CategoryPage;
+export default React.memo(CategoryPage);
