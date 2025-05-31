@@ -5,6 +5,7 @@ import BoardList from '@/domain/board/components/BoardList';
 import { useState } from 'react';
 import * as SA from "../styles/SearchAllPageDesign";
 import { searchAll } from '../services/SearchService';
+import { Link } from 'react-router-dom';
 
 
 
@@ -40,18 +41,23 @@ const SearchAllPage = () => {
       </SA.SearchAllBar>
       
       <SA.SearchResult>
-        {/* <SA.ProductResult> */}
+        <SA.ProductResult>
           <h2> <span>{searchKeyword}</span> 상품 검색 결과</h2>
           {productResult.length > 0 ? (
             <ProductList products={productResult} />
           ) : (
             <p> <span>{searchKeyword}</span> 상품 검색 결과가 없습니다.</p>
           )}
-        {/* </SA.ProductResult> */}
+        </SA.ProductResult>
         {/* <SA.PostResult> */}
           <h2><span>{searchKeyword}</span> 게시글 검색 결과</h2>
-          {boardResult.length > 0 ? (
-            <BoardList contents={boardResult} />
+          {boardResult.length > 0 ? (       
+              <div>
+                {boardResult.map((keyword) => (
+                <p key={keyword.idx}> <Link to={`/board/detail/${keyword.idx}`}> {keyword.content}  </Link></p>
+              ))}
+            </div>
+         
           ) : (
             <p><span>{searchKeyword}</span> 게시글 검색 결과가 없습니다.</p>
           )}

@@ -53,7 +53,13 @@ export const CategorySelect = styled.div`
   gap: 20px;
   width: 100px;
   height: 40px;
+     
+  select {
+    border-radius: 5px;
+    border-color: #ddd;
+  }   
 `
+
 
 export const ButtonBox = styled.div`
   margin-top: 20px;

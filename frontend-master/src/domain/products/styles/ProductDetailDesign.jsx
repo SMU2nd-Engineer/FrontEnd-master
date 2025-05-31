@@ -84,17 +84,21 @@ export const Buttonbox = styled.div`
   color: rgb(85, 77, 68);
   
   .pickbutton {
-  background-color: rgb(238, 238, 186);
+  border-color: rgb(238, 238, 186);
 }
 
 .chatbutton {
   background-color: rgb(186, 236, 238);
   width: 90px;
+  color: rgb(85, 77, 68);
+  font-size: 20px;
 }
 
 .orderbutton {
   background-color: rgb(238, 186, 186);
   width: 90px;
+  color: rgb(85, 77, 68);
+  font-size: 20px;
 }
 `
 

@@ -6,7 +6,7 @@ const SearchRoutes = () => {
   return (
     <div className="search">
       <Routes>
-        <Route path="" element={<SearchAllPage />} />
+        <Route path="/search" element={<SearchAllPage />} />
       </Routes>
       
     </div>
