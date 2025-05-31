@@ -6,6 +6,7 @@ import { ImageActions } from '@xeger/quill-image-actions';
 import { ImageFormats } from '@xeger/quill-image-formats';
 
 // quill 이미지 모듈 등록
+// 이미지 삭제, 정렬, 팝업 기능, 스타일 속성 등 확장
 Quill.register('modules/imageActions', ImageActions);
 Quill.register('modules/imageFormats', ImageFormats);
 
@@ -29,6 +30,35 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
     "width"
   ];
 
+  // 최대 파일 크기 설정 (예: 2MB)
+  const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
+
+  function imageHandler() {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (!file) return;
+
+      // 용량 체크
+      if (file.size > MAX_IMAGE_SIZE) {
+        alert('이미지 크기는 최대 2MB까지 허용됩니다.');
+        return;
+      }
+
+      // base64로 인코딩하여 삽입 (또는 서버 업로드)
+      const reader = new FileReader();
+      reader.onload = () => {
+        const range = this.quill.getSelection(true);
+        this.quill.insertEmbed(range.index, 'image', reader.result);
+      };
+      reader.readAsDataURL(file);
+    };
+  }
+
   // Quill에서 설정할 모듈: 툴바 container만 지정
   // useMemo: 성능 최적화를 위해 사용(렌더링할때 마다 modules 객체 생성 방지용)
   const modules = useMemo(
@@ -37,7 +67,10 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
       imageActions: {},
       imageFormats: {},
       toolbar: {
-        container: "#toolbar", // 툴바 ID로 연결하여 설정함
+        container: "#toolbar", // 툴바 ID로 연결하여 설정함    
+        handlers: {
+          image: imageHandler,
+        },
       },
 
     }),

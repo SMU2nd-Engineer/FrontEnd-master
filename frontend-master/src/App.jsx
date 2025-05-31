@@ -26,7 +26,7 @@ function App() {
           <Route path="/payment/*" element={<PaymentRoutes />} />
           <Route path="/board/*" element={<BoardRoutes />} />
           <Route path="/ticket/*" element={<TicketPages />} />
-          <Route path="/search/*" element={<SearchAllPage />} />
+          <Route path="/total/*" element={<SearchAllPage />} />
         </Routes>
       </BodyComponent>
       <Footer />

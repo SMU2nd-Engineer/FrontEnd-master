@@ -32,7 +32,7 @@ export const HeaderMenu = ({}) => {
      <div className="navigation">
       <div className="nav-top">
           <NavLink
-            to="/search"
+            to="/total"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
           >
             {" "}
@@ -91,7 +91,7 @@ export const HeaderMenu = ({}) => {
                
            {!isLogin ?
             (<NavLink
-              to="/login"
+              to="/user/login"
               style={({ isActive }) => (isActive ? selectedStyle : undefined)}
             >
               {" "}
