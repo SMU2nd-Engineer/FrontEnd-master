@@ -7,7 +7,7 @@ export const BoardDetailMain = styled.div`
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 13px;
 `;
 export const BoardDetailTop = styled.div`
   display: flex;
@@ -19,14 +19,15 @@ export const CategoryAndTitle = styled.div`
   display: flex;
   gap: 10px;
   margin-left: 20px;
+  margin-bottom: 20px;
   max-height: 45px;
   .category {
-    font-size: 22px;
+    font-size: 28px;
     color: #888;
     font-weight: 500;
   }
   .title {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: bold;
     color: #222;
   }
@@ -37,7 +38,9 @@ export const BoardDetailMiddle = styled.div`
   font-size: 16px;
   line-height: 1.6;
   color: #333;
-
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 50px;
   img {
     max-width: 100%;
     border-radius: 8px;
@@ -47,26 +50,51 @@ export const BoardDetailBottom = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
+  padding-top: 15px;
 `;
 
 export const UserAuth = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eee;
-  max-height: 80px;
+  margin-left: 25px;
+  /* padding: 16px 24px; */
   .author {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 13px;
     color: #555;
-    margin-left: 25px;
+    gap: 4px;
   }
   .brn-group {
     button {
-      width: 100px;
+      width: 75px;
+    }
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 4px;
+
+    button {
+      font-size: 13px;
+      background-color: #f0b8b8;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      height: 22px;
+      width: 65px;
+      &:hover {
+        background-color: #ec7d7d;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 12px;
+      color: #888;
     }
   }
 `;
@@ -76,9 +104,6 @@ export const CommentMain = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-top: 32px;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 24px;
 `;
 
 // 댓글 입력창 영역

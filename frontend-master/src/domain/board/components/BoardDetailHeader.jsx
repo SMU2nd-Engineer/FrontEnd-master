@@ -56,18 +56,15 @@ const BoardDetailHeader = ({
         <h2 className="title">{title}</h2>
       </Details.CategoryAndTitle>
 
-      <Details.UserAuth>
+      <Details.UserAuth id="sidis">
         <div className="author">
           {/* 작성자 */}
-          <FaUserLarge style={{ marginRight: "15px" }} />
+          <FaUserLarge style={{ marginRight: "5px" }} />
           <h2>{nickname}</h2>
-
-          <Button
-            className="chatbutton"
-            text={"1:1 채팅"}
-            onClick={handleRoomClick}
-          ></Button>
-          <div>{sdate}</div>
+          <div className="meta">
+            <button onClick={handleRoomClick}>1:1 채팅</button>
+            <p>{sdate}</p>
+          </div>
         </div>
         <div className="brn-group">
           {/* 게시판 리스트 홈페이지로 이동 - 게시글 수정+삭제 X */}
