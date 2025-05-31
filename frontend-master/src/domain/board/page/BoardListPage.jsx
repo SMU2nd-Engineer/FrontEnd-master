@@ -20,6 +20,7 @@ const BoardListPage = () => {
 
   // boards를 검색하는 기능 함수 - 게시글 검색버튼 눌렀을때 데이터 목록이 갱신되게
   const handleOnclick = (searchtype, category , keyword) => {
+    console.log(searchtype, category , keyword)
     getBoardSearch(searchtype, category , keyword)
       .then((res) => res.data)
       .then((data) => setBoards(data))
