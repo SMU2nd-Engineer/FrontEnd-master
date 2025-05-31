@@ -10,7 +10,7 @@ export const Board_top = styled.div`
     background-color: #f0b8b8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
-    width: 10%;
+    width: 6%;
     height: 50%;
   }
 `;
@@ -19,7 +19,8 @@ export const Board_main = styled.div`
   width: 1000px;
   height: 800px;
   text-align: center;
-  justify-content: end;
+  justify-content: flex-end;
+  padding: 15px;
 `;
 
 export const Board_middleList = styled.div`
@@ -34,7 +35,7 @@ export const Board_middleList = styled.div`
 export const Board_cotentsList = styled.table`
   width: 100%;
   height: 50%;
-  padding: 30px;
+  padding: 20px;
   thead {
     th {
       background-color: #f5f4f4d5;
@@ -78,7 +79,7 @@ export const Board_SearchSelectBox = styled.div`
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     width: 120%;
-    height: 50%;
+    height: 100%;
   }
 `;
 
@@ -87,7 +88,7 @@ export const Board_CategorySelectBox = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   width: 120%;
-  height: 50%;
+  height: 100%;
   }
 `;
 
@@ -96,7 +97,7 @@ export const Board_SearchInput = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   width: 105%;
-  height: 50%;  
+  height: 90%;  
   }
 `; 
 
