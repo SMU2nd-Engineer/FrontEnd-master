@@ -1,11 +1,15 @@
 import React from "react";
-import MyPageLink from "../components/MyPageLink";
 import MyPageRating from "../components/MyReviewRating";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REVIEW_SCHEMA } from "@user/utils/userFormValidator";
 import Button from "@/components/Button";
-import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import TransactionTextReview from "../components/TransactionTextReview";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -16,6 +20,7 @@ import { updateReview } from "../services/updateReview";
 
 import * as TranReview from "../style/TransactionReviewDesign";
 import PaymentProductInfo from "@/domain/payment/components/PaymentProductInfo";
+import { getReviewInitInfo } from "../services/getReviewInitInfo";
 
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
@@ -34,9 +39,9 @@ export default function TransactionReviewRegisterPage() {
   const [originalReview, setOriginalReview] = useState({}); // 기존 리뷰 정보 저장.
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const tradeType = Number(searchParams.get('tradeType'));
+  const tradeType = Number(searchParams.get("tradeType"));
   const location = useLocation();
-  const product = location.state?.product;
+  const [productInfo, setProductInfo] = useState(location.state?.product ?? "");
 
   const {
     register, // 입력 폼 등록
@@ -130,7 +135,7 @@ export default function TransactionReviewRegisterPage() {
     const saveInfo = async () => {
       if (reviewIdx) {
         const getReview = await getMyPageData("REVIEW_DETAIL", reviewIdx);
-        console.log("===getReview=== : ", getReview.fetchReviewRegisterInfo);
+        console.log("===getReview=== : ", getReview);
         setEvalutaionCategories(getReview.evaluationCategories);
         setValue("rating", getReview.fetchReviewRegisterInfo.rating);
         setValue("reviewText", getReview.fetchReviewRegisterInfo.reviewText);
@@ -140,6 +145,7 @@ export default function TransactionReviewRegisterPage() {
           getReview?.fetchReviewRegisterInfo?.sellerIdx ?? 0
         ); // 폼 제출이 안되서 지정해주기
         setSellerInfo(getReview.fetchReviewRegisterInfo);
+        setProductInfo(getReview.fetchReviewProductInfoDTO);
         const selectedKeys = Object.entries(getReview.reviewEvaluationRecord) // 객체의 값만 가져옴(map객체)
           .filter(([key, value]) => value === 1) // 선택된 값만 선택
           .map(([key]) => key);
@@ -153,27 +159,38 @@ export default function TransactionReviewRegisterPage() {
           setValue("evaluation[]", selectedKeys);
         }, 0);
       } else {
-        const result = await getMyPageData("SELLER_AND_CATEGORIES");
-        setSellerInfo(result.sellerInfo??"");
+        console.log(
+          "리뷰 초기 요청 값:",
+          productInfo.user_idx,
+          productInfo.idx
+        );
+        // 거래 남기기 위하여 초기 정보 불러오기
+        const result = await getReviewInitInfo(
+          productInfo.user_idx,
+          productInfo.idx
+        );
+        setSellerInfo(result.sellerInfo ?? "");
         setEvalutaionCategories(result.evaluationCategories);
-        setValue("sellerIdx", result?.sellerInfo?.sellerIdx ?? 0); // 폼 제출이 안되서 지정해주기
+        setValue("sellerIdx", productInfo.user_idx); // 폼 제출이 안되서 지정해주기
         setValue("transactionIdx", result?.sellerInfo?.transactionIdx ?? 0); // 폼 제출이 안되서 지정해주기
       }
     };
     saveInfo();
-  }, [setValue, reviewIdx]);
+  }, [productInfo.idx, productInfo.user_idx, setValue, reviewIdx]);
+
+  console.log("넘겨받은 상품 정보:", location.state?.product);
   return (
     <TranReview.TRmain>
       <TranReview.PaymentProductInfo>
-        {/* <PaymentProductInfo product={product} tradeType={{tradeType}} /> */}
+        <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
       </TranReview.PaymentProductInfo>
-      <TranReview.Line></TranReview.Line>
-      <h1>
-        {sellerInfo && sellerInfo[0].sellerName
-          ? `${sellerInfo[0].sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
-          : "거래 정보 로딩 중..."}
-      </h1>
-      {/* <h1>{sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요</h1> */}
+      <TranReview.Line>
+        <h1>
+          {sellerInfo && sellerInfo.sellerName
+            ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
+            : "거래 정보 로딩 중..."}
+        </h1>
+      </TranReview.Line>
       <TranReview.ReviewMainForm
         onSubmit={handleSubmit(submitForm, (error) => {
           console.log("유효성 검증 실패", error);
