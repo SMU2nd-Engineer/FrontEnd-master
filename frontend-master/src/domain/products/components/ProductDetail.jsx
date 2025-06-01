@@ -10,6 +10,7 @@ import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
 import GlobalStyle from "@/style/AppDesign";
 import PeakButton from "./PeakButton";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -17,6 +18,9 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [chatPopup, setChatPopup] = useState(0);
+  const {userInfo} = useLoginUserInfoStore();
+  console.log("로그인 유저 정보:", userInfo);
+  // console.log("게시글 작성자 ID:", product.user_idx);
 
   useEffect(() => {
     getProductDetail(idx)
@@ -121,18 +125,21 @@ export default function ProductDetail() {
         />
         {/* <ImageSlider imageList={product.imageList} /> */}
 
+
         <ProductDetails.PDetailContent>
           {product.content}
         </ProductDetails.PDetailContent>
 
-        <ProductDetails.EditDeleteBox>
+        { product.user_idx === userInfo.userIdx &&(
+          // <ProductDetails.EditDeleteBox>
           <Button
             className="product_editbutton"
             text={"수정"}
             onClick={handleEdit}
           />
-          <ProductDelete idx={idx} />
-        </ProductDetails.EditDeleteBox>
+          // <ProductDelete idx={idx} />
+        // </ProductDetails.EditDeleteBox>
+        )}
       </ProductDetails.DetailBottom>
     </div>
   );
