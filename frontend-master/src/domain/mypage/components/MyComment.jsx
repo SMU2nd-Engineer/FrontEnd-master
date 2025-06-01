@@ -6,6 +6,7 @@ import {
   ContentsAndCommentTableDayTh,
   ContentsAndCommentTableTh,
   MyBoardCommentContainer,
+  MyBoardHedear,
 } from "../style/MypageBoardDesign";
 
 export default function MyComment({ navigate, comments = [] }) {
@@ -28,6 +29,7 @@ export default function MyComment({ navigate, comments = [] }) {
   }
   return (
     <MyBoardCommentContainer>
+      <MyBoardHedear>댓글</MyBoardHedear>
       <ContentsAndCommentTable>
         <thead>
           <tr>

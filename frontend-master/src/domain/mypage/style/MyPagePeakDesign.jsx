@@ -4,13 +4,14 @@ import styled from "styled-components";
  * 짬 판매 상품 컨테이너
  */
 export const PeakContainer = styled.div`
-  width: 100;
+  width: auto;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 1rem;
   gap: 1rem;
+  margin-top: 3rem;
 `;
 
 /**

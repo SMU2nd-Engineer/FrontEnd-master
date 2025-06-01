@@ -15,7 +15,8 @@
       "@user/*": ["./src/domain/user/*"],
       "@mypage/*": ["./src/domain/mypage/*"],
       "@chat/*": ["./src/domain/chat/*"],
-      "@products/*": ["./src/domain/products/*"]
+      "@products/*": ["./src/domain/products/*"],
+      "@board/*": ["./src/domain/board/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*"]

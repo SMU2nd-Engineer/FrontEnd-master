@@ -136,6 +136,7 @@ export const SellHedear = styled.h2`
   justify-content: baseline;
   align-items: center;
   color: #9a8a8a;
+  margin-left: 1rem;
 `;
 /* --------------------------------------------------- */
 

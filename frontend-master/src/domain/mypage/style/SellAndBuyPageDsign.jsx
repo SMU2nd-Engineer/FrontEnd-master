@@ -8,6 +8,9 @@ export const SellAndBuyContainer = styled.div`
   margin-top: 1rem;
   gap: 1.5rem;
   width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 1rem;
 `;
 
 /**
@@ -16,6 +19,14 @@ export const SellAndBuyContainer = styled.div`
 
 export const SellAndBuyHeader = styled.h1`
   font-weight: 500;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  color: #9a8a8a;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
 `;
 
 /**
@@ -27,6 +38,7 @@ export const BuyHedear = styled.h2`
   justify-content: baseline;
   align-items: center;
   color: #9a8a8a;
+  margin-left: 1rem;
 `;
 
 /**
