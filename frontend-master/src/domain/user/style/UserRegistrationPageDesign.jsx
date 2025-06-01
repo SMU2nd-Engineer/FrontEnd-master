@@ -6,7 +6,6 @@ export const RegistFormContainer = styled.div`
 
 export const RegistFormLabel = styled.label`
   font-weight: bold;
-  margin-bottom: 0.5rem;
   display: block;
 `;
 
@@ -25,7 +24,7 @@ export const RegistStyledInput = styled.input`
   border: 1px solid ${({ $error }) => ($error ? "#e53e3e" : "#ddd")};
   border-radius: 5px;
   font-size: 1rem;
-  height: 2.6rem;
+  height: 42px;
   box-sizing: border-box;
 `;
 
@@ -69,9 +68,10 @@ export const RegistStyledButtonWrapper = styled.div`
     white-space: nowrap;
     transition: all 0.2s ease-in-out;
     transform-origin: center center;
-    font-size: 1rem;
+    font-size: 14.5px;
     height: 100%;
     box-sizing: border-box;
+    color: white;
     &:hover {
       background-color: #f8f8f8;
       color: #f0b8b8;
@@ -127,22 +127,22 @@ export const RegistButton = styled.button`
   width: 10rem;
 
   &.cancel {
-    background-color: #ff9a9a;
-    color: #fff;
+    background-color: #fff;
+    color: #ff9a9a;
 
     &:hover {
-      background-color: #fff;
-      color: #ff9a9a;
+      background-color: #ff9a9a;
+      color: #fff;
     }
   }
 
   &.submit {
-    background-color: #000000;
-    color: #fff;
+    background-color: #fff;
+    color: #818080;
 
     &:hover {
-      background-color: #fff;
-      color: #000000;
+      background-color: #818080;
+      color: #fff;
     }
   }
 `;

@@ -141,8 +141,8 @@ export const Board_SearchButton = styled.div`
     cursor: pointer;
     width: 50px;
     height: 115%;
-  }
-  &:hover {
-    background-color: rgb(236, 125, 125);
+    &:hover {
+      background-color: rgb(236, 125, 125);
+    }
   }
 `;
