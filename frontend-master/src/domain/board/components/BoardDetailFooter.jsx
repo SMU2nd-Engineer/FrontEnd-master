@@ -7,6 +7,7 @@ import {
 
 import * as Details from "../styles/BoardDetailDesign";
 import { FaUserLarge } from "react-icons/fa6";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 const BoardDetailFooter = ({
   newCommentText,
@@ -15,7 +16,12 @@ const BoardDetailFooter = ({
   setCommentList,
   id,
   setLoading,
+  useridx,
 }) => {
+
+  // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
+  const {userInfo} = useLoginUserInfoStore();
+
   // 댓글 등록 버튼 선택
   const handleSubmit = async function (e) {
     // preventDefault: 페이지 새로고침 방지
@@ -125,16 +131,11 @@ const BoardDetailFooter = ({
                 {/* 댓글 삭제 button 
                     처음 페이지 시작하면 다른 정보와 로그인한 사람의 user_idx를 가져와야함
                     비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정
-                    ContentsService, ContentsCommentService에 어떻게 불러올지 생각해야함
                   */}
                 {/* {userIdx === comment.userIdx &&  */}
-                <button
-                  onClick={() => {
-                    handleDelete(comment.comment_idx);
-                  }}
-                >
-                  댓글 삭제
-                </button>
+                { useridx === userInfo.userIdx && (<button
+                  onClick={() => { handleDelete(comment.comment_idx);}}
+                > 댓글 삭제</button>)}
                 {/* } */}
               </li>
             );
