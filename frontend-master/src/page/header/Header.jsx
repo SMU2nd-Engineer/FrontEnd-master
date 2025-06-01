@@ -18,19 +18,7 @@ const selectedStyle = {
 export const HeaderMenu = ({}) => {
   const userInfo = useLoginUserInfoStore.getState().userInfo;
 
-  const isLogin = !!userInfo.userId;
-
-  // const [isLogin, setIsLogin] = useState(false);
-
-  // useEffect(()=> {
-  //   const checkLogin = () => {
-  //     const token = getAccessToken();
-  //     setIsLogin(!!token);
-  //   };
-  //   checkLogin();
-
-  // }, [])
-
+  const isLogin = userInfo.userIdx > 0;
   
   return (
     <H.Header_nav>
@@ -88,17 +76,17 @@ export const HeaderMenu = ({}) => {
             <div className="login">
                
            {isLogin ?
-            (<NavLink
+            (
+            <H.Logout>
+              <LogoutButton />
+            </H.Logout>):(<NavLink
               to="/user/login"
               style={({ isActive }) => (isActive ? selectedStyle : undefined)}
             >
               {" "}
               로그인{" "}
             </NavLink> 
-            ): (
-            <H.Logout>
-              <LogoutButton />
-            </H.Logout>)} 
+            ) } 
             </div>
             <NavLink
               to="/chat"
