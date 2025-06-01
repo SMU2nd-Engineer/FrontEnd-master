@@ -4,10 +4,15 @@ import { getUserPeakInfo } from "@user/services/getUserPeakInfo";
 import { updateUserPeak } from "@mypage/services/updateUserPeak";
 import { insertUserPeak } from "@/domain/mypage/services/insertUserPeak";
 import usePickStore from "@/domain/mypage/store/usePickStore";
+import { useLocation } from "react-router-dom";
 
 const PeakButton = ({ idx }) => {
   const { triggerRefresh } = usePickStore();
   const [isPeak, setIsPeak] = useState(false);
+
+  // 찜목록 삭제 알람을 위한 경로확인
+  const location = useLocation();
+  const isPickPage = location.pathname.includes("/mypage/peakList");
 
   useEffect(() => {
     // 상품 정보와 내 정보를 이용해서 찜 상품인지 아닌지 확인을 위한 정보 호출
@@ -24,17 +29,21 @@ const PeakButton = ({ idx }) => {
   }, [idx]);
 
   const handleClick = async (e) => {
-    e.stopPropagation(); // 찜만 클릭되도록 버블링 방지위해 추가됨
+    e.stopPropagation();
+
     if (isPeak) {
-      // 찜 상태에서 누르면 찜 삭제 기능이 작동해야함.
-      const confirmed = confirm("찜 목록에서 삭제하시겠습니까?");
-      if (confirmed) {
+      if (isPickPage) {
+        const confirmed = confirm("찜 목록에서 삭제하시겠습니까?");
+        if (confirmed) {
+          await updateUserPeak(idx);
+          alert("찜 목록에서 삭제되었습니다.");
+          setIsPeak(false);
+        }
+      } else {
         await updateUserPeak(idx);
-        alert("찜 목록에서 삭제되었습니다.");
+        setIsPeak(false);
       }
-      setIsPeak(false);
     } else {
-      // 찜이 아닌 상태에서 누르면 찜 테이블에 값이 들어가야함.
       await insertUserPeak(idx);
       setIsPeak(true);
     }

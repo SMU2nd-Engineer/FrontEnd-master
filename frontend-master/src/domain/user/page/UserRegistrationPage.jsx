@@ -23,18 +23,7 @@ import {
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
 
 /**
- * id : 아이디
- * name : 이름
- * password : 비밀번호
- * passwordCheck : 비밀 번호 확인
- * address : 주소 입력
- * detailAddress : 상세 주소
- * emailLocal : 이메일 앞 부분
- * emailDomain : 이메일 뒷 부분
- * isIdCheck : 아이디 중복 체크 여부
- * isNickNameCheck : 닉네임 중복 체크 여부
- * isSamePassword : 비밀 번호 & 비밀 번호 확인 모두 일치하는지 체크 여부
- * isSocialLogin : 소셜 로그인 여부
+ * 회원 가입 페이지
  * @return : 회원 가입 폼
  */
 
@@ -70,7 +59,6 @@ export default function UserRegistrationPage() {
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
     const socialProvider = sessionStorage.getItem("provider");
-    console.log(socialProvider);
     if (socialId) {
       // 안전한 난수 비밀번호 생성 (예: 32자리) - handleSubmit 실행을 위해 설정함.
       const finalPassword = generatePassword();
@@ -98,7 +86,6 @@ export default function UserRegistrationPage() {
     }
     try {
       const result = await registrationService(formData);
-      console.log(result);
       const accessToken = result.accessToken;
       if (accessToken) {
         setAccessToken(accessToken);

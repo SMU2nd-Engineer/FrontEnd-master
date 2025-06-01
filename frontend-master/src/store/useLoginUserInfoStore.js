@@ -16,7 +16,7 @@ const useLoginUserInfoStore = create(
 
       setLoginUserInfo: (newLoginUserInfo) =>
         set(() => ({ userInfo: newLoginUserInfo })),
-
+      // 유저 정보를 초기 상태로 되돌리는 함수
       setDefaultUser: () =>
         set(() => ({
           userInfo: {
@@ -27,7 +27,7 @@ const useLoginUserInfoStore = create(
           },
         })),
     }),
-    // 유저 정보를 초기 상태로 되돌리는 함수
+
     {
       name: "LoginUserInfo",
     }

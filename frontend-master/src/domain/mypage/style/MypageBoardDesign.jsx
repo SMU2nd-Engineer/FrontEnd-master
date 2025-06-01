@@ -100,3 +100,15 @@ export const MyBoardHedear = styled.h1`
   padding: 1rem;
   border-bottom: 1px solid #ddd;
 `;
+
+export const MyBorderMainHeader = styled.h1`
+  font-weight: 500;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  color: #9a8a8a;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+`;

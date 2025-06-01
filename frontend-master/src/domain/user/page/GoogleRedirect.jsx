@@ -21,11 +21,6 @@ export default function GoogleRedirect() {
   // 자동 로그인 체크
   const autoLogin = sessionStorage.getItem("autoLogin") === "true";
 
-  console.log("GoogleCode : " + googleCode);
-  console.log("stateKey : " + stateKey);
-  console.log("googleError : " + googleError);
-  console.log("googleErrorMessage : " + googleErrorMessage);
-
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   /**
    *
@@ -35,17 +30,11 @@ export default function GoogleRedirect() {
       if (stateKey === import.meta.env.VITE_API_STATE && googleCode) {
         try {
           const res = await googleLogin(googleCode, autoLogin);
-          console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
-            console.log("로그인 성공", res.data);
             navigate("/user/home");
           }
         } catch (error) {
-          console.log(error);
-          // 로그인 실패 시
-          const status = error.response.status;
-          console.log(status);
           console.error("서버 연결 실패:", error);
           alert("네이버 로그인 중 오류가 발생했습니다. 다시 로그인 해주세요");
           navigate("/login");

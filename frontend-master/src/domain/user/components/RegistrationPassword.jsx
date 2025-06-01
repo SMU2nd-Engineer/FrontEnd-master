@@ -1,12 +1,5 @@
 import React from "react";
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  VStack,
-} from "@chakra-ui/react";
-import {
   RegistFlexColumn,
   RegistFormControl,
   RegistFormError,

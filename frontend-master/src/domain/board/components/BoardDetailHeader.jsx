@@ -76,17 +76,22 @@ const BoardDetailHeader = ({
           </div>
         </div>
         <div className="brn-group">
-          {/* 게시판 리스트 홈페이지로 이동 - 게시글 수정+삭제 X */}
-          <button onClick={handleBackHome}>글 목록</button>
+          <div>
+            {/* 게시판 리스트 홈페이지로 이동 - 게시글 수정+삭제 X */}
+            <button onClick={handleBackHome}>글 목록</button>
+          </div>
           {/* 게시글 수정 버튼 */}
-
-          {user_idx === userInfo.userIdx && (
-            <button onClick={handleRegister}>수정</button>
-          )}
-          {/* 게시글 삭제 버튼 */}
-          {user_idx === userInfo.userIdx && (
-            <button onClick={handleDeleteDetail}>삭제</button>
-          )}
+          <div>
+            {user_idx === userInfo.userIdx && (
+              <button onClick={handleRegister}>수정</button>
+            )}
+          </div>
+          <div>
+            {/* 게시글 삭제 버튼 */}
+            {user_idx === userInfo.userIdx && (
+              <button onClick={handleDeleteDetail}>삭제</button>
+            )}
+          </div>
         </div>
       </Details.UserAuth>
     </div>

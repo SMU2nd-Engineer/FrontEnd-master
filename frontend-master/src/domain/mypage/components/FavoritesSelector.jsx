@@ -100,5 +100,6 @@ export default function FavoritesSelector({ mode = "register" }) {
         </Favorite.FormActions>
       </Favorite.CategoryForm>
     </div>
+
   );
 }

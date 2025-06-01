@@ -67,6 +67,8 @@ export const UserAuth = styled.div`
     gap: 4px;
   }
   .brn-group {
+    display: flex;
+    gap: 10px;
     button {
       width: 75px;
       font-size: 14px;
