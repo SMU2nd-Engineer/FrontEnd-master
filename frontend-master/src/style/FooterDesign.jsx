@@ -33,7 +33,7 @@ export const Footer_nav = styled.nav`
   margin-top: 20px;
   justify-content: center;
   display: flex;
-  gap: 100px;
+  gap: 60px;
   text-align: left;
 
   color: rgb(170, 170, 170);
@@ -42,13 +42,13 @@ export const Footer_nav = styled.nav`
 
 .left-column {
   flex: 1;
-  border: 1px dotted rgb(168, 168, 168);
+  /* border: 1px dotted rgb(168, 168, 168); */
   
 }
 
 .right-column{
   flex: 1;
-  border: 1px dotted rgb(168, 168, 168);
+  /* border: 1px dotted rgb(168, 168, 168); */
 }
 
 .ft-h2 {

@@ -2,30 +2,35 @@ import { useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import * as H from "../../style/HeaderDesing"
-import MyName from "@/domain/mypage/components/MyName";
 import { jwtDecode } from "jwt-decode";
 import LogoutButton from "@/domain/user/components/LogoutButton";
 import { getAccessToken } from "@/utils/TokenManager";
+import  mainLogo from  "@/assets/main_logo.png";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
+
 
 const selectedStyle = {
   backgroundColor: "none",
 };
 
-// const isLogin = sessionStorage.getItem("accessToken") || localStorage.getItem("accessToken") 
 
 // 헤더 메뉴
 export const HeaderMenu = ({}) => {
-  const [isLogin, setIsLogin] = useState(false);
+  const userInfo = useLoginUserInfoStore.getState().userInfo;
 
-  useEffect(()=> {
-    const checkLogin = () => {
-      const token = getAccessToken();
-      setIsLogin(!!token);
-    };
-    checkLogin();
+  const isLogin = !!userInfo.userId;
 
-  }, [])
-//  sessionStorage.setItem("userId", jwtDecode(isLogin).userId);
+  // const [isLogin, setIsLogin] = useState(false);
+
+  // useEffect(()=> {
+  //   const checkLogin = () => {
+  //     const token = getAccessToken();
+  //     setIsLogin(!!token);
+  //   };
+  //   checkLogin();
+
+  // }, [])
+
   
   return (
     <H.Header_nav>
@@ -45,13 +50,6 @@ export const HeaderMenu = ({}) => {
             {" "}
             게시판{" "}
           </NavLink>
-          {/* <NavLink
-            to="/product/upload"
-            style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-          >
-            {" "}
-            상품등록{" "}
-          </NavLink> */}
           <NavLink
             to="/mypage"
             style={({ isActive }) => (isActive ? selectedStyle : undefined)}
@@ -65,7 +63,7 @@ export const HeaderMenu = ({}) => {
           <div className="nav-left">
             <NavLink to="/" className="site_name">
               {" "}
-              SMU{" "}
+              <img src={mainLogo} alt="" />{" "}
             </NavLink>
             <div className="main-link">
               <NavLink
@@ -89,7 +87,7 @@ export const HeaderMenu = ({}) => {
           <div className="nav-right">
             <div className="login">
                
-           {!isLogin ?
+           {isLogin ?
             (<NavLink
               to="/user/login"
               style={({ isActive }) => (isActive ? selectedStyle : undefined)}
