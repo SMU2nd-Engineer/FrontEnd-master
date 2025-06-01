@@ -12,14 +12,21 @@ export const Board_top = styled.div`
 `;
 
 export const Board_TopHeaderButton = styled.button`
+    font-size: 13px;
     background-color: #f0b8b8;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
+    border: none;
     border-radius: 5px;
     margin-top: 15px;
-    // 우선순위 높이기 (필요 시)
+    color: white;
+    cursor: pointer;
+    // 우선순위 버튼 높이기
     && {
-      width: 60px;
-      height: 40px;
+      width: 50px;
+      height: 35px;
+    }
+    &:hover {
+        background-color: #ec7d7d;
     }
 `;
 
@@ -118,8 +125,14 @@ export const Board_SearchButton = styled.div`
   button{
   background-color: #f0b8b8;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
+  border: none;
   border-radius: 5px;
+  color: white;
+  cursor: pointer;
   width: 110%;
   height: 110%;
+  }
+  &:hover {
+    background-color: #ec7d7d;
   }
 `;

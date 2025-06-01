@@ -69,6 +69,17 @@ export const UserAuth = styled.div`
   .brn-group {
     button {
       width: 75px;
+      font-size: 13px;
+      background-color: #f0b8b8;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      height: 35px;
+      width: 65px;
+      &:hover {
+        background-color: #ec7d7d;
+      }
     }
   }
   .meta {

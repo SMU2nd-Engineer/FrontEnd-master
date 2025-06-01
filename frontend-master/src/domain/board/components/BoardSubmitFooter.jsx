@@ -30,16 +30,22 @@ const BoardSubmitFooter = ({
   // 페이지 이동을 처리 하는 함수
   const navigate = useNavigate();
 
-  // 게시글 내용 입력 후 클릭하는 버튼 - 게시글 등록 버튼
-  // 등록 성공시 게시글 상세페이지로 이동
-  // preventDefault: 페이지 새로고침 방지
+  /*
+    1. 게시글 내용 입력 후 클릭하는 버튼 - 게시글 등록 버튼
+    => 등록 성공시 게시글 상세페이지로 이동
+    2. preventDefault: 페이지 새로고침 방지
+  */
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // quill 에서 img_src 태그만 별도로 처리
-    // tempdata: <img > src 프로퍼티> 안에 base64 형식 이미지를 파일형식 변환 후
-    // 데이터를  uploadImage에 저장하고 src 프로퍼티 안에 내용을 지움
-    // postFiles: Blob 객체 받음
+    /*
+      1. quill 에서 img_src 태그만 별도로 처리
+      2. tempdata: <img > src 프로퍼티> 안에 base64 형식 이미지를 파일형식 변환 후
+         데이터를  uploadImage에 저장하고 src 프로퍼티 안에 내용을 지움
+      3. postFiles: Blob 객체 받음
+    */
+
     let tempdata = contentData;
     // img 태그 src 속성만 빈 문자열로 변경
     // tempdata = clearImgSrc(tempdata);
@@ -89,8 +95,6 @@ const BoardSubmitFooter = ({
       // uploadImage를 백엔드로 넘겨주는 건 위에서 함
     };
     console.log("postContent: ", postContent);
-    // =>
-    // 서버에 게시글 등록 요청을 보내는 함수
 
     // 게시판 양식 사용 - 수정
     if (isModify) {
