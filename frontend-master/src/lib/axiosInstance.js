@@ -27,9 +27,6 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log("토큰이 없다.");
-    const token = getAccessToken();
-    console.log(token);
     return Promise.reject(error);
   }
 );
@@ -72,7 +69,6 @@ axiosInstance.interceptors.response.use(
         }
       } catch (refreshError) {
         // refresh 토큰이 만료되거나 문제가 생겼을 때
-        console.log(`refresh 실패 : ${refreshError}`);
         alert("로그인 세션이 만료되었습니다. 다시 로그인 해주세요.");
         removeAccessToken();
         try {

@@ -7,7 +7,6 @@ import axiosInstance from "@/lib/axiosInstance";
  */
 
 const idPasswordFindService = async ({ id, name, email }, navigate) => {
-  console.log(id, name, email);
   if (id === "" || id === null || id === undefined) {
     const res = await axiosInstance.post(
       "/user/idFind",

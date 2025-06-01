@@ -6,7 +6,10 @@ import { getMyPageData } from "../services/getMyPageDate";
 import { useNavigate } from "react-router-dom";
 
 import * as Nav from "../style/MyPageNavDesign";
-import { MyBoardContainer } from "../style/MypageBoardDesign";
+import {
+  MyBoardContainer,
+  MyBorderMainHeader,
+} from "../style/MypageBoardDesign";
 
 export default function MyBoardPage() {
   const [myBoardPageInfo, setMyBoardPageInfo] = useState({});
@@ -26,9 +29,8 @@ export default function MyBoardPage() {
         <MyPageLink />
       </Nav.StickyNavbar>
       <MyBoardContainer>
-        {/* <p>내가 작성한 게시글나오는 컴포넌트</p> */}
+        <MyBorderMainHeader> 내가 작성한 게시글 / 댓글</MyBorderMainHeader>
         <MyBoard boards={myBoardPageInfo.myBoardLists} navigate={navigate} />
-        {/* <p>내가 작성한 댓글 나오는 컴포넌트</p> */}
         <MyComment
           comments={myBoardPageInfo.myCommentLists}
           navigate={navigate}

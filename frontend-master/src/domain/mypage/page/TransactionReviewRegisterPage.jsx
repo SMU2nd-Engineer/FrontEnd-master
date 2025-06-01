@@ -21,6 +21,11 @@ import { updateReview } from "../services/updateReview";
 import * as TranReview from "../style/TransactionReviewDesign";
 import PaymentProductInfo from "@/domain/payment/components/PaymentProductInfo";
 import { getReviewInitInfo } from "../services/getReviewInitInfo";
+import {
+  DisableWhenLoading,
+  ErrorFontProduct,
+  ErrorFontReviewHeader,
+} from "../style/TransactionReviewErrorDesign";
 
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
@@ -30,6 +35,15 @@ const SCHEMA = REVIEW_SCHEMA;
  * @returns jsx
  */
 export default function TransactionReviewRegisterPage() {
+  // useEffect 방어 코드 용용
+  const defaultProductInfo = {
+    idx: 0,
+    user_idx: 0,
+    title: "",
+    price: 0,
+    imageUrl: "",
+    tradeType: 0,
+  };
   const { reviewIdx } = useParams();
   const isNewReview = !reviewIdx;
   const [isEditMode, setIsEditMode] = useState(isNewReview); // 수정모드확인
@@ -41,7 +55,9 @@ export default function TransactionReviewRegisterPage() {
   const [searchParams] = useSearchParams();
   const tradeType = Number(searchParams.get("tradeType"));
   const location = useLocation();
-  const [productInfo, setProductInfo] = useState(location.state?.product ?? "");
+  const [productInfo, setProductInfo] = useState(
+    location.state?.product ?? defaultProductInfo
+  );
 
   const {
     register, // 입력 폼 등록
@@ -63,8 +79,6 @@ export default function TransactionReviewRegisterPage() {
    * form 제출용 콜백 함수
    */
   const submitForm = async (formData) => {
-    // 현재 항목 확인하기
-    console.log("제출 데이터 확인하기 : " + formData);
     // 기존과 값이 동일한지 확인하기
     const isSame =
       formData.reviewText === originalReview.reviewText &&
@@ -131,11 +145,13 @@ export default function TransactionReviewRegisterPage() {
   // 구매자(사용자) - 인증 객체에서 확인 가능
   // 거래 평가 하기 위한 카테고리 가져오기
   useEffect(() => {
-    console.log(`reviewIdx : ${reviewIdx}`);
     const saveInfo = async () => {
+      if (!productInfo || productInfo.idx === 0 || productInfo.user_idx === 0) {
+        console.log("productInfo가 아직 준비되지 않음");
+        return;
+      }
       if (reviewIdx) {
         const getReview = await getMyPageData("REVIEW_DETAIL", reviewIdx);
-        console.log("===getReview=== : ", getReview);
         setEvalutaionCategories(getReview.evaluationCategories);
         setValue("rating", getReview.fetchReviewRegisterInfo.rating);
         setValue("reviewText", getReview.fetchReviewRegisterInfo.reviewText);
@@ -159,11 +175,6 @@ export default function TransactionReviewRegisterPage() {
           setValue("evaluation[]", selectedKeys);
         }, 0);
       } else {
-        console.log(
-          "리뷰 초기 요청 값:",
-          productInfo.user_idx,
-          productInfo.idx
-        );
         // 거래 남기기 위하여 초기 정보 불러오기
         const result = await getReviewInitInfo(
           productInfo.user_idx,
@@ -176,20 +187,23 @@ export default function TransactionReviewRegisterPage() {
       }
     };
     saveInfo();
-  }, [productInfo.idx, productInfo.user_idx, setValue, reviewIdx]);
+  }, [productInfo, productInfo.idx, productInfo.user_idx, setValue, reviewIdx]);
 
-  console.log("넘겨받은 상품 정보:", location.state?.product);
   return (
     <TranReview.TRmain>
       <TranReview.PaymentProductInfo>
-        <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
+        {productInfo.idx === 0 ? (
+          <ErrorFontProduct>상품 정보를 불러오는 중입니다...</ErrorFontProduct>
+        ) : (
+          <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
+        )}
       </TranReview.PaymentProductInfo>
       <TranReview.Line>
-        <h1>
+        <ErrorFontReviewHeader>
           {sellerInfo && sellerInfo.sellerName
             ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
             : "거래 정보 로딩 중..."}
-        </h1>
+        </ErrorFontReviewHeader>
       </TranReview.Line>
       <TranReview.ReviewMainForm
         onSubmit={handleSubmit(submitForm, (error) => {
@@ -241,12 +255,14 @@ export default function TransactionReviewRegisterPage() {
           {isNewReview && <Button type="submit" text={"리뷰 작성하기"} />}
 
           {isReadOnly && (
-            <Button
-              text={"수정하기"}
-              onClick={() => {
-                setIsEditMode(true);
-              }}
-            />
+            <DisableWhenLoading disabled={productInfo.idx === 0}>
+              <Button
+                text={"수정하기"}
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              />
+            </DisableWhenLoading>
           )}
 
           {isEditMode && !isNewReview && (

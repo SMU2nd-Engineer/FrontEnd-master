@@ -14,6 +14,7 @@ import {
   MyMainGridArea,
   RatingAndReviewContainer,
 } from "../style/MyMainPageDesign";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 /**
  * 메인 화면
@@ -21,20 +22,17 @@ import {
  */
 export default function MainPage() {
   const [mainPageInfo, setMainPageInfo] = useState({});
-  const navigate = useNavigate();
+
+  const { userInfo } = useLoginUserInfoStore();
 
   // 마이페이지에 필요한 정보를 호출하는 useEffect
   useEffect(() => {
     const saveMainPageInfo = async () => {
       const result = await getMyPageData("MY_MAIN_INFO");
-      // setMainPageInfo(result);
       // 별점 평균 처리하기
       const averageRating =
         result.myPageAverageRating?.myPageTotalRating ?? null;
-      //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
-      console.log("averageRating : ", averageRating);
       const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
-      console.log("ceilRating : ", ceilRating);
       setMainPageInfo({
         myPageGetUserInfo: result.myPageGetUserInfo ?? {},
         myPageAverageRating: ceilRating,
@@ -53,7 +51,7 @@ export default function MainPage() {
 
       <MyMainContainer>
         <MyMainGridArea area="header">
-          <MyName name={mainPageInfo.myPageGetUserInfo?.name} />
+          <MyName name={userInfo.userNickName} />
         </MyMainGridArea>
         <MyMainGridArea area="sell">
           <MySellList
@@ -72,15 +70,6 @@ export default function MainPage() {
         <MyMainGridArea area="peak">
           <MyMainPeak list={mainPageInfo.myMainPeakList} />
         </MyMainGridArea>
-
-        <div className="button">
-          <Button
-            text={"임시 홈 화면으로"}
-            onClick={() => {
-              navigate("/user/home");
-            }}
-          />
-        </div>
       </MyMainContainer>
     </div>
   );

@@ -6,12 +6,6 @@ export default function MyTransactionEvaluation({
   evaluationLists = [],
   myEvaluationLists = {},
 }) {
-  console.log("evaluationLists : ", evaluationLists);
-  console.log("myEvaluationLists : ", myEvaluationLists);
-  console.log(
-    "myEvaluationLists[EVAL_5001] : ",
-    myEvaluationLists["EVAL_5001"]
-  );
   return (
     <MyReview.CheckReviewMain>
       <h3>거래 평가</h3>
