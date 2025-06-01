@@ -21,6 +21,11 @@ import { updateReview } from "../services/updateReview";
 import * as TranReview from "../style/TransactionReviewDesign";
 import PaymentProductInfo from "@/domain/payment/components/PaymentProductInfo";
 import { getReviewInitInfo } from "../services/getReviewInitInfo";
+import {
+  DisableWhenLoading,
+  ErrorFontProduct,
+  ErrorFontReviewHeader,
+} from "../style/TransactionReviewErrorDesign";
 
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
@@ -30,6 +35,15 @@ const SCHEMA = REVIEW_SCHEMA;
  * @returns jsx
  */
 export default function TransactionReviewRegisterPage() {
+  // useEffect 방어 코드 용용
+  const defaultProductInfo = {
+    idx: 0,
+    user_idx: 0,
+    title: "",
+    price: 0,
+    imageUrl: "",
+    tradeType: 0,
+  };
   const { reviewIdx } = useParams();
   const isNewReview = !reviewIdx;
   const [isEditMode, setIsEditMode] = useState(isNewReview); // 수정모드확인
@@ -41,7 +55,9 @@ export default function TransactionReviewRegisterPage() {
   const [searchParams] = useSearchParams();
   const tradeType = Number(searchParams.get("tradeType"));
   const location = useLocation();
-  const [productInfo, setProductInfo] = useState(location.state?.product ?? "");
+  const [productInfo, setProductInfo] = useState(
+    location.state?.product ?? defaultProductInfo
+  );
 
   const {
     register, // 입력 폼 등록
@@ -130,6 +146,10 @@ export default function TransactionReviewRegisterPage() {
   // 거래 평가 하기 위한 카테고리 가져오기
   useEffect(() => {
     const saveInfo = async () => {
+      if (!productInfo || productInfo.idx === 0 || productInfo.user_idx === 0) {
+        console.log("productInfo가 아직 준비되지 않음");
+        return;
+      }
       if (reviewIdx) {
         const getReview = await getMyPageData("REVIEW_DETAIL", reviewIdx);
         setEvalutaionCategories(getReview.evaluationCategories);
@@ -167,19 +187,23 @@ export default function TransactionReviewRegisterPage() {
       }
     };
     saveInfo();
-  }, [productInfo.idx, productInfo.user_idx, setValue, reviewIdx]);
+  }, [productInfo, productInfo.idx, productInfo.user_idx, setValue, reviewIdx]);
 
   return (
     <TranReview.TRmain>
       <TranReview.PaymentProductInfo>
-        <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
+        {productInfo.idx === 0 ? (
+          <ErrorFontProduct>상품 정보를 불러오는 중입니다...</ErrorFontProduct>
+        ) : (
+          <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
+        )}
       </TranReview.PaymentProductInfo>
       <TranReview.Line>
-        <h1>
+        <ErrorFontReviewHeader>
           {sellerInfo && sellerInfo.sellerName
             ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
             : "거래 정보 로딩 중..."}
-        </h1>
+        </ErrorFontReviewHeader>
       </TranReview.Line>
       <TranReview.ReviewMainForm
         onSubmit={handleSubmit(submitForm, (error) => {
@@ -231,12 +255,14 @@ export default function TransactionReviewRegisterPage() {
           {isNewReview && <Button type="submit" text={"리뷰 작성하기"} />}
 
           {isReadOnly && (
-            <Button
-              text={"수정하기"}
-              onClick={() => {
-                setIsEditMode(true);
-              }}
-            />
+            <DisableWhenLoading disabled={productInfo.idx === 0}>
+              <Button
+                text={"수정하기"}
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              />
+            </DisableWhenLoading>
           )}
 
           {isEditMode && !isNewReview && (
