@@ -90,13 +90,15 @@ export const Buttonbox = styled.div`
 .chatbutton {
   background-color: rgb(186, 236, 238);
   width: 90px;
+  height: 50px;
   color: rgb(85, 77, 68);
   font-size: 20px;
 }
 
 .orderbutton {
-  background-color: rgb(238, 186, 186);
+  background-color: rgb(255, 199, 161);
   width: 90px;
+  height: 50px;
   color: rgb(85, 77, 68);
   font-size: 20px;
 }
@@ -134,7 +136,25 @@ export const PDetailContent = styled.p`
 export const EditDeleteBox = styled.div`
   display: flex;
   gap: 10px;
+
+  .product_editbutton{
+    border-color: #8dd38b;
+
+    width: 60px ;
+    height: 50px;
+    color: rgb(85, 77, 68);
+  }  
+
+  .product_deletebutton {
+    border-color: #ffaba8;
+    width: 60px ;
+    height: 50px;
+    color: rgb(85, 77, 68);
+  }
 `
+
+
+
 
 
 

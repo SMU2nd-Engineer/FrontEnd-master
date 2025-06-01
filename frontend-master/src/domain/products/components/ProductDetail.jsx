@@ -8,9 +8,10 @@ import ProductDelete from "./ProductDelete";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
-import GlobalStyle from "@/style/AppDesign";
 import PeakButton from "./PeakButton";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
+
+import { PiChatsCircle } from "react-icons/pi";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -61,6 +62,17 @@ export default function ProductDetail() {
     setChatPopup(0);
   };
 
+  const handleDelete = async () => {
+    try {
+      await deleteProducts(idx);
+      alert('상품이 삭제되었습니다.');
+      navigate('/product/list'); // 목록 페이지로 이동
+    } catch (error) {
+      console.error('삭제 실패:', error);
+      alert('삭제에 실패했습니다.');
+    }
+  };
+
   return (
     <div className="detailinfo">
       {chatPopup === 0 || (
@@ -100,14 +112,28 @@ export default function ProductDetail() {
             </PeakButton>
             <Button
               className="chatbutton"
-              text={"1:1 채팅"}
+              text={"💬 채팅"}
               onClick={handleRoomClick}
             ></Button>
             <Button
               className="orderbutton"
-              text={"바로구매"}
+              text={"💳 구매"}
               onClick={handleClick}
             />
+            { product.user_idx === userInfo.userIdx &&(
+          <ProductDetails.EditDeleteBox>
+          <Button
+            className="product_editbutton"
+            text={"수정"}
+            onClick={handleEdit}
+          />   
+          <Button 
+            className="product_deletebutton"
+            text={"삭제"}
+            onClick={handleDelete}/>       
+           {/* <ProductDelete idx={idx}   /> */}
+         </ProductDetails.EditDeleteBox>
+        )}
           </ProductDetails.Buttonbox>
         </ProductDetails.Column>
       </ProductDetails.DetailTop>
@@ -130,16 +156,7 @@ export default function ProductDetail() {
           {product.content}
         </ProductDetails.PDetailContent>
 
-        { product.user_idx === userInfo.userIdx &&(
-          // <ProductDetails.EditDeleteBox>
-          <Button
-            className="product_editbutton"
-            text={"수정"}
-            onClick={handleEdit}
-          />
-          // <ProductDelete idx={idx} />
-        // </ProductDetails.EditDeleteBox>
-        )}
+        
       </ProductDetails.DetailBottom>
     </div>
   );
