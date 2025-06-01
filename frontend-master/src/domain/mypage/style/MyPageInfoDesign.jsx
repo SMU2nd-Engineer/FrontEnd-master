@@ -145,3 +145,18 @@ export const MyInfoPasswordCheckButton = styled.button`
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 `;
+
+/**
+ * 개인 정보 수정 스타일 헤더
+ */
+export const UserInfoHedear = styled.h1`
+  font-weight: 500;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  color: #9a8a8a;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+`;

@@ -7,6 +7,12 @@ import ProductList from "@products/components/ProductList";
 import * as List from "@products/styles/ProductsListPageDesign";
 import * as board from "@board/styles/BoardListPageDesign";
 import BoardList from "@board/components/BoardList";
+import {
+  HomeBoardContainer,
+  HomeContainer,
+  HomeHedear,
+  HomeProductContainer,
+} from "../style/HomePageDesign";
 
 export default function HomePage() {
   // 홈페이지에 사용할 값을 각 상태에 나눠서 저장장
@@ -26,18 +32,21 @@ export default function HomePage() {
     saveHomePageInfo();
   }, [setLoginUserInfo]);
 
-  console.log("homePageProducts 값이 저장되었는지 확인 : ", homePageProducts);
-  console.log("homePageProducts 값이 저장되었는지 확인 : ", homePageContents);
   // 홈 화면 배치 해야 함.
   return (
-    <div>
-      <h1>홈페이지 입니다.</h1>
-      <List.Product_list>
-        <ProductList products={homePageProducts} />
-      </List.Product_list>
-      <board.Board_middleList>
-        <BoardList boards={homePageContents} />
-      </board.Board_middleList>
-    </div>
+    <HomeContainer>
+      <HomeProductContainer>
+        <HomeHedear>최근 올라온 상품</HomeHedear>
+        <List.Product_list>
+          <ProductList products={homePageProducts} />
+        </List.Product_list>
+      </HomeProductContainer>
+      <HomeBoardContainer>
+        <HomeHedear>최근 올라온 게시글</HomeHedear>
+        <board.Board_middleList>
+          <BoardList boards={homePageContents} />
+        </board.Board_middleList>
+      </HomeBoardContainer>
+    </HomeContainer>
   );
 }

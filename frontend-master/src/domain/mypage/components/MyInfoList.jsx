@@ -17,6 +17,7 @@ import {
   MyInfoFormGridArea,
   MyPageInfoContainer,
   MyPageInfoForm,
+  UserInfoHedear,
   WithdrawalButtonWrapper,
 } from "../style/MyPageInfoDesign";
 
@@ -122,7 +123,7 @@ export default function MyInfoList({ isSocialLogin }) {
 
   return (
     <MyInfoContainer>
-      <h1>개인 정보 페이지</h1>
+      <UserInfoHedear>개인 정보 수정</UserInfoHedear>
       <MyPageInfoContainer>
         <MyPageInfoForm
           onSubmit={handleSubmit(submitEditForm, (errors) => {
