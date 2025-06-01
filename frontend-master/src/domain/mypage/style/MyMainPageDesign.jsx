@@ -17,6 +17,7 @@ export const MyMainContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 1rem;
   margin-top: 2rem;
+  user-select: none;
 `;
 
 /**

@@ -146,7 +146,7 @@ export default function TransactionReviewRegisterPage() {
   // 거래 평가 하기 위한 카테고리 가져오기
   useEffect(() => {
     const saveInfo = async () => {
-      if (!productInfo || productInfo.idx === 0 || productInfo.user_idx === 0) {
+      if (!productInfo) {
         console.log("productInfo가 아직 준비되지 않음");
         return;
       }
@@ -187,7 +187,7 @@ export default function TransactionReviewRegisterPage() {
       }
     };
     saveInfo();
-  }, [productInfo, productInfo.idx, productInfo.user_idx, setValue, reviewIdx]);
+  }, []);
 
   return (
     <TranReview.TRmain>

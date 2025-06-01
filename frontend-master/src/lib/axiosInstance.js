@@ -5,6 +5,11 @@ import {
 } from "@/utils/TokenManager";
 import { logout } from "@/services/LogoutService";
 import axios from "axios";
+import { useAxiosAlertStore } from "@/store/useAxiosAlertStore";
+
+// 요청 대기 큐 + 상태
+let isRefreshing = false;
+let requestQueue = [];
 
 /**
  * axiosInstance
@@ -40,6 +45,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
+    const alertState = useAxiosAlertStore.getState();
     // 에러가 발생했을 때 원본 요청 설정을 저장함.
     const originalRequest = error.config;
     // 에러 상태를 확인 후 에러에 따른 요청을 진행.
@@ -50,6 +56,22 @@ axiosInstance.interceptors.response.use(
     ) {
       //._retry는 반복되는 요청을 진행하지 않도록 하기위해서 설정
       originalRequest._retry = true;
+
+      // refresh 진행 중이면 요청 큐에 넣고 대기
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          requestQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return axiosInstance(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+      }
+
+      // refresh 시작
+      isRefreshing = true;
+
       // 새로운 accessToken 발급 요청
       try {
         const refreshRes = await axiosInstance.post(
@@ -60,7 +82,11 @@ axiosInstance.interceptors.response.use(
         const newToken = refreshRes.data.accessToken;
         if (newToken) {
           setAccessToken(newToken);
-          //   originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+          // 대기 요청 재시도
+          requestQueue.forEach(({ resolve }) => {
+            resolve(newToken);
+          });
+          requestQueue = [];
           originalRequest.headers = {
             ...originalRequest.headers,
             Authorization: `Bearer ${newToken}`, // 확실히 헤더에 넣기 위해서 선택한 방법
@@ -68,8 +94,15 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         }
       } catch (refreshError) {
+        // 실패 시 큐 전체 reject
+        requestQueue.forEach(({ reject }) => reject(refreshError));
+        requestQueue = [];
         // refresh 토큰이 만료되거나 문제가 생겼을 때
-        alert("로그인 세션이 만료되었습니다. 다시 로그인 해주세요.");
+        if (!alertState.hasShowAlert) {
+          alert("로그인 세션이 만료되었습니다. 다시 로그인 해주세요.");
+          alertState.setHasShowAlert(true);
+          alertState.resetAlertFlag(); // 3초 후 초기화
+        }
         removeAccessToken();
         try {
           // 로그 아웃을 위한 경로 지정
