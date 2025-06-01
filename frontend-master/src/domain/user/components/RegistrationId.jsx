@@ -21,9 +21,13 @@ export default function RegistrationId({
   setIsIdCheck,
 }) {
   const id = watch("id");
-  // 닉네임 변경 시 중복 체크 상태 초기화
   useEffect(() => {
-    if (!isSocialLogin) {
+    console.log("RegistrationId useEffect 실행됨", { id, isSocialLogin });
+    if (isSocialLogin) {
+      setIsIdCheck(true);
+      return;
+    }
+    if (id) {
       setIsIdCheck(false);
     }
   }, [id, setIsIdCheck, isSocialLogin]);

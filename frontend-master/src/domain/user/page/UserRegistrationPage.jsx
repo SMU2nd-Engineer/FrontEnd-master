@@ -40,6 +40,9 @@ export default function UserRegistrationPage() {
   } = useForm({
     resolver: yupResolver(YUPSCHEMA),
     mode: "onBlur", // 사용자에게 안내 메시지 출력
+    defaultValues: {
+      socialProvider: "", // 초기값 명시 - 일반 로그인
+    },
   });
   usePreventBackNavigation();
 
@@ -66,6 +69,7 @@ export default function UserRegistrationPage() {
       setValue("password", finalPassword);
       setValue("passwordCheck", finalPassword);
       setValue("socialProvider", socialProvider || "");
+      console.log("소셜 로그인 감지됨 → ID 설정 및 중복 체크 완료");
       setIsIdCheck(true);
       setIsSocialLogin(true);
       setSocialProvider(socialProvider || "");
@@ -104,7 +108,7 @@ export default function UserRegistrationPage() {
       alert("회원 가입 중에 오류가 발생했습니다. 관리자게에 문의해주세요.");
     }
   };
-
+  console.log("isIdCheck " + isIdCheck);
   return (
     <RegistrationContainer>
       <RegistrationForm

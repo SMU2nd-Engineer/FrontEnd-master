@@ -2,13 +2,20 @@ import * as yup from "yup";
 
 // 유효성 검사 스키마 정의
 export const SCHEMA = yup.object({
-  id: yup
-    .string()
-    .required("아이디를 입력해 주세요.")
-    .matches(
-      /^[a-zA-Z0-9]{4,25}$/,
-      "4~25자의 영문 대소문자와 숫자만 빈칸 없이 입력해 주세요."
-    ),
+  socialProvider: yup.string().nullable(), // 소셜 여부 판단용
+
+  id: yup.string().when("socialProvider", {
+    is: (val) => !!val, // 값이 존재하면 소셜 로그인
+    then: () => yup.string().required("아이디를 입력해 주세요."), // 단순 검사용
+    otherwise: () =>
+      yup
+        .string()
+        .required("아이디를 입력해 주세요.")
+        .matches(
+          /^[a-zA-Z0-9]{4,25}$/,
+          "4~25자의 영문 대소문자와 숫자만 빈칸 없이 입력해 주세요."
+        ),
+  }),
   name: yup
     .string()
     .required("이름을 입력해 주세요.")
