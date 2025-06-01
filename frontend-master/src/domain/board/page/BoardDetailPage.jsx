@@ -144,6 +144,7 @@ const BoardDetailPage = () => {
           title={detailBoard.title}
           nickname={detailBoard.nickname}
           id={id}
+          user_idx={detailBoard.user_idx}
           sdate={detailBoard.sdate}
           handleRoomClick={handleRoomClick}
         />

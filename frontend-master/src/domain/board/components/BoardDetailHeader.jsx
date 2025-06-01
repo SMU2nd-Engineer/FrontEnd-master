@@ -25,13 +25,6 @@ const BoardDetailHeader = ({
     console.log("userInfo:", userInfo);
   }, [userInfo]);
 
-  // const {userInfo} = useLoginUserInfoStore();
-  console.log(
-    "로그인한 사람 맞아? :",
-    userInfo.userName,
-    userInfo.userNickName
-  );
-
   // 게시판 리스트 홈페이지로 이동
   const handleBackHome = () => {
     console.log("게시판 홈페이지로 이동");
