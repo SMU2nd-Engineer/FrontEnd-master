@@ -5,6 +5,7 @@ import * as Details from "../styles/BoardDetailDesign";
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
+import { useEffect } from "react";
 
 const BoardDetailHeader = ({
   category_idx,
@@ -19,7 +20,16 @@ const BoardDetailHeader = ({
 
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 수정+삭제 하도록 설정
   const {userInfo} = useLoginUserInfoStore();
+  
+  useEffect(() => {
+    console.log('userInfo:', userInfo);
+
+  }, [userInfo]);
+
+  // const {userInfo} = useLoginUserInfoStore();
   console.log("로그인한 사람 맞아? :", userInfo.userName, userInfo.userNickName);
+
+
 
   // 게시판 리스트 홈페이지로 이동
   const handleBackHome = () => {

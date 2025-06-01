@@ -47,8 +47,6 @@ const BoardSubmitFooter = ({
     */
 
     let tempdata = contentData;
-    // img 태그 src 속성만 빈 문자열로 변경
-    // tempdata = clearImgSrc(tempdata);
     let uploadImage = [];
     let postFiles = [];
 
@@ -85,6 +83,8 @@ const BoardSubmitFooter = ({
         postFiles.push(src);
       }
     });
+    
+    // img 태그 src 속성만 빈 문자열로 변경
     const filterdData = clearImgSrc(tempdata);
 
     // 게시글 등록 요청을 서버로 보낼때 사용될 데이터 객체 만듬
