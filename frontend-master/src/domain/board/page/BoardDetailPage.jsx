@@ -44,6 +44,7 @@ const BoardDetailPage = () => {
     contents_idx: "",
     text: "",
     sdate: "",
+    user_idx: "",
   });
 
   // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
@@ -57,7 +58,7 @@ const BoardDetailPage = () => {
 
   // 로그인한 사람의 user_idx를 가져와야함 - 숫자 가져옴
   // ContentsService, ContentsCommentService에 어떻게 불러올지 생각
-  const [userIdx, setUserIdx] = useState(0);
+  // const [userIdx, setUserIdx] = useState(0);
 
   // 게시글 상세데이터 상태
   const [loading, setLoading] = useState(); // 로딩 상태
@@ -79,6 +80,8 @@ const BoardDetailPage = () => {
         return category_idx;
     }
   };
+
+  console.log("로그인 한 사람이랑 댓글 등록한 사람이 동일해?", detailBoard.user_idx)
 
   // 뒤로가기 방지 hook 사용
   // usePreventBackNavigation();
@@ -157,6 +160,7 @@ const BoardDetailPage = () => {
           commentList={commentList}
           setCommentList={setCommentList}
           id={id}
+          user_idx={detailBoard.user_idx}
           setLoading={setLoading}
         />
       </Details.BoardDetailBottom>
