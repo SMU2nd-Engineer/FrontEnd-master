@@ -29,7 +29,7 @@ const BoardListPage = () => {
 
   // 화면에 표시할 내용
   return (
-    <board.Board_main id='1234'>
+    <board.Board_main>
 
       <board.Board_mainHeader>
         {/* 상단 Header('게시판' 버튼1:게시글등록, 버튼2:게시글수정) 컴포넌트 */}
