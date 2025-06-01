@@ -8,7 +8,6 @@ export const FavoriteMain = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px;
   border-radius: 6px;
   transition: background-color 0.2s ease;
   height: 100%;
@@ -62,21 +61,21 @@ export const FormTitle = styled.h2`
 `;
 
 export const EndButton = styled.button`
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 8px;
   background-color: #f0b8b8;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 55px;
 `;
 
 export const CategoryForm = styled.form`
   width: 100%;
-  line-height: 400%;
+  line-height: 500%;
 `;
 
 export const MyEditFavoritePage = styled.div`

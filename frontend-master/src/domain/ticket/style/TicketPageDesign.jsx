@@ -89,7 +89,6 @@ export const CategoryCheckboxMain = styled.div`
 export const CheckboxGrid = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  gap: 3rem;
   overflow-x: auto;
   align-items: center;
   justify-content: center;
@@ -100,6 +99,11 @@ export const CategoryCheckbox = styled.label`
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
+  padding: 25px;
+  border-radius: 10px;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;
 
 export const CheckboxInput = styled.input`
@@ -200,6 +204,7 @@ export const DataList = styled.div`
 
 export const TicketItemTextTitle = styled.p`
   font-size: 16px;
+  margin-left: 20px;
 `;
 
 export const TicketItemTextCompany = styled.p`
