@@ -9,15 +9,17 @@ const BoardPageHeader = () => {
   // 페이지 상단 게시글 등록 버튼 클릭 핸들러
   const handleRegister = () => {
     console.log("게시글 등록 클릭");
-    navigate("/board/submit")
+    navigate("/board/submit");
   };
 
   return (
-      <board.Board_top>
-        <p className="pagetitle">게시판</p>
-        {/* 게시글 등록 버튼 */} 
-        <board.Board_TopHeaderButton onClick={handleRegister}>등록</board.Board_TopHeaderButton>
-      </board.Board_top>
+    <board.Board_top>
+      <p className="pagetitle">게시판</p>
+      {/* 게시글 등록 버튼 */}
+      <board.Board_TopHeaderButton onClick={handleRegister}>
+        글 등록
+      </board.Board_TopHeaderButton>
+    </board.Board_top>
   );
 };
 
