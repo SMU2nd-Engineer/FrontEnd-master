@@ -16,7 +16,7 @@ const BoardPageHeader = () => {
       <board.Board_top>
         <p className="pagetitle">게시판</p>
         {/* 게시글 등록 버튼 */} 
-        <button onClick={handleRegister}>등록</button>
+        <board.Board_TopHeaderButton onClick={handleRegister}>등록</board.Board_TopHeaderButton>
       </board.Board_top>
   );
 };
