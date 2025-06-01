@@ -5,6 +5,7 @@ import * as Details from "../styles/BoardDetailDesign";
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import Button from "@/components/Button";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 const BoardDetailHeader = ({
   category_idx,
@@ -12,9 +13,14 @@ const BoardDetailHeader = ({
   nickname,
   id,
   sdate,
+  useridx,
   handleRoomClick = (f) => f,
 }) => {
   const navigate = useNavigate();
+
+  // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 수정+삭제 하도록 설정
+  const {userInfo} = useLoginUserInfoStore();
+  // console.log("로그인한 사람 맞아? :", userInfo.userName, userInfo.userNickName);
 
   // 게시판 리스트 홈페이지로 이동
   const handleBackHome = () => {
@@ -70,9 +76,10 @@ const BoardDetailHeader = ({
           {/* 게시판 리스트 홈페이지로 이동 - 게시글 수정+삭제 X */}
           <button onClick={handleBackHome}>뒤로가기</button>
           {/* 게시글 수정 버튼 */}
-          <button onClick={handleRegister}>수정</button>
+
+          { useridx === userInfo.userIdx && (<button onClick={handleRegister}>수정</button>)}
           {/* 게시글 삭제 버튼 */}
-          <button onClick={handleDeleteDetail}>삭제</button>
+          { useridx === userInfo.userIdx && (<button onClick={handleDeleteDetail}>삭제</button>)}
         </div>
       </Details.UserAuth>
     </div>
