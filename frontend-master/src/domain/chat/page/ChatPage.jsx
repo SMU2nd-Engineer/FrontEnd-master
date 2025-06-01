@@ -18,7 +18,13 @@ const ChatPage = () => {
   const [selectRoom, setSelectRoom] = useState(0);
 
   useEffect(() => {
-    getChatRooms().then((res) => setChatRooms(res.data));
+    const fetchRooms = async () =>
+      await getChatRooms().then((res) => setChatRooms(res.data));
+
+    fetchRooms();
+    const intervalId = setInterval(fetchRooms, 3000); // 5초마다 호출
+
+    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 정리
   }, []);
 
   const handleRoomClick = (id) => {
