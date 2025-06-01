@@ -13,6 +13,7 @@ export const FavoriteMain = styled.div`
   height: 100%;
   cursor: pointer;
   justify-content: center;
+  width: 100%;
   &:hover {
     background-color: #f5f5f5;
   }
@@ -22,11 +23,14 @@ export const FavoriteCheckbox = styled.input`
   width: 16px;
   height: 16px;
   accent-color: #2563eb;
+  vertical-align: middle;
 `;
 
 export const FavoriteLabel = styled.label`
   font-size: 14px;
   color: #333;
+  width: 100%;
+  display: flex;
 `;
 
 export const CategoryGrid = styled.div`
@@ -74,8 +78,8 @@ export const EndButton = styled.button`
 `;
 
 export const CategoryForm = styled.form`
-  width: 100%;
-  line-height: 500%;
+  width: 80%;
+  line-height: 400%;
 `;
 
 export const MyEditFavoritePage = styled.div`

@@ -32,12 +32,10 @@ export const DaysGrid = styled.div`
   font-weight: 500;
 `;
 
-// export const Day
-
 export const DayBox = styled.div`
   border: 1px solid #eee;
   padding-top: 10px;
-  height: 75px;
+  height: 70px;
   position: relative;
   text-align: center;
   cursor: pointer;

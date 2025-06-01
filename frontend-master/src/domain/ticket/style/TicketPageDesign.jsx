@@ -71,18 +71,17 @@ export const AccordionMainButton = styled.div`
 
 export const TopCategoryBar = styled.div`
   background-color: #f0f0f0;
-  padding: 0;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-bottom: 15px;
 `;
 
 export const SelectCategory = styled.div`
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
 `;
 
 export const CategoryCheckboxMain = styled.div`
-  padding: 1rem;
+  padding: 10px;
   text-align: center;
 `;
 
@@ -185,7 +184,7 @@ export const EndDate = styled.div`
 `;
 
 export const DateInput = styled.div`
-  margin-left: 5px;
+  margin-left: 7px;
   .react-datepicker__day--outside-month {
     color: #ccc !important;
   }
@@ -193,6 +192,9 @@ export const DateInput = styled.div`
     width: 150px !important;
     padding: 6px 8px !important;
     font-size: 14px !important;
+    border-radius: 6px;
+    border: 0px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.05);
   }
 `;
 
