@@ -2,6 +2,13 @@ import Button from '@/components/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { deleteProducts } from '../services/productService';
+import styled from 'styled-components';
+
+const PDButton = styled.button`
+  background-color: #ffcdcd;
+  width: 60px ;
+  height: 50px;
+`
 
 const ProductDelete = ({idx}) => {
   const navigate = useNavigate();
@@ -19,9 +26,9 @@ const ProductDelete = ({idx}) => {
 
 
   return (
-    <div>
+    <PDButton>
      <Button className='deleteButton' text={"삭제"} onClick={handleDelete}  />
-    </div>
+    </PDButton>
   )
 };
 

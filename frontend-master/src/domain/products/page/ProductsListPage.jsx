@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import "../styles/ProductsListPage.css";
 import ProductList from "../components/ProductList";
 import ProductSearch from "../components/ProductSearch"
 import { getProductList, searchProducts } from "../services/productService";
@@ -10,31 +9,78 @@ import * as List from "../styles/ProductsListPageDesign"
 
 const ProductListPage = () => {
   const [products, setProducts] = useState([]);
+  const [lastId, setLastId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const size = 20;
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
-    getProductList()
-      .then((res) => res.data)
-      .then((data) => {
-        const sortedData = data.sort((a, b) => new Date(b.idx) - new Date(a.idx));  // 최신순으로 정렬되도록
-        setProducts(sortedData);
+    setIsLoading(true);
+    getProductList(null, size)
+      .then((res) => {
+        const data = res.data;
+        console.log("불러온 상품 개수:", data.length);
+        if (data.length < size){
+          setHasMore(false);  
+        } else {
+          setHasMore(true);
+        }
+          setProducts(data);
+        if (data.length > 0) {
+          setLastId(data[data.length - 1].idx);  // 마지막 IDX 저장
+        }
       })
-      .catch((err) => console.error("상품 불러오기 실패:", err));
+      .catch((err) => console.error("상품 불러오기 실패:", err))
+      .finally(() => setIsLoading(false));;
   }, []);
+
+  const loadMore = () => {
+    if (isLoading || !hasMore) return;
+    setIsLoading(true);
+    getProductList(lastId, size)
+      .then((res) => {
+        const data = res.data;
+        if (data.length < size) {
+          setHasMore(false);
+        } else {
+          setHasMore(true);
+        }
+        setProducts(prev => [...prev, ...data]);
+        if (data.length > 0) {
+          setLastId(data[data.length - 1].idx);
+        }
+      })
+      .catch((err) => console.error("추가 상품 불러오기 실패:", err))
+      .finally(() => setIsLoading(false));
+  };
+
 
   const handleSearch = (searchValue) => {
     if(!searchValue) {
       getProductList()
-      .then((res) => res.data)
-      .then((data) => {
-        const sortedData = data.sort((a, b) => new Date(b.idx) - new Date(a.idx));
-        setProducts(sortedData);
+      .then((res) => {
+        const data = res.data;
+        setProducts(data);
+        if (data.length < size) {
+          setHasMore(false);
+        } else {
+          setHasMore(true);
+        }
+        if (data.length > 0) {
+          setLastId(data[data.length - 1].idx);
+        }
       });
     } else {
       console.log(searchValue)
       searchProducts(searchValue)
-      .then((res) => res.data)
-      .then((data) => setProducts(data))
+      .then((res) => {
+        const data = res.data;
+        setProducts(data);
+        setHasMore(false); // 검색 결과는 "더보기" 없음 처리
+      })
       .catch((err) => console.error("검색 실패", err))
     }
   };
@@ -53,6 +99,11 @@ const ProductListPage = () => {
       <List.Product_list>
         <ProductList products={products} />
       </List.Product_list>
+      <List.MoreButton>
+      {hasMore && (
+        <Button text={isLoading ? "로딩중..." : "더보기"} onClick={loadMore} disabled={isLoading} />
+      )}
+      </List.MoreButton>
     </div>
   );
 };
