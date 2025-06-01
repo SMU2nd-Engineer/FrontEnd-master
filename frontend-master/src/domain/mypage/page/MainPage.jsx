@@ -14,6 +14,7 @@ import {
   MyMainGridArea,
   RatingAndReviewContainer,
 } from "../style/MyMainPageDesign";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 /**
  * 메인 화면
@@ -21,6 +22,8 @@ import {
  */
 export default function MainPage() {
   const [mainPageInfo, setMainPageInfo] = useState({});
+
+  const { userInfo } = useLoginUserInfoStore();
 
   // 마이페이지에 필요한 정보를 호출하는 useEffect
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function MainPage() {
 
       <MyMainContainer>
         <MyMainGridArea area="header">
-          <MyName name={mainPageInfo.myPageGetUserInfo?.name} />
+          <MyName name={userInfo.userNickName} />
         </MyMainGridArea>
         <MyMainGridArea area="sell">
           <MySellList

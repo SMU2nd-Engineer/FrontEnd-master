@@ -17,7 +17,7 @@ export const PeakContainer = styled.div`
 /**
  * 내 찜 스타일 헤더
  */
-export const PeakHedear = styled.h2`
+export const PeakHedear = styled.h1`
   font-weight: 500;
   display: flex;
   justify-content: baseline;

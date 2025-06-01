@@ -89,7 +89,9 @@ export default function FavoritesSelector({ mode = "register" }) {
         ))}
       </Favorite.CategoryGrid>
       <Favorite.FormActions>
-        <Favorite.EndButton onClick={handleCancel}>취소</Favorite.EndButton>
+        <Favorite.EndButton type="button" onClick={handleCancel}>
+          취소
+        </Favorite.EndButton>
         <Favorite.EndButton type="submit">
           {mode === "edit" ? "수정하기" : "등록하기"}
         </Favorite.EndButton>
