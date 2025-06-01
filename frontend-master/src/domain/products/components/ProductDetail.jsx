@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-// import "../styles/ProductDetail.css";
 import * as ProductDetails from "../styles/ProductDetailDesign";
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";

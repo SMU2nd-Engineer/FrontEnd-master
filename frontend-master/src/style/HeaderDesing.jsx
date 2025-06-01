@@ -72,13 +72,9 @@ export const Header_nav = styled.nav`
 
 /* Site name */
 .site_name {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 70px;
-  line-height: 110%;
-
-  color: #f0b8b8;
+  img{
+    width: 150px;
+  }
 }
 
 /* MARKET | TICKET */
