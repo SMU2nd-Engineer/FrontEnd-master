@@ -9,7 +9,9 @@ export const SearchContainer = styled.div`
     font-weight: 500;
   }
 
-  
+  p {
+    margin-left: 10px;
+  }
 `
 
 export const SearchAllBar = styled.div`

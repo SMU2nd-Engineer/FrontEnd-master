@@ -107,9 +107,9 @@ export default function ProductDetail() {
 
           {/* 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
-            <PeakButton idx={idx} className="pickbutton">
+            <ProductDetails.StyledPeakButton idx={idx} className="pickbutton"  >
               찜
-            </PeakButton>
+            </ProductDetails.StyledPeakButton>
             <Button
               className="chatbutton"
               text={"💬 채팅"}

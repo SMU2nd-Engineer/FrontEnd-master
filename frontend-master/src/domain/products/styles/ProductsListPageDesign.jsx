@@ -8,6 +8,11 @@ export const Product_top = styled.div`
   text-decoration: underline;
   font-size: 90%;
   color: #666666;
+
+  &:hover{
+    font-weight: 700;
+    color: #f0b8b8 ;
+  }
 }
 `
 export const Product_list = styled.div `
@@ -28,5 +33,6 @@ export const MoreButton = styled.div`
     border-color: #ddd;
     width: 80px;
     height: 30px;
+    color: #666666;
   }
 `

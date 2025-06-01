@@ -51,9 +51,9 @@ const PeakButton = ({ idx }) => {
   };
 
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} style={{width: 30, height:30}} >
       {isPeak ? (
-        <AiFillHeart size={24} color="red" />
+        <AiFillHeart size={24} color="#f0b8b8 " />
       ) : (
         <AiOutlineHeart size={24} color="gray" />
       )}

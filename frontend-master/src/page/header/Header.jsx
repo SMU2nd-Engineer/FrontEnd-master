@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
-import { NavLink, useLocation } from "react-router-dom";
-import * as H from "../../style/HeaderDesing";
-import { jwtDecode } from "jwt-decode";
+
+import { NavLink } from "react-router-dom";
+import * as H from "../../style/HeaderDesing"
 import LogoutButton from "@/domain/user/components/LogoutButton";
-import { getAccessToken } from "@/utils/TokenManager";
-import mainLogo from "@/assets/main_logo.png";
+import  mainLogo from  "@/assets/main_logo.png";
+
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 // 헤더 메뉴
@@ -74,26 +74,3 @@ export const HeaderMenu = ({}) => {
   );
 };
 
-// function HeaderVisibility() {
-//   const [isVisible, setIsVisible] = useState(true);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       if (window.scrollY > 100) {
-//         setIsVisible(false); // 100px 이상 스크롤 시 헤더 숨기기
-//       } else {
-//         setIsVisible(true); // 100px 이하 시 헤더 보이기
-//       }
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, []);
-
-// return (
-//   <div>
-//     <HeaderMenu style={{ display: isVisible ? "block" : "none" }} />
-//   </div>
-// );
-// }

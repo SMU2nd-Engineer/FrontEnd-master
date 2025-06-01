@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PeakButton from "../components/PeakButton";
 
 // export const hr = styled.hr`
 //   border: 0;
@@ -83,25 +84,36 @@ export const Buttonbox = styled.div`
   font-size: 20px;
   color: rgb(85, 77, 68);
   
-  .pickbutton {
-  border-color: rgb(238, 238, 186);
-}
+  
 
 .chatbutton {
-  background-color: rgb(186, 236, 238);
+  border-color: rgb(121, 182, 233);
   width: 90px;
   height: 50px;
   color: rgb(85, 77, 68);
   font-size: 20px;
+
+  &:hover {
+    background-color: rgb(121, 182, 233);
+    color: #ffffff;
+  }
 }
 
 .orderbutton {
-  background-color: rgb(255, 199, 161);
+  border-color: rgb(151, 157, 245);
   width: 90px;
   height: 50px;
   color: rgb(85, 77, 68);
   font-size: 20px;
+
+  &:hover {
+    background-color: rgb(151, 157, 245);
+    color: #ffffff;
+  }
 }
+`
+export const StyledPeakButton = styled(PeakButton)`
+  width: 70px;
 `
 
 export const DetailBottom = styled.div`
@@ -138,11 +150,16 @@ export const EditDeleteBox = styled.div`
   gap: 10px;
 
   .product_editbutton{
-    border-color: #8dd38b;
+    border-color: #acc7ab;
 
     width: 60px ;
     height: 50px;
     color: rgb(85, 77, 68);
+
+    &:hover {
+      background-color: #acc7ab;
+      color: #ffffff;
+    }
   }  
 
   .product_deletebutton {
@@ -150,6 +167,11 @@ export const EditDeleteBox = styled.div`
     width: 60px ;
     height: 50px;
     color: rgb(85, 77, 68);
+
+    &:hover {
+      background-color: #ffaba8;
+      color: #ffffff;
+    }
   }
 `
 

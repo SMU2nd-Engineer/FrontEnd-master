@@ -7,9 +7,7 @@ import * as Card from "../styles/ProductCardDesign";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  console.log("ProductCard product:", product);
   if (!product) return null;
-  console.log("imageList:", product.imageList);
   return (
     <Card.Product_card
       onClick={() => navigate(`/product/detail/${product.idx}`)}
@@ -28,9 +26,11 @@ const ProductCard = ({ product }) => {
         price={product.price}
         sdate={product.sdate}
       />
-      <div onClick={(e) => e.stopPropagation()}>
-        <PeakButton idx={product.idx} />
-      </div>
+      <Card.Button>
+        <div onClick={(e) => e.stopPropagation()}>
+          <Card.CardPeakButton idx={product.idx} />
+        </div>
+      </Card.Button>
     </Card.Product_card>
   );
 };
