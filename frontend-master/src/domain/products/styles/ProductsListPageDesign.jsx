@@ -18,3 +18,15 @@ export const Product_list = styled.div `
   margin: 0 auto;
 `
 
+export const MoreButton = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button{
+    border-color: #ddd;
+    width: 80px;
+    height: 30px;
+  }
+`

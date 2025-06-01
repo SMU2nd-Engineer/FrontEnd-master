@@ -11,12 +11,15 @@ import SearchAllPage from "./domain/search/page/SearchAllPage";
 // import "./style/App.css";
 import TicketPages from "./domain/ticket/page/ticketPage";
 import Footer from "./page/footer/Footer";
+import ScrollToTop from "../src/utils/ScrollToTop";
 
 function App() {
   return (
     <div className="app-main">
       <HeaderMenu />
       <BodyComponent>
+        {/* 화면 맨 위로 올리기 */}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Navigate to="/user" />} />
           <Route path="/user/*" element={<UserRoutes />} />

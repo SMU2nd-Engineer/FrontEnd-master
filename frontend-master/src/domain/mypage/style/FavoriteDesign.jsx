@@ -8,12 +8,12 @@ export const FavoriteMain = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px;
   border-radius: 6px;
   transition: background-color 0.2s ease;
   height: 100%;
   cursor: pointer;
   justify-content: center;
+  width: 100%;
   &:hover {
     background-color: #f5f5f5;
   }
@@ -23,11 +23,14 @@ export const FavoriteCheckbox = styled.input`
   width: 16px;
   height: 16px;
   accent-color: #2563eb;
+  vertical-align: middle;
 `;
 
 export const FavoriteLabel = styled.label`
   font-size: 14px;
   color: #333;
+  width: 100%;
+  display: flex;
 `;
 
 export const CategoryGrid = styled.div`
@@ -62,20 +65,20 @@ export const FormTitle = styled.h2`
 `;
 
 export const EndButton = styled.button`
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 8px;
   background-color: #f0b8b8;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 55px;
 `;
 
 export const CategoryForm = styled.form`
-  width: 100%;
+  width: 80%;
   line-height: 400%;
 `;
 

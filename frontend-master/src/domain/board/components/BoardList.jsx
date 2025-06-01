@@ -1,11 +1,10 @@
 // src/domain/board/components/BoardList.jsx
-import React, { useState } from 'react';
-import BoardItem from './BoardItem';
+import React, { useState } from "react";
+import BoardItem from "./BoardItem";
 import * as board from "../styles/BoardListPageDesign";
-import MyPagination from '@/domain/mypage/components/MyPaginationUI';
+import MyPagination from "@/domain/mypage/components/MyPaginationUI";
 
 const BoardList = ({ boards = [] }) => {
-
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 10;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
@@ -25,28 +24,24 @@ const BoardList = ({ boards = [] }) => {
   return (
     <board.Board_contentsListMain>
       <board.Board_cotentsList>
-          <thead>
-            <tr>
-              <th>순번</th>
-              <th>카테고리</th>
-              <th>제목</th>
-              <th>날짜</th>
-              <th>작성자</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            {/* DB에서 입력한 데이터를 게시글 목록에 출력 */}
-            {
-              currentItems.map((item)=> 
-                <BoardItem key={item.idx} item={item}/>
-            )
-            }
-          </tbody>
-        </board.Board_cotentsList>
-        <MyPagination pageCount={totalPageCount} onPageChange={onPageChange} />
+        <thead>
+          <tr>
+            <th>순번</th>
+            <th>카테고리</th>
+            <th>제목</th>
+            <th>날짜</th>
+            <th>작성자</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* DB에서 입력한 데이터를 게시글 목록에 출력 */}
+          {currentItems.map((item) => (
+            <BoardItem key={item.idx} item={item} />
+          ))}
+        </tbody>
+      </board.Board_cotentsList>
+      <MyPagination pageCount={totalPageCount} onPageChange={onPageChange} />
     </board.Board_contentsListMain>
-    
   );
 };
 

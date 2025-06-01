@@ -7,6 +7,7 @@ import { registrationUserFavorite } from "@user/services/registrationUserFavorit
 import { updateUserFavorites } from "../services/updateUserFavorites";
 
 import * as Favorite from "../style/FavoriteDesign";
+import { div } from "framer-motion/client";
 
 export default function FavoritesSelector({ mode = "register" }) {
   // 선호도 카테고리 정보 저장할 배열
@@ -75,27 +76,30 @@ export default function FavoritesSelector({ mode = "register" }) {
   };
 
   return (
-    <Favorite.CategoryForm onSubmit={handleSubmit(submitForm)}>
-      <Favorite.FormTitle>선호하는 카테고리를 선택해주세요.</Favorite.FormTitle>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Favorite.CategoryForm onSubmit={handleSubmit(submitForm)}>
+        <Favorite.FormTitle>
+          선호하는 카테고리를 선택해주세요.
+        </Favorite.FormTitle>
 
-      <Favorite.CategoryGrid>
-        {categories.map((category) => (
-          <FavoriteCategory
-            key={category.subIdx}
-            category={category}
-            register={register}
-            setValue={setValue}
-          />
-        ))}
-      </Favorite.CategoryGrid>
-      <Favorite.FormActions>
-        <Favorite.EndButton type="button" onClick={handleCancel}>
-          취소
-        </Favorite.EndButton>
-        <Favorite.EndButton type="submit">
-          {mode === "edit" ? "수정하기" : "등록하기"}
-        </Favorite.EndButton>
-      </Favorite.FormActions>
-    </Favorite.CategoryForm>
+        <Favorite.CategoryGrid>
+          {categories.map((category) => (
+            <FavoriteCategory
+              key={category.subIdx}
+              category={category}
+              register={register}
+              setValue={setValue}
+            />
+          ))}
+        </Favorite.CategoryGrid>
+        <Favorite.FormActions>
+          <Favorite.EndButton onClick={handleCancel}>취소</Favorite.EndButton>
+          <Favorite.EndButton type="submit">
+            {mode === "edit" ? "수정하기" : "등록하기"}
+          </Favorite.EndButton>
+        </Favorite.FormActions>
+      </Favorite.CategoryForm>
+    </div>
+
   );
 }

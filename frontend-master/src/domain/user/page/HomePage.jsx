@@ -20,6 +20,7 @@ export default function HomePage() {
   const [homePageContents, setHomePageContents] = useState([]);
   // 전역변수로 유저 정보를 저장장
   const { setLoginUserInfo } = useLoginUserInfoStore();
+  // const [userInfo, setUserInfo] = useState();
 
   // 로그인 페이지로 이동할 경우 불러올 정보 가져오기
   useEffect(() => {

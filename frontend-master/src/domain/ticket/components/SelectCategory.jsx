@@ -16,17 +16,13 @@ const SelectCategory = ({ onChange }) => {
   }, []);
 
   // 체크박스 클릭 했을 때 호출되는 함수
-  const toggleCategory = useCallback(
-    (category) => {
-      const updated = selected.includes(category)
-        ? selected.filter((item) => item !== category)
-        : [...selected, category];
-
-      setSelected(updated); // 상태 업데이트
-      onChange?.(updated.map(Number)); // 선택 상태가 바뀌면 부모 컴포넌트로 전달
-    },
-    [onChange]
-  );
+  const toggleCategory = (category) => {
+    const updated = selected.includes(category)
+      ? selected.filter((item) => item !== category)
+      : [...selected, category];
+    setSelected(updated); // 상태 업데이트
+    onChange?.(updated.map(Number)); // 선택 상태가 바뀌면 부모 컴포넌트로 전달
+  };
 
   return (
     <TicketPages.CategoryCheckboxMain>
