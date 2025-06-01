@@ -1,15 +1,5 @@
 import React, { useState } from "react";
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  Select,
-  FormErrorMessage,
-  Text,
-  HStack,
-  VStack,
-} from "@chakra-ui/react";
-import {
   RegistAtSymbol,
   RegistEmailDomainSelect,
   RegistEmailRow,
@@ -42,7 +32,6 @@ export default function RegistrationEmail({
 
   return (
     <RegistFormContainer>
-      {/* 이메일 입력 */}
       <RegistFormControl>
         <RegistFormLabel htmlFor="emailLocal">이메일</RegistFormLabel>
         <RegistEmailRow>
@@ -62,8 +51,6 @@ export default function RegistrationEmail({
             disabled={!isManualDomain}
             $error={!!errors.emailLocal}
           />
-
-          {/* 도메인 선택 */}
 
           <RegistEmailDomainSelect
             value={watch("emailDomain") || "type"}

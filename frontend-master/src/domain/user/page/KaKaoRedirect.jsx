@@ -22,17 +22,11 @@ export default function KaKaoRedirect() {
       if (stateKey === import.meta.env.VITE_API_STATE && kakaoCode) {
         try {
           const res = await kakaoLogin(kakaoCode, autoLogin);
-          console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
-            console.log("로그인 성공", res.data);
             navigate("/user/home");
           }
         } catch (error) {
-          console.log(error);
-          // 로그인 실패 시
-          const status = error.response.status;
-          console.log(status);
           console.error("서버 연결 실패:", error);
           navigate("/login");
         }

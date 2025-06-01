@@ -18,9 +18,7 @@ export default function MyReviewPage() {
     const saveMyRviewInfo = async () => {
       const results = await getMyPageData("MY_REVIEW_LIST");
       const averageRating = results.myAverageRating?.myPageTotalRating ?? null;
-      //   const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
       const ceilRating = averageRating === null ? 0 : Math.ceil(averageRating);
-      //   setMyReviewInfoList(results);
       setMyReviewInfoList({
         myPageGetUserInfo: results.myPageGetUserInfo ?? {},
         myAverageRating: ceilRating,

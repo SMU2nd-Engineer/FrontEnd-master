@@ -15,7 +15,7 @@ export default function MyPeakPage() {
   const [wishListInfo, setWishListInfo] = useState([]);
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 4;
-  // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
+  // 전체 개수 확인하기
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 설정
   const offset = currentPage * itemsPerPage; // 현재 페이지에서 데이터를 몇 번째 항목부터 잘라서 보여줄지를 결정
   // 전체 페이지 수
@@ -45,10 +45,7 @@ export default function MyPeakPage() {
       </Nav.StickyNavbar>
       <PeakContainer id="peakListBody">
         <PeakHedear>찜 목록</PeakHedear>
-        {/* 카드 형태 렌더링 만들기 
-        여기 또는 하위에서 카드를 눌렀을 때 상세페이지로 이동하게끔 구현해야함 */}
         <MyPeakList products={currentItems} />
-        {/* 페이지네이션 자리 */}
         <MyPagination
           pageCount={totalPageCount}
           onPageChange={onPageChange}

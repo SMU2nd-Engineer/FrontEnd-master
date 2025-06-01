@@ -14,7 +14,6 @@ export default function ChangePasswordPage() {
 
   // useNavigate에서 state 객체에서 id 값을 가지고 옴
   const id = location.state?.id;
-  console.log(id);
 
   const {
     register, // 입력 폼 등록
