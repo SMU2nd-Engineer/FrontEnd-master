@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 /**
  * 유저 정보를 저장할 전역 상태 관리
@@ -30,6 +30,7 @@ const useLoginUserInfoStore = create(
 
     {
       name: "LoginUserInfo",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

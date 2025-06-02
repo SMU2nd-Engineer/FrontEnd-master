@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
+import styled from 'styled-components';
+
+const StyledSubmit = styled.button`
+  width: 50px;
+  height: auto;
+
+  &:hover{
+      background-color: #818080;
+      color: #fff;
+    }
+`
 
 const ProductSearch = ({onSearch}) => {
   const [searchValue, setSearchValue] = useState({
@@ -17,10 +28,7 @@ const ProductSearch = ({onSearch}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(searchValue);
-    setSearchValue({
-    category_idx: 0,
-    categorygenre_idx:0,
-    keyword : ""});
+    
   }
 
   return (
@@ -35,7 +43,7 @@ const ProductSearch = ({onSearch}) => {
         onChange={handleChange}
         placeholder="검색어를 입력하세요"
       />
-      <button type="submit" id='searchButton'>검색</button>
+      <StyledSubmit type="submit" id='searchButton'>검색</StyledSubmit>
     </form>
     </div>
   );

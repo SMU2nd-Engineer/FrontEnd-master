@@ -1,13 +1,13 @@
 import axiosInstance from "@/lib/axiosInstance";
-import { param } from "framer-motion/client";
 
 export const getProductList = (lastId = null, size = 20) => {
   const params = {};
   if (lastId !== null && lastId !== undefined) params.lastId = lastId;
   if (size) params.size = size;
   return axiosInstance.get("product/list", {
-    params, 
-    withCredentials: true });
+    params,
+    withCredentials: true,
+  });
 };
 
 export const postProduct = (newProduct, uploadImage) => {

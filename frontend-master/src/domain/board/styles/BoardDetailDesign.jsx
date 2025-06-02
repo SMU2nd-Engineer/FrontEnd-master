@@ -166,18 +166,31 @@ export const CommentList = styled.div`
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
   }
 
   li {
-    padding: 16px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    position: relative;
+    display: flex;
+    width: 100%;
+    background-color: #f1efef;
+    border-radius: 20px;
+    .userNameAndDate {
+      width: 20%;
+      text-align: center;
+      .userName {
+        font-weight: bold;
+      }
+      .commentTime {
+        font-size: 13px;
+      }
+    }
+    .comment {
+      width: 80%;
+      white-space: pre-line; // 줄바꿈 댓글 작성 기능
+    }
   }
 
-  li p {
+  /* li p {
     margin: 15px 0;
     font-size: 14px;
     color: #333;
@@ -209,5 +222,5 @@ export const CommentList = styled.div`
   > p {
     color: #888;
     font-size: 14px;
-  }
+  } */
 `;

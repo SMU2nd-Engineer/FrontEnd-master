@@ -38,8 +38,15 @@ const TicketPage = () => {
     <TicketPages.TicketPageMain>
       <TicketPages.TopCategoryBar>
         <CategoryPage
+          selectedIds={selectedIds}
           setSelectedIds={setSelectedIds}
+          searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          setAllCategoryIds={setAllCategoryIds}
         />
       </TicketPages.TopCategoryBar>
 
@@ -47,8 +54,14 @@ const TicketPage = () => {
         <TicketPages.Calendar1>
           <Calendar
             selectedIds={selectedIds}
+            setSelectedIds={setSelectedIds}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            startDate={startDate}
             setStartDate={setStartDate}
+            endDate={endDate}
             setEndDate={setEndDate}
+            setAllCategoryIds={setAllCategoryIds}
           />
         </TicketPages.Calendar1>
         <TicketPages.ShowList>

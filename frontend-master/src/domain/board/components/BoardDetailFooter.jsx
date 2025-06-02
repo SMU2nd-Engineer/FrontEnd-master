@@ -32,6 +32,7 @@ const BoardDetailFooter = ({
       .then((res) => {
         // console.log("댓글정보:", newCommentText);
         alert("댓글 등록 성공");
+        console.log("댓글정보:", newCommentText);
         console.log(res);
         setNewCommentText("");
       })
@@ -88,7 +89,13 @@ const BoardDetailFooter = ({
         setLoading(false); // 로딩 완료 표시
       });
   };
-
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (!newCommentText.trim()) return;
+      handleSubmit(e);
+    }
+  };
   // 화면에 표시될 내용
   return (
     <Details.CommentMain>
@@ -98,9 +105,12 @@ const BoardDetailFooter = ({
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
           placeholder="댓글을 입력해주세요."
+          onKeyDown={(e) => handleKeyDown(e)}
         />
         {/* 댓글 등록 onClick */}
-        <button onClick={handleSubmit}>댓글 등록</button>
+        <button onClick={handleSubmit} disabled={!newCommentText.trim()}>
+          댓글 등록
+        </button>
         {/* 댓글 등록 취소 버튼 onClick */}
         {/* <button onClick={handleCancel}>댓글 등록 취소</button> */}
       </Details.CommentSubmit>
@@ -117,16 +127,21 @@ const BoardDetailFooter = ({
             const safeKey = comment?.id ?? `fallback-${index}`; // undefined 방지
             return (
               <li key={safeKey}>
-                <p>
-                  <strong>
+                <div className="userNameAndDate">
+                  <p className="userName">
                     <FaUserLarge
                       style={{ marginRight: "12px", fontSize: "14px" }}
                     />
                     {comment.nickname}
-                  </strong>
-                </p>
-                <p>{comment.text}</p>
-                <strong>{comment.sdate.replace("T", " ")}</strong>
+                  </p>
+                  <p className="commentTime">
+                    {comment.sdate.replace("T", " ")}
+                  </p>
+                </div>
+                <div className="comment">
+                  <p>{comment.text}</p>
+                </div>
+
                 {/* 댓글 삭제 button 
                     처음 페이지 시작하면 다른 정보와 로그인한 사람의 user_idx를 가져와야함
                     비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정

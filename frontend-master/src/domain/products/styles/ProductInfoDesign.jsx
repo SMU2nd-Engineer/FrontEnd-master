@@ -12,6 +12,7 @@ export const Product_Info = styled.div`
   margin: 0 auto;
   max-width: 200px;
   font-size: 13px;
+  line-height: 90%;
 
   product_title {
   font-family: 'Pretendard-Medium';

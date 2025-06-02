@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axiosInstance from "@/lib/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
@@ -9,24 +9,25 @@ const PaymentTestPage = () => {
 
   const handleKakaoPayReady = async () => {
     try {
-      const response = await axiosInstance.post("/payment/ready?payMethod=6001", {
-        partnerOrderId: "ORDER1234",
-        partnerUserId: "USER5678",
-        itemName: "TEST",
-        quantity: 1,
-        amount: 5000,
-        taxFreeAmount: 0,
-        approvalUrl: "http://localhost:5173/payment/success",
-        cancelUrl: "http://localhost:5173/payment/cancel",
-        failUrl: "http://localhost:5173/payment/fail",
+      const response = await axiosInstance.post(
+        "/payment/ready?payMethod=6001",
+        {
+          partnerOrderId: "ORDER1234",
+          partnerUserId: "USER5678",
+          itemName: "TEST",
+          quantity: 1,
+          amount: 5000,
+          taxFreeAmount: 0,
+          approvalUrl: "http://localhost:5173/payment/success",
+          cancelUrl: "http://localhost:5173/payment/cancel",
+          failUrl: "http://localhost:5173/payment/fail",
 
-        deliveryAddress: "서울특별시 강남구 테헤란로 123",
-        productIdx: 2,
-        buyerIdx: 3,
-        sellerIdx: 4
-      });
-
-      console.log("카카오페이 준비 성공:", response.data);
+          deliveryAddress: "서울특별시 강남구 테헤란로 123",
+          productIdx: 2,
+          buyerIdx: 3,
+          sellerIdx: 4,
+        }
+      );
 
       // TID 저장
       sessionStorage.setItem("tid", response.data.tid);
@@ -41,23 +42,21 @@ const PaymentTestPage = () => {
   };
 
   const ClickCancelBtn = () => {
-    nevigate("/payment/refund")
-  }
+    nevigate("/payment/refund");
+  };
 
   return (
-    <div style={{padding: "20px"}}>
+    <div style={{ padding: "20px" }}>
       <h1>카카오페이 결제 테스트</h1>
       <button onClick={ClickCancelBtn}>카카오페이 환불</button>
       <button onClick={handleKakaoPayReady}>카카오페이 결제 준비</button>
       {payUrl && (
-        <div style={{marginTop: "20px"}}>
-          <a href={payUrl}>
-            결제 페이지 이동하기
-          </a>
-    </div>
-  )}
+        <div style={{ marginTop: "20px" }}>
+          <a href={payUrl}>결제 페이지 이동하기</a>
+        </div>
+      )}
 
-      {error && <p style={{color: "red"}}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };

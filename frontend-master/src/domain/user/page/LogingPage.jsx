@@ -50,7 +50,6 @@ export default function LogingPage() {
         );
       }
     } catch (error) {
-      console.log(error);
       alert("로그인 실패");
       setUserId("");
       setpassword("");

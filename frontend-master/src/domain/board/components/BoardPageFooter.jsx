@@ -12,8 +12,8 @@ const BoardPageFooter = ({handleOnclick}) => {
 
   // 검색 실행 함수
   const onClick = () => {
-    handleOnclick(searchTypes, Categories, searchKeywords)
-  }
+    handleOnclick(searchTypes, Categories, searchKeywords);
+  };
 
   // Enter 키처리 함수 - 검색 할때 엔터키 누르면 실행
   const handleKeyDown = (e) => {
@@ -27,28 +27,28 @@ const BoardPageFooter = ({handleOnclick}) => {
   return (
     <board.Board_listPageFooter>
       <board.Board_SearchSelectBox>
-        {/* 구분자: 제목+내용 / 작성자 */} 
-        <SearchSelectBox 
-          handleChange={(e) => setSearchTypes(e.target.value)}/>
+        {/* 구분자: 제목+내용 / 작성자 */}
+        <SearchSelectBox handleChange={(e) => setSearchTypes(e.target.value)} />
       </board.Board_SearchSelectBox>
 
       <board.Board_CategorySelectBox>
-        {/* 카테고리 선택 : 잡담 / 팝니다 / 삽니다 / 기타 */}  
-        <SelectBox 
+        {/* 카테고리 선택 : 잡담 / 팝니다 / 삽니다 / 기타 */}
+        <SelectBox
           id="categpry"
-          name="categpry" 
+          name="categpry"
           category_idx={getCategoryIdx("BOARD")}
-          handleChange={(e) => setCategpries(e.target.value)}/>
+          handleChange={(e) => setCategpries(e.target.value)}
+        />
       </board.Board_CategorySelectBox>
 
       <board.Board_SearchInput>
         {/* 검색어 입력창 */}
-        <input 
+        <input
           type="text"
           placeholder="검색어 입력창"
           value={searchKeywords}
           onChange={(e) => setSearchKeywords(e.target.value)}
-          onKeyDown={handleKeyDown}       
+          onKeyDown={handleKeyDown}
         />
       </board.Board_SearchInput>
 
@@ -56,9 +56,7 @@ const BoardPageFooter = ({handleOnclick}) => {
         {/* 카테고리 선택하고 키워드로 검색어를 입력한 후 누르면 실행되는 버튼 */}
         <button onClick={onClick}>검색</button>
       </board.Board_SearchButton>
-
     </board.Board_listPageFooter>
-
   );
 };
 

@@ -1,23 +1,21 @@
 import React from "react";
 import KakaoPayCancel from "../service/KakaoPayCancel";
-import kakaoPayFail from "../service/KakaoPayFail";
 import Button from "@/components/Button";
 import Address from "@/domain/user/components/RegistrationAddress";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { SCHEMA } from '@/domain/user/utils/userFormValidator';
-import { useForm } from 'react-hook-form';
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SCHEMA } from "@/domain/user/utils/userFormValidator";
+import { useForm } from "react-hook-form";
 
 // 마이페이지에서 환불요청 시 나오는 페이지
 const PaymentCancelPage = () => {
   const YUPSCHEMA = SCHEMA;
   // const product = location.state?.product;
   const product = {
-    img: '이미지',
-    title: '상품이름',
-    price: 5000
-  }
-  const tid = 'T83508ac01c2141f211b'
+    img: "이미지",
+    title: "상품이름",
+    price: 5000,
+  };
+  const tid = "T83508ac01c2141f211b";
 
   const {
     register, // 입력 폼 등록
@@ -31,9 +29,9 @@ const PaymentCancelPage = () => {
 
   const cancelPayment = async () => {
     try {
-      await KakaoPayCancel({tid});
+      await KakaoPayCancel({ tid });
     } catch (err) {
-      console.log("환불 요청중 오류 발생: ", err)
+      console.log("환불 요청중 오류 발생: ", err);
       // kakaoPayFail({
       //   tid,
       //   err
@@ -43,9 +41,11 @@ const PaymentCancelPage = () => {
 
   return (
     <div>
-      <p><strong>환불</strong></p>
+      <p>
+        <strong>환불</strong>
+      </p>
       <div>
-        <div className='img'>
+        <div className="img">
           <img src={product.img} alt="상품이미지" />
         </div>
         <div>
@@ -62,12 +62,8 @@ const PaymentCancelPage = () => {
           errors={errors}
         />
       </div>
-      <div className='paybtn'>
-        <Button 
-          text={"환불요청하기"}
-          type='submit'
-          onClick={cancelPayment}
-        />
+      <div className="paybtn">
+        <Button text={"환불요청하기"} type="submit" onClick={cancelPayment} />
       </div>
     </div>
   );

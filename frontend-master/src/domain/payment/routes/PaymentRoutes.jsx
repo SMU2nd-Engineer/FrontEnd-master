@@ -5,18 +5,21 @@ import PaymentCancelPage from "../page/PaymentCancelPage";
 import PaymentFailPage from "../page/PaymentFailPage";
 import PaymentPage from "../page/PaymentPage";
 import TradeType from "../page/TradeType";
+import PaymentLayout from "../components/PaymentLayout";
 
 const PaymentRoutes = () => {
   return (
     <Routes>
-      <Route path="/:idx" element={<PaymentPage />} />
-      <Route path="test" element={<PaymentTestPage />} />
-      <Route path="success/:idx" element={<PaymentSuccessPage />} />
-      <Route path="cancel/:idx" element={<PaymentCancelPage />} />
-      <Route path="fail/:idx" element={<PaymentFailPage />} />
-      <Route path="trade/:idx" element={<TradeType />} />
+      <Route path="/:idx" element={<PaymentLayout />}>
+        <Route path="info" element={<PaymentPage />} />
+        <Route path="test" element={<PaymentTestPage />} />
+        <Route path="success" element={<PaymentSuccessPage />} />
+        <Route path="cancel" element={<PaymentCancelPage />} />
+        <Route path="fail" element={<PaymentFailPage />} />
+        <Route path="trade" element={<TradeType />} />
+      </Route>
     </Routes>
-  )
-}
+  );
+};
 
 export default PaymentRoutes;

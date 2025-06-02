@@ -2,7 +2,6 @@ import React from "react";
 import KaKaoRedirect from "../page/KaKaoRedirect";
 import { Navigate, Route, Routes } from "react-router-dom";
 import LogingPage from "../page/LogingPage";
-import TempHomePage from "../page/TempHomePage";
 import NaverRedirect from "../page/NaverRedirect";
 import GoogleRedirect from "../page/GoogleRedirect";
 import UserRegistrationPage from "../page/UserRegistrationPage";
@@ -12,6 +11,7 @@ import ChangePasswordPage from "../page/ChangePasswordPage";
 import ChooseFavoritePage from "../page/ChooseFavoritePage";
 import UserWithdrawalPage from "../page/UserWithdrawalPage";
 import HomePage from "../page/HomePage";
+import RequireAuth from "@/utils/RequireAuth";
 
 export default function UserRoutes() {
   return (
@@ -19,7 +19,6 @@ export default function UserRoutes() {
       <Routes>
         <Route path="" element={<Navigate to="login" />} />
         <Route path="login" element={<LogingPage />} />
-        <Route path="temphome" element={<TempHomePage />} />
         <Route path="home" element={<HomePage />} />
         <Route path="kakaoauth" element={<KaKaoRedirect />} />
         <Route path="naverauth" element={<NaverRedirect />} />
@@ -29,7 +28,14 @@ export default function UserRoutes() {
         <Route path="showfindid" element={<ShowFindIdPage />} />
         <Route path="changePassword" element={<ChangePasswordPage />} />
         <Route path="selectFavorites" element={<ChooseFavoritePage />} />
-        <Route path="withdrawal" element={<UserWithdrawalPage />} />
+        <Route
+          path="withdrawal"
+          element={
+            <RequireAuth>
+              <UserWithdrawalPage />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </div>
   );

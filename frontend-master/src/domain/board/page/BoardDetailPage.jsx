@@ -12,7 +12,6 @@ import { useCallback } from "react";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 
-
 // 백엔드에서 받은 이미지 저장경로를 상세페이지에서 보이게 설정하는 함수
 // 여러개의 이미지를 순서에 따라 넣음
 function pushImgSrc(html, getBoardImageUrls) {
@@ -22,11 +21,7 @@ function pushImgSrc(html, getBoardImageUrls) {
   const boardImgTags = doc.querySelectorAll("img");
 
   boardImgTags.forEach((img, index) => {
-    img.setAttribute(
-      "src",
-      "http://localhost:8100/board" + getBoardImageUrls[index] || ""
-    ); // 순서대로 적용
-    // img.setAttribute("width", 183);
+    img.setAttribute("src", getBoardImageUrls[index] || "");
   });
 
   return doc.body.innerHTML;
@@ -109,9 +104,8 @@ const BoardDetailPage = () => {
       });
   }, []);
 
-
   const handleRoomClick = useCallback(() => {
-    postChatRooms(userIdx, detailBoard.title).then((res) => {
+    postChatRooms(detailBoard.user_idx, detailBoard.title).then((res) => {
       setChatPopup(res.data.id);
     });
   }, []);
