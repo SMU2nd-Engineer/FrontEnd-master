@@ -39,12 +39,10 @@ export default function NaverRedirect() {
           const status = error.response.status;
           console.log(status);
           console.error("서버 연결 실패:", error);
-          alert("네이버 로그인 중 오류가 발생했습니다. 다시 로그인 해주세요");
           navigate("/login");
         }
       } else {
         console.log(`${naverError} 발생 : ${naverErrorMessage}`);
-        alert("네이버 로그인 중 오류가 발생했습니다. 다시 로그인 해주세요");
         window.location.href = "/user/login";
       }
     };
