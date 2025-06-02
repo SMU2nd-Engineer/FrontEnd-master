@@ -14,9 +14,10 @@ export const Footer_nav = styled.nav`
   box-sizing: border-box;
   /* text-align: center; */
   padding: 30px;
+  margin: 0 auto;
 
 .navigation {
-  width: 1020px;
+  width: 100%;
   flex-direction: column;
   margin: 0 auto;
   
@@ -27,6 +28,7 @@ export const Footer_nav = styled.nav`
   display: flex;
   gap: 30px;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .ft-column{
@@ -62,4 +64,38 @@ export const Footer_nav = styled.nav`
   margin-left: 5px;
 }
 
+`
+
+export const HorizontalDivider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: #d4d4d4;
+  margin-top: 20px ;
+`
+
+export const Reference = styled.div`
+  margin-top: 3%;
+  display: flex;
+  
+  a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .tickets{
+    flex: 1;
+  }
+
+  .markets{
+    flex: 1;
+  }
+
+  &:hover{
+    cursor: pointer;
+  }
 `

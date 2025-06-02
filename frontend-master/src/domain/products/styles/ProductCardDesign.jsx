@@ -23,6 +23,7 @@ export const Product_card = styled.div `
 
   &:hover {
     background: #e7e7e749;
+    cursor: pointer;
   }
 `
 
