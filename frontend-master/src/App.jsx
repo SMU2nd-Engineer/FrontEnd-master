@@ -12,6 +12,7 @@ import SearchAllPage from "./domain/search/page/SearchAllPage";
 import TicketPages from "./domain/ticket/page/ticketPage";
 import Footer from "./page/footer/Footer";
 import ScrollToTop from "../src/utils/ScrollToTop";
+import RequireAuth from "./utils/RequireAuth";
 
 function App() {
   return (
@@ -23,13 +24,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/user" />} />
           <Route path="/user/*" element={<UserRoutes />} />
-          <Route path="/mypage/*" element={<MyPageRoutes />} />
-          <Route path="/chat/*" element={<ChatPage />} />
-          <Route path="/product/*" element={<ProductsRoutes />} />
-          <Route path="/payment/*" element={<PaymentRoutes />} />
-          <Route path="/board/*" element={<BoardRoutes />} />
-          <Route path="/ticket/*" element={<TicketPages />} />
-          <Route path="/total/*" element={<SearchAllPage />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/mypage/*" element={<MyPageRoutes />} />
+            <Route path="/chat/*" element={<ChatPage />} />
+            <Route path="/product/*" element={<ProductsRoutes />} />
+            <Route path="/payment/*" element={<PaymentRoutes />} />
+            <Route path="/board/*" element={<BoardRoutes />} />
+            <Route path="/ticket/*" element={<TicketPages />} />
+            <Route path="/total/*" element={<SearchAllPage />} />
+          </Route>
         </Routes>
       </BodyComponent>
       <Footer />
