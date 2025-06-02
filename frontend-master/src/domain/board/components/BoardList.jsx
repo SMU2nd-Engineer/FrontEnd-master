@@ -26,11 +26,11 @@ const BoardList = ({ boards = [] }) => {
       <board.Board_cotentsList>
         <thead>
           <tr>
-            <th>순번</th>
-            <th>카테고리</th>
-            <th>제목</th>
-            <th>날짜</th>
-            <th>작성자</th>
+            <th className="th1">순번</th>
+            <th className="th2">카테고리</th>
+            <th className="th3">제목</th>
+            <th className="th4">날짜</th>
+            <th className="th5">작성자</th>
           </tr>
         </thead>
         <tbody>

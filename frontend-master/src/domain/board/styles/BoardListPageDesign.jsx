@@ -33,7 +33,7 @@ export const Board_TopHeaderButton = styled.button`
 
 export const Board_main = styled.div`
   width: 100%;
-  height: 800px;
+  height: 100%;
   text-align: center;
   justify-content: flex-end;
   padding: 15px;
@@ -63,9 +63,24 @@ export const Board_cotentsList = styled.table`
       background-color: #f5f4f4d5;
       color: #464646;
       text-align: center;
-      font-size: 18px;
+      font-size: 1rem;
       border-bottom: 1px solid #ddd;
-      padding: 12px 15px;
+      padding: 10px;
+    }
+    .th1 {
+      width: 9%;
+    }
+    .th2 {
+      width: 9%;
+    }
+    .th3 {
+      width: 56%;
+    }
+    .th4 {
+      width: 14%;
+    }
+    .th5 {
+      width: 12%;
     }
   }
   tbody {
@@ -74,8 +89,9 @@ export const Board_cotentsList = styled.table`
       text-align: center;
     }
     td {
-      padding: 18px;
+      padding: 10px;
       border-bottom: 1px solid #eee;
+      font-size: 1rem;
     }
   }
 `;
