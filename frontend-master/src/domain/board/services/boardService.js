@@ -47,7 +47,14 @@ export const getBoardDetail = (id) => {
 export const putEditContentsDetail = ( id, postContent, postFiles ) => {
   const formData = new FormData();
   formData.append("contents", new Blob([JSON.stringify(postContent)], { type: 'application/json' }))
-  postFiles.forEach((img) => formData.append("files", img))
+  // postFiles.forEach((img) => formData.append("files", img))
+   
+  // 이미지 선택하지 않아도 게시글 등록하게 하는 조건
+  if (postFiles.length > 0) {
+    postFiles.forEach((img) => {
+      formData.append("files", img); // 여러 파일 전송
+    });
+  }
   
   return axiosInstance.post(
     "board/edit",

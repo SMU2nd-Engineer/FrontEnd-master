@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import * as H from "../../style/HeaderDesing"
 import LogoutButton from "@/domain/user/components/LogoutButton";
 import  mainLogo from  "@/assets/main_logo.png";
