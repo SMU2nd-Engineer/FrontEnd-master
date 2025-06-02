@@ -12,7 +12,6 @@ export function useChatSocket(roomId, onMessage) {
   useEffect(() => {
     if (!roomId || roomId == 0) return;
 
-    // EC2 주소나 localhost에 맞게 수정하세요
     const socket = new WebSocket(
       `${
         import.meta.env.VITE_BACK_WEB_SOCKET_URL
