@@ -23,11 +23,7 @@ export default function FavoriteCategory({ category, register }) {
             id={`${category.subIdx}`}
           />
         </div>
-        {category.name === "기타" && category.subIdx === 1007
-          ? "기타(상품)"
-          : category.name === "기타" && category.subIdx === 2005
-          ? "기타(장르)"
-          : category.name}
+        {displayName}
       </Favorite.FavoriteLabel>
     </Favorite.FavoriteMain>
   );
