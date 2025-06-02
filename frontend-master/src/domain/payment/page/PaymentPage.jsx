@@ -26,7 +26,20 @@ const PaymentPage = () => {
     category_idx: 0,
     keyword: "",
   });
+  
+  useEffect(() => {
+      getProductDetail(idx)
+        .then((res) => res.data)
+        .then((data) => {
+          console.log("=================", data)
+          setProduct(data)
+        })
+        .catch((err) => console.error("상품 불러오기 실패: ", err));
+      
+    }, [idx]);
+
   const { productInfo } = useProductStore();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,8 +61,9 @@ const PaymentPage = () => {
     hasFetched.current = true;
     const getUserInfoByToken = async () => {
       const userInfo = await getMyPageData("USER_INFO");
-      const edituserInfo = userInfoSplit(userInfo);
-      setValue("address", edituserInfo.address);
+      const editUserInfo = userInfoSplit(userInfo);
+      setValue("address", editUserInfo.address);
+      setValue("detailAddress", editUserInfo.detailAddress);
     };
     getUserInfoByToken();
   }, [setValue]);
