@@ -56,7 +56,7 @@ axiosInstance.interceptors.response.use(
     ) {
       //._retry는 반복되는 요청을 진행하지 않도록 하기위해서 설정
       originalRequest._retry = true;
-
+      console.log("요청 진행 확인하기1 : 정상 진행.");
       // refresh 진행 중이면 요청 큐에 넣고 대기
       if (isRefreshing) {
         return new Promise((resolve, reject) => {

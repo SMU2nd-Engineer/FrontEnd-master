@@ -76,11 +76,6 @@ const BoardDetailPage = () => {
     }
   };
 
-  console.log(
-    "로그인 한 사람이랑 댓글 등록한 사람이 동일해?",
-    detailBoard.user_idx
-  );
-
   // 뒤로가기 방지 hook 사용
   // usePreventBackNavigation();
 
@@ -100,7 +95,7 @@ const BoardDetailPage = () => {
         // pushImgSrc 함수를 호출 시 두 번째 인자로 imageUrls 넣기
         const processedContent = pushImgSrc(response.data.content, imageUrls);
 
-        console.log("배열 밖으로 나왔니? ", processedContent);
+        // console.log("배열 밖으로 나왔니? ", processedContent);
 
         // 상태에 저장 후 렌더링
         setDetailBoard({

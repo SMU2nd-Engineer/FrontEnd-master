@@ -4,14 +4,11 @@ import * as ProductDetails from "../styles/ProductDetailDesign";
 import Button from "@/components/Button";
 import { deleteProducts, getProductDetail } from "../services/productService";
 import ProductImage from "./ProductImage";
-import ProductDelete from "./ProductDelete";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
 import PeakButton from "./PeakButton";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
-
-import { PiChatsCircle } from "react-icons/pi";
 import { useProductStore } from "@/domain/payment/store/useProductStore";
 
 export default function ProductDetail() {
@@ -22,7 +19,6 @@ export default function ProductDetail() {
   const [chatPopup, setChatPopup] = useState(0);
   const { userInfo } = useLoginUserInfoStore();
   const { setProductInfo } = useProductStore();
-  console.log("로그인 유저 정보:", userInfo);
 
   useEffect(() => {
     getProductDetail(idx)
@@ -82,7 +78,6 @@ export default function ProductDetail() {
       <ProductDetails.DetailTop>
         {/* 이미지 슬라이드, 이미지 리스트 */}
         <ProductDetails.ThumbnailBox>
-          {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
           <ImageSlider imageList={product.imageList} />
           <ProductDetails.OtherImages>
             <ProductImage
@@ -108,20 +103,7 @@ export default function ProductDetail() {
 
           {/* 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
-            <ProductDetails.StyledPeakButton idx={idx} className="pickbutton">
-              찜
-            </ProductDetails.StyledPeakButton>
-            <Button
-              className="chatbutton"
-              text={"💬 채팅"}
-              onClick={handleRoomClick}
-            ></Button>
-            <Button
-              className="orderbutton"
-              text={"💳 구매"}
-              onClick={handleClick}
-            />
-            {product.user_idx === userInfo.userIdx && (
+            {product.user_idx === userInfo.userIdx ? (
               <ProductDetails.EditDeleteBox>
                 <Button
                   className="product_editbutton"
@@ -135,6 +117,22 @@ export default function ProductDetail() {
                 />
                 {/* <ProductDelete idx={idx}   /> */}
               </ProductDetails.EditDeleteBox>
+            ) : (
+              <>
+                <ProductDetails.Pickbutton>
+                  <PeakButton idx={idx}>찜</PeakButton>
+                </ProductDetails.Pickbutton>
+                <Button
+                  className="chatbutton"
+                  text={"💬 채팅"}
+                  onClick={handleRoomClick}
+                ></Button>
+                <Button
+                  className="orderbutton"
+                  text={"💳 구매"}
+                  onClick={handleClick}
+                />
+              </>
             )}
           </ProductDetails.Buttonbox>
         </ProductDetails.Column>

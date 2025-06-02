@@ -1,33 +1,53 @@
 import React from 'react';
 import { useState } from 'react';
 import * as UpImg from "../styles/ImageUploadDesign"
+import imageCompression from 'browser-image-compression';
 
 const ImageUpload = ({uploadImage, setUploadImage}) => {
   const [previewUrl, setPreviewUrl] = useState([]);
 
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const files = event.target.files;
-    if (files) {
-      const newFiles = Array.from(files).slice(0, 10); 
-      
-      // 파일 상태 업데이트
-      const updatedFiles = [...uploadImage, ...newFiles].slice(0,10);
-      setUploadImage(updatedFiles);
+    
+      const newFiles = Array.from(files).slice(0, 6 - uploadImage.length); 
+      const compressedFiles = [];
+      const newPreviewUrls = [];
+      let totalsize = 0;
 
-      // 미리보기 URL 생성
-      newFiles.forEach((file) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const image_Url = reader.result;
-          setPreviewUrl((prev) => {
-            const updatedUrls  = [...prev, image_Url].slice(0, 10);
-            return updatedUrls ;
-          });
-        };
-        reader.readAsDataURL(file);
-      });
+      for (const file of newFiles) {
+        try {
+          const options = {
+            maxSizeMB : 0.3,
+            maxWidthorHeight : 1024,
+            useWebWorker: true,
+          };
+
+          const compressedFile = await imageCompression(file, options);
+          totalsize += compressedFile.size;
+
+          if (totalsize > 2 * 1024 * 1024) {
+            alert("사진이 너무 큽니다. ")
+            return;
+          }
+
+          compressedFiles.push(compressedFile);
+
+          const reader = new FileReader();
+              reader.onloadend = () => {
+                newPreviewUrls.push(reader.result);
+                    // 모든 이미지의 preview가 준비됐을 때만 업데이트
+                if (newPreviewUrls.length === compressedFiles.length) {
+                      setPreviewUrl((prev) => [...prev, ...newPreviewUrls].slice(0, 6));
+                }
+          };
+            reader.readAsDataURL(compressedFile);
+        } catch (err) {
+          console.error("이미지 압축 실패:", err);
+      }
     }
+
+      setUploadImage((prev) => [...prev, ...compressedFiles].slice(0, 6));
   };
 
   const handleDelete = (index) => {

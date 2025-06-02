@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
       />
       <Card.Button>
         <div onClick={(e) => e.stopPropagation()}>
-          <Card.CardPeakButton idx={product.idx} />
+          <PeakButton idx={product.idx} />
         </div>
       </Card.Button>
     </Card.Product_card>

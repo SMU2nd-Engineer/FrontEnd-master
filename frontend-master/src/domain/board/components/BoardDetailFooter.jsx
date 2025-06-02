@@ -21,12 +21,12 @@ const BoardDetailFooter = ({
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
   const { userInfo } = useLoginUserInfoStore();
 
-  console.log(
-    "로그인한 사람 맞아? :",
-    userInfo.userName,
-    userInfo.userNickName
-  );
-  console.log("댓글 등록한 사람 맞아? :", user_idx);
+  // console.log(
+  //   "로그인한 사람 맞아? :",
+  //   userInfo.userName,
+  //   userInfo.userNickName
+  // );
+  // console.log("댓글 등록한 사람 맞아? :", user_idx);
 
   // 댓글 등록 버튼 선택
   const handleSubmit = async function (e) {
