@@ -1,4 +1,0 @@
-.chatInput::before,
-::after {
-  border-color: var(rgb(250, 250, 250));
-}
