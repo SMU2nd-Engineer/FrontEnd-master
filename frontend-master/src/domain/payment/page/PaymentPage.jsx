@@ -27,16 +27,16 @@ const PaymentPage = () => {
     keyword: "",
   });
   
-  useEffect(() => {
-      getProductDetail(idx)
-        .then((res) => res.data)
-        .then((data) => {
-          console.log("=================", data)
-          setProduct(data)
-        })
-        .catch((err) => console.error("상품 불러오기 실패: ", err));
+  // useEffect(() => {
+  //     getProductDetail(idx)
+  //       .then((res) => res.data)
+  //       .then((data) => {
+  //         console.log("=================", data)
+  //         setProduct(data)
+  //       })
+  //       .catch((err) => console.error("상품 불러오기 실패: ", err));
       
-    }, [idx]);
+  //   }, [idx]);
 
   const { productInfo } = useProductStore();
 
