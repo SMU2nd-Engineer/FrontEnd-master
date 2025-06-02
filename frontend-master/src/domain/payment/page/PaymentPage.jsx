@@ -28,9 +28,7 @@ const PaymentPage = () => {
     category_idx: 0,
     keyword : ""
   });
-
-  console.log('배송지 : ' , user.address);
-
+  
   useEffect(() => {
       getProductDetail(idx)
         .then((res) => res.data)
@@ -64,8 +62,9 @@ const PaymentPage = () => {
     hasFetched.current = true;
     const getUserInfoByToken = async () => {
       const userInfo = await getMyPageData("USER_INFO");
-      const edituserInfo = userInfoSplit(userInfo);
-      setValue("address", edituserInfo.address);
+      const editUserInfo = userInfoSplit(userInfo);
+      setValue("address", editUserInfo.address);
+      setValue("detailAddress", editUserInfo.detailAddress);
     };
     getUserInfoByToken();
   }, [setValue]);

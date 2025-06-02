@@ -3,6 +3,7 @@ import axiosInstance from "@/lib/axiosInstance";
 const KakaoPayReady = async (product, user, tradeType) => {
   console.log(product);
   console.log("itemName:", product.title);
+  console.log(user);
 
   const today = new Date();
   const partnerOrderId = `order${today}${product.idx}`;
