@@ -4,7 +4,6 @@ import MyPagination from "./MyPaginationUI";
 import { BuyContainer, BuyHedear } from "../style/SellAndBuyPageDsign";
 
 export default function MyBuyList({ products = [] }) {
-  console.log("buylist  products: ", products);
   // 한페이지에 보여줄 숫자
   const itemsPerPage = 4;
   // 전체 개수 확인하기 - 하드코딩 나중에 값을 넣을 수 있도록 수정해야함
@@ -19,7 +18,6 @@ export default function MyBuyList({ products = [] }) {
   const onPageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-  console.log("buylist : ", currentItems);
   return (
     <BuyContainer>
       <BuyHedear>구매</BuyHedear>

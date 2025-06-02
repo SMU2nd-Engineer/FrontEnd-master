@@ -53,7 +53,8 @@ export const PeakDeleteButton = styled.button`
 
 export const PickListContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  justify-content: center;
 `;
 
 export const CardAndButtonWrapper = styled.div`
