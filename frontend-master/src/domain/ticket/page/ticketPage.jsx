@@ -7,17 +7,8 @@ import * as TicketPages from "../style/TicketPageDesign";
 import { useCallback } from "react";
 
 const TicketPage = () => {
-  const [allCategoryIds, setAllCategoryIds] = useState([]);
-  const [selectedIds, setSelectedIds] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-
   // 팝업 관련 상태 추가
   const [popupInfo, setPopupInfo] = useState(null);
-
-  const categoriesToQuery =
-    selectedIds.length > 0 ? selectedIds : allCategoryIds;
 
   // 팝업 열기 함수: 공연 정보를 받아서 상태 업데이트
   const openPopup = (info) => {
@@ -29,49 +20,19 @@ const TicketPage = () => {
     setPopupInfo(null);
   }, []);
 
-  const handleDateChange = useCallback((start, end) => {
-    setStartDate(start);
-    setEndDate(end);
-  }, []);
-
   return (
     <TicketPages.TicketPageMain>
       <TicketPages.TopCategoryBar>
-        <CategoryPage
-          selectedIds={selectedIds}
-          setSelectedIds={setSelectedIds}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          setAllCategoryIds={setAllCategoryIds}
-        />
+        <CategoryPage />
       </TicketPages.TopCategoryBar>
 
       <TicketPages.BottomArea>
         <TicketPages.Calendar1>
-          <Calendar
-            selectedIds={selectedIds}
-            setSelectedIds={setSelectedIds}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            startDate={startDate}
-            setStartDate={setStartDate}
-            endDate={endDate}
-            setEndDate={setEndDate}
-            setAllCategoryIds={setAllCategoryIds}
-          />
+          <Calendar />
         </TicketPages.Calendar1>
         <TicketPages.ShowList>
-          <SearchDate onDateChange={handleDateChange} />
-          <TicketList
-            selectedIds={categoriesToQuery}
-            searchTerm={searchTerm}
-            startDate={startDate}
-            endDate={endDate}
-          />
+          <SearchDate />
+          <TicketList />
         </TicketPages.ShowList>
       </TicketPages.BottomArea>
 

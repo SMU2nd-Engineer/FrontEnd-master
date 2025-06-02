@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import SelectDateCalendar from "../components/SelectDateCalendar";
+import useTicketStore from "../store/useTicketStore";
 
-const SearchDate = ({ onDateChange }) => {
-  const [startDate, setStartDate] = useState(null); // 시작날짜 지정
-  const [endDate, setEndDate] = useState(null); // 종료날짜 지정
+const SearchDate = () => {
+  const { startDate, endDate, setStartDate, setEndDate } = useTicketStore();
 
   const handleStartChange = (date) => {
     setStartDate(date); // 선택한 날짜를 시작날짜로
@@ -15,19 +15,18 @@ const SearchDate = ({ onDateChange }) => {
       setEndDate(null);
     }
     // 부모 컴포넌트에게 날짜 알려쥐기
-    onDateChange(date, newEndDate);
+    setStartDate(date);
+    setEndDate(newEndDate);
   };
 
   const handleEndChange = (date) => {
     setEndDate(date); // 선택한 날짜를 종료날짜로 셋팅
-    onDateChange(startDate, date); // 부모 컴포넌트에게 날짜 알려주기
+    setStartDate(startDate);
   };
 
   return (
     <div>
       <SelectDateCalendar
-        startDate={startDate}
-        endDate={endDate}
         onStartChange={handleStartChange}
         onEndChange={handleEndChange}
       />

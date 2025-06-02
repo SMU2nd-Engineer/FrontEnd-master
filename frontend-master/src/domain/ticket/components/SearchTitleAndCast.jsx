@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import * as TicketPages from "../style/TicketPageDesign";
+import useTicketStore from "../store/useTicketStore";
 
-const SearchTitleAndCast = ({ onSearch }) => {
+const SearchTitleAndCast = () => {
+  const setSearchTerm = useTicketStore((state) => state.setSearchTerm);
+
   const [query, setQuery] = useState("");
 
   const handleInputChange = (e) => {
@@ -9,7 +12,7 @@ const SearchTitleAndCast = ({ onSearch }) => {
   };
 
   const handleSearch = () => {
-    onSearch(query); // 상위 컴포넌트에서 전달받은 검색 함수 실행
+    setSearchTerm(query); // 상위 컴포넌트에서 전달받은 검색 함수 실행
   };
 
   const handleKeyDown = (e) => {

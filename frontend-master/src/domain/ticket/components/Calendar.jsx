@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getTicketCalendar } from "../services/ticketService";
 import * as Calendars from "../style/CalendarDesign";
+import useTicketStore from "../store/useTicketStore";
 
-function Calendar({ selectedIds, setStartDate, setEndDate }) {
+function Calendar() {
+  const selectedIds = useTicketStore((state) => state.selectedIds);
+  const setStartDate = useTicketStore((state) => state.setStartDate);
+  const setEndDate = useTicketStore((state) => state.setEndDate);
+
   const [date, setDate] = useState(new Date()); // 현재 기준 달
   const [list, setList] = useState([]); // API에서 가져온 날짜별 공연/스포츠 데이터
   const [infos, setInfos] = useState([]); // 달력에 출력할 날짜 정보 배열

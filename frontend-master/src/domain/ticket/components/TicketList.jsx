@@ -5,19 +5,24 @@ import { getCategoryIdx } from "@/utils/CategoryHandler";
 import PopupPage from "./PopupPage";
 import * as TicketPages from "../style/TicketPageDesign";
 import TicketItem from "./TicketItem";
+import useTicketStore from "../store/useTicketStore";
 
-const TicketList = ({
-  selectedIds,
-  searchTerm: searchTitle,
-  startDate,
-  endDate,
-}) => {
+const TicketList = () => {
+  const selectedIds = useTicketStore((state) => state.selectedIds);
+  const allCategoryIds = useTicketStore((state) => state.selectedIds);
+  const startDate = useTicketStore((state) => state.startDate);
+  const endDate = useTicketStore((state) => state.endDate);
+  const searchTerm = useTicketStore((state) => state.searchTerm);
+
   const [ticketInfos, setTicketInfos] = useState([]);
   const [selectedInfo, setSelectedInfo] = useState(null); // 팝업용 상태
   const [loading, setLoading] = useState(false);
   const [idx, setIdx] = useState();
   const [genreName, setGenreName] = useState([]);
   const [openGenres, setOpenGenres] = useState({}); // 장르별 오픈 상태
+
+  const categoriesToQuery =
+    selectedIds.length > 0 ? selectedIds : allCategoryIds;
 
   // 장르 리스트 불러오기
   useEffect(() => {
@@ -52,7 +57,7 @@ const TicketList = ({
     const categoriesParam = selectedIds.join(",");
     getSearchTicket({
       categories: categoriesParam,
-      query: searchTitle,
+      query: searchTerm,
       startDate: startDate ? startDate.toISOString().split("T")[0] : null, // date 형식을 'yyyy-mm-dd' 형식으로 가져오게 하기 위함(시간 빼고)
       endDate: endDate ? endDate.toISOString().split("T")[0] : null,
     })
@@ -64,7 +69,7 @@ const TicketList = ({
         console.error("검색 실패:", err);
         setLoading(false);
       });
-  }, [selectedIds, searchTitle, startDate, endDate]);
+  }, [selectedIds, searchTerm, startDate, endDate]);
 
   const groupByGenre = (tickets) => {
     return tickets.reduce((acc, ticket) => {
@@ -79,7 +84,7 @@ const TicketList = ({
   const filteredInfos = ticketInfos.filter((info) =>
     (info.title || info.name || "") // ticketInfos 중에서 title 또는 name 없을 경우 대비해서 "" 사용
       .toLowerCase()
-      .includes(searchTitle.toLowerCase())
+      .includes(searchTerm.toLowerCase())
   );
 
   // 토글 버튼
