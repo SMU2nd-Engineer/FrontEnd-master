@@ -39,32 +39,43 @@ const Footer = () => {
             </a> <br />
             <F.Reference>
               <div className="tickets">
-                <a href="https://ticket.interpark.com/" >
+                <a href="https://ticket.interpark.com/"
+                   target="_blank"
+                   rel="noopener noreferrer" >
                   {" "}
                   <IoTicketOutline size={25} color="#5d6dff"/>
                   <span className="interpark">Interpark </span>
                   {" "} 
                 </a> <br />
-                <a href="https://www.ticketlink.co.kr/home">
+                <a href="https://www.ticketlink.co.kr/home"
+                   target="_blank"
+                   rel="noopener noreferrer">
                   {" "}
                   <IoTicketOutline size={25} color="#fa3131" />
                   <span className="ticketlink">Ticketlink </span>
                   {" "}
                 </a> <br />
-                <a href="https://ticket.melon.com/main/index.htm" >
+                <a href="https://ticket.melon.com/main/index.htm"
+                   target="_blank"
+                   rel="noopener noreferrer" >
                   {" "}
                   <IoTicketOutline size={25} color="#41D26B" />
                   <span className="melonticket">MelonTicket</span>
                 </a><br />
               </div>
               <div className="markets">
-                <a href="https://m.bunjang.co.kr/">
+                <a href="https://m.bunjang.co.kr/"
+                   target="_blank"
+                   rel="noopener noreferrer">
                   {" "}
                   <TiShoppingCart size={25} color="#000000" />
                   <span className="ticketlink">번개장터 </span>
                   {" "}
                 </a><br />
-                <a href="https://m.bunjang.co.kr/">
+                <a href="https://kream.co.kr/" 
+                   target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {" "}
                   <TiShoppingCart size={25} color="#000000" />
                   <span className="ticketlink">Kream </span>
