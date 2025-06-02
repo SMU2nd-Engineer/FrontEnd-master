@@ -20,14 +20,14 @@ export const CategoryAndTitle = styled.div`
   gap: 10px;
   margin-left: 20px;
   margin-bottom: 20px;
-  max-height: 45px;
+  max-height: 40px;
   .category {
-    font-size: 28px;
+    font-size: 1.5rem;
     color: #888;
     font-weight: 500;
   }
   .title {
-    font-size: 28px;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #222;
   }
@@ -181,12 +181,20 @@ export const CommentList = styled.div`
         font-weight: bold;
       }
       .commentTime {
-        font-size: 13px;
+        font-size: 0.8rem;
       }
     }
     .comment {
       width: 80%;
       white-space: pre-line; // 줄바꿈 댓글 작성 기능
+      font-size: 1rem;
+    }
+    .commentDelete {
+      button {
+        font-size: 0.8rem;
+        margin-right: 10px;
+        color: #c00;
+      }
     }
   }
 

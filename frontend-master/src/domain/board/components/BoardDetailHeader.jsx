@@ -64,7 +64,7 @@ const BoardDetailHeader = ({
         <h2 className="title">{title}</h2>
       </Details.CategoryAndTitle>
 
-      <Details.UserAuth id="sidis">
+      <Details.UserAuth>
         <div className="author">
           {/* 작성자 */}
           <FaUserLarge style={{ marginRight: "5px" }} />
