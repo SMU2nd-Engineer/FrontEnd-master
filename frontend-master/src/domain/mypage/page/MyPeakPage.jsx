@@ -45,7 +45,7 @@ export default function MyPeakPage() {
       </Nav.StickyNavbar>
       <PeakContainer id="peakListBody">
         <PeakHedear>찜 목록</PeakHedear>
-        <MyPeakList products={currentItems} />
+        <MyPeakList key={currentPage} products={currentItems} />
         <MyPagination
           pageCount={totalPageCount}
           onPageChange={onPageChange}
