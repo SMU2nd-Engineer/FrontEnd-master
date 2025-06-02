@@ -10,9 +10,17 @@ const BoardPageFooter = ({handleOnclick}) => {
   const [Categories, setCategpries] = useState(""); // 기본 카테고리
   const [searchKeywords, setSearchKeywords] = useState(""); // 검색어 입력
 
+  // 검색 실행 함수
   const onClick = () => {
     handleOnclick(searchTypes, Categories, searchKeywords)
   }
+
+  // Enter 키처리 함수 - 검색 할때 엔터키 누르면 실행
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
 
   // 화면에 출력되는 내용
   return (
@@ -38,7 +46,8 @@ const BoardPageFooter = ({handleOnclick}) => {
           type="text"
           placeholder="검색어 입력창"
           value={searchKeywords}
-          onChange={(e) => setSearchKeywords(e.target.value)}       
+          onChange={(e) => setSearchKeywords(e.target.value)}
+          onKeyDown={handleKeyDown}       
         />
       </board.Board_SearchInput>
 

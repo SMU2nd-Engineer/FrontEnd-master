@@ -128,7 +128,7 @@ const BoardSubmitFooter = ({
         })
         .catch((error) => {
           console.error("게시글 등록 실패: ", error);
-          alert("게시글 등록 실패했습니다...");
+          alert("글 카테고리를 선택은 필수입니다.");
         });
     }
   };
