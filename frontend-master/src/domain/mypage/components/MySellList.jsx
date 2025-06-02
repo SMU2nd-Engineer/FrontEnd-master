@@ -86,7 +86,10 @@ export default function MySellList({ isMain = false, products = [] }) {
       <MoreCell>
         {isMain && <Link to="/mypage/sellAndPurchaselist/">더 보기</Link>}
       </MoreCell>
-      <ProductList products={currentItems ?? ""} />
+      <ProductList
+        key={`${category}-${currentPage}`}
+        products={currentItems ?? ""}
+      />
       {!isMain && (
         <MyPagination
           pageCount={totalPageCount}
