@@ -78,7 +78,7 @@ export const EndButton = styled.button`
 `;
 
 export const CategoryForm = styled.form`
-  width: 80%;
+  width: 90%;
   line-height: 400%;
 `;
 

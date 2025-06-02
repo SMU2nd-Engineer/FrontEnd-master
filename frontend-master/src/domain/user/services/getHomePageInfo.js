@@ -7,7 +7,7 @@ export const getHomePageInfo = async () => {
     });
     return res.data;
   } catch (error) {
-    console.log("리뷰 등록 과정에서 문제 발생 : ", error);
+    console.log("홈페이지 정보 가져오는 과정에서 문제 발생 : ", error);
     throw error;
   }
 };
