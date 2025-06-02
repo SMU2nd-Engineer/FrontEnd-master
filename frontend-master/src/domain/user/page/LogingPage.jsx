@@ -34,8 +34,11 @@ export default function LogingPage() {
     e.preventDefault();
     try {
       const res = await login(id, password, autoLogin);
+      console.log("🟢 로그인 응답 데이터:", res);
+      console.log("🪪 토큰 반환 형태 확인:", res.data);
       const accessToken = res.data.accessToken;
       if (accessToken) {
+        console.log("✅ accessToken 존재, 저장 시도:", accessToken);
         setAccessToken(accessToken);
         if (rememberId) {
           // 아이디 기억하기 체크 여부에 따라 아이디 제거 또는 기억하기
@@ -50,7 +53,8 @@ export default function LogingPage() {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.error("❌ 로그인 에러:", error);
+      console.error("❌ 에러 응답:", error.response?.data);
       alert("로그인 실패");
       setUserId("");
       setpassword("");

@@ -108,7 +108,6 @@ export default function UserRegistrationPage() {
       alert("회원 가입 중에 오류가 발생했습니다. 관리자게에 문의해주세요.");
     }
   };
-  console.log("isIdCheck " + isIdCheck);
   return (
     <RegistrationContainer>
       <RegistrationForm
