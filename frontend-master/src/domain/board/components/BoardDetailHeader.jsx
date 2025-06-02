@@ -22,7 +22,7 @@ const BoardDetailHeader = ({
   const { userInfo } = useLoginUserInfoStore();
 
   useEffect(() => {
-    console.log("userInfo:", userInfo);
+    // console.log("userInfo:", userInfo);
   }, [userInfo]);
 
   // 게시판 리스트 홈페이지로 이동

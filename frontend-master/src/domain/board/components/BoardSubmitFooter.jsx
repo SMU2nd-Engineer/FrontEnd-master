@@ -94,7 +94,7 @@ const BoardSubmitFooter = ({
       content: filterdData, // 글 내용 입력 - 리액트 에디터 내용 => tempdata
       // uploadImage를 백엔드로 넘겨주는 건 위에서 함
     };
-    console.log("postContent: ", postContent);
+    // console.log("postContent: ", postContent);
 
     // 게시판 양식 사용 - 수정
     if (isModify) {
@@ -128,7 +128,7 @@ const BoardSubmitFooter = ({
         })
         .catch((error) => {
           console.error("게시글 등록 실패: ", error);
-          alert("글 카테고리를 선택은 필수입니다.");
+          alert("글 카테고리 선택은 필수입니다.");
         });
     }
   };

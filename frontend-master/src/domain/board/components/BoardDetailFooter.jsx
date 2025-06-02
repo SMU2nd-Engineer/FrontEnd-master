@@ -21,13 +21,6 @@ const BoardDetailFooter = ({
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
   const { userInfo } = useLoginUserInfoStore();
 
-  // console.log(
-  //   "로그인한 사람 맞아? :",
-  //   userInfo.userName,
-  //   userInfo.userNickName
-  // );
-  // console.log("댓글 등록한 사람 맞아? :", user_idx);
-
   // 댓글 등록 버튼 선택
   const handleSubmit = async function (e) {
     // preventDefault: 페이지 새로고침 방지
@@ -37,6 +30,8 @@ const BoardDetailFooter = ({
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
     await postBoardAddComment({ id, text: newCommentText })
       .then((res) => {
+        // console.log("댓글정보:", newCommentText);
+        alert("댓글 등록 성공");
         console.log("댓글정보:", newCommentText);
         console.log(res);
         setNewCommentText("");
@@ -50,7 +45,7 @@ const BoardDetailFooter = ({
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
     await getBoardComment(id) // API 호출
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setCommentList(response.data); // 받아온 댓글 데이터 상태에 저장
         setLoading(false); // 로딩 완료 표시
       });
@@ -79,7 +74,7 @@ const BoardDetailFooter = ({
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
     await postBoardDeleteComment(comment_idx)
       .then((res) => {
-        console.log("댓글 삭제 정보:", comment_idx);
+        // console.log("댓글 삭제 정보:", comment_idx);
         alert("댓글 삭제 성공");
         console.log(res);
       })

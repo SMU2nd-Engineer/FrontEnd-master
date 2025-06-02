@@ -42,18 +42,11 @@ const BoardDetailPage = () => {
     user_idx: "",
   });
 
-  // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
-  // const [contentsQuillHtml, setContentsQuillHtml] = useState("");
-
   // 새 댓글 입력값
   const [newCommentText, setNewCommentText] = useState("");
 
   // 입력한 댓글 목록으로 불러오기
   const [commentList, setCommentList] = useState([]);
-
-  // 로그인한 사람의 user_idx를 가져와야함 - 숫자 가져옴
-  // ContentsService, ContentsCommentService에 어떻게 불러올지 생각
-  // const [userIdx, setUserIdx] = useState(0);
 
   // 게시글 상세데이터 상태
   const [loading, setLoading] = useState(); // 로딩 상태
@@ -94,8 +87,6 @@ const BoardDetailPage = () => {
 
         // pushImgSrc 함수를 호출 시 두 번째 인자로 imageUrls 넣기
         const processedContent = pushImgSrc(response.data.content, imageUrls);
-
-        // console.log("배열 밖으로 나왔니? ", processedContent);
 
         // 상태에 저장 후 렌더링
         setDetailBoard({

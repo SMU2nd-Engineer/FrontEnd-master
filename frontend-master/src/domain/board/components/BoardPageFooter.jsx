@@ -5,8 +5,8 @@ import { useState } from "react";
 import SearchSelectBox from "@/components/SearchSelectBox";
 import * as board from "../styles/BoardListPageDesign";
 
-const BoardPageFooter = ({ handleOnclick }) => {
-  const [searchTypes, setSearchTypes] = useState(1); // 구분자(제목+내용/작성자)
+const BoardPageFooter = ({handleOnclick}) => {
+  const [searchTypes, setSearchTypes] = useState(0); // 구분자(제목+내용/작성자)  
   const [Categories, setCategpries] = useState(""); // 기본 카테고리
   const [searchKeywords, setSearchKeywords] = useState(""); // 검색어 입력
 
@@ -21,6 +21,7 @@ const BoardPageFooter = ({ handleOnclick }) => {
       onClick();
     }
   };
+
 
   // 화면에 출력되는 내용
   return (
