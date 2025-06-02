@@ -141,22 +141,23 @@ const BoardDetailFooter = ({
                 <div className="comment">
                   <p>{comment.text}</p>
                 </div>
-
-                {/* 댓글 삭제 button 
+                <div className="commentDelete">
+                  {/* 댓글 삭제 button 
                     처음 페이지 시작하면 다른 정보와 로그인한 사람의 user_idx를 가져와야함
                     비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정
                   */}
-                {/* {userIdx === comment.userIdx &&  */}
-                {user_idx === userInfo.userIdx && (
-                  <button
-                    onClick={() => {
-                      handleDelete(comment.comment_idx);
-                    }}
-                  >
-                    {" "}
-                    댓글 삭제
-                  </button>
-                )}
+                  {/* {userIdx === comment.userIdx &&  */}
+                  {user_idx === userInfo.userIdx && (
+                    <button
+                      onClick={() => {
+                        handleDelete(comment.comment_idx);
+                      }}
+                    >
+                      {" "}
+                      댓글 삭제
+                    </button>
+                  )}
+                </div>
                 {/* } */}
               </li>
             );
