@@ -84,6 +84,9 @@ export const Buttonbox = styled.div`
   font-size: 20px;
   color: rgb(85, 77, 68);
   
+.pickbutton {
+  width: 50px !important; 
+}
   
 
 .chatbutton {
@@ -112,9 +115,14 @@ export const Buttonbox = styled.div`
   }
 }
 `
-export const StyledPeakButton = styled(PeakButton)`
-  width: 70px;
+
+export const Pickbutton = styled.div`
+  button {
+    width: 100%;
+    padding: 0;
+    }
 `
+
 
 export const DetailBottom = styled.div`
   width: 100%;

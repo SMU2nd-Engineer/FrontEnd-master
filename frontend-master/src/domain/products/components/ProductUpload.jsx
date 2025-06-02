@@ -137,11 +137,16 @@ const ProductUpload = ({ initialData, isEdit }) => {
                 />
             </div>
             <PUP.ButtonBox>
-            <Button 
-              className="upload"
-              text={isEdit ? "수정" : "등록"}
-              onClick={handleSubmit}
-            ></Button>
+              <Button
+                className="cancle"
+                text={"취소"}
+                onClick={() => navigate(-1)}
+              ></Button>
+              <Button 
+                className="upload"
+                text={isEdit ? "수정" : "등록"}
+                onClick={handleSubmit}
+              ></Button>
             </PUP.ButtonBox>
           </PUP.UploadForm>
         

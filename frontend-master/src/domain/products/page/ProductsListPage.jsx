@@ -22,7 +22,6 @@ const ProductListPage = () => {
     getProductList(null, size)
       .then((res) => {
         const data = res.data;
-        console.log("불러온 상품 개수:", data.length);
         if (data.length < size){
           setHasMore(false);  
         } else {

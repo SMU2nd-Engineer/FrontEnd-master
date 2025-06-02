@@ -4,14 +4,12 @@ import * as ProductDetails from "../styles/ProductDetailDesign";
 import Button from "@/components/Button";
 import { getProductDetail } from "../services/productService";
 import ProductImage from "./ProductImage";
-import ProductDelete from "./ProductDelete";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
 import PeakButton from "./PeakButton";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
-import { PiChatsCircle } from "react-icons/pi";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -20,14 +18,11 @@ export default function ProductDetail() {
   const navigate = useNavigate();
   const [chatPopup, setChatPopup] = useState(0);
   const {userInfo} = useLoginUserInfoStore();
-  console.log("로그인 유저 정보:", userInfo);
-  // console.log("게시글 작성자 ID:", product.user_idx);
 
   useEffect(() => {
     getProductDetail(idx)
       .then((res) => res.data)
       .then((data) => {
-        console.log("#########", data);
         setProduct(data);
         setLoading(false);
       })
@@ -81,7 +76,6 @@ export default function ProductDetail() {
       <ProductDetails.DetailTop>
         {/* 이미지 슬라이드, 이미지 리스트 */}
         <ProductDetails.ThumbnailBox>
-          {/* <ProductImage imageList={product.imageList} title={product.title} mode="thumbnail" /> */}
           <ImageSlider imageList={product.imageList} />
           <ProductDetails.OtherImages>
             <ProductImage
@@ -107,9 +101,26 @@ export default function ProductDetail() {
 
           {/* 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
-            <ProductDetails.StyledPeakButton idx={idx} className="pickbutton"  >
-              찜
-            </ProductDetails.StyledPeakButton>
+            { product.user_idx === userInfo.userIdx ? (
+              <ProductDetails.EditDeleteBox>
+              <Button
+                className="product_editbutton"
+                text={"수정"}
+                onClick={handleEdit}
+              />   
+              <Button 
+                className="product_deletebutton"
+                text={"삭제"}
+                onClick={handleDelete}/>       
+              {/* <ProductDelete idx={idx}   /> */}
+            </ProductDetails.EditDeleteBox>
+            ) : (
+            <>
+            <ProductDetails.Pickbutton>
+              <PeakButton idx={idx}  >
+                찜
+              </PeakButton>
+            </ProductDetails.Pickbutton>
             <Button
               className="chatbutton"
               text={"💬 채팅"}
@@ -120,20 +131,9 @@ export default function ProductDetail() {
               text={"💳 구매"}
               onClick={handleClick}
             />
-            { product.user_idx === userInfo.userIdx &&(
-          <ProductDetails.EditDeleteBox>
-          <Button
-            className="product_editbutton"
-            text={"수정"}
-            onClick={handleEdit}
-          />   
-          <Button 
-            className="product_deletebutton"
-            text={"삭제"}
-            onClick={handleDelete}/>       
-           {/* <ProductDelete idx={idx}   /> */}
-         </ProductDetails.EditDeleteBox>
-        )}
+            
+            </>
+            )}
           </ProductDetails.Buttonbox>
         </ProductDetails.Column>
       </ProductDetails.DetailTop>

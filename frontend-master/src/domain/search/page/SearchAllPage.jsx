@@ -51,12 +51,9 @@ const SearchAllPage = () => {
         </SA.ProductResult>
         {/* <SA.PostResult> */}
           <h2><span>{searchKeyword}</span> 게시글 검색 결과</h2>
-          {boardResult.length > 0 ? (       
-              <div>
-                {boardResult.map((keyword) => (
-                <p key={keyword.idx}> <Link to={`/board/detail/${keyword.idx}`}> {keyword.content}  </Link></p>
-              ))}
-            </div>
+          {boardResult.length > 0 ? (   
+            <BoardList boards={boardResult} />    
+           
          
           ) : (
             <p><span>{searchKeyword}</span> 게시글 검색 결과가 없습니다.</p>
