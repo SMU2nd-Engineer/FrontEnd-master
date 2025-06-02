@@ -120,6 +120,8 @@ export const Pickbutton = styled.div`
   button {
     width: 100%;
     padding: 0;
+
+    
     }
 `
 
