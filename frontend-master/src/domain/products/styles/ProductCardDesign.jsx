@@ -7,7 +7,8 @@ export const Thumbnail = styled.div`
   overflow: hidden;
 
   img{
-    width: 100%;
+    width: 210px;
+    height: 200px;
   }
 
 `
@@ -20,23 +21,26 @@ export const Product_card = styled.div `
   /* overflow: hidden; */
   background: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  &:hover {
+    background: #e7e7e736;
+  }
 `
 
 export const Button = styled.div`
     display: flex;
     justify-content: end;
     padding: 0 10px;
+
+    button {
+    width: 35px ;
+    height: 35px;
+    display: flex;
+    justify-content: end;
+    
+  }
 `
 
-export const CardPeakButton = styled(PeakButton)`
-  width: 30px !important;
-  height: 30px !important;
-  display: flex;
-  justify-content: end;
-  /* padding: 0 10px; */
-  
-  
-`
 
 
 

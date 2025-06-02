@@ -17,10 +17,7 @@ const ProductSearch = ({onSearch}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(searchValue);
-    setSearchValue({
-    category_idx: 0,
-    categorygenre_idx:0,
-    keyword : ""});
+    
   }
 
   return (
