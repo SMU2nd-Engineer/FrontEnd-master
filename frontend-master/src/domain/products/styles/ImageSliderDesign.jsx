@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const SliderContainer = styled.div`
   width: 400px;
   height: 400px;
+  overflow: hidden;
   /* margin: 200px auto; */
   display: flex;
   justify-content: center;
