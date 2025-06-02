@@ -120,7 +120,9 @@ export default function ProductDetail() {
             ) : (
               <>
                 <ProductDetails.Pickbutton>
-                  <PeakButton idx={idx}>찜</PeakButton>
+                  <PeakButton idx={idx} pick={product.pick}>
+                    찜
+                  </PeakButton>
                 </ProductDetails.Pickbutton>
                 <Button
                   className="chatbutton"

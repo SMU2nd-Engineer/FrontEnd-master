@@ -12,9 +12,9 @@ const KakaoPayReady = async (product, user, tradeType) => {
   let amount = product.price;
   const deliveryAddress = user.address;
   const sellerIdx = product.user_idx;
-  const approvalUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/${productIdx}/success?tradeType=${tradeType}`;
-  const cancelUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/${productIdx}/cancel?tradeType=${tradeType}`;
-  const failUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/${productIdx}/fail?tradeType=${tradeType}`;
+  const approvalUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/success/${productIdx}?tradeType=${tradeType}`;
+  const cancelUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/cancel/${productIdx}?tradeType=${tradeType}`;
+  const failUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/fail/${productIdx}?tradeType=${tradeType}`;
 
   if (tradeType === 0) {
     amount += 3000;

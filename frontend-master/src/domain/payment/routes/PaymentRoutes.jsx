@@ -12,12 +12,12 @@ const PaymentRoutes = () => {
     <Routes>
       <Route path="/:idx" element={<PaymentLayout />}>
         <Route path="info" element={<PaymentPage />} />
-        <Route path="test" element={<PaymentTestPage />} />
-        <Route path="success" element={<PaymentSuccessPage />} />
-        <Route path="cancel" element={<PaymentCancelPage />} />
-        <Route path="fail" element={<PaymentFailPage />} />
         <Route path="trade" element={<TradeType />} />
       </Route>
+      <Route path="test" element={<PaymentTestPage />} />
+      <Route path="success/:idx" element={<PaymentSuccessPage />} />
+      <Route path="cancel/:idx" element={<PaymentCancelPage />} />
+      <Route path="fail/:idx" element={<PaymentFailPage />} />
     </Routes>
   );
 };

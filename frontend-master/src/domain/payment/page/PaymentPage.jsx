@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SCHEMA } from "@/domain/user/utils/userFormValidator";
-import { useSearchParams } from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import KakaoPayReady from "../service/KakaoPayReady";
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
@@ -27,6 +27,7 @@ const PaymentPage = () => {
     keyword: "",
   });
   const { productInfo } = useProductStore();
+  const { skipBeforeUnload } = useOutletContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,6 +104,7 @@ const PaymentPage = () => {
           const result = await KakaoPayReady(productInfo, user, tradeType);
 
           if (result) {
+            skipBeforeUnload.current = true;
             window.location.href = result.nextRedirectPcUrl;
           } else {
             alert("결제 요청에 실패했습니다.");

@@ -1,32 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { getUserPeakInfo } from "@user/services/getUserPeakInfo";
 import { updateUserPeak } from "@mypage/services/updateUserPeak";
 import { insertUserPeak } from "@/domain/mypage/services/insertUserPeak";
 import usePickStore from "@/domain/mypage/store/usePickStore";
 import { useLocation } from "react-router-dom";
 
-const PeakButton = ({ idx }) => {
+const PeakButton = ({ idx, pick }) => {
   const { triggerRefresh } = usePickStore();
-  const [isPeak, setIsPeak] = useState(false);
+  const [isPeak, setIsPeak] = useState(pick);
 
   // 찜목록 삭제 알람을 위한 경로확인
   const location = useLocation();
   const isPickPage = location.pathname.includes("/mypage/peakList");
-
-  useEffect(() => {
-    // 상품 정보와 내 정보를 이용해서 찜 상품인지 아닌지 확인을 위한 정보 호출
-    const saveUserPeakInfo = async () => {
-      try {
-        const result = await getUserPeakInfo(idx);
-        setIsPeak(!!result.isPick);
-      } catch (error) {
-        console.log(`내 찜 정보 불러오기 실패! ${error}`);
-        throw error;
-      }
-    };
-    saveUserPeakInfo();
-  }, [idx]);
+  console.log(idx, pick, isPeak);
 
   const handleClick = async (e) => {
     e.stopPropagation();
@@ -51,7 +37,7 @@ const PeakButton = ({ idx }) => {
   };
 
   return (
-    <button onClick={handleClick}  >
+    <button onClick={handleClick}>
       {isPeak ? (
         <AiFillHeart size={24} color="#f0b8b8 " />
       ) : (
@@ -61,4 +47,4 @@ const PeakButton = ({ idx }) => {
   );
 };
 
-export default PeakButton;
+export default React.memo(PeakButton);
