@@ -69,7 +69,6 @@ export default function UserRegistrationPage() {
       setValue("password", finalPassword);
       setValue("passwordCheck", finalPassword);
       setValue("socialProvider", socialProvider || "");
-      console.log("소셜 로그인 감지됨 → ID 설정 및 중복 체크 완료");
       setIsIdCheck(true);
       setIsSocialLogin(true);
       setSocialProvider(socialProvider || "");
