@@ -5,7 +5,8 @@ import BoardList from '@/domain/board/components/BoardList';
 import { useState } from 'react';
 import * as SA from "../styles/SearchAllPageDesign";
 import { searchAll } from '../services/SearchService';
-import { Link } from 'react-router-dom';
+
+
 
 
 

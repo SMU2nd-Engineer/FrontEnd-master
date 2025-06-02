@@ -26,7 +26,10 @@ export const HeaderMenu = () => {
     <H.Header_nav>
       <div className="navigation">
         <div className="nav-top">
-          <NavLink to="/total"> 검색 </NavLink>
+          <NavLink 
+          to="/total" 
+          onClick={() => handleNavClick("/total")}
+          > 검색 </NavLink>
           <NavLink to="/board"> 게시판 </NavLink>
           <NavLink to="/mypage"> 마이페이지 </NavLink>
         </div>

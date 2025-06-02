@@ -53,7 +53,7 @@ body {
   flex-direction: column;
   min-height: 100%;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1020px;
   /* position: relative; */
 }
 
