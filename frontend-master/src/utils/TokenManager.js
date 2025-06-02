@@ -10,7 +10,6 @@ export const getAccessToken = () =>
  * @param {String} token : access 토큰을 입력
  */
 export const setAccessToken = (token) => {
-  console.log("📦 accessToken 저장:", token);
   const autoLogin = sessionStorage.getItem("autoLogin") === "true";
   if (autoLogin) {
     localStorage.setItem("accessToken", token);

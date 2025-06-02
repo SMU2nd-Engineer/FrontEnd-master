@@ -2,69 +2,77 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Divider } from '@chakra-ui/react'
 import * as F from "../../style/FooterDesign"
-
+import { FaGithubSquare } from "react-icons/fa";
+import { IoTicketOutline } from "react-icons/io5";
+import { TiShoppingCart } from "react-icons/ti";
 
 const Footer = () => {
   return (
      <F.Footer_nav>
       <div className="navigation">
       <div className="ftMenu">
-        <NavLink
-          to="/company"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
-          {" "}
+          {/* {" "} */}
           회사소개{" "}
-        </NavLink>
         <span> | </span>
-        <NavLink
-          to="/service"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
           {" "}
           이용약관{" "}
-        </NavLink>
         <span> | </span>
-        <NavLink
-          to="/service-police"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
           {" "}
           운영정책{" "}
-        </NavLink>
         <span> | </span>
-        <NavLink
-          to="/privacy"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
           {" "}
           개인정보처리방침{" "}
-        </NavLink>
         <span> | </span>
-        <NavLink
-          to="/youth-policy"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
           {" "}
           청소년보호정책{" "}
-        </NavLink>
         <span> | </span>
-        <NavLink
-          to="/partner"
-          style={({ isActive }) => (isActive ? selectedStyle : undefined)}
-        >
           {" "}
           광고제휴{" "}
-        </NavLink>
       </div>
-      <div className="chakra-divider">
-        <Divider orientation='horizontal'/>
-      </div>
+      <F.HorizontalDivider />
       <div className="ft-column">
         <div className='left-column'>
-          <h2 className='ft-h2'>팀 소개를 해보도록 합시다</h2>
+          <h2 className='ft-h2'></h2>
           <div className='team-About'>
-            <p></p>
+            <a href="https://github.com/SMU2nd-Engineer" >
+              <FaGithubSquare size={35} color="#5d2279" />
+            </a> <br />
+            <F.Reference>
+              <div className="tickets">
+                <a href="https://ticket.interpark.com/" >
+                  {" "}
+                  <IoTicketOutline size={25} color="#5d6dff"/>
+                  <span className="interpark">Interpark </span>
+                  {" "} 
+                </a> <br />
+                <a href="https://www.ticketlink.co.kr/home">
+                  {" "}
+                  <IoTicketOutline size={25} color="#fa3131" />
+                  <span className="ticketlink">Ticketlink </span>
+                  {" "}
+                </a> <br />
+                <a href="https://ticket.melon.com/main/index.htm" >
+                  {" "}
+                  <IoTicketOutline size={25} color="#41D26B" />
+                  <span className="melonticket">MelonTicket</span>
+                </a><br />
+              </div>
+              <div className="markets">
+                <a href="https://m.bunjang.co.kr/">
+                  {" "}
+                  <TiShoppingCart size={25} color="#000000" />
+                  <span className="ticketlink">번개장터 </span>
+                  {" "}
+                </a><br />
+                <a href="https://m.bunjang.co.kr/">
+                  {" "}
+                  <TiShoppingCart size={25} color="#000000" />
+                  <span className="ticketlink">Kream </span>
+                  {" "}
+                </a>
+                <a href=""></a>
+              </div>
+            </F.Reference>
           </div>
         </div>
         <div className='right-column'>

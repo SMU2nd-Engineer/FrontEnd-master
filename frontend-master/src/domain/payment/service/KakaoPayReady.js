@@ -13,9 +13,9 @@ const KakaoPayReady = async (product, user, tradeType) => {
   let amount = product.price;
   const deliveryAddress = user.address;
   const sellerIdx = product.user_idx;
-  const approvalUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/success/${productIdx}?tradeType=${tradeType}`;
-  const cancelUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/cancel/${productIdx}?tradeType=${tradeType}`;
-  const failUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/fail/${productIdx}?tradeType=${tradeType}`;
+  const approvalUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/${productIdx}/success?tradeType=${tradeType}`;
+  const cancelUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/${productIdx}/cancel?tradeType=${tradeType}`;
+  const failUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/${productIdx}/fail?tradeType=${tradeType}`;
 
   if (tradeType === 0) {
     amount += 3000;
@@ -23,12 +23,12 @@ const KakaoPayReady = async (product, user, tradeType) => {
 
   try {
     const res = await axiosInstance.post(
-      '/payment/ready',
+      "/payment/ready",
 
       {
         partnerOrderId,
         partnerUserId,
-        itemName,  // 상품 이름
+        itemName, // 상품 이름
         productIdx,
         quantity: 1,
         amount, // 금액
@@ -38,12 +38,12 @@ const KakaoPayReady = async (product, user, tradeType) => {
         failUrl,
         tradeType,
         deliveryAddress,
-        sellerIdx
+        sellerIdx,
       },
-      {withCredentials: true}
+      { withCredentials: true }
     );
 
-    console.log("응답데이터 : " , res.data)
+    console.log("응답데이터 : ", res.data);
     sessionStorage.setItem("tid", res.data.tid);
     sessionStorage.setItem("pgToken", res.data.pgToken);
     sessionStorage.setItem("partnerOrderId", partnerOrderId);

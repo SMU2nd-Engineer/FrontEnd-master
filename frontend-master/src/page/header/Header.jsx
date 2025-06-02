@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
 
 import { NavLink, useLocation } from "react-router-dom";
@@ -9,7 +8,7 @@ import mainLogo from "@/assets/main_logo.png";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 // 헤더 메뉴
-export const HeaderMenu = ({}) => {
+export const HeaderMenu = () => {
   const userInfo = useLoginUserInfoStore.getState().userInfo;
 
   const isLogin = userInfo.userIdx > 0;
@@ -27,7 +26,10 @@ export const HeaderMenu = ({}) => {
     <H.Header_nav>
       <div className="navigation">
         <div className="nav-top">
-          <NavLink to="/total"> 검색 </NavLink>
+          <NavLink 
+          to="/total" 
+          onClick={() => handleNavClick("/total")}
+          > 검색 </NavLink>
           <NavLink to="/board"> 게시판 </NavLink>
           <NavLink to="/mypage"> 마이페이지 </NavLink>
         </div>

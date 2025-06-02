@@ -22,7 +22,6 @@ export default function RegistrationId({
 }) {
   const id = watch("id");
   useEffect(() => {
-    console.log("RegistrationId useEffect 실행됨", { id, isSocialLogin });
     if (isSocialLogin) {
       setIsIdCheck(true);
       return;

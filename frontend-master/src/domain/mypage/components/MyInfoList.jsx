@@ -20,6 +20,7 @@ import {
   UserInfoHedear,
   WithdrawalButtonWrapper,
 } from "../style/MyPageInfoDesign";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function MyInfoList({ isSocialLogin }) {
   //yup 스키마 사용하여 입력폼 유효성 정의의
@@ -45,6 +46,8 @@ export default function MyInfoList({ isSocialLogin }) {
   const [isNickNameCheck, setIsNickNameCheck] = useState(false); // 닉네임 중복 체크
 
   const hasFetched = useRef(false); // 중복 호출 방지
+
+  const { setLoginUserInfo } = useLoginUserInfoStore();
 
   // 회원 정보 가져오기
   useEffect(() => {
@@ -113,6 +116,10 @@ export default function MyInfoList({ isSocialLogin }) {
     }
     try {
       await updateUserInfo(formData);
+      setLoginUserInfo({
+        userNickName: formData.nickName,
+        userName: formData.name,
+      });
       alert("개인 정보가 업데이트 되었습니다.");
       navigate("/mypage/main");
     } catch (error) {

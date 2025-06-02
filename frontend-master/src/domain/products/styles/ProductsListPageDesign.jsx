@@ -20,7 +20,7 @@ export const Product_list = styled.div `
   grid-template-columns: repeat(4,  1fr);
   gap: 32px;
   width: 100%;
-  margin: 0 auto;
+  margin-left: 10px;
 `
 
 export const MoreButton = styled.div`

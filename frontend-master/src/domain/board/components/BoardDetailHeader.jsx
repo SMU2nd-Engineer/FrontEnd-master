@@ -41,7 +41,6 @@ const BoardDetailHeader = ({
   const handleDeleteDetail = async () => {
     try {
       await deleteContentsDetail(id);
-      alert("게시글 삭제 클릭");
       navigate(`/board/list`); // 게시판 리스트로 이동
     } catch (error) {
       console.error("삭제 실패:", error);

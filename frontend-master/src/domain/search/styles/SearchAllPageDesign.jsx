@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const SearchContainer = styled.div`
+  margin-left: 10px;
+  
   span{
     color: #eb6666;
   }
@@ -17,8 +19,6 @@ export const SearchContainer = styled.div`
 export const SearchAllBar = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: center; */
-  
 
   input {
     width: 250px;
@@ -26,6 +26,17 @@ export const SearchAllBar = styled.div`
     font-size: 23px;
     font-weight: 400;
     /* margin-left: ;   */
+  }
+
+  button {
+    margin-left: 5px;
+    width: 60px;
+    height: 40px;
+
+    &:hover{
+      background-color: #818080;
+      color: #fff;
+    }
   }
 `
 

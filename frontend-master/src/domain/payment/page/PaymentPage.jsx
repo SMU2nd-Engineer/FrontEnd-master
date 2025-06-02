@@ -1,32 +1,30 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { SCHEMA } from '@/domain/user/utils/userFormValidator';
-import { useParams, useSearchParams } from 'react-router-dom';
-import KakaoPayReady from '../service/KakaoPayReady';
-import SelectBox from '@/components/SelectBox';
-import { getCategoryIdx } from '@/utils/CategoryHandler';
-import { getProductDetail } from '@/domain/products/services/productService';
-import { useEffect } from 'react';
-import Address from '@/domain/user/components/RegistrationAddress';
-import PaymentProductInfo from '../components/PaymentProductInfo';
-import * as PaymentDesign from '../styles/PaymentPageDesign'
-import { useRef } from 'react';
-import { getMyPageData } from '@/domain/mypage/services/getMyPageDate';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SCHEMA } from "@/domain/user/utils/userFormValidator";
+import { useSearchParams } from "react-router-dom";
+import KakaoPayReady from "../service/KakaoPayReady";
+import SelectBox from "@/components/SelectBox";
+import { getCategoryIdx } from "@/utils/CategoryHandler";
+import { useEffect } from "react";
+import Address from "@/domain/user/components/RegistrationAddress";
+import PaymentProductInfo from "../components/PaymentProductInfo";
+import * as PaymentDesign from "../styles/PaymentPageDesign";
+import { useRef } from "react";
+import { getMyPageData } from "@/domain/mypage/services/getMyPageDate";
+import { useProductStore } from "../store/useProductStore";
 
 const PaymentPage = () => {
-  const {idx} = useParams();
-  const [product, setProduct] = useState(null);
   const YUPSCHEMA = SCHEMA;
   const [searchParams] = useSearchParams();
-  const tradeType = Number(searchParams.get('tradeType'));
+  const tradeType = Number(searchParams.get("tradeType"));
   const hasFetched = useRef(false);
   const [user, setUser] = useState({
-    address: ""
+    address: "",
   });
   const [searchValue, setSearchValue] = useState({
     category_idx: 0,
-    keyword : ""
+    keyword: "",
   });
   
   useEffect(() => {
@@ -40,12 +38,13 @@ const PaymentPage = () => {
       
     }, [idx]);
 
+  const { productInfo } = useProductStore();
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSearchValue({...searchValue, [name] : value});
-    console.log("카테고리 변경됨:", name, value);
-    console.log(typeof searchValue.category_idx);
-  }
+    setSearchValue({ ...searchValue, [name]: value });
+  };
 
   const {
     register, // 입력 폼 등록
@@ -88,7 +87,7 @@ const PaymentPage = () => {
     return {
       ...userInfo,
       address: address.trim(),
-      detailAddress: detailAddress.trim()
+      detailAddress: detailAddress.trim(),
     };
   };
 
@@ -98,55 +97,51 @@ const PaymentPage = () => {
   useEffect(() => {
     // 주소나 상세주소가 바뀌면 user.address를 업데이트
     if (watchedAddress || watchedDetail) {
-      const fullAddress = `${watchedAddress || ""} ${watchedDetail || ""}`.trim();
-      setUser(prev => ({ ...prev, address: fullAddress }));
+      const fullAddress = `${watchedAddress || ""} ${
+        watchedDetail || ""
+      }`.trim();
+      setUser((prev) => ({ ...prev, address: fullAddress }));
     }
   }, [watchedAddress, watchedDetail]);
 
-  if(!product || tradeType === null) {
-    console.log('tradeType : ', tradeType);
+  if (!productInfo || tradeType === null) {
+    console.log("tradeType : ", tradeType);
     return <div>상품 정보를 불러오는 중입니다...</div>;
   }
 
   const handlePaymentClick = async () => {
-    
-
     const categoryIdx = Number(searchValue.category_idx);
     switch (categoryIdx) {
       case 6001:
         try {
-          const result = await KakaoPayReady(product, user, tradeType);
-          console.log("카카오 응답 ", result);
-      
+          const result = await KakaoPayReady(productInfo, user, tradeType);
+
           if (result) {
             window.location.href = result.nextRedirectPcUrl;
-            console.log("카카오 응답 ", result);
           } else {
             alert("결제 요청에 실패했습니다.");
           }
-        } catch (error) {
-          console.error("카카오페이 요청 중 오류 발생: ", error);
-          
-          alert("결제 요청 중 오류가 발생했습니다. 다시 시도해주세요.")
+        } catch {
+          alert("결제 요청 중 오류가 발생했습니다. 다시 시도해주세요.");
         }
         break;
       case 6002:
-        alert('토스페이 준비중');
+        alert("토스페이 준비중");
         break;
       case 6003:
-        alert('네이버페이 준비중');
+        alert("네이버페이 준비중");
         break;
       default:
-        alert('결제수단을 선택해주세요');
+        alert("결제수단을 선택해주세요");
         break;
     }
-  }
+  };
 
-  let total
+  let total;
   if (tradeType === 0) {
-    total = product.price + 3000;
+    total = productInfo.price + 3000;
   } else if (tradeType === 1) {
-    total = product.price;
+    total = productInfo.price;
   }
 
   return (
@@ -166,16 +161,23 @@ const PaymentPage = () => {
         </PaymentDesign.Adderss>
         <PaymentDesign.OrderProduct>주문 상품</PaymentDesign.OrderProduct>
         <PaymentDesign.ProductInfo>
-          <PaymentProductInfo product={product} tradeType={{tradeType}}/>
+          <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
         </PaymentDesign.ProductInfo>
         <PaymentDesign.Paymethod>
           <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>
           <PaymentDesign.Select>
-            <SelectBox id={"pay_method"} name={"category_idx"} category_idx={getCategoryIdx("payment")} handleChange={handleChange}/>
+            <SelectBox
+              id={"pay_method"}
+              name={"category_idx"}
+              category_idx={getCategoryIdx("payment")}
+              handleChange={handleChange}
+            />
           </PaymentDesign.Select>
         </PaymentDesign.Paymethod>
         <div>
-          <PaymentDesign.PaymentBtn onClick={handlePaymentClick}>{total}원 결제하기</PaymentDesign.PaymentBtn>
+          <PaymentDesign.PaymentBtn onClick={handlePaymentClick}>
+            {total}원 결제하기
+          </PaymentDesign.PaymentBtn>
         </div>
       </PaymentDesign.PaymentBox>
     </PaymentDesign.Box>
