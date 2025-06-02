@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import kakaoPayApprove from "../service/KakaoPayApprove";
 import kakaoPayFail from "../service/KakaoPayFail";
 import PaymentProductInfo from "../components/PaymentProductInfo";
@@ -19,6 +19,7 @@ const PaymentSuccessPage = () => {
   const tradeType = Number(searchParams.get("tradeType"));
   const [isApproved, setIsApproved] = useState(false);
   const { productInfo } = useProductStore.getState();
+  const { idx } = useParams();
 
   useEffect(() => {
     const approvePayment = async () => {
