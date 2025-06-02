@@ -3,7 +3,6 @@ import ChatList from "./ChatList";
 import ChatInput from "./ChatInput";
 import { getChatRoomMessage, postChatMessage } from "../services/ChatService";
 import { useChatSocket } from "../hooks/useChatSocket";
-import "../styles/chatRoom.css";
 import {
   ChatRoomMainDiv,
   ChatTitle,
