@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { FaRegMessage } from "react-icons/fa6";
 
 import { NavLink, useLocation } from "react-router-dom";
@@ -9,7 +8,7 @@ import mainLogo from "@/assets/main_logo.png";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 // 헤더 메뉴
-export const HeaderMenu = ({}) => {
+export const HeaderMenu = () => {
   const userInfo = useLoginUserInfoStore.getState().userInfo;
 
   const isLogin = userInfo.userIdx > 0;
