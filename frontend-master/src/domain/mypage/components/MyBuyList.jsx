@@ -23,7 +23,7 @@ export default function MyBuyList({ products = [] }) {
   return (
     <BuyContainer>
       <BuyHedear>구매</BuyHedear>
-      <ProductList products={currentItems} />
+      <ProductList key={`buy-${currentPage}`} products={currentItems} />
       <MyPagination
         pageCount={totalPageCount}
         onPageChange={onPageChange}
