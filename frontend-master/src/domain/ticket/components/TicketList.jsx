@@ -4,6 +4,7 @@ import { getCategory } from "@/services/Category";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
 import PopupPage from "./PopupPage";
 import * as TicketPages from "../style/TicketPageDesign";
+import TicketItem from "./TicketItem";
 
 const TicketList = ({
   selectedIds,
@@ -125,17 +126,9 @@ const TicketList = ({
 
               {openGenres[genreCode] && (
                 <TicketPages.ListDot>
-                  {tickets.map((info, i) => (
-                    <div key={i}>
-                      <TicketPages.DataList onClick={() => setIdx(info.idx)}>
-                        <TicketPages.TicketItemTextTitle>
-                          {info.title || info.name}
-                        </TicketPages.TicketItemTextTitle>{" "}
-                        <TicketPages.TicketItemTextCompany>
-                          {" "}
-                          - {info.company}
-                        </TicketPages.TicketItemTextCompany>
-                      </TicketPages.DataList>
+                  {tickets.map((info) => (
+                    <div key={info.idx}>
+                      <TicketItem key={info.idx} info={info} onClick={setIdx} />
                     </div>
                   ))}
                 </TicketPages.ListDot>

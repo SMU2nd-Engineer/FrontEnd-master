@@ -5,7 +5,7 @@ import styled from "styled-components";
 // import * as TicketPages from "../style/TicketPageDesign";
 
 export const TicketPageMain = styled.div`
-  height: 1000px;
+  height: 100%;
 `;
 
 export const BottomArea = styled.div`
