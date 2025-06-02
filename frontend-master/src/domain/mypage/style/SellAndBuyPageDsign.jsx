@@ -5,9 +5,10 @@ import styled from "styled-components";
 export const SellAndBuyContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 1rem;
   gap: 1.5rem;
-  width: 100%;
+  width: 97%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 1rem;
