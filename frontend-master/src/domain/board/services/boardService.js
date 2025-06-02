@@ -47,6 +47,7 @@ export const getBoardDetail = (id) => {
 export const putEditContentsDetail = ( id, postContent, postFiles ) => {
   const formData = new FormData();
   formData.append("contents", new Blob([JSON.stringify(postContent)], { type: 'application/json' }))
+  formData.append("idx", id);
   // postFiles.forEach((img) => formData.append("files", img))
    
   // 이미지 선택하지 않아도 게시글 등록하게 하는 조건
