@@ -56,7 +56,6 @@ axiosInstance.interceptors.response.use(
     ) {
       //._retry는 반복되는 요청을 진행하지 않도록 하기위해서 설정
       originalRequest._retry = true;
-      console.log("요청 진행 확인하기1 : 정상 진행.");
       // refresh 진행 중이면 요청 큐에 넣고 대기
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
@@ -99,7 +98,6 @@ axiosInstance.interceptors.response.use(
         requestQueue = [];
         // refresh 토큰이 만료되거나 문제가 생겼을 때
         if (!alertState.hasShowAlert) {
-          alert("로그인 세션이 만료되었습니다. 다시 로그인 해주세요.");
           alertState.setHasShowAlert(true);
           alertState.resetAlertFlag(); // 3초 후 초기화
         }
@@ -109,7 +107,6 @@ axiosInstance.interceptors.response.use(
           await logout();
           window.location.href = "/user/login";
         } catch (error) {
-          console.log("세션 만료에 따른 페이지 이동 중 오류 발생 : ", error);
           window.location.href = "/user/login";
         }
       }
