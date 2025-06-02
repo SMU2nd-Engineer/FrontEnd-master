@@ -4,7 +4,7 @@ import kakaoPayApprove from "../service/KakaoPayApprove";
 import kakaoPayFail from "../service/KakaoPayFail";
 import PaymentProductInfo from "../components/PaymentProductInfo";
 import * as PaymentDesign from "../styles/PaymentPageDesign";
-import { useProductStore } from "../store/useProductStore";
+import { getProductDetail } from "@/domain/products/services/productService";
 
 const PaymentSuccessPage = () => {
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ const PaymentSuccessPage = () => {
   const pgToken = searchParams.get("pg_token");
   const tradeType = Number(searchParams.get("tradeType"));
   const [isApproved, setIsApproved] = useState(false);
-  const { productInfo } = useProductStore.getState();
   const { idx } = useParams();
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const approvePayment = async () => {
@@ -50,6 +50,7 @@ const PaymentSuccessPage = () => {
         console.log("승인함수 종료함");
       }
     };
+    getProductDetail(idx).then((res) => setProduct(res.data))
 
     approvePayment();
   }, [tid]);
@@ -68,11 +69,11 @@ const PaymentSuccessPage = () => {
 
   const handleGoReview = () => {
     navigate(`/mypage/transactionReviewRegist?tradeType=${tradeType}`, {
-      state: { product: productInfo },
+      state: { product: product },
     });
   };
 
-  if (!productInfo) {
+  if (!product) {
     return <div>상품 정보를 불러오는 중입니다...</div>;
   }
 
@@ -89,7 +90,7 @@ const PaymentSuccessPage = () => {
               </PaymentDesign.PaySuccess>
               <PaymentDesign.ProductInfo>
                 <PaymentProductInfo
-                  product={productInfo}
+                  product={product}
                   tradeType={{ tradeType }}
                 />
               </PaymentDesign.ProductInfo>
@@ -113,7 +114,7 @@ const PaymentSuccessPage = () => {
           <PaymentDesign.PayError>Error 원인 : {error}</PaymentDesign.PayError>
           <PaymentDesign.ProductInfo>
             <PaymentProductInfo
-              product={productInfo}
+              product={product}
               tradeType={{ tradeType }}
             />
           </PaymentDesign.ProductInfo>
