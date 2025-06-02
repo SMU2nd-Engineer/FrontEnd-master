@@ -7,7 +7,7 @@ const KakaoPayReady = async (product, user, tradeType) => {
 
   const today = new Date();
   const partnerOrderId = `order${today}${product.idx}`;
-  const partnerUserId = `user${user.idx}`;
+  const partnerUserId = `user${product.idx}`;
   const itemName = product.title;
   const productIdx = product.idx;
   let amount = product.price;
