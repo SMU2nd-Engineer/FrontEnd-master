@@ -16,7 +16,7 @@ const MyPeakList = ({ products = [] }) => {
     <PickListContainer>
       {products.map((product) => (
         <CardAndButtonWrapper key={product.idx}>
-          <ProductCard product={product} />
+          <ProductCard key={product.idx} product={product} />
         </CardAndButtonWrapper>
       ))}
     </PickListContainer>
