@@ -12,9 +12,9 @@ const useTicketStore = create((set) => ({
 
   allCategoryIds: [],
   setAllCategoryIds: (ids) => set({ allCategoryIds: ids }),
-  get categoriesToQuery() {
-    return this.selectedIds.length > 0 ? this.selectedIds : this.allCategoryIds;
-  },
+
+  searchTerm: "",
+  setSearchTerm: (term) => set({ searchTerm: term }),
 }));
 
 export default useTicketStore;

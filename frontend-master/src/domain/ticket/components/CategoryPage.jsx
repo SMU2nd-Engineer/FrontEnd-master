@@ -3,18 +3,14 @@ import SelectCategory from "./SelectCategory";
 import SearchTitleAndCast from "./SearchTitleAndCast";
 import * as TicketPages from "../style/TicketPageDesign";
 
-const CategoryPage = ({ setSelectedIds, setSearchTerm }) => {
-  const handleSearch = (query) => {
-    setSearchTerm(query);
-  };
-
+const CategoryPage = () => {
   return (
     <div className="category">
       <TicketPages.SelectCategory>
-        <SelectCategory onChange={setSelectedIds} />
+        <SelectCategory />
       </TicketPages.SelectCategory>
       <TicketPages.SearchTitleAndCastDiv>
-        <SearchTitleAndCast onSearch={handleSearch} />
+        <SearchTitleAndCast />
       </TicketPages.SearchTitleAndCastDiv>
     </div>
   );

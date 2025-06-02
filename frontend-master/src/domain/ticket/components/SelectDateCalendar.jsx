@@ -4,13 +4,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // 기본디자인 설정
 import { ko } from "date-fns/locale"; // 한국어 설정
 import * as TicketPages from "../style/TicketPageDesign";
+import useTicketStore from "../store/useTicketStore";
 
-const SelectDateCalendar = ({
-  startDate,
-  endDate,
-  onStartChange,
-  onEndChange,
-}) => {
+const SelectDateCalendar = ({ onStartChange, onEndChange }) => {
+  const { startDate, endDate } = useTicketStore();
   return (
     <TicketPages.SeDate>
       <TicketPages.StartDate>
