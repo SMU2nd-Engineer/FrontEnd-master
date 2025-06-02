@@ -26,8 +26,10 @@ const BoardItem = ({ item }) => {
     <tr key={item.idx} onClick={() => navigate(`/board/detail/${item.idx}`)}>
       <td id={`item-${item.idx}-idx`}>{item.idx}</td>
       <td id={`item-${item.idx}-category`}>{getText(item.category_idx)}</td>
-      <td id={`item-${item.idx}-title`}>{item.title}</td>
-      <td id={`item-${item.idx}-sdate`}>
+      <td id={`item-${item.idx}-title`} style={{ fontSize: "1rem" }}>
+        {item.title}
+      </td>
+      <td id={`item-${item.idx}-sdate`} style={{ fontSize: "0.9rem" }}>
         {(() => {
           const sdate = new Date(item.sdate);
           const today = new Date();
