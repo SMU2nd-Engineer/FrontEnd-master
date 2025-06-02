@@ -26,9 +26,6 @@ const PaymentSuccessPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("pgToken:", pgToken);
-    console.log("tid:", tid);
-
     const approvePayment = async () => {
       try {
         const result = await kakaoPayApprove({

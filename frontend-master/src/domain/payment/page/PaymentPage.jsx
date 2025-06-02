@@ -2,11 +2,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SCHEMA } from "@/domain/user/utils/userFormValidator";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import KakaoPayReady from "../service/KakaoPayReady";
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
-import { getProductDetail } from "@/domain/products/services/productService";
 import { useEffect } from "react";
 import Address from "@/domain/user/components/RegistrationAddress";
 import PaymentProductInfo from "../components/PaymentProductInfo";
@@ -16,8 +15,6 @@ import { getMyPageData } from "@/domain/mypage/services/getMyPageDate";
 import { useProductStore } from "../store/useProductStore";
 
 const PaymentPage = () => {
-  const { idx } = useParams();
-  const [product, setProduct] = useState(null);
   const YUPSCHEMA = SCHEMA;
   const [searchParams] = useSearchParams();
   const tradeType = Number(searchParams.get("tradeType"));
@@ -29,19 +26,7 @@ const PaymentPage = () => {
     category_idx: 0,
     keyword: "",
   });
-  const { productInfo, setProductInfo } = useProductStore();
-
-  console.log("배송지 : ", user.address);
-
-  useEffect(() => {
-    getProductDetail(idx)
-      .then((res) => res.data)
-      .then((data) => {
-        setProductInfo(data);
-        setProduct(productInfo);
-      })
-      .catch((err) => console.error("상품 불러오기 실패: ", err));
-  }, [idx]);
+  const { productInfo } = useProductStore();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,7 +90,7 @@ const PaymentPage = () => {
     }
   }, [watchedAddress, watchedDetail]);
 
-  if (!product || tradeType === null) {
+  if (!productInfo || tradeType === null) {
     console.log("tradeType : ", tradeType);
     return <div>상품 정보를 불러오는 중입니다...</div>;
   }
@@ -115,7 +100,7 @@ const PaymentPage = () => {
     switch (categoryIdx) {
       case 6001:
         try {
-          const result = await KakaoPayReady(product, user, tradeType);
+          const result = await KakaoPayReady(productInfo, user, tradeType);
 
           if (result) {
             window.location.href = result.nextRedirectPcUrl;
@@ -140,9 +125,9 @@ const PaymentPage = () => {
 
   let total;
   if (tradeType === 0) {
-    total = product.price + 3000;
+    total = productInfo.price + 3000;
   } else if (tradeType === 1) {
-    total = product.price;
+    total = productInfo.price;
   }
 
   return (
@@ -162,7 +147,7 @@ const PaymentPage = () => {
         </PaymentDesign.Adderss>
         <PaymentDesign.OrderProduct>주문 상품</PaymentDesign.OrderProduct>
         <PaymentDesign.ProductInfo>
-          <PaymentProductInfo product={product} tradeType={{ tradeType }} />
+          <PaymentProductInfo product={productInfo} tradeType={{ tradeType }} />
         </PaymentDesign.ProductInfo>
         <PaymentDesign.Paymethod>
           <PaymentDesign.PaymentMethod>결제 방법</PaymentDesign.PaymentMethod>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProductDetail } from "@/domain/products/services/productService";
 import { useEffect } from "react";
 import TradeOptionBtn from "../components/TradeOptionBtn";
 import * as Trade from "../styles/PaymentTradeTypeDesign";
@@ -8,20 +9,23 @@ import ProductImage from "@/domain/products/components/ProductImage";
 import { useProductStore } from "../store/useProductStore";
 
 const TradeType = () => {
+  const { idx } = useParams();
   const [tradeType, setTradeType] = useState(null);
-  const [product, setProduct] = useState(null);
   const navigate = useNavigate();
+  const { productInfo, setProductInfo } = useProductStore();
 
   useEffect(() => {
-    const productInfo = useProductStore.getState().productInfo;
-    setProduct(productInfo);
-  }, []);
+    getProductDetail(idx)
+      .then((res) => res.data)
+      .then((data) => {
+        setProductInfo(data);
+      })
+      .catch((err) => console.error("상품 불러오기 실패: ", err));
 
-  useEffect(() => {
-    console.log("tradeType: ", tradeType);
-  }, [tradeType]);
+    setTradeType(0);
+  }, [idx]);
 
-  if (!product) {
+  if (!productInfo) {
     return <p>상품을 찾을 수 없습니다.</p>;
   }
 
@@ -30,14 +34,14 @@ const TradeType = () => {
   };
 
   const handleClick = () => {
-    navigate(`/payment/${product.idx}?tradeType=${tradeType}`, {});
+    navigate(`/payment/${productInfo.idx}/info?tradeType=${tradeType}`, {});
   };
 
   let total;
   if (tradeType === 0) {
-    total = product.price + 3000;
+    total = productInfo.price + 3000;
   } else if (tradeType === 1) {
-    total = product.price;
+    total = productInfo.price;
   }
 
   localStorage.setItem("tradeType", tradeType);
@@ -52,18 +56,18 @@ const TradeType = () => {
               <ProductImage
                 imageList={[
                   {
-                    image_Url: product.image_Url,
-                    idx: product.idx,
+                    image_Url: productInfo.image_Url,
+                    idx: productInfo.idx,
                     flag: true,
                   },
                 ]}
-                title={product.title}
+                title={productInfo.title}
                 mode="thumbnail"
               />
             </Trade.ImgDiv>
             <Trade.PriceTitle>
-              <Trade.TradePrice>{product.price}원</Trade.TradePrice>
-              <Trade.TradeTitle>{product.title}</Trade.TradeTitle>
+              <Trade.TradePrice>{productInfo.price}원</Trade.TradePrice>
+              <Trade.TradeTitle>{productInfo.title}</Trade.TradeTitle>
             </Trade.PriceTitle>
           </Trade.ProductInfo>
           <section>
