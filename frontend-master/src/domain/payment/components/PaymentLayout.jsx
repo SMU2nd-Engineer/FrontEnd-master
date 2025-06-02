@@ -2,8 +2,10 @@ import React from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useProductStore } from "../store/useProductStore";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 const PaymentLayout = () => {
+  const skipBeforeUnload = useRef(false); // false면 경고, true면 예외
   const productInfo = useProductStore((state) => state.productInfo);
   const { idx } = useParams();
   const navigate = useNavigate();
@@ -19,15 +21,17 @@ const PaymentLayout = () => {
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
-      e.preventDefault();
-      e.returnValue = "";
+      if (!skipBeforeUnload.current) {
+        e.preventDefault();
+        e.returnValue = ""; // 크롬 등에서 표시
+      }
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
-  return <Outlet />;
+  return <Outlet context={{ skipBeforeUnload }} />;
 };
 
 export default PaymentLayout;

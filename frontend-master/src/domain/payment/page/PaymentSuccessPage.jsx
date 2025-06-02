@@ -17,13 +17,8 @@ const PaymentSuccessPage = () => {
   const [searchParams] = useSearchParams();
   const pgToken = searchParams.get("pg_token");
   const tradeType = Number(searchParams.get("tradeType"));
-  const [product, setProduct] = useState(null);
   const [isApproved, setIsApproved] = useState(false);
-
-  useEffect(() => {
-    const productInfo = useProductStore.getState().productInfo;
-    setProduct(productInfo);
-  }, []);
+  const { productInfo } = useProductStore.getState();
 
   useEffect(() => {
     const approvePayment = async () => {
@@ -72,11 +67,11 @@ const PaymentSuccessPage = () => {
 
   const handleGoReview = () => {
     navigate(`/mypage/transactionReviewRegist?tradeType=${tradeType}`, {
-      state: { product },
+      state: { product: productInfo },
     });
   };
 
-  if (!product) {
+  if (!productInfo) {
     return <div>상품 정보를 불러오는 중입니다...</div>;
   }
 
@@ -93,7 +88,7 @@ const PaymentSuccessPage = () => {
               </PaymentDesign.PaySuccess>
               <PaymentDesign.ProductInfo>
                 <PaymentProductInfo
-                  product={product}
+                  product={productInfo}
                   tradeType={{ tradeType }}
                 />
               </PaymentDesign.ProductInfo>
@@ -116,7 +111,10 @@ const PaymentSuccessPage = () => {
           </PaymentDesign.PaySuccess>
           <PaymentDesign.PayError>Error 원인 : {error}</PaymentDesign.PayError>
           <PaymentDesign.ProductInfo>
-            <PaymentProductInfo product={product} tradeType={{ tradeType }} />
+            <PaymentProductInfo
+              product={productInfo}
+              tradeType={{ tradeType }}
+            />
           </PaymentDesign.ProductInfo>
           <PaymentDesign.Review onClick={handleGoHome}>
             홈으로 이동하기
