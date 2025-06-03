@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  getBoardDetail,
   postBoardSubmit,
   putEditContentsDetail,
 } from "../services/boardService";
@@ -35,7 +34,7 @@ const BoardSubmitFooter = ({
     => 등록 성공시 게시글 상세페이지로 이동
     2. preventDefault: 페이지 새로고침 방지
   */
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -45,21 +44,18 @@ const BoardSubmitFooter = ({
          데이터를  uploadImage에 저장하고 src 프로퍼티 안에 내용을 지움
       3. postFiles: Blob 객체 받음
     */
-
+    const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/g; // `<img>` 태그를 찾는 정규 표현식
     let tempdata = contentData;
     let uploadImage = [];
     let postFiles = [];
-
-    const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/g; // `<img>` 태그를 찾는 정규 표현식
+    let currentUrls = [];
     let imgMatch; // 이미지 주소
 
     while ((imgMatch = imgRegex.exec(tempdata)) !== null) {
       uploadImage.push(imgMatch[1]); // src 값을 배열에 저장
     }
 
-    console.log(uploadImage);
-
-    uploadImage.forEach((src) => {
+    uploadImage.forEach((src, i) => {
       if (src.startsWith("data:image/")) {
         // base64 데이터인지 확인
         const byteString = atob(src.split(",")[1]); // base64 데이터를 문자열로 변환
@@ -70,20 +66,18 @@ const BoardSubmitFooter = ({
         }
         const blob = new Blob([arrayBuffer], {
           type: src.split(";")[0].split(":")[1],
-        }); // Blob 객체 생성
-        console.log("Blob 객체:", blob);
+        });
         const file = new File([blob], "image.png", {
           type: src.split(";")[0].split(":")[1],
         });
         postFiles.push(file);
+        currentUrls.push(`newImage${i}`);
       } else {
         // 이미지 URL인 경우
-        console.log("이미지 URL:", src);
-
-        postFiles.push(src);
+        currentUrls.push(src);
       }
     });
-    
+
     // img 태그 src 속성만 빈 문자열로 변경
     const filterdData = clearImgSrc(tempdata);
 
@@ -94,15 +88,12 @@ const BoardSubmitFooter = ({
       content: filterdData, // 글 내용 입력 - 리액트 에디터 내용 => tempdata
       // uploadImage를 백엔드로 넘겨주는 건 위에서 함
     };
-    // console.log("postContent: ", postContent);
 
     // 게시판 양식 사용 - 수정
     if (isModify) {
-      putEditContentsDetail(id, postContent, postFiles)
+      putEditContentsDetail(id, postContent, postFiles, currentUrls)
         .then((response) => response.data)
         .then((data) => {
-          console.log("서버응답 확인: ", data);
-
           /* 상세페이지의 게시글 수정 버튼 누르면 발생
              - 게시글 등록페이지 틀과 동일하게 입력된 값 불러옴  
              replace: true - 수정모드일때 다시 수정하는 페이지로 돌아가지 않도록 함(뒤로가기 방지)
@@ -118,8 +109,6 @@ const BoardSubmitFooter = ({
       postBoardSubmit(postContent, postFiles)
         .then((response) => response.data)
         .then((data) => {
-          console.log("서버응답 확인: ", data);
-
           /* 상세 페이지로 이동(백엔드 서버가 새로 생성한 게시글 고유 식별자) 
              replace: true - 새로운 글 등록시 뒤로가기 버튼을 눌러도 기존의 등록페이지로
              돌아가는 걸 막음(뒤로가기 방지) 
