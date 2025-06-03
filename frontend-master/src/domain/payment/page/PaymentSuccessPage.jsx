@@ -50,7 +50,7 @@ const PaymentSuccessPage = () => {
         console.log("승인함수 종료함");
       }
     };
-    getProductDetail(idx).then((res) => setProduct(res.data))
+    getProductDetail(idx).then((res) => setProduct(res.data));
 
     approvePayment();
   }, [tid]);
@@ -113,10 +113,7 @@ const PaymentSuccessPage = () => {
           </PaymentDesign.PaySuccess>
           <PaymentDesign.PayError>Error 원인 : {error}</PaymentDesign.PayError>
           <PaymentDesign.ProductInfo>
-            <PaymentProductInfo
-              product={product}
-              tradeType={{ tradeType }}
-            />
+            <PaymentProductInfo product={product} tradeType={{ tradeType }} />
           </PaymentDesign.ProductInfo>
           <PaymentDesign.Review onClick={handleGoHome}>
             홈으로 이동하기
