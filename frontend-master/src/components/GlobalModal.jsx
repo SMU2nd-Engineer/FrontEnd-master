@@ -13,6 +13,7 @@ const PopupOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  user-select: none;
 `;
 
 const PopupContent = styled.div`
@@ -50,6 +51,9 @@ const PopupButtons = styled.div`
     &:hover {
       background-color: #ec7d7d;
     }
+    &:active {
+      transform: scale(0.95);
+    }
   }
 
   button.cancle {
@@ -58,6 +62,9 @@ const PopupButtons = styled.div`
 
     &:hover {
       background-color: #bdbdbd;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
 `;

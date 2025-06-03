@@ -1,6 +1,4 @@
 import MyPageLink from "../components/MyPageLink";
-import Button from "@/components/Button";
-import { useNavigate } from "react-router-dom";
 import MyName from "../components/MyName";
 import MyMainRating from "../components/MyReviewRating";
 import MyMainPeak from "../components/MyMainPeak";

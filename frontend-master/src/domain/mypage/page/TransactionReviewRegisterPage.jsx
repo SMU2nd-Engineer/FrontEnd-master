@@ -26,6 +26,7 @@ import {
   ErrorFontProduct,
   ErrorFontReviewHeader,
 } from "../style/TransactionReviewErrorDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 // 검증용 스키마 설정
 const SCHEMA = REVIEW_SCHEMA;
@@ -58,6 +59,35 @@ export default function TransactionReviewRegisterPage() {
   const [productInfo, setProductInfo] = useState(
     location.state?.product ?? defaultProductInfo
   );
+  const openModal = useModalStore((state) => state.open);
+
+  const insertReview = async () => {
+    await openModal("alert", {
+      title: "리뷰 등록",
+      message: "리뷰를 남겨주셔서 감사합니다!",
+    });
+  };
+
+  const editReview = async () => {
+    await openModal("alert", {
+      title: "리뷰 수정",
+      message: "리뷰가 업데이트 되었습니다!",
+    });
+  };
+
+  const sameAlert = async () => {
+    await openModal("alert", {
+      title: "알람",
+      message: "변경된 사항이 없습니다.",
+    });
+  };
+
+  const failLoadInfo = async () => {
+    await openModal("alert", {
+      title: "오류",
+      message: "상품 정보를 불러오지 못했습니다. 관리자에게 문의해 주세요.",
+    });
+  };
 
   const {
     register, // 입력 폼 등록
@@ -86,7 +116,7 @@ export default function TransactionReviewRegisterPage() {
       isEqualArray(formData.evaluation, originalReview.evaluation);
 
     if (isSame) {
-      alert("변경된 값이 없습니다.");
+      sameAlert();
       return;
     }
     let addCount = [];
@@ -119,11 +149,11 @@ export default function TransactionReviewRegisterPage() {
 
     if (isNewReview) {
       const result = await registReview(formData);
-      alert("리뷰를 남겨주셔서 감사합니다!");
+      insertReview();
       navigate("/product/list");
     } else {
       const result = await updateReview(editFormData);
-      alert("리뷰가 업데이트 되었습니다!");
+      editReview();
       navigate("/mypage/myReview");
     }
   };
@@ -147,7 +177,7 @@ export default function TransactionReviewRegisterPage() {
   useEffect(() => {
     const saveInfo = async () => {
       if (isNewReview && (!productInfo || productInfo.idx === 0)) {
-        alert("상품 정보를 불러오지 못했습니다. 다시 시도해주세요.");
+        failLoadInfo();
         navigate("/mypage/sellAndPurchaselist", { replace: true });
         return;
       }
@@ -258,7 +288,7 @@ export default function TransactionReviewRegisterPage() {
           {isNewReview && <Button type="submit" text={"리뷰 작성하기"} />}
 
           {isReadOnly && (
-            <DisableWhenLoading disabled={productInfo?.idx}>
+            <DisableWhenLoading>
               <Button
                 text={"수정하기"}
                 onClick={() => {

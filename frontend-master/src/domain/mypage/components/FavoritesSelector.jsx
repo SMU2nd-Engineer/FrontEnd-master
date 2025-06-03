@@ -7,6 +7,7 @@ import { registrationUserFavorite } from "@user/services/registrationUserFavorit
 import { updateUserFavorites } from "../services/updateUserFavorites";
 
 import * as Favorite from "../style/FavoriteDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function FavoritesSelector({ mode = "register" }) {
   // 선호도 카테고리 정보 저장할 배열
@@ -20,6 +21,30 @@ export default function FavoritesSelector({ mode = "register" }) {
   } = useForm();
 
   const navigate = useNavigate();
+
+  const openModal = useModalStore((state) => state.open);
+
+  const editFavorite = async () => {
+    await openModal("alert", {
+      title: "관심사 수정",
+      message: "정상적으로 수정되었습니다.",
+    });
+  };
+
+  const registFavorite = async () => {
+    await openModal("alert", {
+      title: "관심사 등록",
+      message:
+        "관심사가 등록되었습니다! 저희 사이트를 방문해 주셔서 감사합니다!",
+    });
+  };
+
+  const errorAlert = async () => {
+    await openModal("alert", {
+      title: "오류",
+      message: "문제가 발생했습니다. 관리자에게 문의하세요.",
+    });
+  };
 
   // 마운트시 카테고리 정보 저장하기 및 mode === edit일 때 기존 정보 가져오기 넣기
   useEffect(() => {
@@ -48,18 +73,16 @@ export default function FavoritesSelector({ mode = "register" }) {
     try {
       if (mode === "edit") {
         await updateUserFavorites(formData);
-        alert("정상적으로 수정되었습니다.");
+        editFavorite();
         navigate("/mypage/main");
       } else {
         // 등록하기
         await registrationUserFavorite(formData);
-        alert(
-          "관심사가 등록되었습니다! 저희 사이트를 방문해 주셔서 감사합니다!"
-        );
+        registFavorite();
         navigate("/user/home");
       }
     } catch (error) {
-      alert("문제가 발생했습니다. 관리자에게 문의하세요.");
+      errorAlert();
       console.log(error);
     }
   };

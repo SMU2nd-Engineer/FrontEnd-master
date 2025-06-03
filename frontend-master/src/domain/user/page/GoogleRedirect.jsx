@@ -7,6 +7,7 @@ import {
   SocialLoginLodingContainer,
   SocialLoginLodingText,
 } from "../style/SocialLoginLodingDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function GoogleRedirect() {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ export default function GoogleRedirect() {
   );
   // 자동 로그인 체크
   const autoLogin = sessionStorage.getItem("autoLogin") === "true";
+
+  const openModal = useModalStore((state) => state.open);
 
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   /**
@@ -35,8 +38,28 @@ export default function GoogleRedirect() {
             navigate("/user/home");
           }
         } catch (error) {
-          console.error("서버 연결 실패:", error);
-          navigate("/login");
+          const status = error.response?.status;
+
+          if (status === 402) {
+            const { socialId, provider } = error.response.data;
+            sessionStorage.setItem("socialId", socialId);
+            sessionStorage.setItem("provider", provider);
+            const result = await openModal("confirm", {
+              title: "회원가입 유도",
+              message: "가입된 정보가 없습니다. 회원가입을 진행하시겠습니까?",
+            });
+            if (result) {
+              navigate("/user/registration");
+            } else {
+              navigate("/user/login");
+            }
+          } else {
+            await openModal("alert", {
+              title: "소셜 로그인 실패",
+              message: "로그인에 실패했습니다. 다시 시도해주세요.",
+            });
+            window.location.href = "/user/login";
+          }
         }
       } else {
         console.log(`${googleError} 발생 : ${googleErrorMessage}`);
@@ -44,14 +67,7 @@ export default function GoogleRedirect() {
       }
     };
     requestGoogleAuth();
-  }, [
-    googleErrorMessage,
-    googleError,
-    googleCode,
-    stateKey,
-    navigate,
-    autoLogin,
-  ]);
+  }, []);
 
   return (
     <SocialLoginLodingContainer>
