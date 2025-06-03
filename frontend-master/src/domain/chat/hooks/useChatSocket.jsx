@@ -20,7 +20,6 @@ export function useChatSocket(roomId, onMessage) {
     socketRef.current = socket;
 
     socket.onopen = () => {
-      console.log("🔌 WebSocket connected");
       // 특정 채팅방 구독 요청
       socket.send(
         JSON.stringify({
@@ -33,7 +32,6 @@ export function useChatSocket(roomId, onMessage) {
 
     socket.onmessage = (event) => {
       const msg = JSON.parse(event.data);
-      console.log("📩 Received:", msg);
       onMessage(msg);
     };
 
@@ -41,9 +39,7 @@ export function useChatSocket(roomId, onMessage) {
       console.error("WebSocket error", err);
     };
 
-    socket.onclose = () => {
-      console.log("❌ WebSocket disconnected");
-    };
+    socket.onclose = () => {};
 
     return () => {
       socket.close();
