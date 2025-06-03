@@ -31,10 +31,6 @@ const PaymentSuccessPage = () => {
           pgToken,
         });
         console.log("승인결과", result);
-        console.log(
-          "세션 저장 완료:",
-          sessionStorage.getItem("paymentApproved")
-        );
 
         setIsApproved(true);
         setSuccess(true);
