@@ -27,8 +27,6 @@ const BoardListPage = () => {
       .catch((err) => console.error("게시글 불러오기 실패:", err))
   }
 
-  //  console.log("3개 다 출력되니?: " , boards);
-
   // 화면에 표시할 내용
   return (
     <board.Board_main>

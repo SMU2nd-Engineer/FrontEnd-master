@@ -1,7 +1,7 @@
 // src/domain/board/services/BoardService.js
 import axiosInstance from "@/lib/axiosInstance";
 
-// 전체 데이터 를 받아오기 때문에 get을 씀, 파라미터 값은 없어도 됨
+// 게시판 리스트 페이지 - 게시글 등록되면 글 전체 목록 나옴 
 export const getBoardList = () => {
   return axiosInstance.get("board/list", { withCredentials: true });
 };
@@ -13,7 +13,7 @@ export const getBoardSearch = (searchType, category, keyword) => {
 };
 
 
-// 게시글 등록 - 카테고리 선택, 제목입력, 글내용입력(텍스트 에디터 텍스트 + 이미지 포함)
+// 게시글 등록 - 카테고리 선택, 제목입력, 텍스트 에디터:(글내용 입력+이미지 포함)
 export const postBoardSubmit = ( postContent, postFiles ) => {
   const formData = new FormData();
   formData.append("contents", new Blob([JSON.stringify(postContent)], { type: 'application/json' }))
@@ -37,12 +37,12 @@ export const postBoardSubmit = ( postContent, postFiles ) => {
   );
 };
 
-// 게시글 상세페이지 
+// 게시글 상세페이지 - 게시글 등록 후 나오는 페이지(입력한 그대로 출력)
 export const getBoardDetail = (id) => {
   return axiosInstance.get(`board/detail/${id}`,{ withCredentials: true });
 };
 
-// 게시글 상세페이지 수정
+// 게시글 상세페이지 수정(수정버튼 클릭시 실행)
 // id : 게시글 리스트에 있는 idx(순번). 이름만 id
 export const putEditContentsDetail = ( id, postContent, postFiles ) => {
   const formData = new FormData();
@@ -68,7 +68,7 @@ export const putEditContentsDetail = ( id, postContent, postFiles ) => {
   );
 };
 
-// 게시글 상세페이지 삭제
+// 게시글 상세페이지 삭제버튼 - 게시글 삭제
 export const deleteContentsDetail = (id) => {
   return axiosInstance.put(
     `board/delete/${id}`,
