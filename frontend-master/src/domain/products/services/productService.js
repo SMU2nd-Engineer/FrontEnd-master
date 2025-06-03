@@ -44,7 +44,7 @@ export const putEditProduct = (idx, newProduct, uploadImage) => {
   );
   uploadImage.forEach((img) => formData.append("files", img));
 
-  console.log();
+  // console.log();
   return axiosInstance.put(`product/detail/${idx}`, formData, {
     withCredentials: true,
   });
