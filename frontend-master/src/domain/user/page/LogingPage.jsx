@@ -33,7 +33,7 @@ export default function LogingPage() {
   const openModal = useModalStore((state) => state.open);
 
   const loginFail = async () => {
-    const alert = await openModal("alert", {
+    await openModal("alert", {
       title: "로그인 실패",
       message: "아이디 또는 비밀번호를 확인해 주세요.",
     });

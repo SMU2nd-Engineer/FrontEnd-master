@@ -9,6 +9,7 @@ import {
   RegistStyledButtonWrapper,
   RegistStyledInput,
 } from "../style/UserRegistrationPageDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function RegistrationNickName({
   register,
@@ -21,6 +22,23 @@ export default function RegistrationNickName({
 }) {
   const nickName = watch("nickName");
   // 닉네임 변경 시 중복 체크 상태 초기화
+
+  const openModal = useModalStore((state) => state.open);
+
+  const duplicateAlert = async () => {
+    await openModal("alert", {
+      title: "닉네임 중복",
+      message: "중복입니다. 다른 닉네임을 사용해주세요.",
+    });
+  };
+
+  const errorAlert = async () => {
+    await openModal("alert", {
+      title: "오류",
+      message: "문제가 발생했습니다. 관리자에게 문의하세요.",
+    });
+  };
+
   useEffect(() => {
     setIsNickNameCheck(false);
   }, [nickName, setIsNickNameCheck]);
@@ -64,12 +82,12 @@ export default function RegistrationNickName({
                 if (result) {
                   setIsNickNameCheck(true);
                 } else {
-                  alert("중복입니다. 다른 닉네임을 사용해주세요.");
+                  duplicateAlert();
                   setIsNickNameCheck(false);
                 }
               } catch (e) {
                 console.log(e.message);
-                alert("문제가 발생했습니다. 다시 시도해주세요.");
+                errorAlert();
               }
             }}
           />

@@ -10,6 +10,7 @@ import {
   RegistHelperText,
   RegistStyledButtonWrapper,
 } from "../style/UserRegistrationPageDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function RegistrationId({
   register,
@@ -30,6 +31,22 @@ export default function RegistrationId({
       setIsIdCheck(false);
     }
   }, [id, setIsIdCheck, isSocialLogin]);
+
+  const openModal = useModalStore((state) => state.open);
+
+  const duplicateAlert = async () => {
+    await openModal("alert", {
+      title: "아이디 중복",
+      message: "중복입니다. 다른 아이디를 사용해주세요.",
+    });
+  };
+
+  const errorAlert = async () => {
+    await openModal("alert", {
+      title: "오류",
+      message: "문제가 발생했습니다. 관리자에게 문의하세요.",
+    });
+  };
 
   const getHelperMessage = () => {
     if (errors.id) return errors.id.message;
@@ -66,12 +83,12 @@ export default function RegistrationId({
                   if (result) {
                     setIsIdCheck(true);
                   } else {
-                    alert("중복입니다. 다른 아이디를 사용해주세요.");
+                    duplicateAlert();
                     setIsIdCheck(false);
                   }
                 } catch (e) {
                   console.log(e.message);
-                  alert("문제가 발생했습니다. 다시 시도해주세요.");
+                  errorAlert();
                 }
               }}
             />

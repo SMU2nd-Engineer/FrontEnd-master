@@ -32,19 +32,5 @@ export const DisableWhenLoading = styled.div`
     font-size: 1rem;
     transition: background-color 0.3s ease, opacity 0.3s ease,
       transform 0.3s ease;
-
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-      opacity: 0.6;
-      transform: scale(0.95);
-    }
-
-    &:not(:disabled):hover {
-      background-color: white;
-      color: #f0b8b8;
-      border: 1px solid #f0b8b8;
-      transform: scale(1.1);
-    }
   }
 `;

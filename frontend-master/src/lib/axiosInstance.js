@@ -105,24 +105,13 @@ axiosInstance.interceptors.response.use(
         try {
           // 로그 아웃을 위한 경로 지정
           await logout();
-          window.location.href = "/user/login";
-        } catch (error) {
+        } finally {
           window.location.href = "/user/login";
         }
       }
       return Promise.reject(error);
     }
-    if (error.response.status === 402) {
-      const { socialId, provider } = error.response.data;
-      sessionStorage.setItem("socialId", socialId);
-      sessionStorage.setItem("provider", provider);
-      confirm("가입된 정보가 없습니다. 회원 가입 페이지로 이동 하시겠습니까?")
-        ? (window.location.href = "/user/registration")
-        : (window.location.href = "/user/login");
-    }
-    if (error.response.status === 400) {
-      alert("입력된 정보를 다시 확인해 주세요.");
-    }
+    return Promise.reject(error);
   }
 );
 

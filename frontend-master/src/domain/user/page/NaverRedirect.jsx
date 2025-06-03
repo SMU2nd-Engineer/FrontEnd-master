@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import { setAccessToken } from "@/utils/TokenManager";
 import { naverLogin } from "../services/naverLogin";
+import {
+  SocialLoginLodingContainer,
+  SocialLoginLodingText,
+} from "../style/SocialLoginLodingDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function NaverRedirect() {
   const navigate = useNavigate();
@@ -18,8 +23,7 @@ export default function NaverRedirect() {
   // 자동 로그인 체크
   const autoLogin = sessionStorage.getItem("autoLogin") === "true";
 
-  console.log("NaverCode : " + naverCode);
-  console.log("stateKey : " + stateKey);
+  const openModal = useModalStore((state) => state.open);
 
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   useEffect(() => {
@@ -34,25 +38,41 @@ export default function NaverRedirect() {
             navigate("/user/home");
           }
         } catch (error) {
-          console.log(error);
-          // 로그인 실패 시
-          const status = error.response.status;
-          console.log(status);
-          console.error("서버 연결 실패:", error);
-          navigate("/login");
+          const status = error.response?.status;
+
+          if (status === 402) {
+            const { socialId, provider } = error.response.data;
+            sessionStorage.setItem("socialId", socialId);
+            sessionStorage.setItem("provider", provider);
+            const result = await openModal("confirm", {
+              title: "회원가입 유도",
+              message: "가입된 정보가 없습니다. 회원가입을 진행하시겠습니까?",
+            });
+            if (result) {
+              navigate("/user/registration");
+            } else {
+              navigate("/user/login");
+            }
+          } else {
+            await openModal("alert", {
+              title: "소셜 로그인 실패",
+              message: "로그인에 실패했습니다. 다시 시도해주세요.",
+            });
+            window.location.href = "/user/login";
+          }
         }
       } else {
-        console.log(`${naverError} 발생 : ${naverErrorMessage}`);
+        console.error(`${naverError}서버 연결 실패: ${naverErrorMessage}`);
         window.location.href = "/user/login";
       }
     };
     requestNaverAuth();
-  }, [naverErrorMessage, naverError, naverCode, stateKey, navigate, autoLogin]);
+  }, []);
 
   return (
-    <div>
-      <p>로그인 진행 중입니다.</p>
-      <FadeLoader color="#999393" />
-    </div>
+    <SocialLoginLodingContainer>
+      <SocialLoginLodingText>로그인 진행 중입니다.</SocialLoginLodingText>
+      <FadeLoader color="#999393" height={12} width={4} margin={2} />
+    </SocialLoginLodingContainer>
   );
 }

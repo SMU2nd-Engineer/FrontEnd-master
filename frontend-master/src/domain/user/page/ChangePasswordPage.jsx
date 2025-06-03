@@ -11,6 +11,7 @@ import {
   MainContainer,
   PwdButton,
 } from "../style/ChangePasswordPageDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function ChangePasswordPage() {
   const YUPSCHEMA = CHANGE_PASSWORD_SCHEMA;
@@ -32,12 +33,33 @@ export default function ChangePasswordPage() {
     mode: "onBlur", // 사용자에게 안내 메시지 출력
   });
 
+  const openModal = useModalStore((state) => state.open);
+
+  const changeAlert = async () => {
+    await openModal("alert", {
+      title: "비밀번호 변경 성공",
+      message:
+        "비밀번호가 정상적으로 변경되었습니다. 로그인 페이지로 이동합니다.",
+    });
+  };
+
+  const errorAlert = async () => {
+    await openModal("alert", {
+      title: "오류",
+      message: "문제가 발생했습니다. 관리자에게 문의하세요.",
+    });
+  };
+
   const submitForm = async (id, formData) => {
     try {
-      await changePasswordService(id, formData);
+      const result = await changePasswordService(id, formData);
+      if (result.status === 200 || result.status === 201) {
+        changeAlert();
+        window.location.href = "/user/login";
+      }
     } catch (error) {
       console.log(error);
-      alert("오류가 발생했습니다. 관리자게에 문의해주세요.");
+      errorAlert();
     }
   };
 
