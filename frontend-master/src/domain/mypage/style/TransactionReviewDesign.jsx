@@ -15,6 +15,7 @@ export const TRmain = styled.div`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   box-sizing: border-box;
+  user-select: none;
   h1 {
     font-size: 1.55rem;
     font-weight: 600;
