@@ -10,6 +10,7 @@ export const NavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  user-select: none;
   a:hover {
     color: #f37878;
   }

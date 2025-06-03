@@ -16,6 +16,7 @@ export const MyPageInfoContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  user-select: none;
 `;
 
 export const MyPageInfoForm = styled.form`
@@ -95,6 +96,7 @@ export const MyInfoPasswordCheckContainer = styled.div`
 export const MyInfoPasswordCheckHeader = styled.h2`
   color: #f0b8b8;
   font-weight: 500;
+  user-select: none;
 `;
 
 export const MyInfoPasswordCheckInputLebelContainer = styled.div`
@@ -118,6 +120,7 @@ export const MyInfoPasswordCheckLabel = styled.label`
   width: 30%;
   justify-content: center;
   align-items: center;
+  user-select: none;
 `;
 
 export const MyInfoPasswordCheckButton = styled.button`
@@ -133,6 +136,7 @@ export const MyInfoPasswordCheckButton = styled.button`
   font-size: 1rem;
   height: 100%;
   box-sizing: border-box;
+  user-select: none;
   &:hover {
     background-color: #f8f8f8;
     color: #f0b8b8;
@@ -159,4 +163,5 @@ export const UserInfoHedear = styled.h1`
   margin: 1rem;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+  user-select: none;
 `;

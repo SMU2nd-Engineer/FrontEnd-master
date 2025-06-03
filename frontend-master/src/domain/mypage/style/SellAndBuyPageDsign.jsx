@@ -12,6 +12,7 @@ export const SellAndBuyContainer = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 1rem;
+  user-select: none;
 `;
 
 /**
