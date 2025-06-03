@@ -22,6 +22,7 @@ const PopupContent = styled.div`
   color: #333;
   min-width: 280px;
   text-align: center;
+  white-space: pre-line;
 `;
 
 const PopupButtons = styled.div`
@@ -69,16 +70,30 @@ const PopupBox = styled.div`
   flex-direction: column;
 `;
 
-const PopupComponent = () => {
+const PopupComponent = ({
+  text,
+  okOnClick,
+  cancelClick,
+  okShow = true,
+  cancelShow = true,
+  okType = "button",
+  cancelType = "button",
+}) => {
   return (
     <PopupOverlay>
       <PopupBox>
-        <PopupContent>
-          <p>댓글을 삭제하시겠습니까?</p>
-        </PopupContent>
+        <PopupContent>{text}</PopupContent>
         <PopupButtons>
-          <button className="check"> 확인 </button>
-          <button className="cancle"> 취소 </button>
+          {okShow && (
+            <button type={okType} className="check" onClick={okOnClick}>
+              확인
+            </button>
+          )}
+          {cancelShow && (
+            <button type={cancelType} className="cancle" onClick={cancelClick}>
+              취소
+            </button>
+          )}
         </PopupButtons>
       </PopupBox>
     </PopupOverlay>

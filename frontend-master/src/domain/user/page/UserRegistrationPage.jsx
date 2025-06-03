@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../../components/Button";
 import Address from "../components/RegistrationAddress";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,6 +20,7 @@ import {
   RegistButton,
 } from "../style/UserRegistrationPageDesign";
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
+import PopupComponent from "@/components/PopupComponent";
 
 /**
  * 회원 가입 페이지
@@ -57,6 +57,9 @@ export default function UserRegistrationPage() {
     const back = "#E4r";
     return front + back;
   };
+  // 팝업창 state
+  const [showPopup, setShowPopup] = useState(false);
+  const [errorPopup, setErrorPopup] = useState(false);
 
   // 소셜 로그인을 구분하기 위하여 정보를 가져오는 useEffect
   useEffect(() => {
@@ -75,6 +78,17 @@ export default function UserRegistrationPage() {
     }
   }, [setValue]);
 
+  const handleConfirmOk = () => {
+    setShowPopup(false);
+    navigate("/user/selectFavorites", { replace: true });
+  };
+
+  const handleConfirmCancel = async () => {
+    setShowPopup(false);
+    await registrationUserFavorite([]);
+    navigate("/user/home", { replace: true });
+  };
+
   // handleSubmit 사용을 위하여 콜백 함수를 만들어서 api 함수 사용
   const submitForm = async (formData) => {
     if (
@@ -92,23 +106,30 @@ export default function UserRegistrationPage() {
       const accessToken = result.accessToken;
       if (accessToken) {
         setAccessToken(accessToken);
-        let movePosition = confirm(
-          "회원가입이 완료되었습니다. 선호도를 등록할 수 있습니다. 등록하시겠습니까?"
-        );
-        if (movePosition) {
-          navigate("/user/selectFavorites", { replace: true });
-        } else {
-          await registrationUserFavorite([]);
-          navigate("/user/home", { replace: true });
-        }
+        setShowPopup(true);
       }
     } catch (error) {
       console.log(error);
-      alert("회원 가입 중에 오류가 발생했습니다. 관리자게에 문의해주세요.");
+      setErrorPopup(true);
     }
   };
+
   return (
     <RegistrationContainer>
+      {showPopup && (
+        <PopupComponent
+          text="축하합니다! 회원 가입이 완료되었습니다. \n어떤 것을 좋아하시나요? 선호도를 설정하면 더 즐거운 서비스를 이용하실 수 있어요."
+          okOnClick={handleConfirmOk}
+          cancelClick={handleConfirmCancel}
+        />
+      )}
+      {errorPopup && (
+        <PopupComponent
+          text="회원 가입 중 오류가 발생했습니다.\n잠시 후 다시 시도하거나 관리자에게 문의해주세요."
+          cancelShow={false}
+          okOnClick={() => setErrorPopup(false)}
+        />
+      )}
       <RegistrationForm
         onSubmit={handleSubmit(submitForm, (errors) => {
           console.log("유효성 검증 실패", errors);
