@@ -48,9 +48,9 @@ const PaymentSuccessPage = () => {
       } finally {
         setLoading(false);
         console.log("승인함수 종료함");
+        await getProductDetail(idx).then((res) => setProduct(res.data));
       }
     };
-    getProductDetail(idx).then((res) => setProduct(res.data));
 
     approvePayment();
   }, [tid]);

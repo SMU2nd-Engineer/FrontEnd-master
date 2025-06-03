@@ -104,11 +104,11 @@ const BoardDetailPage = () => {
       });
   }, []);
 
-  const handleRoomClick = useCallback(() => {
+  const handleRoomClick = () => {
     postChatRooms(detailBoard.user_idx, detailBoard.title).then((res) => {
       setChatPopup(res.data.id);
     });
-  }, []);
+  };
 
   const closePopup = () => {
     setChatPopup(0);
