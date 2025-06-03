@@ -50,3 +50,6 @@ export const ProductResult = styled.div`
   margin-bottom: 60px;
 `
 
+export const MoreButton = styled.div`
+  
+`

@@ -27,6 +27,7 @@ const ImageUpload = ({uploadImage, setUploadImage}) => {
           totalsize += compressedFile.size;
 
           if (totalsize > 2 * 1024 * 1024) {
+            // 팝업으로 
             alert("사진이 너무 큽니다. ")
             return;
           }

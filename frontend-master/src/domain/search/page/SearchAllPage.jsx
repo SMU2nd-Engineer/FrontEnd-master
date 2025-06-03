@@ -5,12 +5,14 @@ import BoardList from '@/domain/board/components/BoardList';
 import { useState } from 'react';
 import * as SA from "../styles/SearchAllPageDesign";
 import { searchAll } from '../services/SearchService';
+import { useNavigate } from 'react-router-dom';
 
 
 const SearchAllPage = () => {
   const [productResult, setProductResult] = useState([]);
   const [boardResult, setBoardResult] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const navigate = useNavigate();
 
   const handleAllSearch = async (searchValue) => {
   if (!searchValue || !searchValue.keyword) {
@@ -30,6 +32,9 @@ const SearchAllPage = () => {
   }
 };
 
+const productPreview = productResult.slice(0, 4);
+const boardPreview = boardResult.slice(0, 5);
+
   return (
     
     <SA.SearchContainer>
@@ -41,18 +46,30 @@ const SearchAllPage = () => {
       <SA.SearchResult>
         <SA.ProductResult>
           <h2> <span>{searchKeyword}</span> 상품 검색 결과</h2>
-          {productResult.length > 0 ? (
-            <ProductList products={productResult} />
+          {productPreview.length > 0 ? (
+            <>
+            <ProductList products={productPreview} />
+            {productPreview.length > 4 && (
+              <SA.MoreButton onClick={() => navigate(`/products?search=${searchKeyword}`)}>
+                  더보기
+              </SA.MoreButton>
+            )}
+            </>
           ) : (
             <p> <span>{searchKeyword}</span> 상품 검색 결과가 없습니다.</p>
           )}
         </SA.ProductResult>
         {/* <SA.PostResult> */}
           <h2><span>{searchKeyword}</span> 게시글 검색 결과</h2>
-          {boardResult.length > 0 ? (   
-            <BoardList boards={boardResult} />    
-           
-         
+          {boardPreview.length > 0 ? (   
+            <>
+            <BoardList boards={boardPreview} />    
+            {boardPreview.length > 5 && (
+              <SA.MoreButton onClick={() => navigate(`/board?search=${searchKeyword}`)}>
+                  더보기
+              </SA.MoreButton>
+            )}
+          </>
           ) : (
             <p><span>{searchKeyword}</span> 게시글 검색 결과가 없습니다.</p>
           )}

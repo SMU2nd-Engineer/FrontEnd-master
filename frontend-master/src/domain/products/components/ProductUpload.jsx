@@ -44,6 +44,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
     e.preventDefault();
 
     if (!uploadImage || uploadImage.length === 0) {
+      // 팝업으로
     alert("상품 이미지를 최소 한 장 이상 등록해 주세요.");
     return;
     }
@@ -68,6 +69,15 @@ const ProductUpload = ({ initialData, isEdit }) => {
         .catch((error) => console.error("Error:", error));
     }
   };
+
+  const uploadCancel = e => {
+    e.preventDefault();
+
+    const confirmCancel = window.confirm("작성을 취소하시겠습니까?")
+    if (confirmCancel) {
+      navigate(-1);
+    }
+  }
 
   return (
     <>
@@ -140,7 +150,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
               <Button
                 className="cancle"
                 text={"취소"}
-                onClick={() => navigate(-1)}
+                onClick={uploadCancel}
               ></Button>
               <Button 
                 className="upload"
