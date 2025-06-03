@@ -10,6 +10,7 @@ import ImageSlider from "./ImageSlider";
 import PeakButton from "./PeakButton";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 import { useProductStore } from "@/domain/payment/store/useProductStore";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function ProductDetail() {
   const { idx } = useParams();
@@ -19,6 +20,8 @@ export default function ProductDetail() {
   const [chatPopup, setChatPopup] = useState(0);
   const { userInfo } = useLoginUserInfoStore();
   const { setProductInfo } = useProductStore();
+  const openModal = useModalStore((state) => state.open);
+
 
   useEffect(() => {
     getProductDetail(idx)
@@ -60,15 +63,27 @@ export default function ProductDetail() {
   };
 
   const handleDelete = async () => {
-    try {
+    const confirmed = await openModal("confirm", {
+      title: "삭제 확인",
+      message : "정말 삭제하시겠습니까? 상품 내역은 복구되지 않습니다."
+    });
+
+    if(confirmed) {
+      try {
       await deleteProducts(idx);
-      // 팝업으로
-      alert("상품이 삭제되었습니다.");
+      const confirmed = await openModal("confirm", {
+        message : "정말 삭제하시겠습니까? 상품 내역은 복구되지 않습니다."
+    });
       navigate("/product/list"); // 목록 페이지로 이동
     } catch (error) {
       console.error("삭제 실패:", error);
       alert("삭제에 실패했습니다.");
     }
+    }
+    
+    
+    
+    
   };
 
   return (

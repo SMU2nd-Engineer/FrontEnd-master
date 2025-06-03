@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { postProduct, putEditProduct } from "../services/productService";
 import SelectBox from "@/components/SelectBox";
 import { getCategoryIdx } from "@/utils/CategoryHandler";
-// import "../styles/ProductUpload.css";
 import ImageUpload from "./ImageUpload";
 import { useEffect } from "react";
 import * as PUP from "../styles/ProductUploadDesign"
 import Button from "@/components/Button";
+import { useModalStore } from "@/store/useModalStore";
 
 const ProductUpload = ({ initialData, isEdit }) => {
   const [newProduct, setNewProduct] = useState({
@@ -21,15 +21,16 @@ const ProductUpload = ({ initialData, isEdit }) => {
     idx: "",
   });
 
+  const [uploadImage, setUploadImage] = useState([]);
+  const navigate = useNavigate();
+
+  const openModal = useModalStore((state) => state.open);
+
   useEffect(() => {
     if (isEdit && initialData) {
       setNewProduct(initialData);
     }
   }, [initialData, isEdit]);
-
-  const [uploadImage, setUploadImage] = useState([]);
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,13 +41,15 @@ const ProductUpload = ({ initialData, isEdit }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!uploadImage || uploadImage.length === 0) {
-      // 팝업으로
-    alert("상품 이미지를 최소 한 장 이상 등록해 주세요.");
-    return;
+      await openModal("alert", {
+      title: "이미지 필요",
+      message: "상품 이미지를 최소 한 장 이상 등록해 주세요.",
+      }); 
+      return;
     }
 
     if (isEdit) {
@@ -70,11 +73,14 @@ const ProductUpload = ({ initialData, isEdit }) => {
     }
   };
 
-  const uploadCancel = e => {
+  const uploadCancel = async(e) => {
     e.preventDefault();
 
-    const confirmCancel = window.confirm("작성을 취소하시겠습니까?")
-    if (confirmCancel) {
+    const confirmed = await openModal("confirm", {
+      title: "취소",
+      message: "정말 취소하시겠습니까? 등록 중인 내용은 복구되지 않습니다.",
+    });
+    if (confirmed) {
       navigate(-1);
     }
   }
