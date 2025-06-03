@@ -12,7 +12,6 @@ const PeakButton = ({ idx, pick }) => {
   // 찜목록 삭제 알람을 위한 경로확인
   const location = useLocation();
   const isPickPage = location.pathname.includes("/mypage/peakList");
-  console.log(idx, pick, isPeak);
 
   const handleClick = async (e) => {
     e.stopPropagation();
