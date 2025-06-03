@@ -1,10 +1,16 @@
-import Button from "@/components/Button";
 import { changePasswordService } from "../services/changePasswordService";
 import { useLocation } from "react-router-dom";
 import RegistrationPassword from "../components/RegistrationPassword";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CHANGE_PASSWORD_SCHEMA } from "../utils/userFormValidator";
+import {
+  ButtonWrapper,
+  ChangeHedear,
+  ChangePwdForm,
+  MainContainer,
+  PwdButton,
+} from "../style/ChangePasswordPageDesign";
 
 export default function ChangePasswordPage() {
   const YUPSCHEMA = CHANGE_PASSWORD_SCHEMA;
@@ -36,10 +42,9 @@ export default function ChangePasswordPage() {
   };
 
   return (
-    <div>
-      <h2>변경할 비밀번호를 입력해주세요.</h2>
-      <hr />
-      <form
+    <MainContainer>
+      <ChangeHedear>변경할 비밀번호를 입력해주세요.</ChangeHedear>
+      <ChangePwdForm
         onSubmit={handleSubmit(
           (formData) => submitForm(id, formData),
           (errors) => {
@@ -53,14 +58,18 @@ export default function ChangePasswordPage() {
           watch={watch}
           errors={errors}
         />
-        <Button
-          text="취소"
-          onClick={() => {
-            window.location.href = "/user/login";
-          }}
-        />
-        <Button type="submit" text={"비밀번호를 변경합니다."} />
-      </form>
-    </div>
+        <ButtonWrapper>
+          <PwdButton
+            type="button"
+            onClick={() => {
+              window.location.href = "/user/login";
+            }}
+          >
+            돌아가기
+          </PwdButton>
+          <PwdButton type="submit"> 비밀 번호 변경</PwdButton>
+        </ButtonWrapper>
+      </ChangePwdForm>
+    </MainContainer>
   );
 }

@@ -2,21 +2,21 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: auto;
-  gap: 2rem;
+  width: 99.5%;
   user-select: none;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-export const Header = styled.h1`
-  color: #f0b8b8;
-  font-weight: 500;
-  user-select: none;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
 `;
 
-export const BackButton = styled.button`
+export const PwdButton = styled.button`
   background-color: #f0b8b8;
   border: #ddd 1px solid;
   border-radius: 0.375rem;
@@ -28,11 +28,12 @@ export const BackButton = styled.button`
   transform-origin: center center;
   font-size: 1rem;
   height: 100%;
+  box-sizing: border-box;
   width: fit-content;
   padding: 1rem;
-  box-sizing: border-box;
+  margin: 1rem;
   user-select: none;
-  color: white;
+  color: #f8f8f8;
   &:hover {
     background-color: #f8f8f8;
     color: #f0b8b8;
@@ -46,15 +47,22 @@ export const BackButton = styled.button`
   }
 `;
 
-export const Message = styled.p`
-  font-size: 1.1rem;
-  text-align: center;
-  color: #444;
-  white-space: pre-line;
+export const ChangePwdForm = styled.form`
+  gap: 1.5rem;
+  margin-left: 10px;
+  line-height: 3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
 `;
 
-export const EmphasizedId = styled.span`
-  font-weight: bold;
-  color: #f57c7c;
-  font-size: 1.25rem;
+export const ChangeHedear = styled.h1`
+  font-weight: 500;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  color: #9a8a8a;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
 `;
