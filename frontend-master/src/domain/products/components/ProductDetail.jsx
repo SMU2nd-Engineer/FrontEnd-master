@@ -62,6 +62,7 @@ export default function ProductDetail() {
   const handleDelete = async () => {
     try {
       await deleteProducts(idx);
+      // 팝업으로
       alert("상품이 삭제되었습니다.");
       navigate("/product/list"); // 목록 페이지로 이동
     } catch (error) {
