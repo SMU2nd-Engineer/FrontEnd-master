@@ -148,7 +148,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
             </div>
             <PUP.ButtonBox>
               <Button
-                className="cancle"
+                className="cancel"
                 text={"취소"}
                 onClick={uploadCancel}
               ></Button>
