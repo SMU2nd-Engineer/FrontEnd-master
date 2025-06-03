@@ -18,6 +18,7 @@ import {
   LoginOptionLabel,
   LoginWrapper,
 } from "../style/LoginPageDesign";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function LogingPage() {
   const [id, setUserId] = useState("");

@@ -58,7 +58,7 @@ export const LoginStyledButton = styled(Button)`
   grid-column: 2 / 4;
   height: 100%;
   background-color: #f0b8b8;
-  color: black;
+  color: white;
   width: 6rem;
   border: #ddd 1px solid;
   border-radius: 0.375rem;
