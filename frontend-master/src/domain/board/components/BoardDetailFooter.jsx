@@ -51,22 +51,22 @@ const BoardDetailFooter = ({
       });
   };
 
-  // 댓글 등록 취소 버튼 선택 - 게시글 상세페이지로 머무는 것
-  const handleCancel = (e) => {
-    // 새로고침 방지
-    e.preventDefault();
+  // // 댓글 등록 취소 버튼 선택 - 게시글 상세페이지로 머무는 것
+  // const handleCancel = (e) => {
+  //   // 새로고침 방지
+  //   e.preventDefault();
 
-    // 댓글 등록 취소하고 선택하는 팝업창
-    const commentAddCancel = window.confirm(
-      "게시글 댓글 등록을 취소하시겠습니까?"
-    );
+  //   // 댓글 등록 취소하고 선택하는 팝업창
+  //   const commentAddCancel = window.confirm(
+  //     "게시글 댓글 등록을 취소하시겠습니까?"
+  //   );
 
-    // 확인 누르면 게시글 상세페이지에 머무름
-    if (!commentAddCancel) return;
+  //   // 확인 누르면 게시글 상세페이지에 머무름
+  //   if (!commentAddCancel) return;
 
-    // 상태 초기화
-    setNewCommentText("");
-  };
+  //   // 상태 초기화
+  //   setNewCommentText("");
+  // };
 
   // 댓글 삭제 기능 구현
   const handleDelete = async function (comment_idx) {
