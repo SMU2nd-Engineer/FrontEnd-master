@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
-  width: 100%;
+  width: 90.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,4 +43,10 @@ export const HomeHedear = styled.h1`
   margin: 1rem;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+`;
+
+export const HomeProductList = styled.div`
+  > div {
+    gap: 1rem;
+  }
 `;
