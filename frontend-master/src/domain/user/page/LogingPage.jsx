@@ -29,6 +29,15 @@ export default function LogingPage() {
     !!sessionStorage.getItem("accessToken");
   const navigate = useNavigate();
 
+  const openModal = useModalStore((state) => state.open);
+
+  const loginFail = async () => {
+    const alert = await openModal("alert", {
+      title: "로그인 실패",
+      message: "아이디 또는 비밀번호를 확인해 주세요.",
+    });
+  };
+
   const handleLogin = async (e) => {
     // 새로 고침을 방지하기 위한 코드
     e.preventDefault();
@@ -50,7 +59,7 @@ export default function LogingPage() {
         );
       }
     } catch (error) {
-      alert("로그인 실패");
+      loginFail();
       setUserId("");
       setpassword("");
     }
