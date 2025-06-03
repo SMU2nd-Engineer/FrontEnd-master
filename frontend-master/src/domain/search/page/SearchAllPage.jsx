@@ -7,9 +7,6 @@ import * as SA from "../styles/SearchAllPageDesign";
 import { searchAll } from '../services/SearchService';
 
 
-
-
-
 const SearchAllPage = () => {
   const [productResult, setProductResult] = useState([]);
   const [boardResult, setBoardResult] = useState([]);
