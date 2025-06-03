@@ -68,14 +68,21 @@ export const ButtonBox = styled.div`
   align-items: center;
   justify-content: center;
   flex-shrink: 0; 
+  gap: 8px;
   
-  &.upload {
-  border-color: rgb(194, 194, 194);
-  
-  &:hover {
-      background-color: #fff;
-      color: #ff9a9a;
+  .upload {
+    height: 50px;
+    &:hover {
+        background-color: #ff9a9a;
+        color: #fff;
+      }
+  }
+
+  .cancel{
+    height: 50px;
+    &:hover {
+      background-color: #818080;
+      color: #fff;
     }
-  
-}
+  }
 `
