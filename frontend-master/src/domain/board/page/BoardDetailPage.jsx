@@ -118,7 +118,10 @@ const BoardDetailPage = () => {
   return (
     <Details.BoardDetailMain>
       {chatPopup === 0 || (
-        <ChatPopup selectRoom={chatPopup} handleClose={closePopup} />
+        <ChatPopup
+          selectRoom={{ id: chatPopup, nickname: detailBoard.nickname }}
+          handleClose={closePopup}
+        />
       )}
       <Details.BoardDetailTop>
         {/* 카테고리 선택, 제목, 작성자, 게시글 수정+삭제 버튼 */}

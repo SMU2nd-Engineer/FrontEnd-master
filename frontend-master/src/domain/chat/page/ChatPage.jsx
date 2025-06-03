@@ -26,8 +26,8 @@ const ChatPage = () => {
     return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 정리
   }, []);
 
-  const handleRoomClick = (id) => {
-    setSelectRoom(id);
+  const handleRoomClick = (id, nickname) => {
+    setSelectRoom({ id, nickname });
   };
 
   const handleRoomDeleteClick = (id) => {

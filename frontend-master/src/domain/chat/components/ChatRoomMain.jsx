@@ -32,11 +32,11 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   }, [selectRoom]);
 
   // 새 메시지 수신 시 처리
-  useChatSocket(room, onMessage);
+  useChatSocket(room.id, onMessage);
 
   useEffect(() => {
-    if (room == 0) return;
-    getChatRoomMessage(room).then((res) => {
+    if (room.id == 0) return;
+    getChatRoomMessage(room.id).then((res) => {
       setChatList(res.data.chatList);
       setFromUser(res.data.fromidx);
     });
@@ -50,7 +50,7 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
   const handleMessageSend = (chat) => {
     if (room === 0) return;
     if (!chat.content.trim()) return;
-    chat.chatRoomId = room;
+    chat.chatRoomId = room.id;
     chat.userIdx = fromUser;
     postChatMessage(chat).then((res) => setChatList([...chatList, res.data]));
   };
@@ -68,7 +68,7 @@ const ChatRoomMain = ({ selectRoom, type = "default" }) => {
 
   return (
     <ChatRoomMainDiv type={type}>
-      <ChatTitle>채팅 내역</ChatTitle>
+      <ChatTitle>채팅 내역{` - ${room.nickname}`}</ChatTitle>
       <ChatList chatList={chatList} fromUser={fromUser} />
       <ChatInput handleMessageSend={handleMessageSend} />
     </ChatRoomMainDiv>
