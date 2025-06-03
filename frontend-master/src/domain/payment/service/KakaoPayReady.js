@@ -1,6 +1,8 @@
 import axiosInstance from "@/lib/axiosInstance";
 
 const KakaoPayReady = async (product, user, tradeType) => {
+  const KAKAOPAY_URL = import.meta.env.VITE_KAKAOPAY_API_URL;
+
   console.log(product);
   console.log("itemName:", product.title);
   console.log(user);
@@ -13,9 +15,9 @@ const KakaoPayReady = async (product, user, tradeType) => {
   let amount = product.price;
   const deliveryAddress = user.address;
   const sellerIdx = product.user_idx;
-  const approvalUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/success/${productIdx}?tradeType=${tradeType}`;
-  const cancelUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/cancel/${productIdx}?tradeType=${tradeType}`;
-  const failUrl = `http://ec2-3-38-104-183.ap-northeast-2.compute.amazonaws.com/payment/fail/${productIdx}?tradeType=${tradeType}`;
+  const approvalUrl = `${KAKAOPAY_URL}/success/${productIdx}?tradeType=${tradeType}`;
+  const cancelUrl = `${KAKAOPAY_URL}/cancel/${productIdx}?tradeType=${tradeType}`;
+  const failUrl = `${KAKAOPAY_URL}/fail/${productIdx}?tradeType=${tradeType}`;
 
   if (tradeType === 0) {
     amount += 3000;

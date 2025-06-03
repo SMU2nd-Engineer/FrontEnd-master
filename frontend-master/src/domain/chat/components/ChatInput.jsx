@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ChatInputDiv,
   ChatMessageButton,
@@ -12,12 +12,31 @@ import {
  */
 const ChatInput = ({ handleMessageSend }) => {
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    inputRef.current.focus();
+  };
 
   const onSumit = () => {
     var chat = { content: message };
     handleMessageSend(chat);
     setMessage("");
+    handleFocus();
   };
+
+  const keyHandler = (e) => {
+    e.key == "Enter" && onSumit();
+  };
+
+  useEffect(() => {
+    if (!isLoading) {
+      handleFocus();
+      setIsLoading(true);
+    }
+    return setIsLoading(false);
+  }, []);
 
   return (
     <ChatInputDiv>
@@ -29,7 +48,8 @@ const ChatInput = ({ handleMessageSend }) => {
         value={message}
         placeholder="메시지를 입력하세요."
         onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={(e) => e.key == "Enter" && onSumit()}
+        onKeyDown={keyHandler}
+        ref={inputRef}
       />
       <ChatMessageButton type="button" onClick={onSumit}>
         보내기
