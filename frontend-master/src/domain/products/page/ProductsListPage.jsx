@@ -54,8 +54,12 @@ const ProductListPage = () => {
   };
 
   const handleSearch = (searchValue) => {
+    setIsLoading(true);
+    setProducts([]);
+    setLastId(null);
     if (!searchValue) {
-      getProductList().then((res) => {
+      getProductList(null, size)
+      .then((res) => {
         const data = res.data;
         setProducts(data);
         if (data.length < size) {
@@ -66,16 +70,18 @@ const ProductListPage = () => {
         if (data.length > 0) {
           setLastId(data[data.length - 1].idx);
         }
-      });
+      })
+      .catch((err) => console.error("상품 불러오기 실패:", err))
+      .finally(() => setIsLoading(false));
     } else {
-      console.log(searchValue);
       searchProducts(searchValue)
         .then((res) => {
           const data = res.data;
           setProducts(data);
-          setHasMore(false); // 검색 결과는 "더보기" 없음 처리
+          setHasMore(true); 
         })
-        .catch((err) => console.error("검색 실패", err));
+        .catch((err) => console.error("검색 실패", err))
+        .finally(() => setIsLoading(false));
     }
   };
 
