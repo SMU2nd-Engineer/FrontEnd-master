@@ -13,6 +13,7 @@ import TicketPages from "./domain/ticket/page/ticketPage";
 import Footer from "./page/footer/Footer";
 import ScrollToTop from "../src/utils/ScrollToTop";
 import RequireAuth from "./utils/RequireAuth";
+import GlobalModal from "./components/GlobalModal";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         </Routes>
       </BodyComponent>
       <Footer />
+      <GlobalModal />
     </div>
   );
 }
