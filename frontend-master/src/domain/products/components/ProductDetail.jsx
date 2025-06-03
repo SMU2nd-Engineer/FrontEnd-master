@@ -73,7 +73,10 @@ export default function ProductDetail() {
   return (
     <div className="detailinfo">
       {chatPopup === 0 || (
-        <ChatPopup selectRoom={chatPopup} handleClose={closePopup} />
+        <ChatPopup
+          selectRoom={{ id: chatPopup, nickname: product.nickName }}
+          handleClose={closePopup}
+        />
       )}
       <ProductDetails.DetailTop>
         {/* 이미지 슬라이드, 이미지 리스트 */}

@@ -14,7 +14,14 @@ import {
  * @param {{id : number, title : string, time : DateTime}} param0
  * @returns
  */
-const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage, count }) => {
+const ChatRoomItem = ({
+  id,
+  title,
+  lastMessageAt,
+  lastMessage,
+  count,
+  nickname,
+}) => {
   const { handleRoomClick, handleRoomDeleteClick } = useContext(
     ChatRoomDispatchContext
   );
@@ -27,13 +34,17 @@ const ChatRoomItem = ({ id, title, lastMessageAt, lastMessage, count }) => {
   return (
     <ChatRoomItemDiv
       onClick={() => {
-        handleRoomClick(id);
+        handleRoomClick(id, nickname);
         count = 0;
       }}
     >
       {/* <img src="" alt="" /> */}
       <RoomInfoDiv>
-        <InfoTitleDiv>{title}</InfoTitleDiv>
+        <InfoTitleDiv>
+          {title.length > 0
+            ? `${title} - ${nickname}`
+            : `${nickname}과(와)의 대화방`}
+        </InfoTitleDiv>
         <div>
           <InfoLastMessageDiv>{lastMessage}</InfoLastMessageDiv>
           <InfoTextDiv>{stringToTime(lastMessageAt)}</InfoTextDiv>

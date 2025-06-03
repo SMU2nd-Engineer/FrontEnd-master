@@ -5,7 +5,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { REVIEW_SCHEMA } from "@user/utils/userFormValidator";
 import Button from "@/components/Button";
-import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import TransactionTextReview from "../components/TransactionTextReview";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -34,7 +39,7 @@ export default function TransactionReviewRegisterPage() {
   const [originalReview, setOriginalReview] = useState({}); // 기존 리뷰 정보 저장.
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const tradeType = Number(searchParams.get('tradeType'));
+  const tradeType = Number(searchParams.get("tradeType"));
   const location = useLocation();
   const [product, setProduct] = useState(null);
 
@@ -139,7 +144,7 @@ export default function TransactionReviewRegisterPage() {
           "sellerIdx",
           getReview?.fetchReviewRegisterInfo?.sellerIdx ?? 0
         ); // 폼 제출이 안되서 지정해주기
-        setProduct("price", getReview.fet)
+        setProduct("price", getReview.fet);
         setSellerInfo(getReview.fetchReviewRegisterInfo);
         const selectedKeys = Object.entries(getReview.reviewEvaluationRecord) // 객체의 값만 가져옴(map객체)
           .filter(([key, value]) => value === 1) // 선택된 값만 선택
@@ -155,11 +160,11 @@ export default function TransactionReviewRegisterPage() {
         }, 0);
       } else {
         const result = await getMyPageData("SELLER_AND_CATEGORIES");
-        setSellerInfo(result.sellerInfo??"");
+        setSellerInfo(result.sellerInfo ?? "");
         setEvalutaionCategories(result.evaluationCategories);
         setValue("sellerIdx", result?.sellerInfo?.sellerIdx ?? 0); // 폼 제출이 안되서 지정해주기
         setValue("transactionIdx", result?.sellerInfo?.transactionIdx ?? 0); // 폼 제출이 안되서 지정해주기
-        setProduct = location.state?.product;
+        setProduct(location.state?.product);
       }
     };
     saveInfo();
@@ -167,7 +172,7 @@ export default function TransactionReviewRegisterPage() {
   return (
     <TranReview.TRmain>
       <TranReview.PaymentProductInfo>
-        <PaymentProductInfo product={product} tradeType={{tradeType}} />
+        <PaymentProductInfo product={product} tradeType={{ tradeType }} />
       </TranReview.PaymentProductInfo>
       <TranReview.Line></TranReview.Line>
       <h1>
