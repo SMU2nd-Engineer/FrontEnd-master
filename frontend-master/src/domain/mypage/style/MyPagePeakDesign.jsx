@@ -4,14 +4,16 @@ import styled from "styled-components";
  * 짬 판매 상품 컨테이너
  */
 export const PeakContainer = styled.div`
-  width: auto;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 4px rgba(184, 156, 156, 0.1);
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1.5rem;
+  width: 97%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 1rem;
-  gap: 1rem;
-  margin-top: 3rem;
+  user-select: none;
 `;
 
 /**
@@ -53,8 +55,8 @@ export const PeakDeleteButton = styled.button`
 
 export const PickListContainer = styled.div`
   display: flex;
+  padding: 1rem;
   gap: 2rem;
-  justify-content: center;
 `;
 
 export const CardAndButtonWrapper = styled.div`

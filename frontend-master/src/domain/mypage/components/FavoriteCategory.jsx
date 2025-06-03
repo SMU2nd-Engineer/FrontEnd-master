@@ -14,15 +14,13 @@ export default function FavoriteCategory({ category, register }) {
 
   return (
     <Favorite.FavoriteMain>
+      <Favorite.FavoriteCheckbox
+        type="checkbox"
+        {...register("favorites[]")}
+        value={`FAV_${category.subIdx}`}
+        id={`${category.subIdx}`}
+      />
       <Favorite.FavoriteLabel htmlFor={`${category.subIdx}`}>
-        <div style={{ marginLeft: "37px", marginRight: "10px" }}>
-          <Favorite.FavoriteCheckbox
-            type="checkbox"
-            {...register("favorites[]")}
-            value={`FAV_${category.subIdx}`}
-            id={`${category.subIdx}`}
-          />
-        </div>
         {displayName}
       </Favorite.FavoriteLabel>
     </Favorite.FavoriteMain>

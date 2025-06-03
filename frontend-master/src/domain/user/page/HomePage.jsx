@@ -12,6 +12,7 @@ import {
   HomeContainer,
   HomeHedear,
   HomeProductContainer,
+  HomeProductList,
 } from "../style/HomePageDesign";
 
 export default function HomePage() {
@@ -38,9 +39,9 @@ export default function HomePage() {
     <HomeContainer>
       <HomeProductContainer>
         <HomeHedear>최근 올라온 상품</HomeHedear>
-        <List.Product_list>
+        <HomeProductList>
           <ProductList products={homePageProducts} />
-        </List.Product_list>
+        </HomeProductList>
       </HomeProductContainer>
       <HomeBoardContainer>
         <HomeHedear>최근 올라온 게시글</HomeHedear>
