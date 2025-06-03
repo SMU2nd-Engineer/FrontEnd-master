@@ -96,7 +96,7 @@ export default function FavoritesSelector({ mode = "register" }) {
             취소
           </Favorite.EndButton>
           <Favorite.EndButton type="submit">
-            {mode === "edit" ? "수정하기" : "등록하기"}
+            {mode === "edit" ? "수정" : "등록"}
           </Favorite.EndButton>
         </Favorite.FormActions>
       </Favorite.CategoryForm>
