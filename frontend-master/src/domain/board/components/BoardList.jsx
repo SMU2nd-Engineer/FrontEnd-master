@@ -1,7 +1,7 @@
 // src/domain/board/components/BoardList.jsx
 import React, { useState } from "react";
 import BoardItem from "./BoardItem";
-import * as board from "../styles/BoardListPageDesign";
+import * as Board from "../styles/BoardListPageDesign";
 import MyPagination from "@/domain/mypage/components/MyPaginationUI";
 
 const BoardList = ({ boards = [] }) => {
@@ -22,8 +22,8 @@ const BoardList = ({ boards = [] }) => {
   if (!boards.length) return <p>게시글이 없습니다. </p>;
 
   return (
-    <board.Board_contentsListMain>
-      <board.Board_cotentsList>
+    <Board.Board_contentsListMain>
+      <Board.Board_cotentsList>
         <thead>
           <tr>
             <th className="th1">순번</th>
@@ -39,9 +39,9 @@ const BoardList = ({ boards = [] }) => {
             <BoardItem key={item.idx} item={item} />
           ))}
         </tbody>
-      </board.Board_cotentsList>
+      </Board.Board_cotentsList>
       <MyPagination pageCount={totalPageCount} onPageChange={onPageChange} />
-    </board.Board_contentsListMain>
+    </Board.Board_contentsListMain>
   );
 };
 

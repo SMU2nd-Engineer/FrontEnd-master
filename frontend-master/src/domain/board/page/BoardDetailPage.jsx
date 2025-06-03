@@ -8,7 +8,6 @@ import BoardDetailTextEditor from "../components/BoardDetailTextEditor";
 import BoardDetailFooter from "../components/BoardDetailFooter";
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
 import * as Details from "../styles/BoardDetailDesign";
-import { useCallback } from "react";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 
@@ -68,11 +67,6 @@ const BoardDetailPage = () => {
         return category_idx;
     }
   };
-
-  // 뒤로가기 방지 hook 사용
-  // usePreventBackNavigation();
-
-  useEffect(() => console.log(newCommentText), [commentList]);
 
   useEffect(() => {
     // 게시판 등록페이지 등록 데이터 가져오는 것

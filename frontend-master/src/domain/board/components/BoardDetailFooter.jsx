@@ -16,7 +16,6 @@ const BoardDetailFooter = ({
   setCommentList,
   id,
   setLoading,
-  user_idx,
 }) => {
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
   const { userInfo } = useLoginUserInfoStore();
@@ -30,10 +29,7 @@ const BoardDetailFooter = ({
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
     await postBoardAddComment({ id, text: newCommentText })
       .then((res) => {
-        // console.log("댓글정보:", newCommentText);
         alert("댓글 등록 성공");
-        console.log("댓글정보:", newCommentText);
-        console.log(res);
         setNewCommentText("");
       })
       .catch((error) => {
@@ -51,32 +47,13 @@ const BoardDetailFooter = ({
       });
   };
 
-  // // 댓글 등록 취소 버튼 선택 - 게시글 상세페이지로 머무는 것
-  // const handleCancel = (e) => {
-  //   // 새로고침 방지
-  //   e.preventDefault();
-
-  //   // 댓글 등록 취소하고 선택하는 팝업창
-  //   const commentAddCancel = window.confirm(
-  //     "게시글 댓글 등록을 취소하시겠습니까?"
-  //   );
-
-  //   // 확인 누르면 게시글 상세페이지에 머무름
-  //   if (!commentAddCancel) return;
-
-  //   // 상태 초기화
-  //   setNewCommentText("");
-  // };
-
   // 댓글 삭제 기능 구현
   const handleDelete = async function (comment_idx) {
     // 서버에 댓글 등록 요청 보내는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
     await postBoardDeleteComment(comment_idx)
       .then((res) => {
-        // console.log("댓글 삭제 정보:", comment_idx);
         alert("댓글 삭제 성공");
-        console.log(res);
       })
       .catch((error) => {
         console.error("댓글 삭제 실패: ", error);
@@ -84,7 +61,6 @@ const BoardDetailFooter = ({
       });
     await getBoardComment(id) // API 호출
       .then((response) => {
-        console.log(response.data);
         setCommentList(response.data); // 받아온 댓글 데이터 상태에 저장
         setLoading(false); // 로딩 완료 표시
       });
@@ -147,7 +123,7 @@ const BoardDetailFooter = ({
                     비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정
                   */}
                 {/* {userIdx === comment.userIdx &&  */}
-                {user_idx === userInfo.userIdx && (
+                {comment.user_idx === userInfo.userIdx && (
                   <button
                     onClick={() => {
                       handleDelete(comment.comment_idx);

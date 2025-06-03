@@ -20,12 +20,9 @@ const BoardSubmitPage = ({ updateContentsData, isModify, id }) => {
     content: "",
   });
 
-  const { category_idx, title, content } = newsubmit;
+  const { category_idx, title } = newsubmit;
   // 글 내용 입력 - quill 툴바 커스텀
   const [contentData, setContentData] = useState({});
-
-  // 사용자가 quill 에디터에서 작성한 글의 원본 html 저장하는 값
-  const [contentsQuillHtml, setContentsQuillHtml] = useState("");
 
   // quill 확인
   const quillRef = useRef();
@@ -52,7 +49,6 @@ const BoardSubmitPage = ({ updateContentsData, isModify, id }) => {
       [name]: value,
     }));
   };
-  console.log(quillRef);
 
   // 화면에 표시될 내용
   return (
