@@ -10,6 +10,7 @@ export const ReviewPageMain = styled.div`
   gap: 20px;
   width: 100%;
   height: 700px;
+  user-select: none;
   p {
     font-size: 24px;
     font-weight: bold;

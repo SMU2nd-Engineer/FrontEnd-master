@@ -6,6 +6,7 @@ export const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  user-select: none;
 `;
 
 export const LoginContainer = styled.div`

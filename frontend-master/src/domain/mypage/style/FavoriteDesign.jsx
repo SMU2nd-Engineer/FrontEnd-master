@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 // import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
@@ -80,6 +79,7 @@ export const EndButton = styled.button`
 export const CategoryForm = styled.form`
   width: 90%;
   line-height: 400%;
+  user-select: none;
 `;
 
 export const MyEditFavoritePage = styled.div`

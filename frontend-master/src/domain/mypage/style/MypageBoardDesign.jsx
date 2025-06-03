@@ -8,6 +8,7 @@ export const MyBoardContainer = styled.div`
   gap: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  user-select: none;
 `;
 
 /* 게시글 컨테이너 */

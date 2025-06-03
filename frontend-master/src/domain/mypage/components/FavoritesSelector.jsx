@@ -7,7 +7,6 @@ import { registrationUserFavorite } from "@user/services/registrationUserFavorit
 import { updateUserFavorites } from "../services/updateUserFavorites";
 
 import * as Favorite from "../style/FavoriteDesign";
-import { div } from "framer-motion/client";
 
 export default function FavoritesSelector({ mode = "register" }) {
   // 선호도 카테고리 정보 저장할 배열
@@ -100,6 +99,5 @@ export default function FavoritesSelector({ mode = "register" }) {
         </Favorite.FormActions>
       </Favorite.CategoryForm>
     </div>
-
   );
 }
