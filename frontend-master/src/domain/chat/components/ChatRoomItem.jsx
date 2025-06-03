@@ -22,13 +22,10 @@ const ChatRoomItem = ({
   count,
   nickname,
 }) => {
-  const { handleRoomClick, handleRoomDeleteClick } = useContext(
-    ChatRoomDispatchContext
-  );
+  const { handleRoomClick, handleDelete } = useContext(ChatRoomDispatchContext);
 
   const onClick = () => {
-    if (confirm(`정말로 삭제하시겠습니까? 복구되지 않습니다.`))
-      handleRoomDeleteClick(id);
+    handleDelete(id);
   };
 
   return (
