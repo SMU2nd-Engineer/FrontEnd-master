@@ -21,6 +21,12 @@ export const Product_card = styled.div `
   background: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
+  .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: inherit;
+  }
   &:hover {
     background: #e7e7e749;
     cursor: pointer;
