@@ -36,7 +36,6 @@ const ImageSlider = ({ imageList }) => {
         {"›"}
       </SlideDetails.Arrow>
 
-      {/* 썸네일 */}
       <SlideDetails.ThumbnailWrapper>
         {imageList.map((img, idx) => (
           <SlideDetails.ThumbnailImage
@@ -44,7 +43,7 @@ const ImageSlider = ({ imageList }) => {
             src={img.image_Url}
             alt={`thumb_${idx}`}
             onClick={() => setCurrentIndex(idx)}
-            isActive={idx === currentIndex} 
+            $isActive={idx === currentIndex} 
           />
         ))}
       </SlideDetails.ThumbnailWrapper>
