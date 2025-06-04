@@ -164,7 +164,6 @@ export default function ProductDetail() {
           title={product.title}
           mode="all"
         />
-        {/* <ImageSlider imageList={product.imageList} /> */}
 
         <ProductDetails.PDetailContent>
           {product.content}
