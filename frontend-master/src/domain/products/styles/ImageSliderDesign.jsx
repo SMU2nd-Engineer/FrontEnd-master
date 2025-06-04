@@ -27,6 +27,18 @@ export const Arrow = styled.button`
   z-index: 1;
 `;
 
+// export const Slide = styled.div`
+//   position: absolute;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   row-gap: 20px;
+  
+//   transition: opacity 0.3s ease-in-out;
+//   &.active {
+//     opacity: 1;
+//   }
+// `;
 
 export const SlideImage = styled.img`
   width: 100%;
@@ -36,7 +48,7 @@ export const SlideImage = styled.img`
 `;
 
 export const ThumbnailWrapper = styled.div`
-  margin-top: 5px;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
   gap: 8px;
@@ -49,7 +61,6 @@ export const ThumbnailImage = styled.img`
   object-fit: cover;
   cursor: pointer;
   border-radius: 4px;
-  
 
   border: ${({ $isActive }) => ($isActive ? "2px solid #333" : "1px solid transparent")};
   opacity: ${({ $isActive }) => ($isActive ? 1 : 0.6)};
