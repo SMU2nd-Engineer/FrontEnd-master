@@ -3,17 +3,30 @@ import { useState } from "react";
 import * as UpImg from "../styles/ImageUploadDesign";
 import imageCompression from "browser-image-compression";
 import { useModalStore } from "@/store/useModalStore";
+import { useEffect } from "react";
 
 const ImageUpload = ({ uploadImage, setUploadImage }) => {
-  const [previewUrl, setPreviewUrl] = useState([]);
+  const [previewUrl, setPreviewUrl] = useState(uploadImage);
   const openModal = useModalStore((state) => state.open);
 
-  const handleFileChange = async (event) => {
-    const files = event.target.files;
+  useEffect(() => {
+    const isStringArray = uploadImage.every((item) => typeof item === "string");
+    if (isStringArray) {
+      setPreviewUrl(uploadImage);
+    }
+  }, [uploadImage]);
 
-    const newFiles = Array.from(files).slice(0, 6 - uploadImage.length);
+  const handleFileChange = async (event) => {
+    if (uploadImage.length >= 5) {
+      await openModal("alert", {
+        title: "용량 초과",
+        message: "사진은 5개 이상 등록할 수 없습니다.",
+      });
+      return;
+    }
+
+    const newFiles = Array.from(event.target.files);
     const compressedFiles = [];
-    const newPreviewUrls = [];
     let totalsize = 0;
 
     for (const file of newFiles) {
@@ -36,22 +49,16 @@ const ImageUpload = ({ uploadImage, setUploadImage }) => {
         }
 
         compressedFiles.push(compressedFile);
-
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          newPreviewUrls.push(reader.result);
-          // 모든 이미지의 preview가 준비됐을 때만 업데이트
-          if (newPreviewUrls.length === compressedFiles.length) {
-            setPreviewUrl((prev) => [...prev, ...newPreviewUrls].slice(0, 6));
-          }
-        };
-        reader.readAsDataURL(compressedFile);
+        const compressedBlob = await imageCompression.getDataUrlFromFile(
+          compressedFile
+        );
+        setPreviewUrl((prev) => [...prev, compressedBlob]);
       } catch (err) {
         console.error("이미지 압축 실패:", err);
       }
     }
 
-    setUploadImage((prev) => [...prev, ...compressedFiles].slice(0, 6));
+    setUploadImage((prev) => [...prev, ...compressedFiles]);
   };
 
   const handleDelete = (index) => {
@@ -77,7 +84,10 @@ const ImageUpload = ({ uploadImage, setUploadImage }) => {
         {previewUrl.map((image, idx) => (
           <div key={idx} style={{ position: "relative" }}>
             <img src={image} alt={`upload-preview-${idx}`} />
-            <button onClick={() => handleDelete(idx)}> &times; </button>
+            <button onClick={() => handleDelete(idx)} type="button">
+              {" "}
+              &times;{" "}
+            </button>
           </div>
         ))}
       </div>
