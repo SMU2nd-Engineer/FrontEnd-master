@@ -232,7 +232,7 @@ export default function TransactionReviewRegisterPage() {
         <ErrorFontReviewHeader>
           {sellerInfo && sellerInfo.sellerNickName
             ? `${sellerInfo.sellerNickName}님과 진행한 거래에 대한 평가를 남겨주세요`
-            : "거래 정보 로딩 중..."}
+            : "방금 거래한 상품에 대해 리뷰를 작성해주세요."}
         </ErrorFontReviewHeader>
       </TranReview.Line>
       <TranReview.ReviewMainForm
