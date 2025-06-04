@@ -60,6 +60,10 @@ export default function LogingPage() {
         );
       }
     } catch (error) {
+      console.log(
+        "server error : ",
+        error.response?.data?.error || error.message
+      );
       loginFail();
       setUserId("");
       setpassword("");
