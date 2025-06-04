@@ -28,14 +28,9 @@ export default function UserRoutes() {
         <Route path="showfindid" element={<ShowFindIdPage />} />
         <Route path="changePassword" element={<ChangePasswordPage />} />
         <Route path="selectFavorites" element={<ChooseFavoritePage />} />
-        <Route
-          path="withdrawal"
-          element={
-            <RequireAuth>
-              <UserWithdrawalPage />
-            </RequireAuth>
-          }
-        />
+        <Route element={<RequireAuth />}>
+          <Route path="withdrawal" element={<UserWithdrawalPage />} />
+        </Route>
       </Routes>
     </div>
   );
