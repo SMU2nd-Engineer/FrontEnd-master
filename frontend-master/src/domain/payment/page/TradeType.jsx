@@ -52,7 +52,6 @@ const TradeType = () => {
         <div>
           <Trade.ProductInfo>
             <Trade.ImgDiv>
-              {/* <img src={product.image_Url} alt={product.title} /> */}
               <ProductImage
                 imageList={[
                   {
