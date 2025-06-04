@@ -19,6 +19,7 @@ import {
   LoginWrapper,
 } from "../style/LoginPageDesign";
 import { useModalStore } from "@/store/useModalStore";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function LogingPage() {
   const [id, setUserId] = useState("");
@@ -31,6 +32,8 @@ export default function LogingPage() {
   const navigate = useNavigate();
 
   const openModal = useModalStore((state) => state.open);
+
+  const { setLoginUserInfo } = useLoginUserInfoStore();
 
   const loginFail = async () => {
     await openModal("alert", {
@@ -47,6 +50,7 @@ export default function LogingPage() {
       const accessToken = res.data.accessToken;
       if (accessToken) {
         setAccessToken(accessToken);
+        setLoginUserInfo(res.data.userInfo);
         if (rememberId) {
           // 아이디 기억하기 체크 여부에 따라 아이디 제거 또는 기억하기
           localStorage.setItem("savedUserId", id);

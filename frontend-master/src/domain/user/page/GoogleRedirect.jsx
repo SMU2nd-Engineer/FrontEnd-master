@@ -8,6 +8,7 @@ import {
   SocialLoginLodingText,
 } from "../style/SocialLoginLodingDesign";
 import { useModalStore } from "@/store/useModalStore";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function GoogleRedirect() {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ export default function GoogleRedirect() {
 
   const openModal = useModalStore((state) => state.open);
 
+  const { setLoginUserInfo } = useLoginUserInfoStore();
+
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   /**
    *
@@ -35,6 +38,7 @@ export default function GoogleRedirect() {
           const res = await googleLogin(googleCode, autoLogin);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
+            setLoginUserInfo(res.data.userInfo);
             navigate("/user/home");
           }
         } catch (error) {
