@@ -6,8 +6,6 @@ export const Box = styled.div`
   align-items: center;
   text-align: center;
   justify-items: center;
-  /* margin: 1rem; */
-  /* padding: 5px; */
 `
 
 export const PaymentBox = styled.div`
@@ -60,7 +58,6 @@ export const Paymethod = styled.div`
 
 export const PaymentMethod = styled.label`
   border-right: 1px solid #ddd;
-  /* padding: 5px; */
   padding-right: 20px;
   font-weight: bold;
   margin-left : 10px;
@@ -80,22 +77,16 @@ export const ProductInfo = styled.div`
   display: flex;
   width: 100%;
   text-align: center;
-  /* margin: 5px; */
   padding: 10px;
-  /* height: 10rem; */
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  /* border-radius: 5px; */
   margin: 5px;
   margin-top: 10px;
 `
 export const Image = styled.div`
   display: flex;
-  width: 120px;
   height: 120px;
   margin: 5px;
-  /* padding: 5px; */
-  
 `
 
 export const PriceTitle = styled.div`
@@ -116,7 +107,6 @@ export const Price = styled.h2`
 export const Title = styled.p`
   font-size: 16px;
   font-weight: bold;
-  /* margin: ; */
 `
 
 export const Review = styled.button`
@@ -134,7 +124,6 @@ export const Next = styled.button`
   width: 130px;
   padding: 5px;
   height: 50px;
-  /* margin: 5px; */
   margin-top: 2rem;
   font-weight: bold;
 `

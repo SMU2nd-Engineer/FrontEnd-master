@@ -11,7 +11,6 @@ const PaymentProductInfo = ({ product, tradeType }) => {
   return (
     <>
       <PaymentDesign.Image>
-        {/* <img src={product.image_Url} alt="상품이미지" /> */}
         <ProductImage
           imageList={[
             { image_Url: product.image_Url, idx: product.idx, flag: true },
