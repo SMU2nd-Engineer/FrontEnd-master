@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as ProductDetails from "../styles/ProductDetailDesign";
 import Button from "@/components/Button";
 import { deleteProducts, getProductDetail } from "../services/productService";
-import ProductImage from "./ProductImage";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import ImageSlider from "./ImageSlider";
