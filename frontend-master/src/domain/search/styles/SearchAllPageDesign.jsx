@@ -51,5 +51,10 @@ export const ProductResult = styled.div`
 `
 
 export const MoreButton = styled.div`
+  text-decoration: underline;
+  color: #666666;
   
+  &:hover{
+    cursor: pointer;
+  }
 `
