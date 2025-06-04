@@ -112,7 +112,7 @@ axiosInstance.interceptors.response.use(
           removeAccessToken();
           sessionStorage.clear();
           localStorage.clear();
-          setDefaultUser();
+          useLoginUserInfoStore.getState().setDefaultUser();
         } finally {
           window.location.href = "/user/login";
         }
