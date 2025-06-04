@@ -1,11 +1,17 @@
 import { stringToTime } from "@/utils/Time";
 import React, { useContext } from "react";
+import { FaUser } from "react-icons/fa6";
 import { ChatRoomDispatchContext } from "../store/chatContext";
 import {
   ChatRoomItemDiv,
+  InfoBoxDiv,
+  InfoLastMessageBoxDiv,
   InfoLastMessageDiv,
+  InfoNickNameDiv,
   InfoTextDiv,
   InfoTitleDiv,
+  InfoTitleTextDiv,
+  InfoUserDiv,
   RoomInfoDiv,
 } from "../styles/ChatPageDesign";
 
@@ -35,17 +41,28 @@ const ChatRoomItem = ({
         count = 0;
       }}
     >
-      {/* <img src="" alt="" /> */}
       <RoomInfoDiv>
         <InfoTitleDiv>
-          {title.length > 0
-            ? `${title} - ${nickname}`
-            : `${nickname}과(와)의 대화방`}
+          {title.length > 0 ? (
+            <InfoBoxDiv>
+              <InfoUserDiv>
+                <FaUser style={{ marginRight: "7px", fontSize: "17px" }} />
+                <InfoNickNameDiv>{nickname}</InfoNickNameDiv>
+              </InfoUserDiv>
+              <InfoTitleTextDiv>{title}</InfoTitleTextDiv>
+            </InfoBoxDiv>
+          ) : (
+            `${nickname}과(와)의 대화방`
+          )}
         </InfoTitleDiv>
-        <div>
-          <InfoLastMessageDiv>{lastMessage}</InfoLastMessageDiv>
+        <InfoLastMessageBoxDiv>
+          <InfoLastMessageDiv>
+            {lastMessage.length > 20
+              ? lastMessage.substring(0, 20) + " ....."
+              : lastMessage}
+          </InfoLastMessageDiv>
           <InfoTextDiv>{stringToTime(lastMessageAt)}</InfoTextDiv>
-        </div>
+        </InfoLastMessageBoxDiv>
         {/* <span>{toUser}</span> */}
       </RoomInfoDiv>
       {count > 0 ? <div>{count}</div> : ""}

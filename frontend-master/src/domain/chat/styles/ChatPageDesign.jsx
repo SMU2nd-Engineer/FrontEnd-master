@@ -85,7 +85,7 @@ export const InfoTitleDiv = styled.div`
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   unicode-bidi: isolate;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
 `;
 
@@ -103,7 +103,7 @@ export const InfoTextDiv = styled.div`
 export const InfoLastMessageDiv = styled.div`
   display: flex;
   margin-top: 6px;
-  width: 50%;
+  width: 60%;
   display: flex;
   font-size: 12px;
   line-height: 1.3;
@@ -178,6 +178,7 @@ export const MessageFromTextP = styled.p`
   color: rgb(25, 25, 25);
   background-color: white;
   border: 1px solid rgb(229, 229, 229);
+  text-align: left;
 `;
 
 export const MessageFromTimeDiv = styled.span`
@@ -218,6 +219,7 @@ export const MessageToTextP = styled.p`
   border-radius: 10px;
   color: rgb(25, 25, 25);
   background-color: rgb(246, 246, 246);
+  text-align: left;
 `;
 
 export const MessageToTimeSpan = styled.span`
@@ -305,3 +307,29 @@ export const ChatPopupContentDiv = styled.div`
 // .popup-close-btn:hover {
 //   color: #ff4d4d;
 // }
+export const InfoBoxDiv = styled.div`
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 5px;
+`;
+
+export const InfoUserDiv = styled.div`
+  display: flex;
+  text-align: left;
+  font-weight: 900;
+`;
+
+export const InfoNickNameDiv = styled.div`
+  font-size: 18px;
+`;
+
+export const InfoTitleTextDiv = styled.div`
+  margin-left: 10px;
+  font-size: 13px;
+  color: #818080;
+`;
+
+export const InfoLastMessageBoxDiv = styled.div`
+  display: flex;
+  margin-left: 24px;
+`;
