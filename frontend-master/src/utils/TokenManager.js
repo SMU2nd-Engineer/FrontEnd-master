@@ -1,6 +1,6 @@
 /**
  *getAccessToken
- * localStorage에서 accessToken을 가져옴옴
+ * localStorage에서 accessToken을 가져옴
  */
 export const getAccessToken = () =>
   localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
