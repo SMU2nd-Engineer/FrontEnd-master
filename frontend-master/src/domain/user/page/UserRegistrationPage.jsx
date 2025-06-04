@@ -21,6 +21,7 @@ import {
 } from "../style/UserRegistrationPageDesign";
 import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
 import { useModalStore } from "@/store/useModalStore";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 /**
  * 회원 가입 페이지
@@ -58,6 +59,8 @@ export default function UserRegistrationPage() {
     return front + back;
   };
 
+  const { setLoginUserInfo } = useLoginUserInfoStore();
+
   // 소셜 로그인을 구분하기 위하여 정보를 가져오는 useEffect
   useEffect(() => {
     const socialId = sessionStorage.getItem("socialId");
@@ -94,7 +97,7 @@ export default function UserRegistrationPage() {
   };
 
   const errorModal = async () => {
-    const alert = await openModal("alert", {
+    await openModal("alert", {
       title: "오류 발생",
       message:
         "회원 가입 중 오류가 발생했습니다.\n잠시 후 다시 시도하거나 관리자에게 문의해주세요.",
@@ -118,6 +121,7 @@ export default function UserRegistrationPage() {
       const accessToken = result.accessToken;
       if (accessToken) {
         setAccessToken(accessToken);
+        setLoginUserInfo(result.userInfo);
         choosePath();
       }
     } catch (error) {

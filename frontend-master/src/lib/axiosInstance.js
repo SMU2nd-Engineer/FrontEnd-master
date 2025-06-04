@@ -6,6 +6,7 @@ import {
 import { logout } from "@/services/LogoutService";
 import axios from "axios";
 import { useAxiosAlertStore } from "@/store/useAxiosAlertStore";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 // 요청 대기 큐 + 상태
 let isRefreshing = false;
@@ -81,6 +82,9 @@ axiosInstance.interceptors.response.use(
         const newToken = refreshRes.data.accessToken;
         if (newToken) {
           setAccessToken(newToken);
+          useLoginUserInfoStore
+            .getState()
+            .setLoginUserInfo(refreshRes.data.userInfo);
           // 대기 요청 재시도
           requestQueue.forEach(({ resolve }) => {
             resolve(newToken);

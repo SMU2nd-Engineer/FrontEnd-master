@@ -8,6 +8,7 @@ import {
   SocialLoginLodingText,
 } from "../style/SocialLoginLodingDesign";
 import { useModalStore } from "@/store/useModalStore";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function NaverRedirect() {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ export default function NaverRedirect() {
 
   const openModal = useModalStore((state) => state.open);
 
+  const { setLoginUserInfo } = useLoginUserInfoStore();
+
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   useEffect(() => {
     const requestNaverAuth = async () => {
@@ -34,7 +37,7 @@ export default function NaverRedirect() {
           console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
-            console.log("로그인 성공", res.data);
+            setLoginUserInfo(res.data.userInfo);
             navigate("/user/home");
           }
         } catch (error) {

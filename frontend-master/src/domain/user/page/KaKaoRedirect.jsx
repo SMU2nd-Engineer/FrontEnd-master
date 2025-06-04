@@ -8,6 +8,7 @@ import {
   SocialLoginLodingText,
 } from "../style/SocialLoginLodingDesign";
 import { useModalStore } from "@/store/useModalStore";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function KaKaoRedirect() {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ export default function KaKaoRedirect() {
 
   const openModal = useModalStore((state) => state.open);
 
+  const { setLoginUserInfo } = useLoginUserInfoStore();
+
   // 페이지 마운트시 한 번 자동으로 실행하면 되므로 use Effect만 사용함.
   useEffect(() => {
     const requestKaKaoAuth = async () => {
@@ -27,6 +30,7 @@ export default function KaKaoRedirect() {
           const res = await kakaoLogin(kakaoCode, autoLogin);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
+            setLoginUserInfo(res.data.userInfo);
             navigate("/user/home");
           }
         } catch (error) {

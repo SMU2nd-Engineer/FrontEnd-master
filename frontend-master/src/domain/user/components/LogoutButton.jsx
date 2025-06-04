@@ -8,6 +8,9 @@ export default function LogoutButton() {
   const handleClick = () => {
     logout();
     setDefaultUser();
-  }
+    sessionStorage.removeItem("LoginUserInfo");
+    sessionStorage.removeItem("provider");
+    sessionStorage.removeItem("socialId");
+  };
   return <Button text={"로그아웃"} onClick={handleClick} />;
 }
