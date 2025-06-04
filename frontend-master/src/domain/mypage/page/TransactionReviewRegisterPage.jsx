@@ -278,7 +278,7 @@ export default function TransactionReviewRegisterPage() {
           <Button
             text={"다음에"}
             onClick={() => {
-              navigate("/mypage/review");
+              navigate("/mypage/myReview");
             }}
           />
 
