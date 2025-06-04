@@ -8,6 +8,7 @@ import {
 import * as Details from "../styles/BoardDetailDesign";
 import { FaUserLarge } from "react-icons/fa6";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
+import { useModalStore } from "@/store/useModalStore";
 
 const BoardDetailFooter = ({
   newCommentText,
@@ -20,22 +21,36 @@ const BoardDetailFooter = ({
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
   const { userInfo } = useLoginUserInfoStore();
 
-  // 댓글 등록 버튼 선택
+  const openModal = useModalStore((state) => state.open);
+
+  // 게시글 상세페이지 댓글 등록버튼 선택시 확인하는 팝업창(화면 이동X)
+  // preventDefault: 페이지 새로고침 방지
   const handleSubmit = async function (e) {
-    // preventDefault: 페이지 새로고침 방지
+    let commentSubmit = false;
     e.preventDefault();
 
     // 서버에 댓글 등록 요청 보내는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
     await postBoardAddComment({ id, text: newCommentText })
       .then((res) => {
-        alert("댓글 등록 성공");
+        commentSubmit = true;
         setNewCommentText("");
       })
       .catch((error) => {
         console.error("댓글 등록 실패: ", error);
-        alert("댓글 등록 실패했습니다.");
       });
+    if (commentSubmit) {
+      await openModal("alert", {
+        title: "댓글 등록 성공",
+        message: "댓글 등록 성공했습니다!",
+      });
+    } else {
+      await openModal("alert", {
+        title: "댓글 등록 실패",
+        message:
+          "댓글 등록을 실패했습니다! \n혹시 오류가 지속되면 운영자에게 문의해주세요.",
+      });
+    }
 
     // 댓글 목록 가져오는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
@@ -47,24 +62,45 @@ const BoardDetailFooter = ({
       });
   };
 
-  // 댓글 삭제 기능 구현
-  const handleDelete = async function (comment_idx) {
-    // 서버에 댓글 등록 요청 보내는 함수
-    // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
-    await postBoardDeleteComment(comment_idx)
-      .then((res) => {
-        alert("댓글 삭제 성공");
-      })
-      .catch((error) => {
-        console.error("댓글 삭제 실패: ", error);
-        alert("댓글 삭제 실패했습니다.");
-      });
-    await getBoardComment(id) // API 호출
-      .then((response) => {
-        setCommentList(response.data); // 받아온 댓글 데이터 상태에 저장
-        setLoading(false); // 로딩 완료 표시
-      });
+  // 게시글 상세페이지 댓글 삭제버튼 선택시 확인하는 팝업창(화면 이동X)
+  const handleDelete = async (comment_idx) => {
+    let deleteConfirmed = false;
+    const confirmed = await openModal("confirm", {
+      title: "댓글 삭제",
+      message: "정말 삭제하시겠습니까? 되돌릴 수 없습니다.",
+    });
+
+    // confirm 일때 확인 클릭시 적용됨
+    if (confirmed) {
+      // 서버에 댓글 등록 요청 보내는 함수
+      // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
+      await postBoardDeleteComment(comment_idx)
+        .then((res) => {
+          deleteConfirmed = true;
+        })
+        .catch((error) => {
+          console.error("댓글 삭제 실패: ", error);
+        });
+      if (deleteConfirmed) {
+        await openModal("alert", {
+          title: "댓글 삭제 성공",
+          message: "댓글 삭제를 성공했습니다!",
+        });
+      } else {
+        await openModal("alert", {
+          title: "댓글 삭제 실패",
+          message:
+            "댓글 삭제를 실패했습니다! \n혹시 오류가 지속되면 운영자에게 문의해주세요.",
+        });
+      }
+      await getBoardComment(id) // API 호출
+        .then((response) => {
+          setCommentList(response.data); // 받아온 댓글 데이터 상태에 저장
+          setLoading(false); // 로딩 완료 표시
+        });
+    }
   };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -72,6 +108,7 @@ const BoardDetailFooter = ({
       handleSubmit(e);
     }
   };
+
   // 화면에 표시될 내용
   return (
     <Details.CommentMain>
