@@ -12,14 +12,14 @@ export const Product_Info = styled.div`
   margin: 0 auto;
   max-width: 200px;
   font-size: 13px;
-  line-height: 90%;
 
-  product_title {
+  .product_title {
   font-family: 'Pretendard-Medium';
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 170px;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 550;
+  margin-bottom: 4px;
 }
 `

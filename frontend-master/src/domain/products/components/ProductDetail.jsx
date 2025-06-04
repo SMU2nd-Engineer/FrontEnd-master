@@ -92,13 +92,13 @@ export default function ProductDetail() {
         {/* 이미지 슬라이드, 이미지 리스트 */}
         <ProductDetails.ThumbnailBox>
           <ImageSlider imageList={product.imageList} />
-          <ProductDetails.OtherImages>
+          {/* <ProductDetails.OtherImages>
             <ProductImage
               imageList={product.imageList}
               title={product.title}
               mode="all"
             />
-          </ProductDetails.OtherImages>
+          </ProductDetails.OtherImages > */}
         </ProductDetails.ThumbnailBox>
 
         {/* 상품 상세, 버튼 */}
@@ -159,11 +159,11 @@ export default function ProductDetail() {
 
         <ProductDetails.HorizontalDivider />
 
-        <ProductImage
+        {/* <ProductImage
           imageList={product.imageList}
           title={product.title}
           mode="all"
-        />
+        /> */}
 
         <ProductDetails.PDetailContent>
           {product.content}
