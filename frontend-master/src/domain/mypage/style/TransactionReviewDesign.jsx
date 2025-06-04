@@ -38,6 +38,7 @@ export const ChoiceStarRating = styled.div`
   display: flex;
   justify-content: center;
   padding: 0.5rem 0;
+  margin-top: 40px;
 `;
 
 export const CheckReview = styled.div`

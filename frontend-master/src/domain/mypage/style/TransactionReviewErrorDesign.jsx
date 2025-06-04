@@ -11,7 +11,7 @@ export const ErrorFontProduct = styled.p`
 
 export const ErrorFontReviewHeader = styled.h1`
   color: #999;
-  margin: 0 0.25rem;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
