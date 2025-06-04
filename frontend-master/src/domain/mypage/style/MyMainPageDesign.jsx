@@ -11,8 +11,8 @@ export const MyMainContainer = styled.div`
     " sell reviewAndrating"
     " peak reviewAndrating"
     " button button";
-  width: auto;
-  gap: 1rem;
+  width: 100%;
+  /* gap: 1rem; */
   background-color: #fdfdfd;
   border: 1px solid #ddd;
   border-radius: 1rem;
@@ -88,13 +88,13 @@ export const SellOptionButton = styled.button`
  * 마이 메인 판매 상품 컨테이너
  */
 export const SellContainer = styled.div`
-  width: 100;
+  width: 95%;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   padding: 1rem;
-  gap: 1rem;
+  /* gap: 1rem; */
 `;
 
 /**
