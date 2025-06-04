@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import * as SlideDetails from "../styles/ImageSliderDesign";
 
 const ImageSlider = ({ imageList }) => {
@@ -24,17 +23,31 @@ const ImageSlider = ({ imageList }) => {
   return (
     <SlideDetails.SliderContainer>
       <SlideDetails.Arrow direction="prev" onClick={goToPrevious}>
-        {" ‹ "}
+        {"‹"}
       </SlideDetails.Arrow>
-      <SlideDetails.Slide>
-        <SlideDetails.SlideImage
-          src={currentImageUrl}
-          alt={`slide_${currentIndex}`}
-        />
-      </SlideDetails.Slide>
+
+      {/* 메인 이미지 */}
+      <SlideDetails.SlideImage
+        src={currentImageUrl}
+        alt={`slide_${currentIndex}`}
+      />
+
       <SlideDetails.Arrow direction="next" onClick={goToNext}>
-        {" › "}
+        {"›"}
       </SlideDetails.Arrow>
+
+      {/* 썸네일 */}
+      <SlideDetails.ThumbnailWrapper>
+        {imageList.map((img, idx) => (
+          <SlideDetails.ThumbnailImage
+            key={idx}
+            src={img.image_Url}
+            alt={`thumb_${idx}`}
+            onClick={() => setCurrentIndex(idx)}
+            isActive={idx === currentIndex} 
+          />
+        ))}
+      </SlideDetails.ThumbnailWrapper>
     </SlideDetails.SliderContainer>
   );
 };

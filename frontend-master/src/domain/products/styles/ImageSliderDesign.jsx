@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const SliderContainer = styled.div`
   width: 400px;
   height: 400px;
-  overflow: hidden;
-  /* margin: 200px auto; */
-  display: flex;
+  /* overflow: hidden;
+  display: flex; */
   justify-content: center;
   align-items: center;
   position: relative;
@@ -28,22 +27,42 @@ export const Arrow = styled.button`
   z-index: 1;
 `;
 
-export const Slide = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 20px;
-  /* opacity: 0; */
-  transition: opacity 0.3s ease-in-out;
-  &.active {
-    opacity: 1;
-  }
-`;
+// export const Slide = styled.div`
+//   position: absolute;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   row-gap: 20px;
+  
+//   transition: opacity 0.3s ease-in-out;
+//   &.active {
+//     opacity: 1;
+//   }
+// `;
 
 export const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 1;
+`;
+
+export const ThumbnailWrapper = styled.div`
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
+
+export const ThumbnailImage = styled.img`
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 4px;
+
+  border: ${({ isActive }) => (isActive ? "2px solid #333" : "1px solid transparent")};
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.6)};
+  transition: all 0.2s ease-in-out;
 `;
