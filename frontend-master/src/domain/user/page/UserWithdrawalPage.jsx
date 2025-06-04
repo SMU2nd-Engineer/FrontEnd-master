@@ -11,14 +11,20 @@ import {
   WithdrawButtonWrapper,
 } from "../style/UserWithdrawalPageDesign";
 import { useNavigate } from "react-router-dom";
+import { useModalStore } from "@/store/useModalStore";
 
 export default function UserWithdrawalPage() {
   const [isWithdrawal, setIsWithdrawal] = useState(false);
   const navigate = useNavigate();
+  const openModal = useModalStore((state) => state.open);
 
   const handleWithdrawal = async () => {
     const result = await userWithdrawal();
-    alert(result);
+    await openModal("alert", {
+      title: "회원탈퇴 완료",
+      message:
+        "회원 탈퇴가 정상적으로 완료되었습니다. \n그동안 이용해주셔서 감사합니다.",
+    });
     logout(false);
     navigate("/user/login");
   };
