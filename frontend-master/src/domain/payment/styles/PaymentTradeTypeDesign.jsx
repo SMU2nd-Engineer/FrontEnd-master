@@ -7,7 +7,6 @@ export const Box = styled.div`
   justify-items: center;
   text-align: center;
   justify-items: center;
-  /* margin: 1rem; */
   padding: 5px;
 `
 
@@ -16,7 +15,6 @@ export const Container = styled.div`
   align-items: center;
   text-align: center;
   margin: 1rem;
-  /* margin-left: 12rem; */
 `;
 
 export const Test = styled.span`
@@ -41,17 +39,13 @@ export const ProductInfo = styled.div`
 
 export const ImgDiv = styled.div`
   padding: 5px;
-  /* margin-left: 15px; */
   margin-right: 15px;
   display: flex;
-  width: 100px;
   height: 100px;
 `;
 
 export const PriceTitle = styled.div`
-  /* margin-top: 5px; */
   text-align: left;
-  /* padding: 5px; */
   display: block;
 `
 

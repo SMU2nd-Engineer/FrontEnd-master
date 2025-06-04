@@ -85,6 +85,7 @@ export const ProductInfo = styled.div`
 `
 export const Image = styled.div`
   display: flex;
+  /* max-width: 160px; */
   height: 120px;
   margin: 5px;
 `
@@ -93,6 +94,7 @@ export const PriceTitle = styled.div`
   padding: 0px;
   margin-left: 15px;
   text-align: left;
+  padding: 1px;
   h2, p{
     margin: 3px;
     padding-bottom: 5px;
