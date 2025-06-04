@@ -9,10 +9,9 @@ const PopupPage = ({ info, onClose }) => {
       <Popup.PopupContent onClick={(e) => e.stopPropagation()}>
         <Popup.PopupCloseButton onClick={onClose}>×</Popup.PopupCloseButton>
         <div>
-          <div>
-            <h3>
-              {info.title} - {info.company}
-            </h3>
+          <div style={{ display: "flex", gap: "5px" }}>
+            <h3>{info.title}</h3>
+            <p> - {info.company}</p>
           </div>
           <Popup.TicketInfoBox>
             <Popup.TicketInfoImg>
