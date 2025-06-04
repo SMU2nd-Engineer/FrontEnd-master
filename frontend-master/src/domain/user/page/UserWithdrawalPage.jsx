@@ -12,10 +12,13 @@ import {
 } from "../style/UserWithdrawalPageDesign";
 import { useNavigate } from "react-router-dom";
 import { useModalStore } from "@/store/useModalStore";
+import { removeAccessToken } from "@/utils/TokenManager";
+import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 
 export default function UserWithdrawalPage() {
   const [isWithdrawal, setIsWithdrawal] = useState(false);
   const navigate = useNavigate();
+  const { setDefaultUser } = useLoginUserInfoStore();
   const openModal = useModalStore((state) => state.open);
 
   const handleWithdrawal = async () => {
@@ -25,8 +28,12 @@ export default function UserWithdrawalPage() {
       message:
         "회원 탈퇴가 정상적으로 완료되었습니다. \n그동안 이용해주셔서 감사합니다.",
     });
-    logout(false);
-    navigate("/user/login");
+    await logout(false);
+    removeAccessToken();
+    sessionStorage.clear();
+    localStorage.clear();
+    setDefaultUser();
+    window.location.href = "/user/login";
   };
 
   return (
