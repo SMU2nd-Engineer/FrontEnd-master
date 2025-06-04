@@ -33,16 +33,7 @@ export const ThumbnailBox = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `
-export const OtherImages = styled.div`
-  display: flex;
-  gap: 12px; /* 이미지 사이 간격 */
-  /* flex-wrap: nowrap; 줄바꿈 없이 한 줄에 나열 */
-  overflow-y: auto;
 
-  img{
-    width: 60px;
-  }
-`
 
 
 // 상품명, 가격, 판매자명
