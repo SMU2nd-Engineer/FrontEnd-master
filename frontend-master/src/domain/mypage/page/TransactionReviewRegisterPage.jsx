@@ -233,8 +233,8 @@ export default function TransactionReviewRegisterPage() {
       </TranReview.PaymentProductInfo>
       <TranReview.Line>
         <ErrorFontReviewHeader>
-          {sellerInfo && sellerInfo.sellerName
-            ? `${sellerInfo.sellerName}님과 진행한 거래에 대한 평가를 남겨주세요`
+          {sellerInfo && sellerInfo.sellerNickName
+            ? `${sellerInfo.sellerNickName}님과 진행한 거래에 대한 평가를 남겨주세요`
             : "거래 정보 로딩 중..."}
         </ErrorFontReviewHeader>
       </TranReview.Line>
