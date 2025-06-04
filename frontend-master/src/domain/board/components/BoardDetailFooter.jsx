@@ -123,16 +123,18 @@ const BoardDetailFooter = ({
                     비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정
                   */}
                 {/* {userIdx === comment.userIdx &&  */}
-                {comment.user_idx === userInfo.userIdx && (
-                  <button
-                    onClick={() => {
-                      handleDelete(comment.comment_idx);
-                    }}
-                  >
-                    {" "}
-                    댓글 삭제
-                  </button>
-                )}
+                <div className="commentDelete">
+                  {comment.user_idx === userInfo.userIdx && (
+                    <button
+                      onClick={() => {
+                        handleDelete(comment.comment_idx);
+                      }}
+                    >
+                      {" "}
+                      댓글 삭제
+                    </button>
+                  )}
+                </div>
                 {/* } */}
               </li>
             );
