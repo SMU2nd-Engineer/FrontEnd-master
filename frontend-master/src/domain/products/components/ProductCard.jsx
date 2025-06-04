@@ -1,4 +1,4 @@
-import ProductCardInfo from "./ProductInfo";
+import ProductCardInfo from "./ProductCardInfo";
 import ProductImage from "./ProductImage";
 import PeakButton from "./PeakButton";
 import { useNavigate } from "react-router-dom";

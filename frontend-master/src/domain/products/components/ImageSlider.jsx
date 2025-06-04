@@ -24,8 +24,7 @@ const ImageSlider = ({ imageList }) => {
   return (
     <SlideDetails.SliderContainer>
       <SlideDetails.Arrow direction="prev" onClick={goToPrevious}>
-        {" "}
-        ‹{" "}
+        {" ‹ "}
       </SlideDetails.Arrow>
       <SlideDetails.Slide>
         <SlideDetails.SlideImage
@@ -34,8 +33,7 @@ const ImageSlider = ({ imageList }) => {
         />
       </SlideDetails.Slide>
       <SlideDetails.Arrow direction="next" onClick={goToNext}>
-        {" "}
-        ›{" "}
+        {" › "}
       </SlideDetails.Arrow>
     </SlideDetails.SliderContainer>
   );

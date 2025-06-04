@@ -24,10 +24,6 @@ export const postProduct = (newProduct, uploadImage) => {
   });
 };
 
-// export const postPeak = (idx) => {
-//   return axiosInstance.post("product/peak", { idx }, { withCredentials: true });
-// };
-
 export const getProductDetail = (idx) => {
   return axiosInstance.get(
     `product/detail/${idx}`,
@@ -44,7 +40,6 @@ export const putEditProduct = (idx, newProduct, uploadImage) => {
   );
   uploadImage.forEach((img) => formData.append("files", img));
 
-  // console.log();
   return axiosInstance.put(`product/detail/${idx}`, formData, {
     withCredentials: true,
   });
