@@ -114,7 +114,7 @@ export default function ProductDetail() {
             <p>등록일: {new Date(product.sdate).toLocaleDateString()}</p>
           </ProductDetails.NickNDate>
 
-          {/* 찜 채팅 구매 버튼 */}
+          {/* 수정 삭제 or 찜 채팅 구매 버튼 */}
           <ProductDetails.Buttonbox>
             {product.user_idx === userInfo.userIdx ? (
               <ProductDetails.EditDeleteBox>

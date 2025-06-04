@@ -36,8 +36,8 @@ export const ThumbnailBox = styled.div`
 export const OtherImages = styled.div`
   display: flex;
   gap: 12px; /* 이미지 사이 간격 */
-  flex-wrap: nowrap; /* 줄바꿈 없이 한 줄에 나열 */
-  overflow-x: auto;
+  /* flex-wrap: nowrap; 줄바꿈 없이 한 줄에 나열 */
+  overflow-y: auto;
 
   img{
     width: 60px;
@@ -128,14 +128,18 @@ export const Pickbutton = styled.div`
 
 export const DetailBottom = styled.div`
   width: 100%;
-  height: auto;
+  height: 750px;
+  overflow-y: auto;
   text-align: left;
   margin-top: 20px;
   padding: 10px;
   border-top: 1px dotted rgb(168, 168, 168);
-
+  
   img{
-    width: 500px;
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+    display : block ;
   }
 
   p{
