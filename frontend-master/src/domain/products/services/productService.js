@@ -32,13 +32,15 @@ export const getProductDetail = (idx) => {
   );
 };
 
-export const putEditProduct = (idx, newProduct, uploadImage) => {
+export const putEditProduct = (idx, newProduct, uploadImage, currentImages) => {
   const formData = new FormData();
   formData.append(
     "product",
     new Blob([JSON.stringify(newProduct)], { type: "application/json" })
   );
   uploadImage.forEach((img) => formData.append("files", img));
+
+  currentImages.forEach((images) => formData.append("current", images));
 
   return axiosInstance.put(`product/detail/${idx}`, formData, {
     withCredentials: true,

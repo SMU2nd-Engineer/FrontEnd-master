@@ -29,6 +29,7 @@ const ProductUpload = ({ initialData, isEdit }) => {
   useEffect(() => {
     if (isEdit && initialData) {
       setNewProduct(initialData);
+      setUploadImage(initialData.imageList.map((image) => image.image_Url));
     }
   }, [initialData, isEdit]);
 
@@ -53,7 +54,13 @@ const ProductUpload = ({ initialData, isEdit }) => {
     }
 
     if (isEdit) {
-      putEditProduct(newProduct.idx, newProduct, uploadImage)
+      const uploadFile = uploadImage.filter(
+        (image) => typeof image !== "string"
+      );
+      const currentImages = uploadImage.map((image, i) => {
+        return typeof image !== "string" ? `newImage${i}` : image;
+      });
+      putEditProduct(newProduct.idx, newProduct, uploadFile, currentImages)
         .then((response) => response.data)
         .then((result) => {
           const idx = result.idx;
