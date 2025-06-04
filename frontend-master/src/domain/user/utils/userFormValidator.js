@@ -20,8 +20,8 @@ export const SCHEMA = yup.object({
     .string()
     .required("이름을 입력해 주세요.")
     .matches(
-      /^[가-힣a-zA-Z]{2,6}$/,
-      "이름은 한글 또는 영문만 빈칸 없이 입력해 주세요."
+      /^[가-힣a-zA-Z]{2,15}$/,
+      "이름은 한글 또는 영문만 빈칸 없이 2~15자리까지 가능합니다."
     ),
   password: yup
     .string()
