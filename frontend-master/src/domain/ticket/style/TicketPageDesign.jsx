@@ -211,5 +211,6 @@ export const TicketItemTextTitle = styled.p`
 
 export const TicketItemTextCompany = styled.p`
   font-size: 10px;
-  margin-bottom: 0;
+  margin-top: 25px;
+  margin-left: 5px;
 `;
