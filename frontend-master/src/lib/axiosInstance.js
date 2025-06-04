@@ -109,6 +109,10 @@ axiosInstance.interceptors.response.use(
         try {
           // 로그 아웃을 위한 경로 지정
           await logout();
+          removeAccessToken();
+          sessionStorage.clear();
+          localStorage.clear();
+          setDefaultUser();
         } finally {
           window.location.href = "/user/login";
         }
