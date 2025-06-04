@@ -132,9 +132,6 @@ export default function TransactionReviewRegisterPage() {
         (item) => !currentEvaluations.includes(item)
       );
 
-      // 거래 평가 값을 변경하기 위해서 프론트에서 +/- 처리
-      const changeValueEvaluation = {};
-
       addCount.forEach((evaluation) => {
         changeValueEvaluation[evaluation] = 1;
       });
@@ -281,7 +278,7 @@ export default function TransactionReviewRegisterPage() {
           <Button
             text={"다음에"}
             onClick={() => {
-              navigate("/mypage/sellAndPurchaselist");
+              navigate("/mypage/review");
             }}
           />
 
