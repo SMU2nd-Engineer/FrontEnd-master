@@ -62,7 +62,7 @@ export const ThumbnailImage = styled.img`
   cursor: pointer;
   border-radius: 4px;
 
-  border: ${({ isActive }) => (isActive ? "2px solid #333" : "1px solid transparent")};
-  opacity: ${({ isActive }) => (isActive ? 1 : 0.6)};
+  border: ${({ $isActive }) => ($isActive ? "2px solid #333" : "1px solid transparent")};
+  opacity: ${({ $isActive }) => ($isActive ? 1 : 0.6)};
   transition: all 0.2s ease-in-out;
 `;
