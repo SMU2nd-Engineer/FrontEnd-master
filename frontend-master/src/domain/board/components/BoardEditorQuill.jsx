@@ -1,14 +1,15 @@
 import React, { useMemo } from "react";
-import ReactQuill, {Quill} from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import BoardCustomToolbar from "./BoardCustomToolbar"; // 툴바 컴포넌트 import
-import { ImageActions } from '@xeger/quill-image-actions';
-import { ImageFormats } from '@xeger/quill-image-formats';
+import { ImageActions } from "@xeger/quill-image-actions";
+import { ImageFormats } from "@xeger/quill-image-formats";
+import { useModalStore } from "@/store/useModalStore";
 
 // quill 이미지 모듈 등록
 // 이미지 삭제, 정렬, 팝업 기능, 스타일 속성 등 확장
-Quill.register('modules/imageActions', ImageActions);
-Quill.register('modules/imageFormats', ImageFormats);
+Quill.register("modules/imageActions", ImageActions);
+Quill.register("modules/imageFormats", ImageFormats);
 
 const BoardEditorQuill = ({ contentData, setContentData }) => {
   // 에디터의 사용할 기능(글꼴, 색상, 스타일 등)들을 모아놓은 항목들
@@ -27,25 +28,34 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
     "indent",
     "image",
     "height",
-    "width"
+    "width",
   ];
 
+  const openModal = useModalStore((state) => state.open);
   // 최대 파일 크기 설정 (예: 2MB)
   const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
 
   function imageHandler() {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
     input.click();
 
-    input.onchange = async () => {
+    input.onchange = async (e) => {
+      e.preventDefault();
+
       const file = input.files[0];
       if (!file) return;
 
       // 용량 체크
       if (file.size > MAX_IMAGE_SIZE) {
-        alert('이미지 크기는 최대 2MB까지 허용됩니다.');
+        await openModal("alert", {
+          title: "이미지 크기 제한",
+          message:
+            "이미지 크기는 최대 2MB까지 허용됩니다. \n이미지 크기를 확인하세요.",
+        });
+
+        // alert("이미지 크기는 최대 2MB까지 허용됩니다.");
         return;
       }
 
@@ -53,7 +63,7 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
       const reader = new FileReader();
       reader.onload = () => {
         const range = this.quill.getSelection(true);
-        this.quill.insertEmbed(range.index, 'image', reader.result);
+        this.quill.insertEmbed(range.index, "image", reader.result);
       };
       reader.readAsDataURL(file);
     };
@@ -67,12 +77,11 @@ const BoardEditorQuill = ({ contentData, setContentData }) => {
       imageActions: {},
       imageFormats: {},
       toolbar: {
-        container: "#toolbar", // 툴바 ID로 연결하여 설정함    
+        container: "#toolbar", // 툴바 ID로 연결하여 설정함
         handlers: {
           image: imageHandler,
         },
       },
-
     }),
     []
   );

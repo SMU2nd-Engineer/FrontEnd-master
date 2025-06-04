@@ -5,7 +5,7 @@ import * as Details from "../styles/BoardDetailDesign";
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
-import { useEffect } from "react";
+import { useModalStore } from "@/store/useModalStore";
 
 const BoardDetailHeader = ({
   category_idx,
@@ -20,6 +20,29 @@ const BoardDetailHeader = ({
 
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 수정+삭제 하도록 설정
   const { userInfo } = useLoginUserInfoStore();
+  const openModal = useModalStore((state) => state.open);
+
+  // 게시글 상세페이지 게시글 삭제버튼 선택시 확인하는 팝업창(화면 이동O)
+  const handleContentsDelete = async () => {
+    const confirmed = await openModal("confirm", {
+      title: "게시글 삭제",
+      message: "정말 삭제하시겠습니까? 되돌릴 수 없습니다.",
+    });
+
+    // confirm 일때 확인 클릭시 적용됨
+    if (confirmed) {
+      try {
+        await deleteContentsDetail(id);
+        navigate(`/board/list`); // 게시판 리스트로 이동
+      } catch (error) {
+        console.error("삭제 실패:", error);
+        await openModal("alert", {
+          title: "게시글 삭제 성공",
+          message: "게시글 삭제를 성공했습니다!",
+        });
+      }
+    }
+  };
 
   // 게시판 리스트 홈페이지로 이동
   const handleBackHome = () => {
@@ -29,17 +52,6 @@ const BoardDetailHeader = ({
   // 게시글 수정 버튼 선택
   const handleRegister = () => {
     navigate(`/board/edit/${id}`);
-  };
-
-  // 게시글 삭제 버튼 선택
-  const handleDeleteDetail = async () => {
-    try {
-      await deleteContentsDetail(id);
-      navigate(`/board/list`); // 게시판 리스트로 이동
-    } catch (error) {
-      console.error("삭제 실패:", error);
-      alert("게시글 삭제 실패했습니다.");
-    }
   };
 
   // 화면에 표시될 내용
@@ -64,7 +76,9 @@ const BoardDetailHeader = ({
           <FaUserLarge style={{ marginRight: "5px" }} />
           <h2>{nickname}</h2>
           <div className="meta">
-            <button onClick={handleRoomClick}>1:1 채팅</button>
+            {user_idx !== userInfo.userIdx && (
+              <button onClick={handleRoomClick}>1:1 채팅</button>
+            )}
             <p>{sdate.replace("T", " ")}</p>
           </div>
         </div>
@@ -82,7 +96,7 @@ const BoardDetailHeader = ({
           <div>
             {/* 게시글 삭제 버튼 */}
             {user_idx === userInfo.userIdx && (
-              <button onClick={handleDeleteDetail}>삭제</button>
+              <button onClick={handleContentsDelete}>삭제</button>
             )}
           </div>
         </div>
