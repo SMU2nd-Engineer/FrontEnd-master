@@ -59,26 +59,26 @@ const ProductListPage = () => {
     setLastId(null);
     if (!searchValue) {
       getProductList(null, size)
-      .then((res) => {
-        const data = res.data;
-        setProducts(data);
-        if (data.length < size) {
-          setHasMore(false);
-        } else {
-          setHasMore(true);
-        }
-        if (data.length > 0) {
-          setLastId(data[data.length - 1].idx);
-        }
-      })
-      .catch((err) => console.error("상품 불러오기 실패:", err))
-      .finally(() => setIsLoading(false));
+        .then((res) => {
+          const data = res.data;
+          setProducts(data);
+          if (data.length < size) {
+            setHasMore(false);
+          } else {
+            setHasMore(true);
+          }
+          if (data.length > 0) {
+            setLastId(data[data.length - 1].idx);
+          }
+        })
+        .catch((err) => console.error("상품 불러오기 실패:", err))
+        .finally(() => setIsLoading(false));
     } else {
       searchProducts(searchValue)
         .then((res) => {
           const data = res.data;
           setProducts(data);
-          setHasMore(true); 
+          setHasMore(true);
         })
         .catch((err) => console.error("검색 실패", err))
         .finally(() => setIsLoading(false));

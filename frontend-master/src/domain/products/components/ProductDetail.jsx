@@ -22,7 +22,6 @@ export default function ProductDetail() {
   const { setProductInfo } = useProductStore();
   const openModal = useModalStore((state) => state.open);
 
-
   useEffect(() => {
     getProductDetail(idx)
       .then((res) => res.data)
@@ -65,25 +64,20 @@ export default function ProductDetail() {
   const handleDelete = async () => {
     const confirmed = await openModal("confirm", {
       title: "삭제 확인",
-      message : "정말 삭제하시겠습니까? 상품 내역은 복구되지 않습니다."
+      message: "정말 삭제하시겠습니까? 상품 내역은 복구되지 않습니다.",
     });
 
-    if(confirmed) {
+    if (confirmed) {
       try {
-      await deleteProducts(idx);
-      const confirmed = await openModal("confirm", {
-        message : "정말 삭제하시겠습니까? 상품 내역은 복구되지 않습니다."
-    });
-      navigate("/product/list"); // 목록 페이지로 이동
-    } catch (error) {
-      console.error("삭제 실패:", error);
-      alert("삭제에 실패했습니다.");
+        await deleteProducts(idx);
+        navigate("/product/list"); // 목록 페이지로 이동
+      } catch (error) {
+        console.error("삭제 실패:", error);
+        await openModal("alert", {
+          message: "삭제에 실패했습니다.",
+        });
+      }
     }
-    }
-    
-    
-    
-    
   };
 
   return (
