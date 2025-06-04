@@ -50,6 +50,7 @@ const ChatInput = ({ handleMessageSend }) => {
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={keyHandler}
         ref={inputRef}
+        autoComplete="off"
       />
       <ChatMessageButton type="button" onClick={onSumit}>
         보내기
