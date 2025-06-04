@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
         />
       </Card.Thumbnail>
       <ProductCardInfo
-        title={product.title}
+        title=<div className="title">{product.title}</div>
         price={product.price}
         sdate={product.sdate}
       />
