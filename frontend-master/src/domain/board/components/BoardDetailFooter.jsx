@@ -20,7 +20,6 @@ const BoardDetailFooter = ({
 }) => {
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
   const { userInfo } = useLoginUserInfoStore();
-
   const openModal = useModalStore((state) => state.open);
 
   // 게시글 상세페이지 댓글 등록버튼 선택시 확인하는 팝업창(화면 이동X)
@@ -28,6 +27,15 @@ const BoardDetailFooter = ({
   const handleSubmit = async function (e) {
     let commentSubmit = false;
     e.preventDefault();
+
+    // 댓글 등록 255자 이하로 입력되게 설정
+    if (newCommentText.length > 255) {
+      await openModal("alert", {
+        title: "댓글 등록 255자 제한",
+        message: "댓글은 255자 이하로 입력해주세요.",
+      });
+      return;
+    }
 
     // 서버에 댓글 등록 요청 보내는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정

@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import BoardDetailHeader from "../components/BoardDetailHeader";
 import BoardDetailTextEditor from "../components/BoardDetailTextEditor";
 import BoardDetailFooter from "../components/BoardDetailFooter";
-import usePreventBackNavigation from "@/hooks/usePreventBackNavigation";
 import * as Details from "../styles/BoardDetailDesign";
 import ChatPopup from "@/domain/chat/components/ChatPopup";
 import { postChatRooms } from "@/domain/chat/services/ChatService";
