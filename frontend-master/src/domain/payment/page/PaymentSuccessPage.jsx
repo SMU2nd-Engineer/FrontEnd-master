@@ -5,7 +5,7 @@ import kakaoPayFail from "../service/KakaoPayFail";
 import PaymentProductInfo from "../components/PaymentProductInfo";
 import * as PaymentDesign from "../styles/PaymentPageDesign";
 import { getProductDetail } from "@/domain/products/services/productService";
-import { useRef } from "react";
+import { useForceHomeOnBackOrReload } from "@/hooks/useForceHomeOnBackOrReload";
 
 const PaymentSuccessPage = () => {
   const navigate = useNavigate();
@@ -21,11 +21,10 @@ const PaymentSuccessPage = () => {
   const [isApproved, setIsApproved] = useState(false);
   const { idx } = useParams();
   const [product, setProduct] = useState(null);
-  const hasFetched = useRef(false);
+
+  useForceHomeOnBackOrReload();
 
   useEffect(() => {
-    if (hasFetched.current) return;
-    hasFetched.current = true;
     const approvePayment = async () => {
       try {
         const result = await kakaoPayApprove({

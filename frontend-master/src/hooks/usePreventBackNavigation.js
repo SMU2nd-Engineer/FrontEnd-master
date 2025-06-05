@@ -8,7 +8,7 @@ const usePreventBackNavigation = () => {
 
     const handlePopState = (event) => {
       // 뒤로가기 이벤트 발생시 선택하는 팝업창
-      const originateBack = window.confirm("뒤로가기 이벤트가 발생합니다. 진행하시겠습니까?");
+      const originateBack = window.confirm("페이지를 벗어나시겠습니까?");
 
       if(originateBack) {
         // 사용자가 진행을 선택하면, 뒤로가기를 허용 (이벤트 무시하고 기본 동작 유지)
