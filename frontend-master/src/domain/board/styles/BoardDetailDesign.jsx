@@ -172,11 +172,16 @@ export const CommentList = styled.div`
   li {
     display: flex;
     width: 100%;
+    height: 100%;
     background-color: #f1efef;
     border-radius: 20px;
+    align-items: center;
+    gap: 10px;
     .userNameAndDate {
-      width: 20%;
+      width: 17%;
+      justify-items: center;
       text-align: center;
+      align-items: center;
       .userName {
         font-weight: bold;
       }
@@ -185,15 +190,19 @@ export const CommentList = styled.div`
       }
     }
     .comment {
-      width: 80%;
+      width: 720px;
       white-space: pre-line; // 줄바꿈 댓글 작성 기능
       font-size: 1rem;
     }
     .commentDelete {
+      height: 100%;
+      align-self: flex-start; /* 이 자식만 위로 정렬됨 */
       button {
         font-size: 0.8rem;
-        margin-right: 10px;
+        margin-right: 6px;
+        margin-top: 5px;
         color: #c00;
+        height: 40px;
       }
     }
   }
