@@ -23,8 +23,12 @@ const PaymentSuccessPage = () => {
   const [product, setProduct] = useState(null);
 
   useForceHomeOnBackOrReload();
-
+  
   useEffect(() => {
+    if (!partnerOrderId || !partnerUserId || !pgToken) {
+      kakaoPayFail(tid, "정보 불러오기 실패");
+      return;
+      }
     const approvePayment = async () => {
       try {
         const result = await kakaoPayApprove({

@@ -8,12 +8,6 @@ const kakaoPayFail = async ({ tid, error }) => {
     });
   } catch (err) {
     console.log("결제 실패 처리중 오류: ", error);
-
-    if (err.response?.data?.error_message) {
-      alert(` 결제 실패: ${err.response.data.error_message}`);
-    } else {
-      alert("결제 실패 처리 중 오류가 발생했습니다.");
-    }
   }
 };
 
