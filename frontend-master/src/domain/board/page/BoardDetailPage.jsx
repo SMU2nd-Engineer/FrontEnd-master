@@ -39,10 +39,6 @@ const BoardDetailPage = () => {
     sdate: "",
     user_idx: "",
   });
-
-  // 새 댓글 입력값
-  const [newCommentText, setNewCommentText] = useState("");
-
   // 입력한 댓글 목록으로 불러오기
   const [commentList, setCommentList] = useState([]);
 
@@ -135,8 +131,6 @@ const BoardDetailPage = () => {
       <Details.BoardDetailBottom>
         {/* 댓글 등록 + 삭제버튼, 댓글 목록 보이기 */}
         <BoardDetailFooter
-          newCommentText={newCommentText}
-          setNewCommentText={setNewCommentText}
           commentList={commentList}
           setCommentList={setCommentList}
           id={id}

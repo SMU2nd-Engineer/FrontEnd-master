@@ -9,40 +9,25 @@ import * as Details from "../styles/BoardDetailDesign";
 import { FaUserLarge } from "react-icons/fa6";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
 import { useModalStore } from "@/store/useModalStore";
+import BoardCommentInput from "./BoardCommentInput";
 
-const BoardDetailFooter = ({
-  newCommentText,
-  setNewCommentText,
-  commentList,
-  setCommentList,
-  id,
-  setLoading,
-}) => {
+const BoardDetailFooter = ({ commentList, setCommentList, id, setLoading }) => {
   // 로그인한 상태에서 전역변수 가져옴 - 로그인한 사람만 댓글삭제 하도록 설정
+  // 새 댓글 입력값
   const { userInfo } = useLoginUserInfoStore();
   const openModal = useModalStore((state) => state.open);
 
   // 게시글 상세페이지 댓글 등록버튼 선택시 확인하는 팝업창(화면 이동X)
   // preventDefault: 페이지 새로고침 방지
-  const handleSubmit = async function (e) {
+  const handleSubmit = async function (e, boardInput) {
     let commentSubmit = false;
     e.preventDefault();
 
-    // 댓글 등록 255자 이하로 입력되게 설정
-    if (newCommentText.length > 255) {
-      await openModal("alert", {
-        title: "댓글 등록 255자 제한",
-        message: "댓글은 255자 이하로 입력해주세요.",
-      });
-      return;
-    }
-
     // 서버에 댓글 등록 요청 보내는 함수
     // - 비동기처리해서 기다렸다가 다음것이 실행되게 설정
-    await postBoardAddComment({ id, text: newCommentText })
+    await postBoardAddComment({ id, text: boardInput })
       .then((res) => {
         commentSubmit = true;
-        setNewCommentText("");
       })
       .catch((error) => {
         console.error("댓글 등록 실패: ", error);
@@ -109,32 +94,11 @@ const BoardDetailFooter = ({
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      if (!newCommentText.trim()) return;
-      handleSubmit(e);
-    }
-  };
-
   // 화면에 표시될 내용
   return (
     <Details.CommentMain>
-      <Details.CommentSubmit>
-        {/* 댓글 */}
-        <textarea
-          value={newCommentText}
-          onChange={(e) => setNewCommentText(e.target.value)}
-          placeholder="댓글을 입력해주세요."
-          onKeyDown={(e) => handleKeyDown(e)}
-        />
-        {/* 댓글 등록 onClick */}
-        <button onClick={handleSubmit} disabled={!newCommentText.trim()}>
-          댓글 등록
-        </button>
-        {/* 댓글 등록 취소 버튼 onClick */}
-        {/* <button onClick={handleCancel}>댓글 등록 취소</button> */}
-      </Details.CommentSubmit>
+      {/* 댓글 입력창 */}
+      <BoardCommentInput handleSubmit={handleSubmit} />
       <Details.CommentList>
         {/* 댓글목록 */}
         {/* 기존 댓글 내역 출력 - 댓글이 없으면 '댓글이 없습니다. 문구 출력' */}
@@ -164,10 +128,8 @@ const BoardDetailFooter = ({
                 </div>
 
                 {/* 댓글 삭제 button 
-                    처음 페이지 시작하면 다른 정보와 로그인한 사람의 user_idx를 가져와야함
-                    비교해서 작성자랑 같지 않으면 x버튼 사라지게 설정
+                    작성자도 등록한 댓글을 삭제가능하게 설정
                   */}
-                {/* {userIdx === comment.userIdx &&  */}
                 <div className="commentDelete">
                   {comment.user_idx === userInfo.userIdx && (
                     <button
@@ -180,7 +142,6 @@ const BoardDetailFooter = ({
                     </button>
                   )}
                 </div>
-                {/* } */}
               </li>
             );
           })}
