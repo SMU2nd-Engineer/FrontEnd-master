@@ -11,7 +11,7 @@ const ChatPopup = ({ selectRoom, handleClose = (f) => f }) => {
   return (
     <ChatPopupDiv>
       <ChatPopupOverlayDiv onClick={handleClose}>
-        <Button text={"×"} onClick={handleClose} className="popup-close-btn" />
+        {/* <Button text={"×"} onClick={handleClose} className="popup-close-btn" /> */}
         <ChatPopupContentDiv onClick={(e) => e.stopPropagation()}>
           <ChatRoomMain selectRoom={selectRoom} type={"popup"} />
         </ChatPopupContentDiv>

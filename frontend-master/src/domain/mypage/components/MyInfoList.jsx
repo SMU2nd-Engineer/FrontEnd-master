@@ -32,6 +32,7 @@ export default function MyInfoList({ isSocialLogin }) {
     setValue, // 외부 API 값이나 수동 입력 처리
     watch, // 실시간 값 확인용
     formState: { errors }, // 각 필드의 유효성 오류 처리
+    control,
   } = useForm({
     resolver: yupResolver(YUPSCHEMA),
     mode: "onBlur", // 사용자에게 안내 메시지 출력
@@ -67,7 +68,7 @@ export default function MyInfoList({ isSocialLogin }) {
       setExistingNickname(editUserInfo.nickName); // 기존 닉네임 저장
     };
     getUserInfoByToken();
-  }, [setValue]);
+  }, []);
 
   /**
    * 이메일, 주소 분리 함수
@@ -161,6 +162,7 @@ export default function MyInfoList({ isSocialLogin }) {
               setValue={setValue}
               watch={watch}
               errors={errors}
+              control={control}
               isNickNameCheck={isNickNameCheck}
               setIsNickNameCheck={setIsNickNameCheck}
               existingNickname={existingNickname}
@@ -180,6 +182,7 @@ export default function MyInfoList({ isSocialLogin }) {
               setValue={setValue}
               watch={watch}
               errors={errors}
+              control={control}
             />
           </MyInfoFormGridArea>
           <MyInfoButtonWrapper>

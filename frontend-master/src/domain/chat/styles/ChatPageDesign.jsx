@@ -14,6 +14,19 @@ export const ChatPageDiv = styled.div`
   min-height: 700px;
   position: relative;
   word-break: break-all;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    padding: 10px;
+  }
+
+  @media (max-width: 480px) {
+    min-height: auto;
+  }
 `;
 
 export const RoomListDiv = styled.div`
@@ -22,6 +35,11 @@ export const RoomListDiv = styled.div`
   border-right: 1px solid rgb(246, 246, 246);
   padding-bottom: 0px;
   background-color: rgb(255, 255, 255);
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const RoomsDiv = styled.div`
@@ -34,9 +52,7 @@ export const RoomsDiv = styled.div`
 
 export const ChatTitle = styled.div`
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
   justify-content: space-between;
   color: rgb(25, 25, 25);
   font-size: 22px;
@@ -44,6 +60,15 @@ export const ChatTitle = styled.div`
   padding: 20px 20px 10px;
   line-height: 33px;
   border-bottom: 1px solid rgb(246, 246, 246);
+
+  @media (max-width: 600px) {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 export const ChatRoomItemDiv = styled.div`
@@ -51,7 +76,6 @@ export const ChatRoomItemDiv = styled.div`
   cursor: pointer;
   height: 80px;
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   padding: 0px 20px;
   user-select: none;
@@ -63,30 +87,35 @@ export const ChatRoomItemDiv = styled.div`
   &:hover {
     background-color: rgb(246, 246, 246);
   }
+
+  @media (max-width: 480px) {
+    height: 70px;
+    padding: 0 10px;
+  }
 `;
 
 export const RoomInfoDiv = styled.div`
   width: 100%;
   display: block;
-  -webkit-box-pack: justify;
   justify-content: space-between;
   letter-spacing: -0.5px;
-  -webkit-box-align: center;
   align-items: center;
 `;
 
 export const InfoTitleDiv = styled.div`
   display: flex;
   width: 100%;
-  -webkit-box-align: center;
   align-items: center;
   width: fit-content;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
   unicode-bidi: isolate;
   font-size: 15px;
   font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 export const InfoTextDiv = styled.div`
@@ -113,6 +142,10 @@ export const ChatRoomMainDiv = styled.div`
   width: ${(props) => (props.type === "popup" ? `100%` : `50%`)};
   height: 100%;
   overflow: hidden;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const NullChatDiv = styled.div`
@@ -136,6 +169,11 @@ export const ChatListDiv = styled.div`
   margin: 0px 0px auto;
   margin-left: 16px;
   max-height: 600px;
+
+  @media (max-width: 480px) {
+    margin-left: 8px;
+    font-size: 14px;
+  }
 `;
 
 export const MessageDiv = styled.div`
@@ -145,25 +183,36 @@ export const MessageDiv = styled.div`
   position: relative;
   font-size: 15px;
   margin-right: 24px;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-right: 12px;
+  }
 `;
 
 export const MessageFromDiv = styled.div`
   display: flex;
-  -webkit-box-align: end;
   align-items: end;
   unicode-bidi: isolate;
   font-weight: 500;
   font-size: 15px;
   line-height: 145%;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 export const MessageFromTextSpan = styled.span`
   display: flex;
-  -webkit-box-align: end;
   align-items: end;
   font-weight: 500;
   font-size: 15px;
   line-height: 145%;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 export const MessageFromTextP = styled.p`
@@ -175,6 +224,10 @@ export const MessageFromTextP = styled.p`
   background-color: white;
   border: 1px solid rgb(229, 229, 229);
   text-align: left;
+
+  @media (max-width: 480px) {
+    padding: 10px 14px;
+  }
 `;
 
 export const MessageFromTimeDiv = styled.span`
@@ -194,18 +247,25 @@ export const MessageToDiv = styled.div`
   font-size: 15px;
   align-items: flex-end;
   margin-left: 24px;
-  -webkit-box-align: end;
   align-items: end;
   flex-direction: row-reverse;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+    margin-left: 12px;
+  }
 `;
 
 export const MessageToTextSpan = styled.span`
   display: flex;
-  -webkit-box-align: end;
   align-items: end;
   font-weight: 500;
   font-size: 15px;
   line-height: 145%;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 export const MessageToTextP = styled.p`
@@ -216,6 +276,10 @@ export const MessageToTextP = styled.p`
   color: rgb(25, 25, 25);
   background-color: rgb(246, 246, 246);
   text-align: left;
+
+  @media (max-width: 480px) {
+    padding: 10px 14px;
+  }
 `;
 
 export const MessageToTimeSpan = styled.span`
@@ -244,7 +308,6 @@ export const ChatMessageInput = styled.input`
   position: relative;
   display: flex;
   align-items: flex-end;
-  -webkit-box-pack: center;
   justify-content: center;
   width: 100%;
   max-height: 120px;
@@ -259,7 +322,14 @@ export const ChatMessageButton = styled.button`
 `;
 
 export const ChatPopupDiv = styled.div`
-  width: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const ChatPopupOverlayDiv = styled.div`
@@ -274,6 +344,7 @@ export const ChatPopupOverlayDiv = styled.div`
   align-items: center;
   z-index: 1000;
 `;
+
 export const ChatPopupContentDiv = styled.div`
   background-color: #fefefe;
   border-radius: 12px;
@@ -283,26 +354,15 @@ export const ChatPopupContentDiv = styled.div`
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   position: relative;
   max-height: 90vh;
+  overflow-y: auto; /* 스크롤 대응 */
+  display: flex;
+  flex-direction: column; /* 자식이 ChatRoomMainDiv일 경우 layout 정렬 */
+
+  @media (max-width: 480px) {
+    padding: 20px;
+  }
 `;
 
-// export const
-
-// /* 닫기 버튼 */
-// .popup-close-btn {
-//   position: absolute;
-//   top: 20px;
-//   right: 20px;
-//   background: transparent;
-//   border: none;
-//   font-size: 1.8rem;
-//   cursor: pointer;
-//   font-weight: bold;
-//   color: #333;
-//   transition: color 0.3s;
-// }
-// .popup-close-btn:hover {
-//   color: #ff4d4d;
-// }
 export const InfoBoxDiv = styled.div`
   display: flex;
   align-items: baseline;
@@ -317,6 +377,10 @@ export const InfoUserDiv = styled.div`
 
 export const InfoNickNameDiv = styled.div`
   font-size: 18px;
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 export const InfoTitleTextDiv = styled.div`

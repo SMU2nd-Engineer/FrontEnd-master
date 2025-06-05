@@ -9,13 +9,19 @@ import {
   RegistFormLabel,
   RegistStyledInput,
 } from "../style/UserRegistrationPageDesign";
+import { useWatch } from "react-hook-form";
 
 export default function RegistrationEmail({
   register,
   setValue,
   watch,
   errors,
+  control,
 }) {
+  const emailDomain = useWatch({
+    control,
+    name: "emailDomain",
+  });
   const [isManualDomain, setIsManualDomain] = useState(true);
 
   const handleDomainChange = (e) => {
@@ -46,14 +52,14 @@ export default function RegistrationEmail({
             key={isManualDomain ? "editable" : "readonly"}
             type="text"
             {...register("emailDomain")}
-            value={watch("emailDomain") || ""} // 초기화 undefined 오류를 해결하기 위하여 "" 로 설정
+            value={emailDomain || ""} // 초기화 undefined 오류를 해결하기 위하여 "" 로 설정
             onChange={(e) => setValue("emailDomain", e.target.value)}
             disabled={!isManualDomain}
             $error={!!errors.emailLocal}
           />
 
           <RegistEmailDomainSelect
-            value={watch("emailDomain") || "type"}
+            value={emailDomain || "type"}
             onChange={handleDomainChange}
           >
             <option value="type">직접 입력</option>

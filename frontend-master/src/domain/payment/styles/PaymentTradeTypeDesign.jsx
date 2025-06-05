@@ -2,19 +2,17 @@ import styled, {css} from "styled-components";
 
 export const Box = styled.div`
   width: 100%;
-  display: inline-block;
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-  justify-items: center;
   padding: 5px;
 `
 
 export const Container = styled.div`
-  width: 50%;
-  align-items: center;
-  text-align: center;
-  margin: 1rem;
+  width: 100%;
+  max-width: 450px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  @media (max-width: 768px) {
+    max-width: 350px;
+  }
 `;
 
 export const Test = styled.span`
