@@ -184,6 +184,17 @@ export default function TransactionReviewRegisterPage() {
         setValue("rating", getReview.fetchReviewRegisterInfo.rating);
         setValue("reviewText", getReview.fetchReviewRegisterInfo.reviewText);
         setValue("reviewIdx", getReview.fetchReviewRegisterInfo.reviewIdx);
+        if (
+          !getReview?.fetchReviewRegisterInfo?.sellerIdx ||
+          getReview.fetchReviewRegisterInfo.sellerIdx === 0
+        ) {
+          await openModal("alert", {
+            title: "리뷰 열람 불가",
+            message: "상대방이 탈퇴하여 리뷰를 열람할 수 없습니다.",
+          });
+          navigate("/mypage/myReview", { replace: true });
+          return;
+        }
         setValue(
           "sellerIdx",
           getReview?.fetchReviewRegisterInfo?.sellerIdx ?? 0
