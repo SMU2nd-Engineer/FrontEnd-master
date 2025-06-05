@@ -46,7 +46,6 @@ export default function ProductDetail() {
   };
 
   const handleEdit = () => {
-    console.log("수정할 idx: ", idx);
     navigate(`/product/edit/${idx}`);
   };
 

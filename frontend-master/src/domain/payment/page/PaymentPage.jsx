@@ -32,7 +32,6 @@ const PaymentPage = () => {
   const { productInfo } = useProductStore();
   const { skipBeforeUnload } = useOutletContext();
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSearchValue({ ...searchValue, [name]: value });
@@ -97,13 +96,12 @@ const PaymentPage = () => {
   }, [watchedAddress, watchedDetail]);
 
   if (!productInfo || tradeType === null) {
-    console.log("tradeType : ", tradeType);
     return <div>상품 정보를 불러오는 중입니다...</div>;
   }
 
   // 기능 구현 파라미터 받기 가능 => 삭제나 수정시 적용 가능
   const handleAlert = async (title, message) => {
-    const confirmed = await openModal("confirm", {
+    const confirmed = await openModal("alert", {
       title: title,
       message: message,
     });
@@ -112,7 +110,7 @@ const PaymentPage = () => {
   const handlePaymentClick = async () => {
     const categoryIdx = Number(searchValue.category_idx);
     let title;
-    let message
+    let message;
     switch (categoryIdx) {
       case 6001:
         try {
@@ -130,20 +128,20 @@ const PaymentPage = () => {
         break;
       case 6002:
         title = "토스페이 준비중";
-        message = "토스페이 준비 중..."
-        handleAlert(title, message)
+        message = "토스페이 준비 중...";
+        handleAlert(title, message);
         // alert("토스페이 준비중");
         break;
       case 6003:
         title = "네이버페이 준비중";
-        message = "네이버페이 준비 중..."
-        handleAlert(title, message)
+        message = "네이버페이 준비 중...";
+        handleAlert(title, message);
         // alert("네이버페이 준비중");
         break;
       default:
         title = "결제수단이 선택되지 않았습니다.";
-        message = "결제수단을 선택해주세요"
-        handleAlert(title, message)
+        message = "결제수단을 선택해주세요";
+        handleAlert(title, message);
         // alert("결제수단을 선택해주세요");
         break;
     }

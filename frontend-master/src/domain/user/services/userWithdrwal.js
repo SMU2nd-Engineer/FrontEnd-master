@@ -9,7 +9,7 @@ export const userWithdrawal = async () => {
     );
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log("회원탈퇴 과정에서 문제 발생 : ", error);
     throw error;
   }
 };

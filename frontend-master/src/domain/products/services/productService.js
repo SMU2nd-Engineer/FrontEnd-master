@@ -18,7 +18,6 @@ export const postProduct = (newProduct, uploadImage) => {
   );
   uploadImage.forEach((img) => formData.append("files", img));
 
-  console.log();
   return axiosInstance.post("product/upload", formData, {
     withCredentials: true,
   });
