@@ -99,8 +99,8 @@ const BoardSubmitFooter = ({
         category_idx: newsubmit.category_idx,
         title: newsubmit.title,
         content: filterdData, // 글 내용 입력 - 리액트 에디터 내용 => tempdata
-        // uploadImage를 백엔드로 넘겨주는 건 위에서 함
       };
+
       // 게시판 등록 양식 사용 - 수정
       if (isModify) {
         putEditContentsDetail(id, postContent, postFiles, currentUrls)

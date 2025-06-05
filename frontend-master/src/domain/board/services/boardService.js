@@ -1,4 +1,3 @@
-// src/domain/board/services/BoardService.js
 import axiosInstance from "@/lib/axiosInstance";
 
 // 게시판 리스트 페이지 - 게시글 등록되면 글 전체 목록 나옴
@@ -21,7 +20,6 @@ export const postBoardSubmit = (postContent, postFiles) => {
     "contents",
     new Blob([JSON.stringify(postContent)], { type: "application/json" })
   );
-  // postFiles.forEach((img) => formData.append("files", img))
 
   // 이미지 선택하지 않아도 게시글 등록하게 하는 조건
   if (postFiles.length > 0) {
