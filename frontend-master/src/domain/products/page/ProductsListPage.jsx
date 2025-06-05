@@ -3,7 +3,7 @@ import ProductList from "../components/ProductList";
 import ProductSearch from "../components/ProductSearch";
 import { getProductList, searchProducts } from "../services/productService";
 import Button from "@/components/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as List from "../styles/ProductsListPageDesign";
 
 const ProductListPage = () => {
@@ -11,32 +11,84 @@ const ProductListPage = () => {
   const [lastId, setLastId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [searchParams, setSearchParams] = useState(null); // 검색 조건 상태 저장
+  const [searchParams, setSearchParams] = useState(null); 
+  const location = useLocation(); 
+  const query = new URLSearchParams(location.search);
 
   const size = 20;
   const navigate = useNavigate();
 
+  // 검색 요청 처리
+  const handleSearch = (searchValue) => {
+    setIsLoading(true);
+    setProducts([]);
+    setLastId(null);
+    setSearchParams(searchValue);
+
+    const isEmptySearch =
+      !searchValue.keyword &&
+      (searchValue.category_idx === 0 || searchValue.category_idx === "0") &&
+      (searchValue.categorygenre_idx === 0 || searchValue.categorygenre_idx === "0");
+
+    if (isEmptySearch) {
+      getProductList(null, size)
+        .then((res) => {
+          const data = res.data;
+          setProducts(data);
+          if (data.length < size) setHasMore(false);
+          else setHasMore(true);
+          if (data.length > 0) setLastId(data[data.length - 1].idx);
+          else setLastId(null);
+        })
+        .catch((err) => console.error("상품 불러오기 실패:", err))
+        .finally(() => setIsLoading(false));
+    } else {
+      searchProducts({ ...searchValue, lastId: null, size })
+        .then((res) => {
+          const data = res.data;
+          setProducts(data);
+          if (data.length < size) setHasMore(false);
+          else setHasMore(true);
+          if (data.length > 0) setLastId(data[data.length - 1].idx);
+          else setLastId(null);
+        })
+        .catch((err) => console.error("검색 실패:", err))
+        .finally(() => setIsLoading(false));
+    }
+  };
+
   // 초기 전체 상품 불러오기
   useEffect(() => {
-    setIsLoading(true);
-    getProductList(null, size)
-      .then((res) => {
-        const data = res.data;
-        setProducts(data);
-        if (data.length < size) {
-          setHasMore(false);
-        } else {
-          setHasMore(true);
-        }
-        if (data.length > 0) {
-          setLastId(data[data.length - 1].idx);
-        } else {
-          setLastId(null);
-        }
-      })
-      .catch((err) => console.error("상품 불러오기 실패:", err))
-      .finally(() => setIsLoading(false));
-  }, []);
+    const keywordFromUrl = query.get("search");
+
+    if (keywordFromUrl) {
+      // 검색어가 있을 경우 검색 실행
+      handleSearch({
+        keyword: keywordFromUrl,
+        category_idx: 0,
+        categorygenre_idx: 0,
+      });
+    }
+      else {setIsLoading(true);
+      getProductList(null, size)
+        .then((res) => {
+          const data = res.data;
+          setProducts(data);
+          if (data.length < size) {
+            setHasMore(false);
+          } else {
+            setHasMore(true);
+          }
+          if (data.length > 0) {
+            setLastId(data[data.length - 1].idx);
+          } else {
+            setLastId(null);
+          }
+        })
+        .catch((err) => console.error("상품 불러오기 실패:", err))
+        .finally(() => setIsLoading(false));
+    }
+  }, [location.search]);
 
   // 더보기 버튼 클릭 시
   const loadMore = () => {
@@ -85,44 +137,7 @@ const ProductListPage = () => {
     }
   };
 
-  // 검색 요청 처리
-  const handleSearch = (searchValue) => {
-    setIsLoading(true);
-    setProducts([]);
-    setLastId(null);
-    setSearchParams(searchValue);
-
-    const isEmptySearch =
-      !searchValue.keyword &&
-      (searchValue.category_idx === 0 || searchValue.category_idx === "0") &&
-      (searchValue.categorygenre_idx === 0 || searchValue.categorygenre_idx === "0");
-
-    if (isEmptySearch) {
-      getProductList(null, size)
-        .then((res) => {
-          const data = res.data;
-          setProducts(data);
-          if (data.length < size) setHasMore(false);
-          else setHasMore(true);
-          if (data.length > 0) setLastId(data[data.length - 1].idx);
-          else setLastId(null);
-        })
-        .catch((err) => console.error("상품 불러오기 실패:", err))
-        .finally(() => setIsLoading(false));
-    } else {
-      searchProducts({ ...searchValue, lastId: null, size })
-        .then((res) => {
-          const data = res.data;
-          setProducts(data);
-          if (data.length < size) setHasMore(false);
-          else setHasMore(true);
-          if (data.length > 0) setLastId(data[data.length - 1].idx);
-          else setLastId(null);
-        })
-        .catch((err) => console.error("검색 실패:", err))
-        .finally(() => setIsLoading(false));
-    }
-  };
+  
 
   const handleClick = () => {
     navigate("/product/upload");
