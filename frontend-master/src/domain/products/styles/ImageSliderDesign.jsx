@@ -3,12 +3,20 @@ import styled from "styled-components";
 export const SliderContainer = styled.div`
   width: 400px;
   height: 400px;
-  /* overflow: hidden;
-  display: flex; */
   justify-content: center;
   align-items: center;
   position: relative;
   margin-bottom: 20px;
+
+  @media (max-width: 1024px) {
+    width: 320px;   /* 400 * 0.8 */
+    height: 320px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 90%;    /* 모바일에선 꽉 채움 */
+    height: auto;   /* 높이는 자동 */
+  }
 `;
 
 export const Arrow = styled.button`
@@ -27,24 +35,13 @@ export const Arrow = styled.button`
   z-index: 1;
 `;
 
-// export const Slide = styled.div`
-//   position: absolute;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   row-gap: 20px;
-  
-//   transition: opacity 0.3s ease-in-out;
-//   &.active {
-//     opacity: 1;
-//   }
-// `;
 
 export const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 1;
+
 `;
 
 export const ThumbnailWrapper = styled.div`
@@ -61,6 +58,7 @@ export const ThumbnailImage = styled.img`
   object-fit: cover;
   cursor: pointer;
   border-radius: 4px;
+  margin-top: -5px;
 
   border: ${({ $isActive }) => ($isActive ? "2px solid #333" : "1px solid transparent")};
   opacity: ${({ $isActive }) => ($isActive ? 1 : 0.6)};

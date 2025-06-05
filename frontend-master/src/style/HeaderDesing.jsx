@@ -19,6 +19,11 @@ export const Header_nav = styled.nav`
   width: 1020px;
   flex-direction: column;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+      width: 100%;
+      padding: 0 16px;
+    }
   
 }
 /* 검색 게시판 상품등록 마이페이지 */
