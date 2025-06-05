@@ -3,16 +3,22 @@ import styled from "styled-components";
 export const Box = styled.div`
   width: 100%;
   display: inline-block;
-  align-items: center;
-  text-align: center;
+  /* align-items: center; */
+  /* text-align: center; */
   justify-items: center;
 `
 
 export const PaymentBox = styled.div`
-  width: 55%;
+  width: 100%;
+  max-width: 500px;
   display: block;
   margin: 10px;
   padding: 5px;
+  @media (max-width: 768px) {
+    /* padding: 0 0.5rem; */
+    /* align-items: center; */
+    max-width: 350px;
+  }
 `
 
 export const PaymentInfo = styled.p`
@@ -30,8 +36,11 @@ export const Adderss = styled.div`
   border: #ddd solid 1px;
   border-radius: 5px;
   text-align: center;
-  padding: 20px;
-  margin: 10px;
+  padding: 12px;
+  margin-top: 10px;
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 `
 
 export const AddressP = styled.p`
@@ -66,11 +75,14 @@ export const PaymentMethod = styled.label`
 
 export const PaymentBtn = styled.button`
   background-color: #f0b8b8;
-  width: 100%;
+  width: 105%;
   padding: 5px;
-  margin: 5px;
+  /* margin: 5px; */
   margin-top: 5rem;
   font-weight: bold;
+  @media (max-width: 768px) {
+    max-width: 315px;
+  }
 `
 
 export const ProductInfo = styled.div`
@@ -80,12 +92,14 @@ export const ProductInfo = styled.div`
   padding: 10px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  margin: 5px;
+  /* margin: 5px; */
   margin-top: 10px;
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 `
 export const Image = styled.div`
   display: flex;
-  /* max-width: 160px; */
   height: 120px;
   margin: 5px;
 `
@@ -116,9 +130,12 @@ export const Review = styled.button`
   width: 125px;
   height: 50px;
   padding: 5px;
-  margin-left: 7px;
+  margin-left: 1rem;
   margin-top: 2rem;
   font-weight: bold;
+  @media (max-width: 768px) {
+    max-width: 100px;
+  }
 `
 
 export const Next = styled.button`
@@ -128,12 +145,18 @@ export const Next = styled.button`
   height: 50px;
   margin-top: 2rem;
   font-weight: bold;
+  @media (max-width: 768px) {
+    max-width: 100px;
+  }
 `
 
 export const ReviewBox = styled.div`
   display: flex;
   justify-content: space-between;
   width: 539px;
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 `
 
 export const PaySuccess = styled.h2`
