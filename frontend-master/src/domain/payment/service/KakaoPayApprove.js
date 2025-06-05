@@ -1,6 +1,11 @@
 import axiosInstance from "@/lib/axiosInstance";
 
-const kakaoPayApprove = async ({tid, partnerOrderId, partnerUserId, pgToken}) => {
+const kakaoPayApprove = async ({
+  tid,
+  partnerOrderId,
+  partnerUserId,
+  pgToken,
+}) => {
   console.log("승인 요청 시작");
 
   try {
@@ -8,15 +13,14 @@ const kakaoPayApprove = async ({tid, partnerOrderId, partnerUserId, pgToken}) =>
       tid,
       partnerOrderId,
       partnerUserId,
-      pgToken
-    })
+      pgToken,
+    });
 
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.error("승인 에러: ", error);
     throw error;
   }
-}
+};
 
 export default kakaoPayApprove;

@@ -3,10 +3,6 @@ import axiosInstance from "@/lib/axiosInstance";
 const KakaoPayReady = async (product, user, tradeType) => {
   const KAKAOPAY_URL = import.meta.env.VITE_KAKAOPAY_API_URL;
 
-  console.log(product);
-  console.log("itemName:", product.title);
-  console.log(user);
-
   const today = new Date();
   const partnerOrderId = `order${today}${product.idx}`;
   const partnerUserId = `user${product.idx}`;
@@ -45,7 +41,6 @@ const KakaoPayReady = async (product, user, tradeType) => {
       { withCredentials: true }
     );
 
-    console.log("응답데이터 : ", res.data);
     sessionStorage.setItem("tid", res.data.tid);
     sessionStorage.setItem("pgToken", res.data.pgToken);
     sessionStorage.setItem("partnerOrderId", partnerOrderId);

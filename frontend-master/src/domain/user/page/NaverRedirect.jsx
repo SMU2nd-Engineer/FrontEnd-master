@@ -34,7 +34,6 @@ export default function NaverRedirect() {
       if (stateKey === import.meta.env.VITE_API_STATE && naverCode) {
         try {
           const res = await naverLogin(naverCode, autoLogin);
-          console.log(res);
           if (res.status === 200) {
             setAccessToken(res.data.accessToken);
             setLoginUserInfo(res.data.userInfo);

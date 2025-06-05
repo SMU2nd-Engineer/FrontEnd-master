@@ -31,7 +31,6 @@ const PaymentSuccessPage = () => {
           partnerUserId,
           pgToken,
         });
-        console.log("승인결과", result);
 
         setIsApproved(true);
         setSuccess(true);
@@ -44,15 +43,12 @@ const PaymentSuccessPage = () => {
         });
       } finally {
         setLoading(false);
-        console.log("승인함수 종료함");
         await getProductDetail(idx).then((res) => setProduct(res.data));
       }
     };
 
     approvePayment();
   }, [tid]);
-
-  console.log("승인여부", isApproved);
 
   if (isApproved === "true") {
     setSuccess(true);

@@ -17,7 +17,7 @@ const regitrationService = async (state) => {
     );
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log("회원 등록 과정에서 오류 발생 : ", error);
   }
 };
 
