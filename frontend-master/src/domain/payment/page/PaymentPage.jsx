@@ -130,19 +130,16 @@ const PaymentPage = () => {
         title = "토스페이 준비중";
         message = "토스페이 준비 중...";
         handleAlert(title, message);
-        // alert("토스페이 준비중");
         break;
       case 6003:
         title = "네이버페이 준비중";
         message = "네이버페이 준비 중...";
         handleAlert(title, message);
-        // alert("네이버페이 준비중");
         break;
       default:
         title = "결제수단이 선택되지 않았습니다.";
         message = "결제수단을 선택해주세요";
         handleAlert(title, message);
-        // alert("결제수단을 선택해주세요");
         break;
     }
   };

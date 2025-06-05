@@ -14,8 +14,6 @@ export const useForceHomeOnBackOrReload = () => {
             navigate("/", { replace: true });
         };
         window.addEventListener("popstate", handlePopState);
-        // 현재 페이지 히스토리에 추가해서 뒤로가기를 유도할 수 있도록 설정
-        window.history.pushState(null, "", window.location.href);
         // 클린업
         return () => {
             window.removeEventListener("popstate", handlePopState);
