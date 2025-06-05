@@ -20,6 +20,7 @@ const PaymentSuccessPage = () => {
   const [isApproved, setIsApproved] = useState(false);
   const { idx } = useParams();
   const [product, setProduct] = useState(null);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
     if (hasFetched.current) return;
