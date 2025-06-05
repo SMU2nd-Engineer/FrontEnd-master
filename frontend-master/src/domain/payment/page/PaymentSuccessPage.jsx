@@ -25,6 +25,7 @@ const PaymentSuccessPage = () => {
 
   useEffect(() => {
     if (hasFetched.current) return;
+    hasFetched.current = true;
     const approvePayment = async () => {
       try {
         const result = await kakaoPayApprove({
