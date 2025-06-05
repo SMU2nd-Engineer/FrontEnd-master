@@ -23,7 +23,7 @@ export const Product_card = styled.div `
 
   .title {
     white-space: nowrap;
-    /* overflow: hidden; */
+    overflow: hidden;
     text-overflow: ellipsis;
     width: inherit;
   }
