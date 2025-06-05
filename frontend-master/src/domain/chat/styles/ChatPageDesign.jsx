@@ -90,9 +90,7 @@ export const InfoTitleDiv = styled.div`
 `;
 
 export const InfoTextDiv = styled.div`
-  display: flex;
   margin-top: 6px;
-  width: 50%;
   display: flex;
   font-size: 12px;
   line-height: 1.3;
@@ -101,9 +99,7 @@ export const InfoTextDiv = styled.div`
 `;
 
 export const InfoLastMessageDiv = styled.div`
-  display: flex;
   margin-top: 6px;
-  width: 60%;
   display: flex;
   font-size: 12px;
   line-height: 1.3;
@@ -332,4 +328,5 @@ export const InfoTitleTextDiv = styled.div`
 export const InfoLastMessageBoxDiv = styled.div`
   display: flex;
   margin-left: 24px;
+  gap: 10px;
 `;
