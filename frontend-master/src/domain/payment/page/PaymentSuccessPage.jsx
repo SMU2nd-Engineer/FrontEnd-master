@@ -5,6 +5,7 @@ import kakaoPayFail from "../service/KakaoPayFail";
 import PaymentProductInfo from "../components/PaymentProductInfo";
 import * as PaymentDesign from "../styles/PaymentPageDesign";
 import { getProductDetail } from "@/domain/products/services/productService";
+import { useRef } from "react";
 
 const PaymentSuccessPage = () => {
   const navigate = useNavigate();
