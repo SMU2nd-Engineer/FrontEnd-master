@@ -40,7 +40,7 @@ const ChatPage = () => {
       await getChatRooms().then((res) => setChatRooms(res.data));
 
     fetchRooms();
-    const intervalId = setInterval(fetchRooms, 5000); // 5초마다 호출
+    const intervalId = setInterval(fetchRooms, 3000); // 3초마다 호출
 
     return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 정리
   }, []);

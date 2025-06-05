@@ -22,9 +22,9 @@ import {
  */
 const ChatRoomItem = ({
   id,
-  title,
+  title = "",
   lastMessageAt,
-  lastMessage,
+  lastMessage = "",
   count,
   nickname,
 }) => {
@@ -43,7 +43,7 @@ const ChatRoomItem = ({
     >
       <RoomInfoDiv>
         <InfoTitleDiv>
-          {title.length > 0 ? (
+          {title !== null && title.length > 0 ? (
             <InfoBoxDiv>
               <InfoUserDiv>
                 <FaUser style={{ marginRight: "7px", fontSize: "17px" }} />
@@ -57,7 +57,7 @@ const ChatRoomItem = ({
         </InfoTitleDiv>
         <InfoLastMessageBoxDiv>
           <InfoLastMessageDiv>
-            {lastMessage.length > 20
+            {lastMessage !== null && lastMessage.length > 20
               ? lastMessage.substring(0, 20) + " ....."
               : lastMessage}
           </InfoLastMessageDiv>
