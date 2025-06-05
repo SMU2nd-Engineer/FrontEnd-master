@@ -46,6 +46,7 @@ export default function UserRegistrationPage() {
       socialProvider: "", // 초기값 명시 - 일반 로그인
     },
   });
+
   usePreventBackNavigation();
 
   const [isIdCheck, setIsIdCheck] = useState(false);

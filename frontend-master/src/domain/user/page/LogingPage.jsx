@@ -20,10 +20,18 @@ import {
 } from "../style/LoginPageDesign";
 import { useModalStore } from "@/store/useModalStore";
 import useLoginUserInfoStore from "@/store/useLoginUserInfoStore";
+import { useForm } from "react-hook-form";
 
 export default function LogingPage() {
-  const [id, setUserId] = useState("");
-  const [password, setpassword] = useState("");
+  const {
+    register, // 입력 폼 등록
+    handleSubmit, // 폼 제출시 사용하여
+    setValue, // 외부 API 값이나 수동 입력 처리
+  } = useForm({
+    defaultValues: {
+      socialProvider: "", // 초기값 명시 - 일반 로그인
+    },
+  });
   const [autoLogin, setAutoLogin] = useState(false);
   const [rememberId, setRememberId] = useState(false);
   const isLogin =
@@ -42,11 +50,10 @@ export default function LogingPage() {
     });
   };
 
-  const handleLogin = async (e) => {
+  const submitLoginForm = async ({ id, pw }) => {
     // 새로 고침을 방지하기 위한 코드
-    e.preventDefault();
     try {
-      const res = await login(id, password, autoLogin);
+      const res = await login(id, pw, autoLogin);
       const accessToken = res.data.accessToken;
       if (accessToken) {
         setAccessToken(accessToken);
@@ -69,8 +76,8 @@ export default function LogingPage() {
         error.response?.data?.error || error.message
       );
       loginFail();
-      setUserId("");
-      setpassword("");
+      setValue("id", "");
+      setValue("pw", "");
     }
   };
 
@@ -78,7 +85,7 @@ export default function LogingPage() {
     () => {
       const savedId = localStorage.getItem("savedUserId");
       if (savedId) {
-        setUserId(savedId);
+        setValue("id", savedId);
         setRememberId(true);
       }
       if (isLogin) {
@@ -91,24 +98,24 @@ export default function LogingPage() {
   return (
     <LoginWrapper>
       <LoginContainer id="LoginContainer">
-        <LoginForm onSubmit={handleLogin}>
+        <LoginForm onSubmit={handleSubmit(submitLoginForm)}>
           <InputId
-            id="id"
+            {...register("id")}
             type="text"
-            value={id}
-            onChange={(e) => setUserId(e.target.value)}
+            // value={id}
+            // onChange={(e) => setUserId(e.target.value)}
             placeholder="아이디"
           />
           <InputPw
-            id="pw"
+            {...register("pw")}
             placeholder="패스워드"
             type="password"
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
+            // value={password}
+            // onChange={(e) => setpassword(e.target.value)}
           />
           <LoginStyledButton
             text={"로그인"}
-            onClick={handleLogin}
+            // onClick={handleLogin}
             type={"submit"}
             className="login-button"
           />
