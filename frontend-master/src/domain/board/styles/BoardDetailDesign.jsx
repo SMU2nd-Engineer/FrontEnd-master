@@ -206,38 +206,4 @@ export const CommentList = styled.div`
       }
     }
   }
-
-  /* li p {
-    margin: 15px 0;
-    font-size: 14px;
-    color: #333;
-    strong {
-      font-size: 17px;
-    }
-  }
-
-  li strong {
-    font-size: 13px;
-    color: #666;
-  }
-
-  li button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: transparent;
-    color: #c00;
-    border: none;
-    font-size: 12px;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  > p {
-    color: #888;
-    font-size: 14px;
-  } */
 `;
