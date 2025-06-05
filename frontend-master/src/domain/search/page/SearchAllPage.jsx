@@ -45,7 +45,7 @@ const SearchAllPage = () => {
             <>
               <ProductList products={productResult.slice(0, 4)} />
               {productResult.length > 4 && (
-                <SA.MoreButton onClick={() => navigate(`/products?search=${searchKeyword}`)}>
+                <SA.MoreButton onClick={() => navigate(`/product?search=${searchKeyword}`)}>
                   더보기
                 </SA.MoreButton>
               )}
