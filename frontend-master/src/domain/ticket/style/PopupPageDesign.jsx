@@ -29,7 +29,7 @@ export const PopupContent = styled.div`
   overflow-y: auto;
   h3 {
     margin: 0 0 20px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #222;
   }
