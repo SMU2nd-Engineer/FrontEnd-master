@@ -23,7 +23,7 @@ export default function RegistrationNickName({
   existingNickname,
 }) {
   const nickName = useWatch({
-    control,
+    control: control || undefined,
     name: "nickName",
   });
   // 닉네임 변경 시 중복 체크 상태 초기화

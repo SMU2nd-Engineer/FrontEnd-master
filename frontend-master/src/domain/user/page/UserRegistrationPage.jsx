@@ -78,7 +78,7 @@ export default function UserRegistrationPage() {
       setIsSocialLogin(true);
       setSocialProvider(socialProvider || "");
     }
-  }, [setValue]);
+  }, []);
 
   const openModal = useModalStore((state) => state.open);
 
