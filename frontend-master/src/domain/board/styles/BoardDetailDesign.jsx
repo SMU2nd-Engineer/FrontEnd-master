@@ -178,7 +178,7 @@ export const CommentList = styled.div`
     align-items: center;
     gap: 10px;
     .userNameAndDate {
-      width: 17%;
+      width: 20%;
       justify-items: center;
       text-align: center;
       align-items: center;
