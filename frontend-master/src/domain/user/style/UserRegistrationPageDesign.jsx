@@ -15,6 +15,10 @@ export const RegistInputGroup = styled.div`
   gap: 0.5rem;
   width: 100%;
   margin-bottom: 5px;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 export const RegistStyledInput = styled.input`
@@ -26,6 +30,11 @@ export const RegistStyledInput = styled.input`
   font-size: 1rem;
   height: 42px;
   box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    height: 38px;
+  }
 `;
 
 export const RegistHelperText = styled.p`
@@ -72,6 +81,7 @@ export const RegistStyledButtonWrapper = styled.div`
     height: 100%;
     box-sizing: border-box;
     color: white;
+
     &:hover {
       background-color: #f8f8f8;
       color: #f0b8b8;
@@ -83,6 +93,10 @@ export const RegistStyledButtonWrapper = styled.div`
     &:active {
       transform: scale(1.05);
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
     }
   }
 `;
@@ -99,6 +113,11 @@ export const RegistEmailRow = styled.div`
   gap: 0.5rem;
   align-items: center;
   width: 100%;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const RegistEmailDomainSelect = styled.select`
@@ -108,12 +127,21 @@ export const RegistEmailDomainSelect = styled.select`
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 5px;
+
+  @media (max-width: 480px) {
+    height: 2.5rem;
+    font-size: 0.95rem;
+  }
 `;
 
 export const RegistAtSymbol = styled.span`
   font-size: 1rem;
   line-height: 3rem;
   min-width: 1rem;
+
+  @media (max-width: 600px) {
+    line-height: 2rem;
+  }
 `;
 
 export const RegistButton = styled.button`
@@ -145,6 +173,10 @@ export const RegistButton = styled.button`
       color: #fff;
     }
   }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 export const RegistrationContainer = styled.div`
@@ -155,6 +187,16 @@ export const RegistrationContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 600px) {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
 `;
 
 export const RegistrationForm = styled.form`
@@ -170,6 +212,12 @@ export const RegistrationForm = styled.form`
   gap: 1.5rem;
   margin-left: 10px;
   line-height: 3rem;
+
+  @media (max-width: 600px) {
+    margin-left: 0;
+    gap: 1rem;
+    line-height: 2.5rem;
+  }
 `;
 
 export const FormGridArea = styled.div`
@@ -182,4 +230,10 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
   gap: 3rem;
   margin-top: 3rem;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
 `;
