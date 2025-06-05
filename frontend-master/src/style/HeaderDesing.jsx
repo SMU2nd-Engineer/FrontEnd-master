@@ -13,14 +13,29 @@ export const Header_nav = styled.nav`
   box-sizing: border-box;
   color: #9a8a8a;
 
-  .navigation {
-    width: 100%;
-    max-width: 1020px;
-    flex-direction: column;
-    margin: 0 auto;
-    padding: 0 10px; /* 좌우 여백 추가 */
-    box-sizing: border-box;
-  }
+
+.navigation {
+  width: 1020px;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+      width: 100%;
+      padding: 0 16px;
+    }
+  
+}
+/* 검색 게시판 상품등록 마이페이지 */
+.nav-top {
+  display: flex;
+  justify-content: flex-end;
+  z-index: 100;
+
+  margin-top: 5px;
+  margin-bottom: 40px;
+  color: #9a8a8a;
+}
+
 
   .nav-top {
     display: flex;

@@ -13,6 +13,27 @@ const StyledSubmit = styled.button`
   }
 `;
 
+const StyledInput = styled.input`
+  width: 300px;
+  height: 36px;
+  padding: 6px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  @media (max-width: 768px) {
+    width: 110px;
+    font-size: 14px;
+    height: 30px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+    font-size: 12px;
+    height: 28px;
+  }
+`;
+
 const ProductSearch = ({ onSearch }) => {
   const [searchValue, setSearchValue] = useState({
     category_idx: 0,
@@ -45,7 +66,7 @@ const ProductSearch = ({ onSearch }) => {
           category_idx={getCategoryIdx("contents")}
           handleChange={handleChange}
         />
-        <input
+        <StyledInput 
           type="text"
           name="keyword"
           value={searchValue.keyword}

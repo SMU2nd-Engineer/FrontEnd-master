@@ -1,12 +1,5 @@
 import styled from "styled-components";
-import PeakButton from "../components/PeakButton";
 
-// export const hr = styled.hr`
-//   border: 0;
-//   width: 80%;
-//   height: 1px;
-//   background: #bbb;
-// `;
 
 export const VerticalDivider = styled.div`
   width: 1px;
@@ -25,6 +18,11 @@ export const DetailTop = styled.div`
   gap: 50px;
   width: 100%;
   padding: 20px; 
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 30px;
+    padding: 15px;
+  }
 `
 export const ThumbnailBox = styled.div`
   flex: 1;
@@ -33,15 +31,7 @@ export const ThumbnailBox = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `
-export const OtherImages = styled.div`
-  display: flex;
-  gap: 12px; /* 이미지 사이 간격 */
-  overflow-y: auto;
 
-  img{
-    width: 60px;
-  }
-`
 
 
 // 상품명, 가격, 판매자명

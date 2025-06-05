@@ -14,6 +14,17 @@ export const UploadContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 95%;
+    padding: 0.5rem;
+    margin: 2rem auto;
+  }
 `;
 
 export const UploadForm = styled.form`
@@ -26,6 +37,7 @@ export const UploadForm = styled.form`
     display: flex;
     gap: 80px;
     align-items: center;
+    
   }
 
   .form-row label {
@@ -34,11 +46,24 @@ export const UploadForm = styled.form`
   }
 
   .form-row input {
-    border: 1px solid #ccc;
-    width: 400px;
-    height: 35px;
-    border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 400px;
+  height: 35px;
+  border-radius: 5px;
+  max-width: 100%; /* 부모 컨테이너를 넘지 않도록 */
+}
+
+@media (max-width: 768px) {
+  .form-row input {
+    width: 100px; /* 화면 너비의 80% */
   }
+}
+
+/* @media (max-width: 480px) {
+  .form-row input {
+    width: 95vw; /* 더 작은 화면에서는 거의 꽉 차도록 */
+  }
+} */
 
   textarea {
     margin-top: 10px;
