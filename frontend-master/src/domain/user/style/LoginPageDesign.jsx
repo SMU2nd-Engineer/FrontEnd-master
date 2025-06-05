@@ -7,6 +7,7 @@ export const LoginWrapper = styled.div`
   align-items: center;
   width: 100%;
   user-select: none;
+  padding: 1rem;
 `;
 
 export const LoginContainer = styled.div`
@@ -19,22 +20,41 @@ export const LoginContainer = styled.div`
   margin: 3rem;
   width: 100%;
   max-width: 40%;
+
+  @media (max-width: 1024px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
 `;
 
 export const LoginForm = styled.form`
-  grid-area: form;
   display: grid;
   grid-template-areas:
-    "input-id login-button"
-    "input-pw login-button";
+    "input-id"
+    "input-pw"
+    "login-button";
   gap: 1rem;
-  margin-left: 10px;
   justify-content: center;
+
+  @media (min-width: 601px) {
+    grid-template-areas:
+      "input-id login-button"
+      "input-pw login-button";
+  }
 `;
 
 export const InputId = styled.input`
   grid-area: input-id;
-  justify-self: end;
   border: 1px solid #ddd;
   border-radius: 10px;
   text-align: center;
@@ -44,7 +64,6 @@ export const InputId = styled.input`
 
 export const InputPw = styled.input`
   grid-area: input-pw;
-  justify-self: end;
   border: 1px solid #ddd;
   border-radius: 10px;
   text-align: center;
@@ -54,45 +73,43 @@ export const InputPw = styled.input`
 
 export const LoginStyledButton = styled(Button)`
   grid-area: login-button;
-  grid-row: 1 / 3;
-  grid-column: 2 / 4;
   height: 100%;
   background-color: #f0b8b8;
   color: white;
-  width: 6rem;
+  width: 100%;
   border: #ddd 1px solid;
   border-radius: 0.375rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap;
-  transition: all 0.2s ease-in-out;
-  transform-origin: center center;
   font-size: 1rem;
-  box-sizing: border-box;
+
   &:hover {
     background-color: #f8f8f8;
     color: #f0b8b8;
-    transform: scale(1.1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
   }
 
   &:active {
-    transform: scale(1.05);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+  }
+
+  @media (min-width: 601px) {
+    width: 6rem;
+    grid-row: 1 / 3;
+    grid-column: 2 / 4;
   }
 `;
 
 export const LoginOption = styled.div`
-  grid-area: options;
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
   font-size: 14px;
+  flex-wrap: wrap;
 `;
 
 export const LoginHelp = styled.div`
-  grid-area: helps;
   text-align: center;
   font-size: 13px;
   color: #555;
@@ -100,70 +117,49 @@ export const LoginHelp = styled.div`
   border-bottom: 1px solid #ddd;
 
   a {
-    text-decoration: none; // 밑줄 제거
-    color: inherit; // 글자 색상 상속
+    text-decoration: none;
+    color: inherit;
     margin: 0 4px;
   }
 `;
 
 export const SocialLogin = styled.div`
-  grid-area: socials;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 3rem;
+  gap: 5rem;
+  @media (max-width: 601px) {
+    gap: 1.5rem;
+  }
 `;
 
 export const SocialButton = styled.button`
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:hover {
-    border: none;
-    outline: none;
+    transform: scale(1.1);
   }
 
-  button {
-    width: 56px;
-    height: 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  &:active {
+    transform: scale(0.9);
+  }
+
+  img {
     border-radius: 50%;
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      border: none;
-      outline: none;
-      transform: scale(1.1);
-    }
-    &:active {
-      transform: scale(0.9);
-      border: none;
-    }
-    &:focus {
-      border: none;
-      outline: none;
-    }
-    img {
-      width: auto;
-      height: auto;
-      overflow: hidden;
-      border-radius: 50%;
-      &:focus {
-        border: none;
-        outline: none;
-      }
-    }
+    width: 100%;
+    height: 100%;
   }
 `;
 
 export const LoginOptionInput = styled.input`
-  width: auto;
   margin: 10px;
 `;
 
-export const LoginOptionLabel = styled.label`
-  width: auto;
-`;
+export const LoginOptionLabel = styled.label``;
