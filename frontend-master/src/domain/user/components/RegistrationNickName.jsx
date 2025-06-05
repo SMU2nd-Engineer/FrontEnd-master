@@ -10,17 +10,22 @@ import {
   RegistStyledInput,
 } from "../style/UserRegistrationPageDesign";
 import { useModalStore } from "@/store/useModalStore";
+import { useWatch } from "react-hook-form";
 
 export default function RegistrationNickName({
   register,
   setValue,
   watch,
+  control,
   errors,
   isNickNameCheck,
   setIsNickNameCheck,
   existingNickname,
 }) {
-  const nickName = watch("nickName");
+  const nickName = useWatch({
+    control,
+    name: "nickName",
+  });
   // 닉네임 변경 시 중복 체크 상태 초기화
 
   const openModal = useModalStore((state) => state.open);
@@ -70,13 +75,13 @@ export default function RegistrationNickName({
           <Button
             text={"중복 체크"}
             onClick={async () => {
-              if (existingNickname === watch("nickName")) {
+              if (existingNickname === nickName) {
                 setIsNickNameCheck(true);
                 return;
               }
               try {
                 const result = await duplicateCheckService(
-                  watch("nickName"),
+                  nickName,
                   "nickName"
                 );
                 if (result) {

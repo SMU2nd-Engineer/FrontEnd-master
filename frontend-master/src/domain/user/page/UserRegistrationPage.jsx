@@ -38,6 +38,7 @@ export default function UserRegistrationPage() {
     setValue, // 외부 API 값이나 수동 입력 처리
     watch, // 실시간 값 확인용
     formState: { errors }, // 각 필드의 유효성 오류 처리
+    control,
   } = useForm({
     resolver: yupResolver(YUPSCHEMA),
     mode: "onBlur", // 사용자에게 안내 메시지 출력
@@ -146,6 +147,7 @@ export default function UserRegistrationPage() {
             isSocialLogin={isSocialLogin}
             isIdCheck={isIdCheck}
             setIsIdCheck={setIsIdCheck}
+            control={control}
           />
         </FormGridArea>
 
@@ -174,6 +176,7 @@ export default function UserRegistrationPage() {
             register={register}
             setValue={setValue}
             watch={watch}
+            control={control}
             errors={errors}
             isNickNameCheck={isNickNameCheck}
             setIsNickNameCheck={setIsNickNameCheck}
@@ -195,6 +198,7 @@ export default function UserRegistrationPage() {
             setValue={setValue}
             watch={watch}
             errors={errors}
+            control={control}
           />
         </FormGridArea>
         {/* 값을 넘기기 위하여 보이지 않는 값을 설정하기 */}

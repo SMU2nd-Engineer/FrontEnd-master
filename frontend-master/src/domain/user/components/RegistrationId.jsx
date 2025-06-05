@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { duplicateCheckService } from "../services/duplicateCheckService";
 import Button from "@/components/Button";
+import { useWatch } from "react-hook-form";
 
 import {
   RegistFormContainer,
@@ -20,8 +21,12 @@ export default function RegistrationId({
   isSocialLogin,
   isIdCheck,
   setIsIdCheck,
+  control,
 }) {
-  const id = watch("id");
+  const id = useWatch({
+    control,
+    name: "id",
+  });
   useEffect(() => {
     if (isSocialLogin) {
       setIsIdCheck(true);
@@ -79,7 +84,7 @@ export default function RegistrationId({
               text={"중복 체크"}
               onClick={async () => {
                 try {
-                  const result = await duplicateCheckService(watch("id"), "id");
+                  const result = await duplicateCheckService(id, "id");
                   if (result) {
                     setIsIdCheck(true);
                   } else {
