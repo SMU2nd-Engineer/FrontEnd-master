@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// import 명 이렇게 사용하시면 됩니다(경로는 각자 수정 필요!)
-// import * as Main from "../style/MainPageDesign";
-
 export const MainTool = styled.div`
   width: 100vw;
   max-width: 100%;
@@ -22,6 +19,29 @@ export const MyPageContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   padding: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-areas:
+      "header"
+      "products"
+      "rating"
+      "reviews"
+      "peak"
+      "button";
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
 `;
 
 export const Header = styled.div`
@@ -29,17 +49,12 @@ export const Header = styled.div`
 `;
 export const Products = styled.div`
   grid-area: products;
-  grid-column: 1/3;
   .sell-container {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
   }
-  /* .sell-options {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
-  } */
 `;
 export const Peak = styled.div`
   grid-area: peak;
-  grid-column: 1/3;
 `;
 export const Rating = styled.div`
   grid-area: rating;
@@ -47,7 +62,6 @@ export const Rating = styled.div`
 `;
 export const Reviews = styled.div`
   grid-area: reviews;
-  grid-row: 4/6;
 `;
 export const HomeButton = styled.div`
   grid-area: button;
