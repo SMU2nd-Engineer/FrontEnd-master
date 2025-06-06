@@ -16,16 +16,21 @@ export const HomeContainer = styled.div`
   @media (max-width: 1024px) {
     width: 95%;
     padding: 1.5rem;
+    max-width: 90%;
   }
 
   @media (max-width: 600px) {
     padding: 1rem;
+    max-width: 95%;
   }
 
   @media (max-width: 480px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     margin: 0.5rem;
-    padding: 1rem 0.5rem;
+    padding: 0rem;
   }
 `;
 
@@ -37,11 +42,16 @@ export const HomeProductContainer = styled.div`
   margin-bottom: 1rem;
 
   @media (max-width: 600px) {
-    gap: 0.75rem;
+    max-width: 80%;
+    gap: 0rem;
   }
 
   @media (max-width: 480px) {
-    gap: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+    gap: 0rem;
   }
 `;
 
@@ -53,6 +63,10 @@ export const HomeBoardContainer = styled.div`
   margin-top: 1rem;
 
   @media (max-width: 480px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
     gap: 0.5rem;
   }
 `;
@@ -82,7 +96,8 @@ export const HomeHedear = styled.h1`
 
 export const HomeProductList = styled.div`
   > div {
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0rem;
 
     @media (max-width: 600px) {
       gap: 0.75rem;
