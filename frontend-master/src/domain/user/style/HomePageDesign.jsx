@@ -12,6 +12,21 @@ export const HomeContainer = styled.div`
   border-radius: 20px;
   padding: 2rem;
   user-select: none;
+
+  @media (max-width: 1024px) {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
 `;
 
 export const HomeProductContainer = styled.div`
@@ -20,6 +35,14 @@ export const HomeProductContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 600px) {
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
 `;
 
 export const HomeBoardContainer = styled.div`
@@ -28,11 +51,12 @@ export const HomeBoardContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
 `;
 
-/**
- * 홈 스타일 헤더
- */
 export const HomeHedear = styled.h1`
   font-weight: 500;
   display: flex;
@@ -43,10 +67,30 @@ export const HomeHedear = styled.h1`
   margin: 1rem;
   padding: 1rem;
   border-bottom: 1px solid #ddd;
+
+  @media (max-width: 600px) {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
 `;
 
 export const HomeProductList = styled.div`
   > div {
     gap: 1rem;
+
+    @media (max-width: 600px) {
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 `;
