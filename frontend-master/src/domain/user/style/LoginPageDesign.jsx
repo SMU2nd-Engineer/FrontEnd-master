@@ -8,6 +8,20 @@ export const LoginWrapper = styled.div`
   width: 100%;
   user-select: none;
   padding: 1rem;
+  @media (max-width: 1024px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    max-width: 90%;
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
 `;
 
 export const LoginContainer = styled.div`
@@ -26,7 +40,7 @@ export const LoginContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    max-width: 100%;
+    max-width: 90%;
     margin: 1rem;
     padding: 1.5rem;
   }
