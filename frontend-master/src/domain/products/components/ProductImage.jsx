@@ -1,4 +1,3 @@
-
 const ProductImage = ({ imageList, title, mode = "all" }) => {
   if (!imageList?.length) return <div className="null_image" />;
 
