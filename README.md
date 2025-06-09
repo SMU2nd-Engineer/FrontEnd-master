@@ -79,14 +79,13 @@ frontend-master
 - components : 공용 컴포넌트
 - domain
   - board: 게시판 CRUD, 댓글 등 게시판 중심 기능 담당
-  - category: 분류 및 필터링을 위한 카테고리 관련 로직
-  - chat: 1:1 채팅, WebSocket 처리, MongoDB 연동
-  - log: 사용자 및 관리자 활동 로그 기록용 모듈
+  - chat: 1:1 채팅
+  - mypage : 마이페이지 및 관심사 관련 로직
   - payment: 결제 요청, 결제 결과 저장 등 처리
-  - product: 상품 정보 등록 및 수정 관리
+  - products: 상품 정보 등록 및 수정 관리
   - search: 키워드 기반 검색 등 구현
   - ticket: 티켓 확인 및 상태 관리
-  - user: 회원가입, 로그인, 마이페이지 등 사용자 인증 및 관리 기능
+  - user: 회원가입, 로그인 등 사용자 인증 및 관리 기능
 - hooks: 공용 커스텀 훅
 - lib : axios 설정 파일 존재
 - page : header, footer 등 공용 페이지
